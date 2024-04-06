@@ -1,0 +1,63 @@
+.container2 {
+    width: 350px;
+}
+
+.container2 .inside{
+    width: 100%;
+    background-color: #242234;
+    height: fit-content;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.para-border {
+    text-align: center;
+    width: 60%;
+}
+
+.image-border {
+    padding: 10px;
+}
+
+.inside > .para-border > p {
+    color: #7D7690;
+}
+
+.pin-border {
+    width: 180px;
+    margin: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.pin-border > .input-pin {
+    width: 33px;
+    height: 33px;
+    color: white;
+    margin: 0;
+    background-color: #1E1B27;
+    border: #2D273C 1px solid;
+}
+
+.di-receive {
+    color: #7D7690;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.di-receive > a {
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.container2 > button {
+    margin-top: 30px;
+}
+

@@ -1,0 +1,12 @@
+.other-options {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.other-options > button {
+    width: 50%;
+    border-radius: 15px;
+    background-color: #242234;
+    margin: 4px;
+}

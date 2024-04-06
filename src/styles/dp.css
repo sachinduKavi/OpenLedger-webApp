@@ -1,0 +1,82 @@
+.pic-container {
+    position: relative;
+    display: flex;
+    height: 100%;
+    flex-direction: column-reverse;
+    justify-content:center;
+    align-items: center;
+}
+
+.profile-pic {
+    width: 200px;
+    aspect-ratio: 1;
+    border-radius: 100%;
+    background: url('../assets/images/user.png');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-pic > img {
+    width: 100%;
+}
+
+.edit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 1%;
+    box-shadow: 0 0 8px rgb(150, 150, 150);
+    top: 80%;
+    background-color: #010101;
+    width: 20%;
+    border: 0.1rem white solid;
+    border-radius: 100%;
+    aspect-ratio: 1;
+}
+
+.edit:active {
+    box-shadow: 0 0 12px rgb(150, 150, 150);
+}
+
+.control-panel {
+    margin-bottom: 10px;
+    visibility: visible;
+    box-shadow: 0 0 5px rgb(243, 243, 243);
+    width: 200px;
+    border-radius: 20px;
+    height: 150px;
+    background-color: #1E1B27;
+}
+
+.control-panel {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.movers {
+    width: 70%;
+}
+
+.control-panel img {
+    width: 40px;
+    border-radius: 100%;
+}
+
+.control-panel img:active {
+    width: 40px;
+    box-shadow: 0 0 5px rgb(243, 243, 243);
+}
+
+.movers > .rows {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}

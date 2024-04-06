@@ -1,0 +1,19 @@
+.agreement-wrapper  {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin: 15px 3px 15px 3px;
+}
+
+.agreement {
+    color: #7D7690;
+    font-weight: bold;
+}
+
+#reg-background-img {
+    background: url('../assets/images/money.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+
