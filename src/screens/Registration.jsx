@@ -27,6 +27,7 @@ export default class Registration extends Component {
             passwordNotMatch: false,
             codeNotMatch: false,
             setUpProfile: false,
+            accountAlreadyExists: false,
 
             typeOfError: 'none',
 
@@ -49,7 +50,8 @@ export default class Registration extends Component {
             emailFormatInvalid: false,
             passwordNotMatch: false,
             codeNotMatch: false,
-            setUpProfile: false
+            setUpProfile: false,
+            accountAlreadyExists: false
         })
           console.log('messagekill')
     }
@@ -75,6 +77,9 @@ export default class Registration extends Component {
                 break
             case 'setUpProfile':
                 this.setState({setUpProfile: true})
+                break
+            case 'accountAlreadyExists':
+                this.setState({accountAlreadyExists: true})
                 break
                 
           }
@@ -153,6 +158,8 @@ export default class Registration extends Component {
                 {(this.state.codeNotMatch)?<TimeMessage header='Invalid Code' type='error' messageID='codeNotMatch'  killFn={this.messageKiller}>Sorry, you have entered invalid pin.</TimeMessage>:null}
                 {/* Setup profile  */}
                 {(this.state.setUpProfile)?<TimeMessage header='One More Step' type='info' messageID='setUpProfile'  killFn={this.messageKiller}>Now choose a user name and a profile picture.</TimeMessage>:null}
+                {/* Email Address already exists   */}
+                {(this.state.accountAlreadyExists)?<TimeMessage header='Already Signed Email' type='warnning' messageID='accountAlreadyExists'  killFn={this.messageKiller}>Email address you enter has already existing account, login with that account or use different email address.</TimeMessage>:null}
             
             </AnimatePresence>
 

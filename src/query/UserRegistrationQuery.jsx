@@ -2,22 +2,29 @@ import {temp_domain, header, mainDomain} from '../middleware/API'
 import {storage} from '../middleware/firebaseConfig'
 import {ref, uploadBytes} from 'firebase/storage'
 
+// Change the whole system api address
+const cDomain = mainDomain
+
 // Send post request through axios to the api backend 
+// Registration step 01
 const verificationCode = async (user_email) => {
     console.log('Inside the verification code')
-    const response = await mainDomain.post('user/verificationCode', {userEmail: user_email}, header)
+    const response = await cDomain.post('user/verificationCode', {userEmail: user_email}, header)
     console.log(response)
     return {
         data: response.data.codeSent,
+        error: response.data.error,
         statusCode: response.status
     }
 }
 
+// Registration step 02 
+// Checking the code 
 const emailValidation = async (user_email, pinNumber) => {
     console.log(user_email, pinNumber)
     console.log('Inside the email validation')
     // try{
-        const response = await mainDomain.post('user/codeValidation', {userEmail:user_email, code:pinNumber}, header)
+        const response = await cDomain.post('user/codeValidation', {userEmail:user_email, code:pinNumber}, header)
         console.log('testing...')
         console.log("Response", response)
         return {
@@ -39,7 +46,7 @@ const userRegistration = async (userDetails) => {
     console.log("Inside the user registration...")
     console.log(userDetails)
 
-    const response = await mainDomain.post('user/newUserRegistration', userDetails, header)
+    const response = await cDomain.post('user/newUserRegistration', userDetails, header)
     
     return response.data.process_success
 }

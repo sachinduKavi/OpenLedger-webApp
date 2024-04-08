@@ -54,6 +54,8 @@ export default class RegisterEmail extends Component {
 
         } else {
             // Network Error please check your internet connection !
+            console.log(res.error)
+            if(res.error == 'accountAlreadyExists') this.parentContext.displayMessage("accountAlreadyExists")
         }
         // Hide process circle
         this.parentContext.processTrigger(false)
@@ -75,7 +77,6 @@ export default class RegisterEmail extends Component {
             } else {
                 // Email is not a valid email
                 this.parentContext.displayMessage("emailFormatInvalid")
-                this.setState({emailState: 'error'})
             }
 
         } else {
