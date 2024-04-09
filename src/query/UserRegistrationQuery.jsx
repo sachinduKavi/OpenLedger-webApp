@@ -3,7 +3,7 @@ import {storage} from '../middleware/firebaseConfig'
 import {ref, uploadBytes} from 'firebase/storage'
 
 // Change the whole system api address
-const cDomain = mainDomain
+const cDomain = temp_domain
 
 // Send post request through axios to the api backend 
 // Registration step 01
@@ -22,7 +22,6 @@ const verificationCode = async (user_email) => {
 // Checking the code 
 const emailValidation = async (user_email, pinNumber) => {
     console.log(user_email, pinNumber)
-    console.log('Inside the email validation')
     // try{
         const response = await cDomain.post('user/codeValidation', {userEmail:user_email, code:pinNumber}, header)
         console.log('testing...')
@@ -37,7 +36,7 @@ const emailValidation = async (user_email, pinNumber) => {
 const profilePictureUpload = async (imageFile, userImageID) => {
     const imageRef = ref(storage, `user_images/${userImageID}`)
     await uploadBytes(imageRef, imageFile).then(res=> {
-        alert('Image Uploaded')
+        console.log('Image uploaded')
     })
 }
 

@@ -7,7 +7,7 @@ import {motion, AnimatePresence} from 'framer-motion'
 
 import {userRegistration} from '../query/UserRegistrationQuery'
 
-import RegisterEmail from './RegisterEmail'
+import RegisterEmail from './registration/RegisterEmail'
 import TimeMessage from '../components/TimeMessage'
 import Process from '../components/process'
 import EmailCode from './registration/RegStep02'

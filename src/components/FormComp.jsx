@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 
+import {userLogin} from '../query/loginQuery'
+import {emailRegex} from '../middleware/FormatChecker'
+
 import { Input } from 'antd'
 import Orcomp from './Orcomp'
 import OtherOptions from './OtherOptions'
@@ -13,8 +16,10 @@ export default class FormComp extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      userEmail: '',
-      userPassword: ''
+      user: {
+        userEmail: null,
+        userPassword: null
+      }
     }
 
     this.onValueChange = this.onValueChange.bind(this)
@@ -23,11 +28,11 @@ export default class FormComp extends Component {
   onValueChange(e) {
     if(e.target.id == 'email'){
       this.setState(
-        {userEmail:  e.target.value}
+        {user:  {...this.state.user, userEmail: e.target.value}}
       )
     } else {
       this.setState(
-        {userPassword: e.target.value}
+        {user:  {...this.state.user, userPassword: e.target.value}}
       )
     }
     
@@ -35,16 +40,22 @@ export default class FormComp extends Component {
 
   // User name and password submission 
   onDataSubmission = async () => {
-    console.log(this.state.userEmail, this.state.userPassword)
-    
-    const data = await fetch("https://jsonplaceholder.typicode.com/posts").then((res) => {
-      console.log(res)
-      return res.json()
-    }).catch((err) => {
-      console.log("Error" + err)
-    })
+    // Check for email format 
+    if(emailRegex(this.state.user.userEmail)) {
+      // Extract user email and password 
+      const res = await userLogin({user_email: this.state.user.userEmail, user_pass: this.state.user.userPassword})
+      if(res.error == null) {
+        if(res.accountValidate) {
+          // Password match
+        } else {
+          // Password dose not match
+        }
+      }
+    } else {
+      // Email is not according to the format
+    }
 
-    console.log('data', data)
+    
   }
 
   render() {

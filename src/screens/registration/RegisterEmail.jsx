@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { Input } from 'antd'
-import { verificationCode } from '../query/UserRegistrationQuery'
+import { verificationCode } from '../../query/UserRegistrationQuery'
 
-import { emailRegex } from '../middleware/FormatChecker'
+import { emailRegex } from '../../middleware/FormatChecker'
 
-import OpenledgerLogo from '../assets/OpenLedger.png'
-import Agreement from '../components/agreement'
+import OpenledgerLogo from '../../assets/OpenLedger.png'
+import Agreement from '../../components/agreement'
 
 export default class RegisterEmail extends Component {
     constructor(props) {

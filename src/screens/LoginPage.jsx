@@ -5,6 +5,9 @@ import '../styles/login-style.css'
 import FormComp from '../components/FormComp'
 
 export default class LoginPage extends Component {
+
+  
+
   render() {
     return (
         // div tage covers the entire page
