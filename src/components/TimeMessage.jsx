@@ -22,12 +22,18 @@ const selectType = (type) => {
   }
 }
 
-import React from 'react'
+import React, {useEffect} from 'react'
 
 export default function TimeMessage(props) {
   const type = props.type
 
-  
+
+  // ComponentDidMount equivalent. runs in the begin
+  // useEffect(() => {
+  //   setTimeout(()=>{
+  //     props.killFn(props.messageID)
+  //   }, 16)
+  // })
 
   return (
     
