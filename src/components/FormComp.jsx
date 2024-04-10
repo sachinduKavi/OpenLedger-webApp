@@ -40,21 +40,30 @@ export default class FormComp extends Component {
 
   // User name and password submission 
   onDataSubmission = async () => {
+    // Trigger processing circle
+    this.props.parentContext.processTrigger(true)
+
     // Check for email format 
     if(emailRegex(this.state.user.userEmail)) {
       // Extract user email and password 
-      const res = await userLogin({user_email: this.state.user.userEmail, user_pass: this.state.user.userPassword})
-      if(res.error == null) {
-        if(res.accountValidate) {
-          // Password match
+      const reply = await userLogin({user_email: this.state.user.userEmail, user_pass: this.state.user.userPassword})
+      if(reply.error == null) {
+        if(reply.accountValidate) { // Password match
+          // Set user details in local storage
+          localStorage.setItem('userDetails', reply.userDetails)
+          // Navigate to Dashboard 
+          this.props.parentContext.setState({loginComplete: true})
         } else {
           // Password dose not match
         }
+      } else {
+        // Error occurred
       }
     } else {
       // Email is not according to the format
     }
-
+    // Turn off process icon
+    this.props.parentContext.processTrigger(false)
     
   }
 
@@ -93,7 +102,7 @@ export default class FormComp extends Component {
 
                 
               </div>
-              <img src={OpenledgerLogo} alt="" className='openledger-logo'/>
+              <img src={OpenledgerLogo} alt="open-ledger-logo" className='openledger-logo'/>
             </div>
 
             

@@ -33,6 +33,7 @@ const emailValidation = async (user_email, pinNumber) => {
 }
 
 // This function directly interacting with the firebase storage to upload user profile pictures
+// Fire store picture uploading 
 const profilePictureUpload = async (imageFile, userImageID) => {
     const imageRef = ref(storage, `user_images/${userImageID}`)
     await uploadBytes(imageRef, imageFile).then(res=> {

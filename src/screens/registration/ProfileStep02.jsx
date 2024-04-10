@@ -20,7 +20,7 @@ export default function ProfileStep02(props) {
 
 
 
-    // Image sectioin form the local device 
+    // Image selection form the local device 
     const finalizeProfile = async () => {
       parentContext.processTrigger(true)
       parentContext.state.userName = userName

@@ -119,7 +119,6 @@ export default class Registration extends Component {
 
         this.processTrigger(false)
         
-
     }
 
   render() {
