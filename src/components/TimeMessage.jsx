@@ -29,20 +29,19 @@ export default function TimeMessage(props) {
 
 
   // ComponentDidMount equivalent. runs in the begin
-  // useEffect(() => {
-  //   setTimeout(()=>{
-  //     props.killFn(props.messageID)
-  //   }, 16)
-  // })
+  useEffect(() => {
+    setTimeout(()=>{
+      props.killFn(props.messageID)
+    }, 16)
+  })
 
   return (
     
-    <motion.div className='message-box' animate={
-    {x: 0}
-      }
+    <motion.div className='message-box' 
+      animate={{x: 0}}
       initial={{x:500}}
       transition={{duration: 0.3, type: 'spring', stiffness: 200}}
-      exit={{x:0, transition:{duration:5, ease:'easeOut'}}}
+      exit={{x:500, transition:{duration:0.3, ease:'easeOut'}}}
       >
           
           <div className='horizontal-comp'>
@@ -61,7 +60,7 @@ export default function TimeMessage(props) {
               
               </div>
 
-              <button className='cross' id='closeBtn' onClick={() => {props.killFn(props.messageID)}}><img src={closeIcon} alt='close'/></button>
+              <button className='cross' id='closeBtn' onClick={() => {props.killFn()}}><img src={closeIcon} alt='close'/></button>
           </div>
 
     </motion.div>

@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import { useLocation } from 'react-router-dom';
 
 export default class SelectGroup extends Component {
 
   componentDidMount = () => {
-    const location = useLocation();
-  const searchParams = new URLSearchParams(location.search); // Parse query string
-  const selectedValue = searchParams.get('userDetails');
-  console.log(selectedValue)
+    if(this.props.location) {
+      console.log(this.props.location)
+    } else {
+      console.log('No Location props')
+    }
   }
 
   render() {

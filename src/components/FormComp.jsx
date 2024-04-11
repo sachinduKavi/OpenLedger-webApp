@@ -55,6 +55,8 @@ export default class FormComp extends Component {
           this.props.parentContext.setState({loginComplete: true})
         } else {
           // Password dose not match
+          console.log('invalid password')
+          this.props.parentContext.setState({passwordError: true})
         }
       } else {
         // Error occurred
