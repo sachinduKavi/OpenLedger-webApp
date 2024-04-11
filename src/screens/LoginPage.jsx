@@ -6,6 +6,7 @@ import '../styles/login-style.css'
 import FormComp from '../components/FormComp'
 import Process from '../components/process'
 import TimeMessage from '../components/TimeMessage'
+import SelectGroup from './SelectGroup'
 
 export default class LoginPage extends Component {
 
@@ -28,8 +29,10 @@ export default class LoginPage extends Component {
     })
   }
 
-  displayMessage = (messageID) => {
-    
+  displayMessage = async (messageID) => {
+    this.setState({
+
+    })
   }
 
   // Processing trigger show processing icon
@@ -41,7 +44,7 @@ export default class LoginPage extends Component {
   
 
   render() {
-    if(this.state.loginComplete) return <Navigate to='/select_group'/>
+    if(this.state.loginComplete) return <Navigate to={`/select_group?userDetails=${{userName: 'sachindu', lastName: 'another name'}}`}/>
     return (
         // div tag covers the entire page
         <div className='horizontal-page' style={{width:'100%', overflow:'hidden'}}> 
@@ -50,6 +53,8 @@ export default class LoginPage extends Component {
             {/* Displays Error messages */}
             {this.state.passwordError?<TimeMessage header='Incorrect Password' type='error' messageID='passwordError' killFn={this.messageKiller}>You have entered incorrect password, please try it again.</TimeMessage>:null}
 
+
+            {/* Processing logo */}
             {this.state.processing?<Process/>:null}
         </div>
       
