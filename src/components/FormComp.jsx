@@ -55,14 +55,15 @@ export default class FormComp extends Component {
           this.props.parentContext.setState({loginComplete: true})
         } else {
           // Password dose not match
-          console.log('invalid password')
           this.props.parentContext.setState({passwordError: true})
         }
       } else {
-        // Error occurred
+        // Error unknown occurred
+        this.props.parentContext.setState({serverError: true})
       }
     } else {
       // Email is not according to the format
+      this.props.parentContext.setState({emailFormatError:true})
     }
     // Turn off process icon
     this.props.parentContext.processTrigger(false)

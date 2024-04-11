@@ -31,8 +31,8 @@ export default function TimeMessage(props) {
   // ComponentDidMount equivalent. runs in the begin
   useEffect(() => {
     setTimeout(()=>{
-      props.killFn(props.messageID)
-    }, 16)
+      props.killFn()
+    }, 16000)
   })
 
   return (
