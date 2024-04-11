@@ -3,7 +3,7 @@ import { Route, Routes, BrowserRouter} from 'react-router-dom'
 
 import LoginPage from './screens/LoginPage'
 import Registration from './screens/Registration'
-import SelectGroup from './screens/SelectGroup'
+import Dashboard from './screens/Dashboard'
 
 function App() {
  
@@ -14,7 +14,7 @@ function App() {
           <Route path='/' element={<LoginPage/>}/>
           <Route path='login' element={<LoginPage/>}/>
           <Route path='register' element={<Registration/>}/>
-          <Route path='select_group' element={<SelectGroup/>}/>
+          <Route path='dashboard' element={<Dashboard/>}/>
         </Routes>
       </BrowserRouter>
   )

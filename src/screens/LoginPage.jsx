@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import {motion} from 'framer-motion'
 import {Navigate} from 'react-router-dom'
 import {AnimatePresence} from 'framer-motion'
 
@@ -43,7 +42,7 @@ export default class LoginPage extends Component {
   
 
   render() {
-    if(this.state.loginComplete) return <Navigate to={`/select_group?userDetails=${new URLSearchParams({userName: 'sachindu', lastName: 'another name'})}`}/>
+    if(this.state.loginComplete) return <Navigate to={`/dashboard?userDetails=${new URLSearchParams({userName: 'sachindu', lastName: 'another name'})}`}/>
     return (
         // div tag covers the entire page
         <div className='horizontal-page' style={{width:'100%', overflow:'hidden'}}> 
