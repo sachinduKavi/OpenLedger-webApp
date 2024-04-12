@@ -42,7 +42,7 @@ export default class LoginPage extends Component {
   
 
   render() {
-    if(this.state.loginComplete) return <Navigate to={`/dashboard?userDetails=${new URLSearchParams({userName: 'sachindu', lastName: 'another name'})}`}/>
+    if(this.state.loginComplete) return <Navigate to='/dashboard'/>
     return (
         // div tag covers the entire page
         <div className='horizontal-page' style={{width:'100%', overflow:'hidden'}}> 

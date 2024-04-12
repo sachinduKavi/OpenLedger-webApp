@@ -1,0 +1,78 @@
+.welcome-container {
+    position: fixed;
+    width: 100%;
+    margin: 0 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.welcome-container > .welcome {
+    display: flex;
+    min-width: 50%;
+    border-radius: 0 0 20px 20px;
+    height: 60px;
+    padding: 0 8px 3px 3px;
+    background-color: #C1B5FF;
+    
+}
+
+.welcome-container .welcome-inner {
+    height: 100%;
+    border-radius: 0 0 20px 20px;
+    width: 100%;
+    background-color: #363659;
+    box-shadow: 0 0 5px black;
+}
+
+.welcome-inner > div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0 30px;
+}
+
+.image-div {
+    display:flex;
+    justify-content: center;
+    border-radius: 100%;
+    margin-right: 20px;
+}
+
+.welcome-inner > div a {
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: white;
+    flex-direction: row;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.icon {
+    background: url('../assets/icons/support.png');
+    aspect-ratio: 1;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 35px;
+}
+
+.account {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.support {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: 1px;
+}
+
+.support > p {
+    font-weight: bold;
+}
+

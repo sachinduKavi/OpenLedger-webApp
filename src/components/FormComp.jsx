@@ -50,7 +50,7 @@ export default class FormComp extends Component {
       if(reply.error == null) {
         if(reply.accountValidate) { // Password match
           // Set user details in local storage
-          localStorage.setItem('userDetails', reply.userDetails)
+          localStorage.setItem('userDetails', JSON.stringify(reply.userDetails))
           // Navigate to Dashboard 
           this.props.parentContext.setState({loginComplete: true})
         } else {
