@@ -33,7 +33,7 @@ export default class Registration extends Component {
 
             // User Details
             userName: null,
-            userPictureID: null,
+            userImageLink: null,
             pictureScale: null,
             currentUserEmail: null,
             currentUserPassword: null,
@@ -112,17 +112,25 @@ export default class Registration extends Component {
             user_name: this.state.userName,
             user_email: this.state.currentUserEmail,
             user_password: this.state.currentUserPassword,
-            user_image_id: this.state.userPictureID,
+            user_image_id: this.state.userImageLink,
             picture_scale: this.state.pictureScale
         } 
         this.setState({registerProcess: await userRegistration(userDetails)})
 
-        this.processTrigger(false)
+        // Save user details in the local storage
+        // Format user details for local storage
+        localStorage.setItem('userDetails', JSON.stringify({
+            userName: userDetails.user_name,
+            userEmail: userDetails.user_email,
+            userImageID: userDetails.user_image_id,
+            pictureScale: userDetails.picture_scale
+        }))
+        this.processTrigger(false) // Switch off processing...
         
     }
 
   render() {
-    if(this.state.registerProcess) return <Navigate to='/select_group'/>
+    if(this.state.registerProcess) return <Navigate to='/dashboard'/>
     return (
         <div className='horizontal-page'>
             <motion.div className='formComp'

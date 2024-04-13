@@ -26,18 +26,19 @@ export default function ProfileStep02(props) {
       parentContext.state.userName = userName
       // Generates a image ID for the user
       const userImageID = v4().slice(0, 20)
-      parentContext.state.userPictureID = (userName.toString().replace(" ", "_")) + userImageID
+      const pictureName = (userName.toString().replace(" ", "_")) + userImageID
 
       // Setting up image scale 
       if(parentContext.state.pictureScale == null) parentContext.state.pictureScale = {x: 0, y: 0, scale: 1}
 
       // Uploading the image to the firebase
       if(imageFile != null) {
-        await profilePictureUpload(imageFile, parentContext.state.userPictureID)
+        const pictureLink = await profilePictureUpload(imageFile, pictureName)
+        parentContext.state.userImageLink = pictureLink
       }
-      parentContext.processTrigger(false)
+      
       // Handing over to the main Registration function
-      // parentContext.createNewUser()
+      parentContext.createNewUser()
     }
 
     return (
