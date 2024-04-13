@@ -22,7 +22,7 @@ export default class Dashboard extends Component {
     return (
       <div>
         <div className="dash02">
-          <WelcomeBar userName={this.userDetails.userName} dp={this.userDetails.userImageID}/>
+          <WelcomeBar userName={this.userDetails.userName} imageLink={this.userDetails.userImageID} imageScale={this.userDetails.pictureScale}/>
         </div>
       </div>
     )

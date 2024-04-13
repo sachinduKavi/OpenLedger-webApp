@@ -1,4 +1,5 @@
 .display-picture {
+    position: relative;
     overflow: hidden;
     border-radius: 100%;
     margin: 10px;
@@ -6,9 +7,15 @@
     min-width: 10px;
     border: #B7B5EB 1.8px solid;
     background: url('../assets/images/user.png');
-    box-shadow: 0 0 5px white;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    /* box-shadow: 0 0 5px white; */
 }
 
-/* .display-picture > img {
+.display-picture > img {
+    position: absolute;
+    left: 0;
+    left: 0;
     width: 100%;
-} */
+}

@@ -9,7 +9,7 @@ import '../../styles/welcomeComp.css'
 import MenuImage from '../../assets/icons/menu.png'
 
 export default function WelcomeBar(props) {
-    console.log('image link', props.dp)
+    console.log('image link', props.imageLink)
   return (
     <motion.div className="welcome-container"
         initial={{y:-110}}
@@ -40,7 +40,7 @@ export default function WelcomeBar(props) {
             </div>
 
             
-            <SimpleDP imageLink={null} size={50}/>
+            <SimpleDP imageLink={props.imageLink} size={45} imageScale={props.imageScale}/>
             
         
         </div>
