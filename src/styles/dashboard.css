@@ -1,9 +1,16 @@
 .dash02 {
+    position: relative;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 100vw;
     height: 100vh;
+    align-items: center;
     background: linear-gradient(170deg, #110E19, #404A9C);
+}
+
+.dash02 > p {
+    margin: 30px;
+    color: #DFDFDF;
 }
 
 .display-picture > img {

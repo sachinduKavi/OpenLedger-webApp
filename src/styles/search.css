@@ -1,0 +1,31 @@
+
+:root {
+    --background: #120f1a;
+    --primary: #37375c;
+    --secondary: #442d80;
+    --accent: #47c5ab;
+}
+
+
+.search-container {
+    
+}
+
+.search-bar-container {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.search-bar-container > img {
+    width: 40px;
+}
+
+.search-bar {
+    background-color: var(--background);
+}
+
+.search-bar:active, :hover {
+    background-color: var(--background);
+}
+
