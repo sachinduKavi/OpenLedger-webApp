@@ -6,6 +6,20 @@
   padding: 0;
 }
 
+/* --linearPrimarySecondary: linear-gradient(#37375c, #442d80);
+--linearPrimaryAccent: linear-gradient(#37375c, #47c5ab);
+--linearSecondaryAccent: linear-gradient(#442d80, #47c5ab);
+--radialPrimarySecondary: radial-gradient(#37375c, #442d80);
+--radialPrimaryAccent: radial-gradient(#37375c, #47c5ab);
+--radialSecondaryAccent: radial-gradient(#442d80, #47c5ab); */
+
+
+/* --text: #e9e7ee;
+--background: #120f1a;
+--primary: #37375c;
+--secondary: #442d80;
+--accent: #47c5ab; */
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

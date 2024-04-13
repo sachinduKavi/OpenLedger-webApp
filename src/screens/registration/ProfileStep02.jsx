@@ -35,9 +35,9 @@ export default function ProfileStep02(props) {
       if(imageFile != null) {
         await profilePictureUpload(imageFile, parentContext.state.userPictureID)
       }
-
+      parentContext.processTrigger(false)
       // Handing over to the main Registration function
-      parentContext.createNewUser()
+      // parentContext.createNewUser()
     }
 
     return (
