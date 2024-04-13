@@ -8,7 +8,6 @@ import {Input} from 'antd'
 import {profilePictureUpload} from '../../query/UserRegistrationQuery'
 
 import '../../styles/profile-setup.css'
-import { child } from 'firebase/database'
 
 
 export default function ProfileStep02(props) {
@@ -36,7 +35,7 @@ export default function ProfileStep02(props) {
         const pictureLink = await profilePictureUpload(imageFile, pictureName)
         parentContext.state.userImageLink = pictureLink
       }
-      
+
       // Handing over to the main Registration function
       parentContext.createNewUser()
     }

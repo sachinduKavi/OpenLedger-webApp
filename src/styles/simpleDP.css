@@ -1,0 +1,14 @@
+.display-picture {
+    overflow: hidden;
+    border-radius: 100%;
+    margin: 10px;
+    aspect-ratio: 1;
+    min-width: 10px;
+    border: #B7B5EB 1.8px solid;
+    background: url('../assets/images/user.png');
+    box-shadow: 0 0 5px white;
+}
+
+/* .display-picture > img {
+    width: 100%;
+} */

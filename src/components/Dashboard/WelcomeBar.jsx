@@ -1,6 +1,8 @@
 import React from 'react'
 import {motion} from 'framer-motion'
 
+import SimpleDP from '../SimpleDP'
+
 
 import '../../styles/welcomeComp.css'
 
@@ -37,8 +39,8 @@ export default function WelcomeBar(props) {
                 
             </div>
 
-
-      
+            
+            <SimpleDP imageLink={null} size={50}/>
             
         
         </div>
