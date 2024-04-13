@@ -9,12 +9,11 @@ export default class Dashboard extends Component {
   constructor() {
     super()
     this.userDetails = JSON.parse(localStorage.getItem('userDetails'))
-    console.log(this.userDetails)
   }
 
 
   componentDidMount() {
-    
+    this.userDetails = JSON.parse(localStorage.getItem('userDetails'))
   }
 
   render() {
@@ -23,6 +22,12 @@ export default class Dashboard extends Component {
       <div>
         <div className="dash02">
           <WelcomeBar userName={this.userDetails.userName} imageLink={this.userDetails.userImageID} imageScale={this.userDetails.pictureScale}/>
+        
+        
+        
+        
+        
+        
         </div>
       </div>
     )

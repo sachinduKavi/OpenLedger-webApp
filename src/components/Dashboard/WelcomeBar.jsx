@@ -30,7 +30,7 @@ export default function WelcomeBar(props) {
 
         <div className="account">
             <div className="support">
-                <div className="icon">
+                <div className="icon" style={{margin:5}}>
 
                 </div>
 
