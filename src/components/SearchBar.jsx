@@ -9,7 +9,7 @@ export default function SearchBar() {
   return (
     <div className='search-container'>
         <div className="search-bar-container">
-            <Input className='search-bar'/>
+            <Input type="text" id='search-bar'/>
 
             <img src={SearchImg} alt='search icon' />
         </div>

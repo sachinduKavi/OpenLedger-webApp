@@ -6,7 +6,7 @@ import SimpleDP from '../SimpleDP'
 
 import '../../styles/welcomeComp.css'
 
-import MenuImage from '../../assets/icons/menu.png'
+import MenuImage from '../../assets/logos/olLogo.png'
 
 export default function WelcomeBar(props) {
     console.log('image link', props.imageLink)
@@ -20,7 +20,7 @@ export default function WelcomeBar(props) {
             <div className="welcome-inner">
                 <div>
 
-                    <div className="image-div"><img src={MenuImage} alt="menu button"  width={45}/></div>
+                    <div className="image-div"><img src={MenuImage} alt="menu button"  width={50}/></div>
                     
                     <p><a>Welcome,</a><br/>{props.userName}</p>
                 </div>

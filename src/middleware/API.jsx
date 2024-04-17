@@ -4,7 +4,7 @@ import axios from "axios"
 
 
 const temp_domain = axios.create({
-    baseURL: "http://192.168.8.167:3000/"
+    baseURL: "http://192.168.8.150:3000/"
 })
 
 const mainDomain = axios.create({
