@@ -1,0 +1,55 @@
+.overlay {
+    min-width: 100vw;
+    min-height: 100vh;
+    position: absolute;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.blur-page {
+    position: absolute;
+    inset: 0;
+    background-color: black;
+    opacity: 0.5;
+}
+
+.newForm {
+    width: 1130px;
+    position: relative;
+    height: 669px;
+    background-color: #5A71FB15;
+    border-radius: 20px;
+    z-index: 51;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 60px 100px;
+    border: 1px solid #B7B5EB;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-box,
+.input-box:focus, .input-box:active
+{
+    min-width: 350px;
+    background-color: #232238;
+    border: none;
+    margin: 0;
+    
+}
+
+.input-label {
+    color: #EEEEEE;
+    margin-top: 20px;
+}
+
+.input-box:hover {
+    border:none;
+    background-color: #232238;
+}
+    
+
+
+

@@ -4,6 +4,7 @@ import {Navigate} from 'react-router-dom'
 import '../styles/dashboard.css'
 import WelcomeBar from '../components/Dashboard/WelcomeBar'
 import SearchBar from '../components/SearchBar'
+import TreasuryNew from '../components/Dashboard/TreasuryNew'
 
 import PlusImage from '../assets/icons/plus.png'
 
@@ -37,11 +38,12 @@ export default class Dashboard extends Component {
           <SearchBar>Search treasury name or ID</SearchBar>
 
           
+          <TreasuryNew/>
 
 
 
           {/* Treasury add icon  */}
-          <button className='addBtn'>
+          <button className='addBtn' >
             <img src={PlusImage} alt="plus image" />
           </button>
 
