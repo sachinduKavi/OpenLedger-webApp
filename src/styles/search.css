@@ -1,19 +1,31 @@
+.container-bar {
+    position: relative;
+    background: linear-gradient(
+        to right,
+        #B7B5EB,
+        #63609E
+    );
+    padding: 1px;
+    border-radius: 0.5rem;
+}
+
 .search-container {
     padding: 3px;
     position: relative;
-    margin: 5px;
+    border-radius: inherit;
+    padding: 5px;
+    z-index: 3;
+    background: #232238;
 }
 
-.search-container::before {
-    content: '';
-    position: absolute;
-    background-color: bisque;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    z-index: -1;
-    
+.search-container:focus{
+    box-shadow: 0 0 5px #C1B5FF;
+}
+
+
+
+.search-container::after {
+    filter: blur(5rem);
 }
 
 .search-bar-container {
@@ -33,6 +45,8 @@
     background-color: transparent;
     border: 0;
     flex-grow: 1;
+    color: white;
+    font-size: large;
     width: fit-content;
 } 
 

@@ -33,3 +33,24 @@
     transition: border 0.3s;
     cursor: pointer;
 }
+
+.addBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    background-color: #15131F;
+    aspect-ratio: 1;
+    width: 7vh;
+    border-radius: 100%;
+    bottom: 50px;
+    right: 50px;
+}
+
+.addBtn:active {
+    box-shadow: 0 0 5px white;
+}
+
+.addBtn > img {
+    width: 100%;
+}

@@ -5,11 +5,17 @@ import '../styles/dashboard.css'
 import WelcomeBar from '../components/Dashboard/WelcomeBar'
 import SearchBar from '../components/SearchBar'
 
+import PlusImage from '../assets/icons/plus.png'
+
 export default class Dashboard extends Component {
 
   constructor() {
     super()
     this.userDetails = JSON.parse(localStorage.getItem('userDetails'))
+
+    this.state = {
+
+    }
   }
 
 
@@ -29,6 +35,15 @@ export default class Dashboard extends Component {
         
 
           <SearchBar>Search treasury name or ID</SearchBar>
+
+          
+
+
+
+          {/* Treasury add icon  */}
+          <button className='addBtn'>
+            <img src={PlusImage} alt="plus image" />
+          </button>
 
         </div>
       </div>
