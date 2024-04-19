@@ -50,6 +50,23 @@
     border:none;
     background-color: #232238;
 }
+
+.newForm > .row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.upload-cover {
+    width: 350px;
+    height: 180px;
+    background-color: #232238;
+    border-radius: inherit;
+}
+
+.button-row {
+    margin: 50px;
+}
     
 
 

@@ -1,12 +1,16 @@
-import React from 'react'
+import React, {useRef, useState} from 'react'
 
 import '../../styles/new-treasury.css'
 
-import {Input} from 'antd'
+import {Input, Button} from 'antd'
 
 import PrimaryBorder from '../PrimaryBorder'
 
 export default function TreasuryNew() {
+
+  const coverImageRef = useRef(null)
+  const [imageFile, selectImage] = useState(null) // 
+
   return (
     <div className='overlay'>
 
@@ -32,13 +36,29 @@ export default function TreasuryNew() {
                     />
                 </PrimaryBorder>
 
-                <h5 className="input-label">Members Limit</h5>
+                <h5 className="input-label">Members Limit:</h5>
                 <PrimaryBorder borderRadius='6px'>
-                  <Input type='number' className='input-box' style={{width:'5px'}} value={100}/>
+                  <Input type='number' className='input-box' style={{minWidth:3}} value={100}/>
                 </PrimaryBorder>
 
             </div>
+
+
+            <div className="cell">
+              <h5 className="input-label">Upload Cover Photo:</h5>
+              <PrimaryBorder borderRadius='6px'>
+                <div className="upload-cover" onClick={() => {coverImageRef.current.click()}}>
+
+                </div>
+              </PrimaryBorder>
+
+              <input type="file" accept='image/*' ref={coverImageRef}/>
+            </div>
             
+          </div>
+
+          <div className="row button-row">
+            <Button type='primary'>Create</Button>
           </div>
 
 
