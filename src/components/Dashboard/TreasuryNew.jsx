@@ -6,10 +6,20 @@ import {Input, Button} from 'antd'
 
 import PrimaryBorder from '../PrimaryBorder'
 
+import DefaultUpload from '../../assets/icons/upload.png'
+
 export default function TreasuryNew() {
 
   const coverImageRef = useRef(null)
   const [imageFile, selectImage] = useState(null) // 
+
+  // Input values from the create new treasury form
+  const[inputValues, changeInputValues] = useState({
+    treasuryName: null,
+    description: null,
+    memberLimit: null,
+    uploadImage: null
+  })
 
   return (
     <div className='overlay'>
@@ -48,17 +58,20 @@ export default function TreasuryNew() {
               <h5 className="input-label">Upload Cover Photo:</h5>
               <PrimaryBorder borderRadius='6px'>
                 <div className="upload-cover" onClick={() => {coverImageRef.current.click()}}>
-
+                  {(imageFile == null)
+                  ? <img src={DefaultUpload} alt="uploadImage" />
+                  : <img src={URL.createObjectURL(imageFile)} alt='uploadImage' width='100%'/>
+                }
                 </div>
               </PrimaryBorder>
 
-              <input type="file" accept='image/*' ref={coverImageRef}/>
+              <input type="file" accept='image/*' ref={coverImageRef} onChange={(e) => selectImage(e.target.files[0])}/>
             </div>
             
           </div>
 
           <div className="row button-row">
-            <Button type='primary'>Create</Button>
+            <Button type='primary' >Create</Button>
           </div>
 
 
