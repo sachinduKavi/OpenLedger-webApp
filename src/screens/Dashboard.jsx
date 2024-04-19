@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {Navigate} from 'react-router-dom'
+import {motion} from 'framer-motion'
 
 import '../styles/dashboard.css'
 import WelcomeBar from '../components/Dashboard/WelcomeBar'
@@ -15,13 +16,19 @@ export default class Dashboard extends Component {
     this.userDetails = JSON.parse(localStorage.getItem('userDetails'))
 
     this.state = {
-
+      newTreasuryPopUp: false,
     }
   }
 
 
   componentDidMount() {
     this.userDetails = JSON.parse(localStorage.getItem('userDetails'))
+  }
+
+  // Display and close new treasury pop up window
+  newTreasuryPopTrigger = () => {
+    console.log('Inside the function')
+    this.setState({newTreasuryPopUp: !this.state.newTreasuryPopUp})
   }
 
   render() {
@@ -38,12 +45,13 @@ export default class Dashboard extends Component {
           <SearchBar>Search treasury name or ID</SearchBar>
 
           
-          <TreasuryNew/>
+          {/* Display pop up window for new treasury group */}
+          {this.state.newTreasuryPopUp && <TreasuryNew close={this.newTreasuryPopTrigger}/>}
 
 
 
           {/* Treasury add icon  */}
-          <button className='addBtn' >
+          <button className='addBtn' onClick={this.newTreasuryPopTrigger}>
             <img src={PlusImage} alt="plus image" />
           </button>
 
