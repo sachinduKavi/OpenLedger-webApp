@@ -17,7 +17,6 @@ export default function TreasuryNew() {
 
           <h2>CREATE NEW TREASURY</h2>
 
-
           
           <div className="row">
             <div className="cell">
@@ -31,6 +30,11 @@ export default function TreasuryNew() {
                   <Input.TextArea className='input-box' type='text'
                     rows={6}
                     />
+                </PrimaryBorder>
+
+                <h5 className="input-label">Members Limit</h5>
+                <PrimaryBorder borderRadius='6px'>
+                  <Input type='number' className='input-box' style={{width:'5px'}} value={100}/>
                 </PrimaryBorder>
 
             </div>

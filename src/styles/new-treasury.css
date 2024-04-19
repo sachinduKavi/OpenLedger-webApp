@@ -33,6 +33,7 @@
 .input-box,
 .input-box:focus, .input-box:active
 {
+    color: white;
     min-width: 350px;
     background-color: #232238;
     border: none;
