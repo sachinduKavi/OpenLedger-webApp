@@ -8,7 +8,7 @@ import {easeIn, motion} from 'framer-motion'
 import PrimaryBorder from '../PrimaryBorder'
 
 import DefaultUpload from '../../assets/icons/upload.png'
-import { center } from '@cloudinary/url-gen/qualifiers/textAlignment'
+
 
 export default function TreasuryNew(props) {
 

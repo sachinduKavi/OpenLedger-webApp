@@ -6,6 +6,7 @@ import '../styles/dashboard.css'
 import WelcomeBar from '../components/Dashboard/WelcomeBar'
 import SearchBar from '../components/SearchBar'
 import TreasuryNew from '../components/Dashboard/TreasuryNew'
+import Process from '../components/process'
 
 import PlusImage from '../assets/icons/plus.png'
 
@@ -17,7 +18,12 @@ export default class Dashboard extends Component {
 
     this.state = {
       newTreasuryPopUp: false,
+      processing: true
     }
+  }
+
+  processTrigger = (state) => {
+    this.setState({processing: state})
   }
 
 
@@ -54,6 +60,10 @@ export default class Dashboard extends Component {
           <button className='addBtn' onClick={this.newTreasuryPopTrigger}>
             <img src={PlusImage} alt="plus image" />
           </button>
+
+
+          {/* Processing circle */}
+          {this.state.processing && <Process/>}
 
         </div>
       </div>
