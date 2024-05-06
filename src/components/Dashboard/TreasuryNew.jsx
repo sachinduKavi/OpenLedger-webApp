@@ -92,12 +92,6 @@ export default function TreasuryNew(props) {
             
           </div>
 
-
-          
-
-          
-
-         
           
         </motion.div>
     </div>

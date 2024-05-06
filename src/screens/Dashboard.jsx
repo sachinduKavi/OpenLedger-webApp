@@ -18,7 +18,7 @@ export default class Dashboard extends Component {
 
     this.state = {
       newTreasuryPopUp: false,
-      processing: true
+      processing: false
     }
   }
 

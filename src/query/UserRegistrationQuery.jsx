@@ -43,7 +43,7 @@ const profilePictureUpload = async (imageFile, userImageID) => {
 }
 
 
-
+// Registration step 03
 // Final step of the registration process all the data of the user are send to the api to create an account
 const userRegistration = async (userDetails) => {
     console.log("Inside the user registration...")
