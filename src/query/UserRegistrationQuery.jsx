@@ -9,6 +9,7 @@ const cDomain = temp_domain
 // Registration step 01
 const verificationCode = async (user_email) => {
     console.log('Inside the verification code')
+    
     const response = await cDomain.post('user/verificationCode', {userEmail: user_email}, header)
     console.log(response)
     return {

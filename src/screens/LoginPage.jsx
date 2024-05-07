@@ -56,7 +56,7 @@ export default class LoginPage extends Component {
               {/* Server error */}
               {this.state.serverError&&<TimeMessage header='Unknown Error Occurred' type='warnning' killFn={this.messageKiller}>Sorry unknown error occurred with our servers, please try again later.</TimeMessage>}
             </AnimatePresence>
-
+      
             
             {/* Processing logo */}
             {this.state.processing&&<Process/>}
