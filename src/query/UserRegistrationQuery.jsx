@@ -25,7 +25,6 @@ const emailValidation = async (user_email, pinNumber) => {
     console.log(user_email, pinNumber)
     // try{
         const response = await cDomain.post('user/codeValidation', {userEmail:user_email, code:pinNumber}, header)
-        console.log('testing...')
         console.log("Response", response)
         return {
             validity: response.data.email_validation,
