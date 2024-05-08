@@ -36,13 +36,13 @@ export default class Dashboard extends Component {
     console.log('Inside the function')
     this.setState({newTreasuryPopUp: !this.state.newTreasuryPopUp})
   }
-
+  
   render() {
     if(this.userDetails ==  null) return <Navigate to='/login'/>
     return (
       <div>
         <div className="dash02">
-          <WelcomeBar userName={this.userDetails.userName} imageLink={this.userDetails.userImageID} imageScale={this.userDetails.pictureScale}/>
+          <WelcomeBar userName={this.userDetails.user_name} imageLink={this.userDetails.dp_link} imageScale={this.userDetails.picture_scale}/>
         
 
           <p>You'll find recently accessed groups here, and you also have the option to create new treasury groups.</p>

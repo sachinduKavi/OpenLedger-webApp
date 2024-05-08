@@ -15,7 +15,7 @@ export default class LoginPage extends Component {
       loginComplete: false, // Navigate to the app main screen 
 
       // Error messages IDs
-      passwordError: false,
+      invalidPass: false,
       emailFormatError: false,
       serverError: false,
 
@@ -26,7 +26,7 @@ export default class LoginPage extends Component {
   // Discard all the time messages 
   messageKiller = () => {
     this.setState({
-      passwordError: false,
+      invalidPass: false,
       emailFormatError: false,
       serverError: false,
     })
@@ -50,7 +50,7 @@ export default class LoginPage extends Component {
 
             <AnimatePresence>
               {/* Displays Error messages */}
-              {this.state.passwordError&&<TimeMessage header='Incorrect Password' type='error' killFn={this.messageKiller}>You have entered incorrect password, please try it again.</TimeMessage>}
+              {this.state.invalidPass&&<TimeMessage header='Incorrect Password' type='error' killFn={this.messageKiller}>You have entered incorrect password, please try it again.</TimeMessage>}
               {/* Invalid email address */}
               {this.state.emailFormatError&&<TimeMessage header='Invalid Email' type='error' killFn={this.messageKiller}>You have entered a invalid email address, please check again and reenter.</TimeMessage>}
               {/* Server error */}

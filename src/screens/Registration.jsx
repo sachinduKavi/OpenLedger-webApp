@@ -112,19 +112,14 @@ export default class Registration extends Component {
             user_name: this.state.userName,
             user_email: this.state.currentUserEmail,
             user_password: this.state.currentUserPassword,
-            user_image_id: this.state.userImageLink,
+            dp_link: this.state.userImageLink,
             picture_scale: this.state.pictureScale
         } 
         this.setState({registerProcess: await userRegistration(userDetails)})
 
         // Save user details in the local storage
         // Format user details for local storage
-        localStorage.setItem('userDetails', JSON.stringify({
-            userName: userDetails.user_name,
-            userEmail: userDetails.user_email,
-            userImageID: userDetails.user_image_id,
-            pictureScale: userDetails.picture_scale
-        }))
+        localStorage.setItem('userDetails', JSON.stringify(userDetails))
         this.processTrigger(false) // Switch off processing...
         
     }

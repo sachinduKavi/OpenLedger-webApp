@@ -47,7 +47,7 @@ const profilePictureUpload = async (imageFile, userImageID) => {
 // Final step of the registration process all the data of the user are send to the api to create an account
 const userRegistration = async (userDetails) => {
     console.log("Inside the user registration...")
-    console.log(userDetails)
+    console.log("User Details", userDetails)
 
     const response = await cDomain.post('user/newUserRegistration', userDetails, header)
     
