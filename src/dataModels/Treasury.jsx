@@ -1,4 +1,4 @@
-const { createNewTreasuryQuery } = require('../query/treasuryQuery')
+import {createNewTreasuryQuery} from '../query/treasuryQuery'
 
 class Treasury {
     // Private Treasury variables
@@ -15,7 +15,7 @@ class Treasury {
     #ownerID
 
     // Creating new treasury instant
-    constructor(treasuryName = null, description = null, memberLimit = null, coverImageLink = null, publicTreasury = null) {
+    constructor({treasuryName = null, description = null, memberLimit = null, coverImageLink = null, publicTreasury = null}) {
         this.#treasuryName = treasuryName
         this.#description = description
         this.#memberLimit = memberLimit
@@ -25,13 +25,13 @@ class Treasury {
 
 
     // Call create treasury query to call backend
-    createNewTreasury() {
-        createNewTreasuryQuery({
+    async sendDataToBackend() {
+        return await createNewTreasuryQuery({
             treasury_name: this.#treasuryName,
             description: this.#description,
             member_limit: this.#memberLimit,
             cover_image_link: this.#coverImageLink,
-            public: this.#publicTreasury
+            public_treasury: this.#publicTreasury
         })
     }
 

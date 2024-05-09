@@ -2,8 +2,11 @@ import React, {useRef, useState} from 'react'
 
 import '../../styles/new-treasury.css'
 
-import {Input, Button, Switch} from 'antd'
+import {Input, Switch} from 'antd'
 import {easeIn, motion} from 'framer-motion'
+import {v4} from 'uuid'
+
+import {uploadImageFireStore} from '../../query/firebaseImageUpload'
 
 import PrimaryBorder from '../PrimaryBorder'
 
@@ -15,7 +18,7 @@ import Treasury from '../../dataModels/Treasury'
 export default function TreasuryNew(props) {
 
   const coverImageRef = useRef(null)
-  const [imageFile, selectImage] = useState(null) // 
+  const [imageFile, selectImage] = useState(null) 
 
   // Input values from the create new treasury form
   const[inputValues, changeInputValues] = useState({
@@ -32,20 +35,27 @@ export default function TreasuryNew(props) {
 
   // User click on data create treasury button
   const createNewTreasurySubmission = async () => {
-    // props.parentContext.processTrigger(true) // Display process loading
-    console.log(inputValues, imageFile)
+    props.parentContext.processTrigger(true) // Display process loading
+
+    // Generate a random name for the image
+    const treasuryImageID = v4().slice(0, 20)
+    const pictureName = (inputValues.treasuryName.toString().replace(" ", "_")) + treasuryImageID
+    // Upload image to the fire store
+    let imageDownloadLink = null
+    if(imageFile != null) imageDownloadLink = await uploadImageFireStore(imageFile, `treasuryCover/${pictureName}`)
 
     // Create new treasury instant
-    const treasury = new Treasury(
-      {
+    const treasury = new Treasury({
         treasuryName: inputValues.treasuryName,
         description: inputValues.description,
         memberLimit: inputValues.memberLimit,
-        coverImageLink: "",
-        public: inputValues.publicTreasury
-      }
-    )
+        coverImageLink: imageDownloadLink,
+        publicTreasury: inputValues.publicTreasury
+      })
 
+    const res = await treasury.sendDataToBackend() // Post data to the backend
+    console.log('response', res)
+    props.parentContext.processTrigger(false) // Hide process loading
   }
 
   return (
