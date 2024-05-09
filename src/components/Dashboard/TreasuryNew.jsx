@@ -24,15 +24,16 @@ export default function TreasuryNew(props) {
     memberLimit: 100 // default member limit of the system is 100
   })
 
-  // On Create treasury group 
-  const dataSubmission = () => {
-    console.log('values: ', inputValues)
-  }
-
   // Toggle the state when user change group public or private
   const toggleChange = (e) => {
     changeInputValues({...inputValues, publicTreasury: e})
   }  
+
+  // User click on data create treasury button
+  const treasuryDataSubmission = async () => {
+    // props.parentContext.processTrigger(true) // Display process loading
+    console.log(inputValues, imageFile)
+  }
 
   return (
     <div className='overlay'>
@@ -109,7 +110,7 @@ export default function TreasuryNew(props) {
 
               <button className='cancel-btn' onClick={props.close}>Cancel</button>
           
-              <button type='primary' onClick={dataSubmission} className='create-btn'>Create Treasury</button>
+              <button type='primary' onClick={treasuryDataSubmission} className='create-btn'>Create Treasury</button>
     
             
           </div>

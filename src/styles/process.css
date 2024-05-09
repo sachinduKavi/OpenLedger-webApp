@@ -4,6 +4,7 @@
     align-items: center;
     width: 70px;
     aspect-ratio: 1;
+    z-index: 500;
     opacity: 1;
     border: 5px rgb(255, 255, 255) solid;
     /* background-color: rgb(255, 255, 255, 1); */
@@ -12,6 +13,7 @@
 }
 
 .background-blur {
+    z-index: 400;
     position: absolute;
     top: 0;
     left: 0;

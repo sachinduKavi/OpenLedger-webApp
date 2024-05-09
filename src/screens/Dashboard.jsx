@@ -52,7 +52,7 @@ export default class Dashboard extends Component {
 
           
           {/* Display pop up window for new treasury group */}
-          {this.state.newTreasuryPopUp && <TreasuryNew close={this.newTreasuryPopTrigger}/>}
+          {this.state.newTreasuryPopUp && <TreasuryNew close={this.newTreasuryPopTrigger} parentContext={this}/>}
 
 
 
