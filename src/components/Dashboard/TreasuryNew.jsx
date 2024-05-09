@@ -9,6 +9,7 @@ import PrimaryBorder from '../PrimaryBorder'
 
 import DefaultUpload from '../../assets/icons/upload.png'
 import { green } from '@cloudinary/url-gen/actions/adjust'
+import Treasury from '../../dataModels/Treasury'
 
 
 export default function TreasuryNew(props) {
@@ -30,9 +31,21 @@ export default function TreasuryNew(props) {
   }  
 
   // User click on data create treasury button
-  const treasuryDataSubmission = async () => {
+  const createNewTreasurySubmission = async () => {
     // props.parentContext.processTrigger(true) // Display process loading
     console.log(inputValues, imageFile)
+
+    // Create new treasury instant
+    const treasury = new Treasury(
+      {
+        treasuryName: inputValues.treasuryName,
+        description: inputValues.description,
+        memberLimit: inputValues.memberLimit,
+        coverImageLink: "",
+        public: inputValues.publicTreasury
+      }
+    )
+
   }
 
   return (
@@ -110,7 +123,7 @@ export default function TreasuryNew(props) {
 
               <button className='cancel-btn' onClick={props.close}>Cancel</button>
           
-              <button type='primary' onClick={treasuryDataSubmission} className='create-btn'>Create Treasury</button>
+              <button type='primary' onClick={createNewTreasurySubmission} className='create-btn'>Create Treasury</button>
     
             
           </div>

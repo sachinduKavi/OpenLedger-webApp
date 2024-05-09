@@ -10,28 +10,33 @@ class Treasury {
     #treasuryLink
     #qrImageID
     #globalVisibility
-    #public
+    #publicTreasury
     #coverImageLink
     #ownerID
 
     // Creating new treasury instant
-    constructor({treasuryName = null, description = null, memberLimit = null, coverImageLink = null, public = null}) {
+    constructor(treasuryName = null, description = null, memberLimit = null, coverImageLink = null, publicTreasury = null) {
         this.#treasuryName = treasuryName
         this.#description = description
         this.#memberLimit = memberLimit
         this.#coverImageLink = coverImageLink
-        this.#public = public
+        this.#publicTreasury = publicTreasury
     }
 
 
+    // Call create treasury query to call backend
     createNewTreasury() {
         createNewTreasuryQuery({
             treasury_name: this.#treasuryName,
             description: this.#description,
             member_limit: this.#memberLimit,
             cover_image_link: this.#coverImageLink,
-            public: this.#public
+            public: this.#publicTreasury
         })
+    }
+
+    toString() {
+        console.log(this.getAll())
     }
     
 
@@ -68,7 +73,7 @@ class Treasury {
     }
 
     getPublic() {
-        return this.#public
+        return this.#publicTreasury
     }
 
     getOwnerID() {
@@ -85,35 +90,35 @@ class Treasury {
         this.#treasuryName = treasuryName
     }
 
-    setTreasuryName(description) {
+    setDescription(description) {
         this.#description = description
     }
 
-    setTreasuryName(memberLimit) {
+    setMemberLimit(memberLimit) {
         this.#memberLimit = memberLimit
     }
 
-    setTreasuryName(coverImageID) {
+    setCoverImageID(coverImageID) {
         this.#coverImageID = coverImageID
     }
 
-    setTreasuryName(treasuryLink) {
+    setTreasuryLink(treasuryLink) {
         this.#treasuryLink = treasuryLink
     }
 
-    setTreasuryName(qrImageID) {
+    setQrImageID(qrImageID) {
         this.#qrImageID = qrImageID
     }
 
-    setTreasuryName(globalVisibility) {
+    setGlobalVisibility(globalVisibility) {
         this.#globalVisibility = globalVisibility
     }
 
-    setTreasuryName(public) {
-        this.#public = public
+    setPublic(publicTreasury) {
+        this.#publicTreasury = publicTreasury
     }
 
-    setTreasuryName(ownerID) {
+    setOwnerID(ownerID) {
         this.#ownerID = ownerID
     }
 
@@ -131,7 +136,7 @@ class Treasury {
             this.getOwnerID()
         ]
     }
-    setAll(treasuryID, treasuryName, description, memberLimit, coverImageID, treasuryLink, qrImageID, globalVisibility, public, ownerID) {
+    setAll(treasuryID, treasuryName, description, memberLimit, coverImageID, treasuryLink, qrImageID, globalVisibility, publicTreasury, ownerID) {
         this.setTreasuryID(treasuryID)
         this.setTreasuryName(treasuryName)
         this.setDescription(description)
@@ -140,7 +145,7 @@ class Treasury {
         this.setTreasuryLink(treasuryLink)
         this.setQrImageID(qrImageID)
         this.setGlobalVisibility(globalVisibility)
-        this.setPublic(public)
+        this.setPublic(publicTreasury)
         this.setOwnerID(ownerID)
     }
 
