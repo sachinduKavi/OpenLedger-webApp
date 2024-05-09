@@ -2,12 +2,13 @@ import React, {useRef, useState} from 'react'
 
 import '../../styles/new-treasury.css'
 
-import {Input, Button} from 'antd'
+import {Input, Button, Switch} from 'antd'
 import {easeIn, motion} from 'framer-motion'
 
 import PrimaryBorder from '../PrimaryBorder'
 
 import DefaultUpload from '../../assets/icons/upload.png'
+import { green } from '@cloudinary/url-gen/actions/adjust'
 
 
 export default function TreasuryNew(props) {
@@ -19,6 +20,7 @@ export default function TreasuryNew(props) {
   const[inputValues, changeInputValues] = useState({
     treasuryName: null,
     description: null,
+    publicTreasury: true,
     memberLimit: 100 // default member limit of the system is 100
   })
 
@@ -26,6 +28,11 @@ export default function TreasuryNew(props) {
   const dataSubmission = () => {
     console.log('values: ', inputValues)
   }
+
+  // Toggle the state when user change group public or private
+  const toggleChange = (e) => {
+    changeInputValues({...inputValues, publicTreasury: e})
+  }  
 
   return (
     <div className='overlay'>
@@ -79,6 +86,21 @@ export default function TreasuryNew(props) {
               </PrimaryBorder>
 
               <input type="file" accept='image/*' ref={coverImageRef} onChange={(e) => selectImage(e.target.files[0])}/>
+
+              <div className="toggle">
+                <p className="into">Define whether your treasury is Private or Public organization</p>
+                
+                {/* Public Private Switch */}
+                <div className="switch">
+                  <Switch onChange={toggleChange} value={inputValues.publicTreasury}/> 
+
+                  {/* Public Private placeholder */}
+                  {inputValues.publicTreasury?<h5 style={{color:'#95F1AF'}}>Public</h5>: <h5 style={{color:'#F45C56'}}>Private</h5>}
+                </div>
+                
+              </div>
+
+              
             </div>
             
           </div>

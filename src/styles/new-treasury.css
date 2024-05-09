@@ -113,4 +113,29 @@
     border: 1px solid red;
 }
 
+.cell {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.toggle > p {
+    color: rgb(201, 201, 201);
+}
+
+.switch {
+    display: flex;
+    margin: 5px 0;
+    width: 50px;
+    flex-direction: row;
+}
+
+.switch > h5 {
+    margin: 0 10px;
+}
+
+.cell .toggle {
+    margin: 20px 0;
+}
+
 
