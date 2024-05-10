@@ -15,12 +15,13 @@ class Treasury {
     #ownerID
 
     // Creating new treasury instant
-    constructor({treasuryName = null, description = null, memberLimit = null, coverImageLink = null, publicTreasury = null}) {
+    constructor({treasuryName = null, description = null, memberLimit = null, coverImageLink = null, publicTreasury = null, ownerID = null}) {
         this.#treasuryName = treasuryName
         this.#description = description
         this.#memberLimit = memberLimit
         this.#coverImageLink = coverImageLink
         this.#publicTreasury = publicTreasury
+        this.#ownerID = ownerID
     }
 
 
@@ -31,7 +32,8 @@ class Treasury {
             description: this.#description,
             member_limit: this.#memberLimit,
             cover_image_link: this.#coverImageLink,
-            public_treasury: this.#publicTreasury
+            public_treasury: this.#publicTreasury,
+            owner_id: this.#ownerID
         })
     }
 

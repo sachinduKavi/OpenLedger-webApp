@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, useContext } from 'react'
 import {Navigate} from 'react-router-dom'
 import {motion} from 'framer-motion'
 
@@ -9,12 +9,15 @@ import TreasuryNew from '../components/Dashboard/TreasuryNew'
 import Process from '../components/process'
 
 import PlusImage from '../assets/icons/plus.png'
+import { SessionContext } from '../Session'
 
 export default class Dashboard extends Component {
-
+  static contextType = SessionContext;
   constructor() {
     super()
+    // const {sessionData, changeSessionData} = useContext(SessionContext)
     this.userDetails = JSON.parse(localStorage.getItem('userDetails'))
+    
 
     this.state = {
       newTreasuryPopUp: false,
@@ -27,8 +30,8 @@ export default class Dashboard extends Component {
   }
 
 
-  componentDidMount() {
-    this.userDetails = JSON.parse(localStorage.getItem('userDetails'))
+  async componentDidMount() {
+    this.userDetails = await JSON.parse(localStorage.getItem('userDetails'))
   }
 
   // Display and close new treasury pop up window

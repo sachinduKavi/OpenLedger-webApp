@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react'
+import React, {useRef, useState, useContext} from 'react'
 
 import '../../styles/new-treasury.css'
 
@@ -13,9 +13,11 @@ import PrimaryBorder from '../PrimaryBorder'
 import DefaultUpload from '../../assets/icons/upload.png'
 import { green } from '@cloudinary/url-gen/actions/adjust'
 import Treasury from '../../dataModels/Treasury'
+import { SessionContext } from '../../Session'
 
 
 export default function TreasuryNew(props) {
+  const sessionContext = useContext(SessionContext)
 
   const coverImageRef = useRef(null)
   const [imageFile, selectImage] = useState(null) 
@@ -33,6 +35,7 @@ export default function TreasuryNew(props) {
     changeInputValues({...inputValues, publicTreasury: e})
   }  
 
+  // Create new treasury step 01 button click
   // User click on data create treasury button
   const createNewTreasurySubmission = async () => {
     props.parentContext.processTrigger(true) // Display process loading
@@ -50,15 +53,17 @@ export default function TreasuryNew(props) {
         description: inputValues.description,
         memberLimit: inputValues.memberLimit,
         coverImageLink: imageDownloadLink,
-        publicTreasury: inputValues.publicTreasury
+        publicTreasury: inputValues.publicTreasury,
+        ownerID: props.parentContext.userDetails.user_ID
       })
 
     const res = await treasury.sendDataToBackend() // Post data to the backend
     console.log('response', res)
     props.parentContext.processTrigger(false) // Hide process loading
   }
-
+  
   return (
+  
     <div className='overlay'>
 
         <div className="blur-page"></div>
