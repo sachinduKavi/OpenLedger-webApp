@@ -24,7 +24,6 @@ class Treasury {
         this.#ownerID = ownerID
     }
 
-
     // Call create treasury query to call backend
     async sendDataToBackend() {
         return await createNewTreasuryQuery({
@@ -37,6 +36,7 @@ class Treasury {
         })
     }
 
+    // Display all the values in the instant
     toString() {
         console.log(this.getAll())
     }

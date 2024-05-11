@@ -4,8 +4,7 @@ const cDomain = temp_domain
 
 // Send backend post request to create new treasury group
 const createNewTreasuryQuery = async (treasury) => {
-    const response = await cDomain.post('treasury/createTreasury', treasury, header)
-    return response
+    return await cDomain.post('treasury/createTreasury', treasury, header)
 }
 
 
