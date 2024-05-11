@@ -11,7 +11,6 @@ import {uploadImageFireStore} from '../../query/firebaseImageUpload'
 import PrimaryBorder from '../PrimaryBorder'
 
 import DefaultUpload from '../../assets/icons/upload.png'
-import { green } from '@cloudinary/url-gen/actions/adjust'
 import Treasury from '../../dataModels/Treasury'
 import { SessionContext } from '../../Session'
 
@@ -54,8 +53,7 @@ export default function TreasuryNew(props) {
         memberLimit: inputValues.memberLimit,
         coverImageLink: imageDownloadLink,
         publicTreasury: inputValues.publicTreasury,
-        ownerID: props.parentContext.userDetails.user_ID
-      })
+        ownerID: props.parentContext.userDetails.user_ID})
 
     const res = await treasury.sendDataToBackend() // Post data to the backend
     console.log('response', res)

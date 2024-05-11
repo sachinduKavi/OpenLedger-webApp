@@ -26,6 +26,7 @@ class Treasury {
 
     // Call create treasury query to call backend
     async sendDataToBackend() {
+        // Update treasury database
         return await createNewTreasuryQuery({
             treasury_name: this.#treasuryName,
             description: this.#description,
