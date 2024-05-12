@@ -4,6 +4,7 @@
     flex-direction: column;
     width: 100vw;
     height: 100vh;
+    overflow: hidden;
     align-items: center;
     background: linear-gradient(170deg, #110E19, #404A9C);
 }
@@ -45,6 +46,7 @@
     border-radius: 100%;
     bottom: 50px;
     right: 50px;
+    z-index: 10;
 }
 
 .addBtn:active {

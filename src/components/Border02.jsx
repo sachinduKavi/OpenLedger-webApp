@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function PrimaryBorder(props) {
+export default function Border02(props) {
   const styles = {
     padding: '2px',
     background: 'linear-gradient(to right,#B7B5EB,#63609E)',

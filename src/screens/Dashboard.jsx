@@ -12,7 +12,7 @@ import News from '../components/Dashboard/News'
 
 import PlusImage from '../assets/icons/plus.png'
 import { SessionContext } from '../Session'
-import PrimaryBorder from '../components/PrimaryBorder'
+import Border02 from '../components/Border02'
 
 export default class Dashboard extends Component {
   static contextType = SessionContext;
@@ -59,9 +59,7 @@ export default class Dashboard extends Component {
           <div className="main-content">
             <MyTreasuries/>
 
-            <PrimaryBorder borderRadius='6px'>
-              <News/>
-            </PrimaryBorder>
+            <News/>
             
           </div>
           
