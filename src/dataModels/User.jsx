@@ -3,7 +3,7 @@ class User {
     #userID = null
     #userName = null
     #userEmail = null
-    #password = null
+    #passwordHash = null
     #displayPictureID = null
 
 

@@ -15,7 +15,6 @@ export default class Dashboard extends Component {
   static contextType = SessionContext;
   constructor() {
     super()
-    // const {sessionData, changeSessionData} = useContext(SessionContext)
     this.userDetails = JSON.parse(localStorage.getItem('userDetails'))
     
 
@@ -53,6 +52,10 @@ export default class Dashboard extends Component {
 
           <SearchBar>Search treasury name or ID</SearchBar>
 
+          {/* Dashboard content */}
+          <div className="main-content">
+            
+          </div>
           
           {/* Display pop up window for new treasury group */}
           {this.state.newTreasuryPopUp && <TreasuryNew close={this.newTreasuryPopTrigger} parentContext={this}/>}
