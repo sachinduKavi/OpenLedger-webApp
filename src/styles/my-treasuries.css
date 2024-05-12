@@ -1,0 +1,8 @@
+.gigs-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 80%;
+    height: 100%;
+    border: 5px solid black;
+}

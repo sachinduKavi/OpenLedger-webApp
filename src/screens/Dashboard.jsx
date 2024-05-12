@@ -7,9 +7,12 @@ import WelcomeBar from '../components/Dashboard/WelcomeBar'
 import SearchBar from '../components/SearchBar'
 import TreasuryNew from '../components/Dashboard/TreasuryNew'
 import Process from '../components/process'
+import MyTreasuries from '../components/Dashboard/MyTreasuries'
+import News from '../components/Dashboard/News'
 
 import PlusImage from '../assets/icons/plus.png'
 import { SessionContext } from '../Session'
+import PrimaryBorder from '../components/PrimaryBorder'
 
 export default class Dashboard extends Component {
   static contextType = SessionContext;
@@ -54,6 +57,11 @@ export default class Dashboard extends Component {
 
           {/* Dashboard content */}
           <div className="main-content">
+            <MyTreasuries/>
+
+            <PrimaryBorder borderRadius='6px'>
+              <News/>
+            </PrimaryBorder>
             
           </div>
           
