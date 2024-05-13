@@ -1,5 +1,41 @@
 .gig-border {
-    aspect-ratio: 4/2;
+    position: relative;
+    aspect-ratio: 2/1;
+    background: url('../assets/images/stockAdobe.jpg');
+    background-position: center;
+    background-size:cover;
+    border-radius: 10px;
+}
+
+.gig-border:hover {
+    cursor: pointer;
+    box-shadow: 0 0 15px white;
+    transition: box-shadow 0.2s ease-in-out;
+}
+
+.gig-content {
+    position: absolute;
+    inset: 0;
+    padding: 2rem;
+    z-index: 101;
+}   
+
+.gig-content .topic {
+    color: white;
+    font-size: 30px;
+}
+
+.background-blur {
+    position: absolute;
+    inset: 0;
+    z-index: 100;
+    border-radius: inherit;
     background-color: black;
-    border-radius: 6px;
+    opacity: 0.45;
+}
+
+.balance {
+    display: flex;
+    width: 100%;
+    background-color: tomato;
 }

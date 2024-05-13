@@ -5,6 +5,7 @@
     width: 100vw;
     height: 100vh;
     overflow: hidden;
+    justify-content: space-between;
     align-items: center;
     background: linear-gradient(170deg, #110E19, #404A9C);
 }
@@ -58,8 +59,9 @@
 }
 
 .main-content {
-    margin: 20px;
-    flex-grow: 1;
+    margin: 20px 20px 0 20px;
+    height: 75%;
+    justify-self:self-end;
     width: 95vw;
     display: flex;
     flex-direction: row;

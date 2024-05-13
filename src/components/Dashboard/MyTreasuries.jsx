@@ -7,6 +7,14 @@ export default function MyTreasuries() {
   return (
     <div className='gigs-container'>
       <TreasuryGig/>
+      <TreasuryGig/>
+      <TreasuryGig/>
+      <TreasuryGig/>
+      <TreasuryGig/>
+      <TreasuryGig/>
+      <TreasuryGig/>
+      <TreasuryGig/>
+      <TreasuryGig/>
     </div>
   )
 }
