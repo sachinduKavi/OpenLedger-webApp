@@ -93,7 +93,7 @@ export default function TreasuryNew(props) {
 
                 <h5 className="input-label">Members Limit:</h5>
                 <PrimaryBorder borderRadius='6px'>
-                  <Input type='number' className='input-box' style={{minWidth:3}} value={100}
+                  <Input type='number' className='input-box' style={{minWidth:3}} value={inputValues.memberLimit}
                     onChange={(e) => changeInputValues({...inputValues, memberLimit:e.target.value})}
                   />
                 </PrimaryBorder>
