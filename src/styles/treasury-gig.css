@@ -10,15 +10,23 @@
 .gig-border:hover {
     cursor: pointer;
     box-shadow: 0 0 15px white;
-    transition: box-shadow 0.2s ease-in-out;
+    background-size: 150%;
+    transition: box-shadow 0.2s ease-in-out, background-size 5s ease-in-out;
 }
 
 .gig-content {
     position: absolute;
     inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     padding: 2rem;
     z-index: 101;
 }   
+
+.gig-content  h3 {
+    color: #f3f3f390;
+}
 
 .gig-content .topic {
     color: white;
@@ -36,6 +44,16 @@
 
 .balance {
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     width: 100%;
-    background-color: tomato;
+    align-items: center;
+}
+
+.notification {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100px;
+
 }
