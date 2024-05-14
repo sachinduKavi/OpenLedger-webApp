@@ -3,6 +3,7 @@ import {createNewTreasuryQuery} from '../query/treasuryQuery'
 class Treasury {
     // Private Treasury variables
     #treasuryID
+    #createdDate
     #treasuryName
     #description
     #memberLimit
@@ -15,10 +16,11 @@ class Treasury {
     #ownerID
 
     // Creating new treasury instant
-    constructor({treasuryName = null, description = null, memberLimit = null, coverImageLink = null, publicTreasury = null, ownerID = null}) {
+    constructor({treasuryName = null, description = null, memberLimit = null, coverImageLink = null, publicTreasury = null, ownerID = null, createdDate = null}) {
         this.#treasuryName = treasuryName
         this.#description = description
         this.#memberLimit = memberLimit
+        this.#createdDate = createdDate
         this.#coverImageLink = coverImageLink
         this.#publicTreasury = publicTreasury
         this.#ownerID = ownerID
@@ -26,9 +28,12 @@ class Treasury {
 
     // Call create treasury query to call backend
     async sendDataToBackend() {
+        const date = new Date()
+        console.log('Creation date',  date)
         // Update treasury database
         return await createNewTreasuryQuery({
             treasury_name: this.#treasuryName,
+            created_date: date,
             description: this.#description,
             member_limit: this.#memberLimit,
             cover_image_link: this.#coverImageLink,
