@@ -3,27 +3,32 @@ import {createNewTreasuryQuery} from '../query/treasuryQuery'
 class Treasury {
     // Private Treasury variables
     #treasuryID
-    #createdDate
     #treasuryName
     #description
     #memberLimit
+    #createdDate
     #coverImageID
     #treasuryLink
-    #qrImageID
     #globalVisibility
     #publicTreasury
-    #coverImageLink
     #ownerID
+    #currentBalance
+    #userRole
 
     // Creating new treasury instant
-    constructor({treasuryName = null, description = null, memberLimit = null, coverImageLink = null, publicTreasury = null, ownerID = null, createdDate = null}) {
+    constructor({treasuryID = null, treasuryName = null, description = null, memberLimit = null, coverImageID = null, treasuryLink = null, publicTreasury = null, ownerID = null, globalVisibility = null, createdDate = null, currentBalance = null, userRole = null}) {
+        this.#treasuryID = treasuryID
         this.#treasuryName = treasuryName
         this.#description = description
         this.#memberLimit = memberLimit
-        this.#createdDate = createdDate
-        this.#coverImageLink = coverImageLink
+        this.#coverImageID = coverImageID
+        this.#createdDate = createdDate?.toString().slice(0, 10)?? null
+        this.#treasuryLink = treasuryLink
         this.#publicTreasury = publicTreasury
         this.#ownerID = ownerID
+        this.#globalVisibility = globalVisibility
+        this.#currentBalance = currentBalance
+        this.#userRole = userRole
     }
 
     // Call create treasury query to call backend
@@ -36,7 +41,7 @@ class Treasury {
             created_date: date,
             description: this.#description,
             member_limit: this.#memberLimit,
-            cover_image_link: this.#coverImageLink,
+            cover_image_link: this.#coverImageID,
             public_treasury: this.#publicTreasury,
             owner_id: this.#ownerID
         })
@@ -72,9 +77,6 @@ class Treasury {
         return this.#treasuryLink
     }
 
-    getQrImageID() {
-        return this.#qrImageID
-    }
 
     getGlobalVisibility() {
         return this.#globalVisibility
@@ -112,10 +114,6 @@ class Treasury {
 
     setTreasuryLink(treasuryLink) {
         this.#treasuryLink = treasuryLink
-    }
-
-    setQrImageID(qrImageID) {
-        this.#qrImageID = qrImageID
     }
 
     setGlobalVisibility(globalVisibility) {
