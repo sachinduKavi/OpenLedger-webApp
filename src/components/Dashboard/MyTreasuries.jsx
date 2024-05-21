@@ -8,11 +8,16 @@ import TreasuryGig from './TreasuryGig'
 
 
 export default function MyTreasuries(props) {
+  
+  const loadTreasuries = async () => {
+    const response = await getAllTreasuryParticipantData(props.userID)
+    console.log('Treasury participant response', response)
+  }
 
   // Component did mount ?
   useEffect(() => {
-
-    // await getAllTreasuryParticipantData()
+    // Loading treasury data
+    loadTreasuries()
   })
 
   return (
