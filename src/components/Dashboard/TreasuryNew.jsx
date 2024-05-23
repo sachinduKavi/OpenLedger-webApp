@@ -45,18 +45,19 @@ export default function TreasuryNew(props) {
     // Upload image to the fire store
     let imageDownloadLink = null
     if(imageFile != null) imageDownloadLink = await uploadImageFireStore(imageFile, `treasuryCover/${pictureName}`)
-
+    console.log('Image download link', imageDownloadLink)
     // Create new treasury instant
     const treasury = new Treasury({
         treasuryName: inputValues.treasuryName,
         description: inputValues.description,
         memberLimit: inputValues.memberLimit,
-        coverImageLink: imageDownloadLink,
+        coverImageID: imageDownloadLink,
         publicTreasury: inputValues.publicTreasury,
         ownerID: props.parentContext.userDetails.user_ID})
 
     const res = await treasury.sendDataToBackend() // Post data to the backend
     console.log('response', res)
+    props.parentContext.setState({newTreasuryPopUp: false})
     props.parentContext.processTrigger(false) // Hide process loading
   }
   
@@ -64,7 +65,7 @@ export default function TreasuryNew(props) {
   
     <div className='overlay'>
 
-        <div className="blur-page"></div>
+        <div className="blur-pages"></div>
       
         <motion.div className='newForm'
           initial={{scale:0}}

@@ -8,15 +8,16 @@
     min-width: 100vw;
     min-height: 100vh;
     position: absolute;
-    z-index: 400;
+    z-index: 101;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.blur-page {
+.blur-pages {
     position: absolute;
     inset: 0;
+    z-index: 49;
     background-color: black;
     opacity: 0.5;
 }
@@ -27,7 +28,7 @@
     height: 669px;
     background-color: #5A71FB15;
     border-radius: 20px;
-    z-index: 51;
+    z-index: 50;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     padding: 60px 100px;

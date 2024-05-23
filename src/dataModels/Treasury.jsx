@@ -90,6 +90,10 @@ class Treasury {
         return this.#ownerID
     }
 
+    getBalance() {
+        return this.#currentBalance
+    }
+
 
 
     setTreasuryID(treasuryID) {

@@ -5,7 +5,7 @@ import '../styles/process.css'
 export default function Process() {
   return (
 
-    <>
+    <div className='process-container'>
       <div className='background-blur'>
 
       </div>
@@ -15,7 +15,7 @@ export default function Process() {
 
           <div className='process'>
 
-              {/* Animatied div tag */}
+              {/* Animated div tag */}
               <div className='ani-container'>
 
               </div>
@@ -25,7 +25,7 @@ export default function Process() {
               </div>
           </div>
       </div>
-    </>
+    </div>
     
   )
 }

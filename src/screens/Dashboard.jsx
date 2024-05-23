@@ -78,6 +78,7 @@ export default class Dashboard extends Component {
           {this.state.processing && <Process/>}
 
         </div>
+        
       </div>
     )
   }

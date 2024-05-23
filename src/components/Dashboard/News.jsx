@@ -1,10 +1,23 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {motion} from 'framer-motion'
+
+import {getNews} from '../../query/newsQuery'
 
 import '../../styles/news.css'
 import NewLogo from '../../assets/icons/battle.png'
 
 export default function News() {
+
+  const loadNews = async () => {
+    await getNews()
+  }
+
+
+  // Component did mount ?
+  useEffect(() => {
+    loadNews() // Loading news from the API
+  }, [])
+
   return (
     <motion.div className='news-section' 
     initial={{x: 300}}
