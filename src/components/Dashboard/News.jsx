@@ -2,6 +2,7 @@ import React, {useEffect} from 'react'
 import {motion} from 'framer-motion'
 
 import {getNews} from '../../query/newsQuery'
+import NewsData from '../../dataModels/News'
 
 import '../../styles/news.css'
 import NewLogo from '../../assets/icons/battle.png'
@@ -9,7 +10,17 @@ import NewLogo from '../../assets/icons/battle.png'
 export default function News() {
 
   const loadNews = async () => {
-    await getNews()
+    const results = await getNews()
+
+    let tempNewArray = []
+    results.data.articles.forEach(element => {
+      tempNewArray.push(new NewsData({
+        title: element.title,
+        content: element.content,
+        imageURL: element.urlToImage,
+        publishAt: element.publishedAt
+      }))
+    });
   }
 
 

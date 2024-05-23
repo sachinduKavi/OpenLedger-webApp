@@ -1,4 +1,4 @@
-class News {
+class NewsData {
     #title
     #content
     #imageURL
@@ -27,3 +27,5 @@ class News {
         return this.#publishAt
     }
 }
+
+export default NewsData

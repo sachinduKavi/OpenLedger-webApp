@@ -1,8 +1,8 @@
 import {newsDomain, header} from '../middleware/API'
 
 const getNews = async () => {
-    const response = await newsDomain.get()
-    console.log(response)
+    return await newsDomain.get()
+   
 }
 
 
