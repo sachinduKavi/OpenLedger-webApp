@@ -57,7 +57,7 @@ export default class Dashboard extends Component {
 
           {/* Dashboard content */}
           <div className="main-content">
-            <MyTreasuries/>
+            <MyTreasuries userID={this.userDetails.user_ID}/>
 
             <News/>
             

@@ -10,15 +10,18 @@ import TreasuryGig from './TreasuryGig'
 export default function MyTreasuries(props) {
   
   const loadTreasuries = async () => {
-    const response = await getAllTreasuryParticipantData(props.userID)
-    console.log('Treasury participant response', response)
+    console.log('Treasury participant response')
+    const response = await getAllTreasuryParticipantData(props.userID).catch(err => {
+      console.log('error', err)
+    })
+    
   }
 
   // Component did mount ?
   useEffect(() => {
     // Loading treasury data
     loadTreasuries()
-  })
+  }, [])
 
   return (
     <div className='gigs-container'>

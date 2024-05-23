@@ -10,9 +10,7 @@ export default function TreasuryGig() {
 
     // Component did mount
     useEffect(() => {
-        console.log('Component did mount...')
         setParentWidth(document.querySelector('.gigs-container').offsetWidth)
-        console.log('parent Width ', parentWidth)
     }, [])
 
   return (
