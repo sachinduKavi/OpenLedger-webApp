@@ -60,8 +60,9 @@ const MyTreasuries = forwardRef((props, ref) => {
   return (
     <div className='gigs-container'>
       {(treasuryArray.length > 0)?treasuryArray.map((element, index)=> {
+        console.log(index)
         return(
-        <TreasuryGig treasuryDetails={element} key={index}/>
+        <TreasuryGig treasuryDetails={element} key={index}  keyValue={index}/>
       )}):<div style={{display:'flex', flexGrow:1, justifyContent:'center', alignItems:'center'}}>
             <h3>No Recent Groups...</h3>
         </div>}

@@ -46,8 +46,8 @@ export default function News() {
           <h2>Ledger News</h2>
       </div>
 
-      {newsArray.map(element => (
-        <NewsGig data={element}/>
+      {newsArray.map((element, index) => (
+        <NewsGig data={element} key={index} keyValue={index}/>
       ))}
       
         
