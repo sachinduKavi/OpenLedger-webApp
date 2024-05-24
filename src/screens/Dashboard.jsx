@@ -1,4 +1,4 @@
-import React, { Component, useContext } from 'react'
+import React, { Component, useContext, createRef } from 'react'
 import {Navigate} from 'react-router-dom'
 import {motion} from 'framer-motion'
 
@@ -19,11 +19,12 @@ export default class Dashboard extends Component {
   constructor() {
     super()
     this.userDetails = JSON.parse(localStorage.getItem('userDetails'))
-    
+    this.childTreasuryRef = createRef()
 
     this.state = {
       newTreasuryPopUp: false,
-      processing: false
+      processing: false,
+  
     }
   }
 
@@ -38,8 +39,11 @@ export default class Dashboard extends Component {
 
   // Display and close new treasury pop up window
   newTreasuryPopTrigger = () => {
-    console.log('Inside the function')
     this.setState({newTreasuryPopUp: !this.state.newTreasuryPopUp})
+    // Check whether the window is closed 
+    if(this.state.newTreasuryPopUp) {
+      this.childTreasuryRef.current.reloadTreasuries()
+    }
   }
   
   render() {
@@ -50,14 +54,14 @@ export default class Dashboard extends Component {
           <WelcomeBar userName={this.userDetails.user_name} imageLink={this.userDetails.dp_link} imageScale={this.userDetails.picture_scale}/>
         
 
-          <p>You'll find recently accessed groups here, and you also have the option to create new treasury groups.</p>
+          <p>You'll find recently accessed groups here, and you also have the option to create new treasury groups.</p>
         
 
           <SearchBar>Search treasury name or ID</SearchBar>
 
           {/* Dashboard content */}
           <div className="main-content">
-            <MyTreasuries userID={this.userDetails.user_ID}/>
+            <MyTreasuries userID={this.userDetails.user_ID} ref={this.childTreasuryRef}/>
 
             <News/>
             

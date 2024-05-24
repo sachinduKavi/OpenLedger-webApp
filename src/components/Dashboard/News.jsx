@@ -10,17 +10,19 @@ import NewLogo from '../../assets/icons/battle.png'
 export default function News() {
 
   const loadNews = async () => {
-    const results = await getNews()
+    // const results = await getNews()
 
-    let tempNewArray = []
-    results.data.articles.forEach(element => {
-      tempNewArray.push(new NewsData({
-        title: element.title,
-        content: element.content,
-        imageURL: element.urlToImage,
-        publishAt: element.publishedAt
-      }))
-    });
+    // let tempNewArray = [] // Creating temporary new instant array
+    // results.data.articles.forEach(element => {
+    //   tempNewArray.push(new NewsData({
+    //     title: element.title,
+    //     content: element.content,
+    //     imageURL: element.urlToImage,
+    //     publishAt: element.publishedAt
+    //   }))
+    // })
+
+    
   }
 
 

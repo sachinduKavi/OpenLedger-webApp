@@ -57,7 +57,7 @@ export default function TreasuryNew(props) {
 
     const res = await treasury.sendDataToBackend() // Post data to the backend
     console.log('response', res)
-    props.parentContext.setState({newTreasuryPopUp: false})
+    props.close() // Close the current pop up window
     props.parentContext.processTrigger(false) // Hide process loading
   }
   

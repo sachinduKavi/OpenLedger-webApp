@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, forwardRef, useImperativeHandle} from 'react'
 
 import {getAllTreasuryParticipantData} from '../../query/treasuryQuery'
 import Treasury from '../../dataModels/Treasury'
@@ -8,18 +8,21 @@ import TreasuryGig from './TreasuryGig'
 
 
 
-export default function MyTreasuries(props) {
+const MyTreasuries = forwardRef((props, ref) => {
+  // Use create reference to reload the child component
+  useImperativeHandle(ref, () => ({
+    reloadTreasuries() {
+      loadTreasuries()
+      console.log('Reload is perform')
+    }
+  }))
+
 
   const [treasuryArray, setTreasuryArray] = useState([])
-  
-  // Clean treasury array on refresh
-  const clearTreasuryGigs = () => {
-    setTreasuryArray([])
-  }
 
   // Loading items to the treasury dashboard
   const loadTreasuries = async () => {
-    clearTreasuryGigs() // remove current values
+    console.log('reloading...')
     let tempResponseArray = []
     // Get response data from the getAllTreasuryParticipantData query
     const response = await getAllTreasuryParticipantData(props.userID).catch(err => {
@@ -62,4 +65,7 @@ export default function MyTreasuries(props) {
       )})}
     </div>
   )
-}
+})
+
+
+export default MyTreasuries

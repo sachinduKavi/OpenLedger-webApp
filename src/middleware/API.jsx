@@ -18,7 +18,7 @@ const header = {
 }
 
 const newsDomain = axios.create({
-    baseURL: 'https://newsapi.org/v2/everything?q=tesla&from=2024-04-23&sortBy=publishedAt&apiKey=4fb3c55f28c24f0c916f31987ba93ecd'
+    baseURL: 'https://api.thenewsapi.com/v1/news/headlines?locale=us&language=en&api_token=O1sbmmEfLxLyQuInCmIu6RbRSqazOpRftShmXOY0'
 })
 
 
