@@ -1,0 +1,26 @@
+.news-container {
+    position: relative;
+    z-index: 35;
+    padding: 10px;
+    max-width: 400px;
+    margin-bottom: 5px;
+}
+
+.news-container::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0.6;
+    z-index: 29;
+    border-radius: 10px;
+    background-color: black;
+}
+
+.news-container p, h4 {
+    position: relative;
+    z-index: 36;
+}
+
+.news-container > p {
+    color: rgb(163, 163, 163);
+}

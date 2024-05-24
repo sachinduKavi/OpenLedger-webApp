@@ -18,7 +18,7 @@ const header = {
 }
 
 const newsDomain = axios.create({
-    baseURL: 'https://api.thenewsapi.com/v1/news/headlines?locale=us&language=en&api_token=O1sbmmEfLxLyQuInCmIu6RbRSqazOpRftShmXOY0'
+    baseURL: 'https://newsdata.io/api/1/news?apikey=pub_448216a127f4ad53970cf4faa51c75ef600c1&q=finance&language=en&category=business'
 })
 
 

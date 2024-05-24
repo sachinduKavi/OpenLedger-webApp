@@ -33,7 +33,7 @@ export default function TreasuryGig(props) {
 
             {/* Balance  */}
             <div className="balance">
-              <h2>Balance : {props.treasuryDetails.getBalance()}</h2>
+              <h4>Balance : LKR {props.treasuryDetails.getBalance()}</h4>
 
               <div className="notification">
                 <img src={NotificationIcon} alt="notification"  width='30px' height='30px'/>

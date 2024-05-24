@@ -1,28 +1,31 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {motion} from 'framer-motion'
 
 import {getNews} from '../../query/newsQuery'
 import NewsData from '../../dataModels/News'
+import NewsGig from './NewsGig'
 
 import '../../styles/news.css'
 import NewLogo from '../../assets/icons/battle.png'
 
 export default function News() {
 
+  const [newsArray, setNewsArray] = useState([])
+
   const loadNews = async () => {
-    // const results = await getNews()
+    const results = await getNews()
+    const resultArray = results.data.results
 
-    // let tempNewArray = [] // Creating temporary new instant array
-    // results.data.articles.forEach(element => {
-    //   tempNewArray.push(new NewsData({
-    //     title: element.title,
-    //     content: element.content,
-    //     imageURL: element.urlToImage,
-    //     publishAt: element.publishedAt
-    //   }))
-    // })
-
-    
+    let tempNewArray = [] // Creating temporary new instant array
+    resultArray.forEach(element => {
+      tempNewArray.push(new NewsData({
+        title: element.title,
+        content: element.description,
+        imageURL: element.image_url,
+        publishAt: element.pubDate
+      }))
+    })
+    setNewsArray(tempNewArray)    
   }
 
 
@@ -38,10 +41,15 @@ export default function News() {
     transition={{duration: 0.3, stiffness: 5}}
       >
       <div className="topic">
-          <img src={NewLogo} alt="news-image" width='40px'/>
+          <img src={NewLogo} alt="news-image" width='40px' height={'40px'}/>
 
           <h2>Ledger News</h2>
       </div>
+
+      {newsArray.map(element => (
+        <NewsGig data={element}/>
+      ))}
+      
         
     </motion.div>
   )

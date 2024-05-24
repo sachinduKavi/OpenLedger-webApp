@@ -4,9 +4,15 @@
     /* background-color: red;  */
     height: 100%;
     flex-grow: 1;   
+    overflow-y: auto;
+    -ms-overflow-style: none;
     margin: 0 10px 10px 10px;
     border-radius: 25px;
     border: 4px solid #a3a0fa;
+}
+
+.news-section::-webkit-scrollbar {
+    display: none;
 }
 
 /* Tried to make gradient border but failed this is reminder for future changes */
