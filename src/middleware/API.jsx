@@ -1,4 +1,5 @@
 import axios from "axios"
+import { linkWithCredential } from "firebase/auth"
 
 // https://openledgers.netlify.app/
 
@@ -14,7 +15,8 @@ const mainDomain = axios.create({
 // const temp_domain = "http://192.168.8.167:3000/"
 
 const header = {
-    header: {'Content-Type':'application/json'}
+    header: {'Content-Type':'application/json'},
+    withCredentials: true
 }
 
 const newsDomain = axios.create({
