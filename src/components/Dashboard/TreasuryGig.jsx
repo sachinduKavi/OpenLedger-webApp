@@ -1,6 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import PrimaryBorder from '../PrimaryBorder'
 import {motion} from 'framer-motion'
+import {useNavigate} from 'react-router-dom'
+
+import Treasury from '../../screens/Treasury'
 
 import '../../styles/treasury-gig.css'
 
@@ -8,7 +11,7 @@ import NotificationIcon from '../../assets/icons/notification.png'
 import { contains } from '@cloudinary/url-gen/backwards/utils/legacyBaseUtil'
 
 export default function TreasuryGig(props) {
-  
+    const navigate = useNavigate() // Navigate object 
     const [parentWidth, setParentWidth] = useState(1000)
 
     // Component did mount
@@ -17,6 +20,12 @@ export default function TreasuryGig(props) {
         setParentWidth(document.querySelector('.gigs-container').offsetWidth)
     }, [])
 
+    // Open the relevant treasury group
+    const openTreasury = () => {
+      console.log('Open treasury', props.treasuryDetails)
+      navigate('/treasury', { data: props.treasuryDetails })
+    }
+
   return (
     <motion.div className="margin" style={{marginBottom:'20px'}}
       initial={{scale: 0}}
@@ -24,7 +33,7 @@ export default function TreasuryGig(props) {
       transition={{duration: 0.3, delay:props.keyValue*0.14}}
     >
       <PrimaryBorder borderRadius='10px'>
-        <div className='gig-border' style={{width: (parentWidth/2 -70).toString() + 'px', background: `url(${props.treasuryDetails.getCoverImageID()??'../assets/images/stockAdobe.jpg'})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
+        <div className='gig-border' style={{width: (parentWidth/2 -70).toString() + 'px', background: `url(${props.treasuryDetails.getCoverImageID()??'../assets/images/stockAdobe.jpg'})`, backgroundSize: 'cover', backgroundPosition: 'center'}} onClick={openTreasury}>
           <div className="background-blur"></div>
 
           <div className="gig-content">

@@ -1,10 +1,11 @@
 import React, {useState} from 'react'
-import { Route, Routes, BrowserRouter} from 'react-router-dom'
+import { Route, Routes, BrowserRouter, Router} from 'react-router-dom'
 
 import LoginPage from './screens/LoginPage'
 import Registration from './screens/Registration'
 import Dashboard from './screens/Dashboard'
 import {SessionContext} from './Session'
+import Treasury from './screens/Treasury'
 
 export const Context = React.createContext()
 
@@ -19,12 +20,15 @@ function App() {
   return (
     <SessionContext.Provider value={{sessionData: sessionData, changeSessionData: changeSessionData}}>
       <BrowserRouter>
+
         <Routes>
           <Route path='/' element={<LoginPage/>}/>
           <Route path='login' element={<LoginPage/>}/>
           <Route path='register' element={<Registration/>}/>
           <Route path='dashboard' element={<Dashboard/>}/>
+          <Route path='treasury' element={<Treasury/>}/>
         </Routes>
+  
       </BrowserRouter>
     </SessionContext.Provider>
       

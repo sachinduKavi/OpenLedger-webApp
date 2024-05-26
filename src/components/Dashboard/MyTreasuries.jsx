@@ -29,14 +29,13 @@ const MyTreasuries = forwardRef((props, ref) => {
     const response = await getAllTreasuryParticipantData(props.userID).catch(err => {
       console.log('error', err)
     })
-    console.log(response.data)
-    if(response.data === 'JsonWebTokenError') navigate('/login') // Change page to login page if the token is expired 
-    
+    // Change page to login page if the token is expired 
+    if(response.data === 'JsonWebTokenError' || response.data === 'TokenExpiredError') navigate('/login') 
 
     const responseArray = response.data.content
     
     // Creating new treasury array with instants
-    responseArray.forEach(element => {
+    responseArray?.forEach(element => {
           const treasury = new Treasury({
             treasuryID: element.treasury_ID,
             treasuryName: element.treasury_name,
