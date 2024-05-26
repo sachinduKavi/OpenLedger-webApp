@@ -1,4 +1,4 @@
-import React, {useState, useEffect, forwardRef, useImperativeHandle} from 'react'
+import React, {useState, useEffect, forwardRef, useImperativeHandle, useContext} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {getAllTreasuryParticipantData} from '../../query/treasuryQuery'
 import Treasury from '../../dataModels/Treasury'
@@ -7,9 +7,9 @@ import '../../styles/my-treasuries.css'
 import TreasuryGig from './TreasuryGig'
 
 
-
 const MyTreasuries = forwardRef((props, ref) => {
   const navigate = useNavigate() // To change the page 
+
   // Use create reference to reload the child component
   useImperativeHandle(ref, () => ({
     reloadTreasuries() {
@@ -26,7 +26,7 @@ const MyTreasuries = forwardRef((props, ref) => {
     console.log('reloading...')
     let tempResponseArray = []
     // Get response data from the getAllTreasuryParticipantData query
-    const response = await getAllTreasuryParticipantData(props.userID).catch(err => {
+    const response = await getAllTreasuryParticipantData().catch(err => {
       console.log('error', err)
     })
     // Change page to login page if the token is expired 
@@ -49,6 +49,7 @@ const MyTreasuries = forwardRef((props, ref) => {
             treasuryLink: element.treasury_link,
             userRole: element.user_role
           })
+          
           tempResponseArray.push(treasury)
     })
     setTreasuryArray(tempResponseArray) // Update treasury array
@@ -63,6 +64,7 @@ const MyTreasuries = forwardRef((props, ref) => {
   return (
     <div className='gigs-container'>
       {(treasuryArray.length > 0)?treasuryArray.map((element, index)=> {
+        
         return(
         <TreasuryGig treasuryDetails={element} key={index}  keyValue={index}/>
       )}):<div style={{display:'flex', flexGrow:1, justifyContent:'center', alignItems:'center'}}>

@@ -10,15 +10,12 @@ import TreasuryDashboard from './screens/TreasuryDashboard'
 export const Context = React.createContext()
 
 function App() {
- 
-  let sessionData = {}
+  const [sessionData, changeSessionData] = useState({name: 'sachindu'}) // Declare session variables
   // Change Session data
-  const changeSessionData = (value) => {
-    sessionData = value
-  }
+
 
   return (
-    <SessionContext.Provider value={{sessionData: sessionData, changeSessionData: changeSessionData}}>
+    <SessionContext.Provider value={{sessionData, changeSessionData}}>
       <BrowserRouter>
 
         <Routes>

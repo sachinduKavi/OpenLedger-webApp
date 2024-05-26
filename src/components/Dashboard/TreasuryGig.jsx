@@ -1,29 +1,31 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useContext} from 'react'
 import PrimaryBorder from '../PrimaryBorder'
 import {motion} from 'framer-motion'
 import {useNavigate} from 'react-router-dom'
 
-import Treasury from '../../screens/TreasuryDashboard'
-
+import TreasuryDashboard from '../../screens/TreasuryDashboard'
 import '../../styles/treasury-gig.css'
 
 import NotificationIcon from '../../assets/icons/notification.png'
+import { SessionContext } from '../../Session'
 import { contains } from '@cloudinary/url-gen/backwards/utils/legacyBaseUtil'
 
 export default function TreasuryGig(props) {
-    const navigate = useNavigate() // Navigate object 
+    const navigate = useNavigate() // Navigate instant 
     const [parentWidth, setParentWidth] = useState(1000)
+    const {sessionData, changeSessionData} = useContext(SessionContext) // Fetch global variables
 
     // Component did mount
     useEffect(() => {
       console.log('Key', props.keyValue)
-        setParentWidth(document.querySelector('.gigs-container').offsetWidth)
+      setParentWidth(document.querySelector('.gigs-container').offsetWidth)
     }, [])
 
     // Open the relevant treasury group
     const openTreasury = () => {
-      console.log('Open treasury', props.treasuryDetails)
-      navigate('/treasury', { data: props.treasuryDetails })
+      console.log('Open treasury', props.treasuryDetails.getTreasuryID())
+      changeSessionData({treasury: props.treasuryDetails}) // Update session data
+      navigate('/treasury')
     }
 
   return (

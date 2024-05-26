@@ -49,7 +49,7 @@ class Treasury {
 
     // Display all the values in the instant
     toString() {
-        console.log(this.getAll())
+        return 'This is treasury object'
     }
     
 

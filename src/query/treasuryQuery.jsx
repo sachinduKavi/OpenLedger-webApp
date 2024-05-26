@@ -8,8 +8,9 @@ const createNewTreasuryQuery = async (treasury) => {
 }
 
 // Retrieve all the treasury data form the backend which is relevant to the user_ID
-const getAllTreasuryParticipantData = async (userID) => {
-    return await cDomain.post('treasury/getParticipant', {user_ID: userID}, header)
+const getAllTreasuryParticipantData = async () => {
+    console.log('get')
+    return await cDomain.get('treasury/getParticipant', header)
 }
 
 
