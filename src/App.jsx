@@ -5,7 +5,7 @@ import LoginPage from './screens/LoginPage'
 import Registration from './screens/Registration'
 import Dashboard from './screens/Dashboard'
 import {SessionContext} from './Session'
-import Treasury from './screens/Treasury'
+import TreasuryDashboard from './screens/TreasuryDashboard'
 
 export const Context = React.createContext()
 
@@ -26,7 +26,7 @@ function App() {
           <Route path='login' element={<LoginPage/>}/>
           <Route path='register' element={<Registration/>}/>
           <Route path='dashboard' element={<Dashboard/>}/>
-          <Route path='treasury' element={<Treasury/>}/>
+          <Route path='treasury' element={<TreasuryDashboard/>}/>
         </Routes>
   
       </BrowserRouter>

@@ -3,7 +3,7 @@ import PrimaryBorder from '../PrimaryBorder'
 import {motion} from 'framer-motion'
 import {useNavigate} from 'react-router-dom'
 
-import Treasury from '../../screens/Treasury'
+import Treasury from '../../screens/TreasuryDashboard'
 
 import '../../styles/treasury-gig.css'
 

@@ -1,10 +1,10 @@
 import React from 'react'
 import {useLocation} from 'react-router-dom'
 
-import '../styles/treasury.css'
+import '../styles/treasury-dashboard.css'
 
 
-export default function Treasury() {
+export default function TreasuryDashboard() {
     const location = useLocation()
     console.log('Use location', location)
 
