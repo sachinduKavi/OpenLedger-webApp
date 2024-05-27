@@ -17,7 +17,6 @@ export default function TreasuryGig(props) {
 
     // Component did mount
     useEffect(() => {
-      console.log('Key', props.keyValue)
       setParentWidth(document.querySelector('.gigs-container').offsetWidth)
     }, [])
 
@@ -25,6 +24,9 @@ export default function TreasuryGig(props) {
     const openTreasury = () => {
       console.log('Open treasury', props.treasuryDetails.getTreasuryID())
       changeSessionData({treasury: props.treasuryDetails}) // Update session data
+      // Saving treasury instant on local storage
+      localStorage.setItem('treasury_obj', JSON.stringify(props.treasuryDetails.extractJSON()))
+
       navigate('/treasury')
     }
 

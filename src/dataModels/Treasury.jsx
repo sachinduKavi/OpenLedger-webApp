@@ -31,6 +31,23 @@ class Treasury {
         this.#userRole = userRole
     }
 
+    extractJSON() {
+        return {
+            treasuryID: this.#treasuryID,
+            treasuryName: this.#treasuryName,
+            description: this.#description,
+            memberLimit: this.#memberLimit,
+            createdDate: this.#createdDate,
+            coverImageID: this.#coverImageID,
+            treasuryLink: this.#treasuryLink,
+            globalVisibility: this.#globalVisibility,
+            publicTreasury: this.#publicTreasury,
+            ownerID: this.#ownerID,
+            currentBalance: this.#currentBalance,
+            useRole: this.#userRole
+        }
+    }
+
     // Call create treasury query to call backend
     async sendDataToBackend() {
         const date = new Date()

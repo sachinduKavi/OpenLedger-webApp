@@ -9,12 +9,16 @@ const createNewTreasuryQuery = async (treasury) => {
 
 // Retrieve all the treasury data form the backend which is relevant to the user_ID
 const getAllTreasuryParticipantData = async () => {
-    console.log('get')
     return await cDomain.get('treasury/getParticipant', header)
+}
+
+const verifyTreasury =  async (treasuryID) => {
+    return await cDomain.post('treasury/verifyTreasury', {treasury_ID: treasuryID, setHeader: true}, header)
 }
 
 
 export {
     createNewTreasuryQuery,
-    getAllTreasuryParticipantData
+    getAllTreasuryParticipantData,
+    verifyTreasury
 }
