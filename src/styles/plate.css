@@ -1,0 +1,25 @@
+.plate {
+    display: flex;
+    flex-direction: row;
+    width: 350px;
+    background-color: #151831;
+    height: fit-content;
+    padding: 20px;
+    border-radius: inherit;
+    /* margin-bottom: 6px; */
+    cursor: pointer;
+}
+
+.margin {
+    margin-bottom: 8px;
+}
+
+.plate > h2 {
+    color: #F3F3F3;
+    letter-spacing: 0.08em;
+    font-size: 1.8em;
+}
+
+.plate > img {
+    margin-right: 20px;
+}
