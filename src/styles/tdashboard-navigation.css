@@ -7,3 +7,9 @@
     align-items: start;
     margin-left: -10px;
 }
+
+.back-button {
+    background-color: #151831;
+    border-radius: inherit;
+    padding: 5px 25px;
+}
