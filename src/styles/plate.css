@@ -20,6 +20,7 @@
 
 .light > h2 {
     color: #F3F3F3;
+    font-size: 1vw;
 }
 
 .dark > h2 {

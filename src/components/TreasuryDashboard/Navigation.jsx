@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import {useNavigate} from 'react-router-dom'
 import '../../styles/tdashboard-navigation.css'
 import Plate from '../Plate'
 import PrimaryBorder from '../PrimaryBorder'
@@ -27,6 +28,7 @@ import treasuryImageDark from '../../assets/icons/dashboard-icons/treasury-dark.
 import undoImage from '../../assets/icons/dashboard-icons/undo.png'
 
 export default function Navigation() {
+    const navigate = useNavigate()
     const [panelSwitch, setPanelSwitch] = useState({
         dashboard: true,
         announcement: false,
@@ -80,7 +82,10 @@ export default function Navigation() {
                 whileHover={{scale: 0.9, x: -12}}
             >
             <PrimaryBorder borderRadius='0 25px 25px 0'>
-                <motion.div className="back-button"
+                <motion.div className="back-button" onClick={() => {
+                    // Navigate back to the user dashboard
+                    navigate('/dashboard')
+                }}
                     whileHover={{width: 100}}
                 
                 >
