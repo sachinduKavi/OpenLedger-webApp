@@ -34,6 +34,7 @@ export default function TreasuryGig(props) {
     <motion.div className="margin" style={{marginBottom:'20px'}}
       initial={{scale: 0}}
       animate={{scale: 1}}
+      whileHover={{scale: 0.98, transition: {duration: 0.1}}}
       transition={{duration: 0.3, delay:props.keyValue*0.14}}
     >
       <PrimaryBorder borderRadius='10px'>

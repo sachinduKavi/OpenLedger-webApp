@@ -1,7 +1,9 @@
 import React from 'react'
 
+import {Button} from 'antd'
 import '../../styles/dashboard-t.css'
 import {motion} from 'framer-motion'
+import ShareIcon from '../../assets/icons/Share.png'
 
 import PrimaryBorder from '../../components/PrimaryBorder'
 
@@ -13,16 +15,25 @@ export default function Dashboard(props) {
     >
         <div className="column" style={{flexGrow: 3}}>
 
-            <PrimaryBorder borderRadius={26}>
-                <div className="treasury-card" style={{backgroundImage: `url(${props.treasuryObj.getCoverImageID()})`,
-                    backgroundSize: 'cover'
-                }}></div>
-            </PrimaryBorder>
+            <div className="card-container">
+                <PrimaryBorder borderRadius={26}>
+                    <div className="treasury-card" style={{backgroundImage: `url(${props.treasuryObj.getCoverImageID()})`,
+                        backgroundSize: 'cover'
+                    }}></div>
+                </PrimaryBorder>
 
-            <div className="overlay"></div>
-         
-            
-    
+                <div className="card-overlay">
+                    <h1>{props.treasuryObj.getTreasuryName()}</h1>
+                    <p>{props.treasuryObj.getDescription()}</p>
+
+                    <div>
+                        <h2>{props.treasuryObj.getTreasuryID()}</h2>
+
+                        <img src={ShareIcon} alt="share-icon" />
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <div className="column" style={{flexGrow: 2}}>

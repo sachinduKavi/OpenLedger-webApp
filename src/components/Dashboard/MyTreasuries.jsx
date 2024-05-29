@@ -5,6 +5,7 @@ import Treasury from '../../dataModels/Treasury'
 
 import '../../styles/my-treasuries.css'
 import TreasuryGig from './TreasuryGig'
+import {motion} from 'framer-motion'
 
 
 const MyTreasuries = forwardRef((props, ref) => {
