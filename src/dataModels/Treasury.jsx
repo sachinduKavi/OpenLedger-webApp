@@ -149,6 +149,10 @@ class Treasury {
         this.#ownerID = ownerID
     }
 
+    setUserRole(userRole) {
+        this.#userRole = userRole
+    }
+
     getAll() {
         return [
             this.getTreasuryID(),

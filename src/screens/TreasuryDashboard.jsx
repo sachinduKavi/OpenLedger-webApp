@@ -7,6 +7,7 @@ import WelcomeBar from '../components/Dashboard/WelcomeBar'
 import Navigation from '../components/TreasuryDashboard/Navigation'
 import Dashboard from './DashboardT/Dashboard'
 import User from '../dataModels/User'
+import {AnimatePresence} from 'framer-motion'
 
 
 export default function TreasuryDashboard(){
@@ -14,6 +15,15 @@ export default function TreasuryDashboard(){
   const treasury = new Treasury(JSON.parse(localStorage.getItem('treasury_obj'))) // Creating new class object using local storage data
   // Get user details from the local storage
   const userDetails = JSON.parse(localStorage.getItem('userDetails')) // User details
+  const [panelSwitch, setPanelSwitch] = useState({
+    dashboard: true,
+    announcement: false,
+    treasury: false,
+    transaction: false,
+    ledgerChat: false,
+    complaints: false,
+    reports: false
+  })
 
   const navigate = useNavigate()
 
@@ -47,11 +57,15 @@ export default function TreasuryDashboard(){
 
       <div className="body-content">
         {/* Navigation bar */}
-        <Navigation/>
+        <Navigation switch={[panelSwitch, setPanelSwitch]}/>
 
         {/* Changing screen with responsive for the navigation bar */}
         <div className="screen">
-          <Dashboard treasuryObj={treasury}/>
+          <AnimatePresence>
+            {panelSwitch.dashboard && <Dashboard treasuryObj={treasury}/>}
+
+          </AnimatePresence>
+          
         </div>
 
 

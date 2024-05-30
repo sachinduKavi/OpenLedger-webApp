@@ -11,7 +11,7 @@ export default function Plate(props) {
   return (
     <motion.div className="margin" onClick={props.onClick} role='button' 
         whileHover={{scale: 0.9, x: -12}}
-        onHoverEnd={{scale:1, x: 0, transition: {delay: 0, duration: 0}}}
+        // onHoverEnd={{scale:1, x: 0, transition: {delay: 0, duration: 0}}}
         initial={{x:-1000}}
         animate={{x:0, transition: {delay: props.keyValue*0.04, duration: 0.5, type: 'spring'}}}
     >

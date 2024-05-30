@@ -27,17 +27,10 @@ import treasuryImage from '../../assets/icons/dashboard-icons/treasury.png'
 import treasuryImageDark from '../../assets/icons/dashboard-icons/treasury-dark.png'
 import undoImage from '../../assets/icons/dashboard-icons/undo.png'
 
-export default function Navigation() {
+export default function Navigation(props) {
     const navigate = useNavigate()
-    const [panelSwitch, setPanelSwitch] = useState({
-        dashboard: true,
-        announcement: false,
-        treasury: false,
-        transaction: false,
-        ledgerChat: false,
-        complaints: false,
-        reports: false
-    })
+    const [panelSwitch, setPanelSwitch] = props.switch
+    
 
     const resetPanel = () => {
         // Reset all the panels to false

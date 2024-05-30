@@ -12,6 +12,7 @@ export default function Dashboard(props) {
     <motion.div className='treasury-dashboard'
         initial={{x: 1500}}
         animate={{x: 0, transition: {duration: 0.3}}}
+        exit={{y: 1000}}
     >
         <div className="column" style={{flexGrow: 3}}>
 
@@ -33,6 +34,10 @@ export default function Dashboard(props) {
                     </div>
                 </div>
             </div>
+
+
+            {/* Ledger  */}
+            
 
         </div>
 
