@@ -1,4 +1,18 @@
+.icon-menu {
+    justify-self: end;
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
+.icon-menu:active {
+    background-color: #f0f8ff55;
+}
 
 .ledger-border {
     position: relative;
@@ -31,10 +45,6 @@
     justify-content: center;
 }
 
-.ledger-border .row > img {
-    position: absolute;
-    right: 20px;
-}
 
 .single-ledger-border {
     width: 100%;
@@ -74,4 +84,19 @@
 
 .amount, .date-time {
     text-align: end;
+}
+
+.menu-options {
+    position: absolute;
+    min-width: 100px;
+    min-height: 200px;
+    right: 50px;
+    top: 10px;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-options > button {
+    margin-bottom: 5px;
 }

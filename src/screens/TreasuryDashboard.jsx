@@ -9,12 +9,16 @@ import Dashboard from './DashboardT/Dashboard'
 import User from '../dataModels/User'
 import {AnimatePresence} from 'framer-motion'
 
+import Treasurer from '../dataModels/Treasurer'
+
 
 export default function TreasuryDashboard(){
   // Extracting the object from the local storage
   const treasury = new Treasury(JSON.parse(localStorage.getItem('treasury_obj'))) // Creating new class object using local storage data
   // Get user details from the local storage
   const userDetails = JSON.parse(localStorage.getItem('userDetails')) // User details
+  let activeUser;
+
   const [panelSwitch, setPanelSwitch] = useState({
     dashboard: true,
     announcement: false,
@@ -36,6 +40,15 @@ export default function TreasuryDashboard(){
       // Treasury is validated
       const treasuryRole = response.data.user_role // Role in the treasury
       treasury.setUserRole(treasuryRole) // Update user role
+      console.log(treasuryRole)
+      // Creating member, treasurer, co-treasurer, chair instant
+      if(treasuryRole === 'Treasurer') {
+        // User role is treasurer
+        console.log('Treasurer is found', userDetails)
+        activeUser = new Treasurer(userDetails) // Creating treasurer instant 
+        console.log('active user', activeUser)
+      }
+
     } else {
       // Treasury login is unauthorized
       navigate('/dashboard') // Navigate back to the dashboard
