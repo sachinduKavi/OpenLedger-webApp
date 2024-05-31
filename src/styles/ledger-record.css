@@ -1,0 +1,71 @@
+.ledger-container {
+    flex: 1;
+    background-color: red;
+}
+
+.ledger-border {
+    border: 3px solid #A2A0D7;
+    height: 100%;
+    margin: 10px 0;
+    border-radius: 25px;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    overflow-y: scroll;
+}
+
+.ledger-border  h2 {
+    font-size: 25px;
+}
+
+.ledger-border .row {
+    display: flex;
+    width: 100%;
+    position: relative;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.ledger-border .row > img {
+    position: absolute;
+    right: 20px;
+}
+
+.single-ledger-border {
+    width: 100%;
+    min-height: 50px;
+    margin-top: 5px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.single-ledger-border > .background {
+    position: absolute;
+    inset: 0;
+    background-color: black;
+    opacity: 0.32;
+    border-radius: inherit;
+}
+
+.single-ledger-border > .content{
+    position: relative;
+    inset: 0;
+    padding: 0 10px;
+}
+
+.content > .row {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+}
+
+.content > .row > .column {
+    display: flex;
+    flex-direction: column;
+    max-width: 70%;
+}
