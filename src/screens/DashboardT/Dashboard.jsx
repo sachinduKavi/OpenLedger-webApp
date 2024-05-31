@@ -15,7 +15,7 @@ export default function Dashboard(props) {
         animate={{x: 0, transition: {duration: 0.3}}}
         exit={{y: 1000}}
     >
-        <div className="column" style={{flexGrow: 11}}>
+        <div className="column">
 
             <div className="card-container">
                 <PrimaryBorder borderRadius={26}>
@@ -42,7 +42,7 @@ export default function Dashboard(props) {
                     
         </div>
 
-        <div className="column" style={{flexGrow: 9}}>
+        <div className="column">
 
         </div>
     </motion.div>

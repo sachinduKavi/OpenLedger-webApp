@@ -6,7 +6,7 @@ import SingleLedger from './SingleLedger'
 
 export default function Ledger() {
   return (
-    <div className="ledger-container">
+   
       
       <div className='ledger-border'>
      
@@ -21,9 +21,15 @@ export default function Ledger() {
         <SingleLedger/>
         <SingleLedger/>
         <SingleLedger/>
+        <SingleLedger/>
+        <SingleLedger/>
+        <SingleLedger/>
+        <SingleLedger/>
+        <SingleLedger/>
+        
       </div>
       
-    </div>
+  
     
   )
 }
