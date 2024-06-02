@@ -4,6 +4,7 @@ import '../../styles/ledger-record.css'
 import MenuImage from '../../assets/icons/3dots.png'
 import SingleLedger from './SingleLedger'
 import { Button } from 'antd'
+import NewLegerForm from './NewLegerForm'
 
 
 export default function Ledger(props) {
@@ -47,7 +48,9 @@ export default function Ledger(props) {
         <SingleLedger/>
         <SingleLedger/>
         <SingleLedger/>
-        
+
+
+        <NewLegerForm/>
       </div>
       
   

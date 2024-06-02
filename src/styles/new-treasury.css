@@ -32,7 +32,7 @@
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     padding: 60px 100px;
-    border: 1px solid var(--btnBorder);
+    border: 3px solid var(--btnBorder);
     display: flex;
     flex-direction: column;
 }
