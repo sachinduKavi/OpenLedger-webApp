@@ -1,14 +1,32 @@
 
 class User {
+    static position = 'User'
+
+    getPosition() {
+        return User.position
+    }
+
+    // Returns user level 
+    getUserLevel() {
+        return 0
+    }
+
     #userID = null
     #userName = null
     #userEmail = null
     #passwordHash = null
-    #displayPictureID = null
+    #dpLink = null
+    #pictureScale = null
 
 
-    constructor(userID = null, userName = null, userEmail = null, password = null, dp = null) {
+    constructor({userID = null, userName = null, userEmail = null, password = null, dpLink = null, pictureScale = null}) {
         // Creating new user Instant
+        this.#userID = userID
+        this.#userName = userName
+        this.#userEmail = userEmail
+        this.#passwordHash = password
+        this.#dpLink = dpLink
+        this.#pictureScale = pictureScale
     }
 
     // Update Database with current data
@@ -32,8 +50,8 @@ class User {
         this.#passwordHash = passwordHash
     }
 
-    setDisplayPictureID(displayPictureID){
-        this.#displayPictureID = displayPictureID
+    setDisplayPictureID(dpLink){
+        this.#dpLink = dpLink
     }
 
     getUserId() {
@@ -53,7 +71,7 @@ class User {
     }
 
     getDisplayPictureId() {
-        return this.#displayPictureID
+        return this.#dpLink
     }
 
     getAll() {

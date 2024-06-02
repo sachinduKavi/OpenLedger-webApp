@@ -38,7 +38,7 @@ export default function Dashboard(props) {
 
 
             {/* Ledger  */}
-            <Ledger/>
+            <Ledger attributes={{user: props.userObj, treasury: props.treasuryObj}}/>
                     
         </div>
 

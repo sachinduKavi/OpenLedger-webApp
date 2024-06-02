@@ -6,9 +6,14 @@ import SingleLedger from './SingleLedger'
 import { Button } from 'antd'
 
 
-export default function Ledger() {
-  const [options, setOptions] = useState(false) // Display overlay options
+export default function Ledger(props) {
+  // Load every single ledger records related to the the treasury
+  const loadLedgers = () => {
 
+  } 
+
+  const [options, setOptions] = useState(false) // Display overlay options
+  console.log('Object pass by ', props.attributes, props.attributes.user)
   return (
    
       
@@ -25,10 +30,10 @@ export default function Ledger() {
 
             <img src={MenuImage} alt="menu-icon" />
           </div>
-          
+          {/* Only Treasure and CO treasurer has access to add new records */}
           {options && <div className="menu-options">
-            <button>New Record</button>
             <button>Refresh</button>
+            {props.attributes.user.getUserLevel() > 2 && <button>New Record</button>}
           </div>}
         </div>
 

@@ -8,8 +8,9 @@ import Navigation from '../components/TreasuryDashboard/Navigation'
 import Dashboard from './DashboardT/Dashboard'
 import User from '../dataModels/User'
 import {AnimatePresence} from 'framer-motion'
-
+import Process from '../components/process'
 import Treasurer from '../dataModels/Treasurer'
+import Member from '../dataModels/Member'
 
 
 export default function TreasuryDashboard(){
@@ -17,7 +18,8 @@ export default function TreasuryDashboard(){
   const treasury = new Treasury(JSON.parse(localStorage.getItem('treasury_obj'))) // Creating new class object using local storage data
   // Get user details from the local storage
   const userDetails = JSON.parse(localStorage.getItem('userDetails')) // User details
-  let activeUser;
+  const [activeUser, setUser] = useState(null) // For user object with their user level
+  const [isProcessing, toggleProcessing] = useState(true)
 
   const [panelSwitch, setPanelSwitch] = useState({
     dashboard: true,
@@ -44,15 +46,24 @@ export default function TreasuryDashboard(){
       // Creating member, treasurer, co-treasurer, chair instant
       if(treasuryRole === 'Treasurer') {
         // User role is treasurer
-        console.log('Treasurer is found', userDetails)
-        activeUser = new Treasurer(userDetails) // Creating treasurer instant 
-        console.log('active user', activeUser)
+        setUser(new Treasurer(userDetails)) // Creating treasurer instant 
+        
+      } else if (treasuryRole === 'CoTreasurer') {
+        // User role is co treasurer
+
+      } else if (treasuryRole === 'Chair') {
+        // User role is Chair
+      } else if (treasuryRole === 'Member') {
+        // User role is Member
+      } else {
+        // Undefined user role
       }
 
     } else {
       // Treasury login is unauthorized
       navigate('/dashboard') // Navigate back to the dashboard
     }
+    toggleProcessing(false)
   }
 
   // Component did mount ?
@@ -66,7 +77,7 @@ export default function TreasuryDashboard(){
   
   return (  
     <div className='container'>
-      <WelcomeBar userName={userDetails?.user_name} imageLink={userDetails?.dp_link} imageScale={userDetails?.picture_scale}/>
+      <WelcomeBar userName={userDetails?.userName} imageLink={userDetails?.dpLink} imageScale={userDetails?.pictureScale}/>
 
       <div className="body-content">
         {/* Navigation bar */}
@@ -75,7 +86,9 @@ export default function TreasuryDashboard(){
         {/* Changing screen with responsive for the navigation bar */}
         <div className="screen">
           <AnimatePresence>
-            {panelSwitch.dashboard && <Dashboard treasuryObj={treasury}/>}
+            {panelSwitch.dashboard 
+            && !isProcessing 
+            && <Dashboard treasuryObj={treasury} userObj={activeUser}/>}
 
           </AnimatePresence>
           
@@ -83,6 +96,7 @@ export default function TreasuryDashboard(){
 
 
       </div>
+      {isProcessing && <Process/>}
     </div>
   )
 }

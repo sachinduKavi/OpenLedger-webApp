@@ -49,8 +49,15 @@ export default class FormComp extends Component {
       const reply = await userLogin({user_email: this.state.user.userEmail, user_pass: this.state.user.userPassword})
       if(reply.error == null) {
         if(reply.accountValidate) { // Password match
+          const userData = reply.userDetails
           // Set user details in local storage
-          localStorage.setItem('userDetails', JSON.stringify(reply.userDetails))
+          localStorage.setItem('userDetails', JSON.stringify({
+            userID: userData.user_ID,
+            userEmail: userData.user_email,
+            userName: userData.user_name,
+            dpLink: userData.dp_link,
+            pictureScale: userData.picture_scale
+          }))
           // Navigate to Dashboard 
           this.props.parentContext.setState({loginComplete: true})
         } else {
