@@ -55,7 +55,7 @@ export default function NewLegerForm(props) {
             <div className="ledger-content-new">
               <label>Title: </label>
               <PrimaryBorder borderRadius='6px' width='50%'>
-                <Input onChange={(e) => {setNewRecord({title: e.target.value})}}/>
+                <Input onChange={(e) => {setNewRecord({...newRecord, title: e.target.value})}}/>
               </PrimaryBorder>
               
             </div>
@@ -63,7 +63,7 @@ export default function NewLegerForm(props) {
             <div className="ledger-content-new">
               <label>Description: </label>
               <PrimaryBorder borderRadius='6px' width='100%'>
-                <Input onChange={(e) => {setNewRecord({description: e.target.value})}}/>
+                <Input onChange={(e) => {setNewRecord({...newRecord, description: e.target.value})}}/>
               </PrimaryBorder>
               
             </div>
@@ -71,7 +71,7 @@ export default function NewLegerForm(props) {
             <div className="ledger-content-new">
               <label>Amount: </label>
               <PrimaryBorder borderRadius='6px' width='140px'>
-                <Input onChange={(e) => {setNewRecord({amount: e.target.value})}}/>
+                <Input type='number' onChange={(e) => {setNewRecord({...newRecord, amount: e.target.value})}}/>
               </PrimaryBorder>
               
             </div>
@@ -83,9 +83,9 @@ export default function NewLegerForm(props) {
 
                 {/* Here user can see the evidence listed by them  */}
                 {evidenceArray.map((element, index) => {
-                  <div className="add-btn" key={index} style={{overflow: 'hidden'}}>
+                  return(<div className="add-btn" key={index} style={{overflow: 'hidden'}}>
                   {(element.getImageFile() !== null) && <img src={URL.createObjectURL(element.getImageFile())} alt="Loading" height='120%'/>}
-                </div>
+                </div>)
                 })}
       
                 <motion.div className="add-btn"
