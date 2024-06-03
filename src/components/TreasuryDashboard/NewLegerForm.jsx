@@ -38,6 +38,8 @@ export default function NewLegerForm(props) {
     // Creating new LedgerRecord instant
     const ledgerRecord = new LedgerRecordModel({...newRecord, evidenceArray: evidenceArray, treasuryID: props.treasury.getTreasuryID()}) 
     await ledgerRecord.uploadEvidenceImages() // Trigger to upload images to the firebase
+    // Now Ledger record is ready to be transfer to the backend
+    
   }
 
 
