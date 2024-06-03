@@ -53,7 +53,7 @@ export default function TreasuryNew(props) {
         memberLimit: inputValues.memberLimit,
         coverImageID: imageDownloadLink,
         publicTreasury: inputValues.publicTreasury,
-        ownerID: props.parentContext.userDetails.user_ID})
+        ownerID: props.parentContext.userDetails.userID})
 
     const res = await treasury.sendDataToBackend() // Post data to the backend
     console.log('response', res)
