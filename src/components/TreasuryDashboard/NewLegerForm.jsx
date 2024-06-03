@@ -6,6 +6,7 @@ import PlusIcon from '../../assets/icons/plus.png'
 import {motion, AnimatePresence} from 'framer-motion'
 import Evidence from '../../dataModels/Evidence'
 import EvidenceTitle from './EvidenceTitle'
+import LedgerRecordModel from '../../dataModels/LedgerRecordModel'
 
 
 export default function NewLegerForm(props) {
@@ -19,9 +20,10 @@ export default function NewLegerForm(props) {
     amount: 0
   })
 
-  // User clicks on the create record button
+  // User clicks on the create record button 
   const onSubmission = () => {
-    console.log('onData submission', newRecord)
+    const ledgerRecord = new LedgerRecordModel({...newRecord, evidenceArray: evidenceArray}) // Creating Ledger Record instant
+    console.log('Ledger record', ledgerRecord)
   }
 
   
