@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useRef} from 'react'
 import RedCloseBtn from '../RedCloseBtn'
 import {Input} from 'antd'
 import PrimaryBorder from '../../components/PrimaryBorder'
@@ -10,6 +10,8 @@ export default function NewLegerForm() {
   const clickOnClose = () => {
     console.log('User click on close')
   }
+
+  const evidenceImageRef = useRef()
 
   return (
     <div className='ledger-form-overlay'>
@@ -27,7 +29,7 @@ export default function NewLegerForm() {
 
             <div className="ledger-content-new">
               <label>Title: </label>
-              <PrimaryBorder borderRadius='6px'>
+              <PrimaryBorder borderRadius='6px' width='50%'>
                 <Input/>
               </PrimaryBorder>
               
@@ -35,7 +37,7 @@ export default function NewLegerForm() {
 
             <div className="ledger-content-new">
               <label>Description: </label>
-              <PrimaryBorder borderRadius='6px'>
+              <PrimaryBorder borderRadius='6px' width='100%'>
                 <Input/>
               </PrimaryBorder>
               
@@ -51,11 +53,12 @@ export default function NewLegerForm() {
 
             {/* Add evidence to the ledger record */}
             <label>Add Evidence:</label>
+            <input type="file" style={{visibility:'hidden'}} ref={evidenceImageRef} accept='image/*'/>
             <div className="evidence-container">
-
       
                 <motion.div className="add-btn"
                   whileTap={{scale: 0.8, transition: {duration: 0.1}}}
+                  onClick={() => {evidenceImageRef.current.click()}}
                 >
                   <img src={PlusIcon} alt="plus-icon" width='70%'/>
                 </motion.div>
