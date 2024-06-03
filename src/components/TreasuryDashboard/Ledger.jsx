@@ -4,10 +4,12 @@ import '../../styles/ledger-record.css'
 import MenuImage from '../../assets/icons/3dots.png'
 import SingleLedger from './SingleLedger'
 import { Button } from 'antd'
+import { AnimatePresence } from 'framer-motion'
 import NewLegerForm from './NewLegerForm'
 
 
 export default function Ledger(props) {
+  const [newLegerRecord, toggleNewLegerRecord] = useState(false)
   // Load every single ledger records related to the the treasury
   const loadLedgers = () => {
 
@@ -34,7 +36,9 @@ export default function Ledger(props) {
           {/* Only Treasure and CO treasurer has access to add new records */}
           {options && <div className="menu-options">
             <button>Refresh</button>
-            {props.attributes.user.getUserLevel() > 2 && <button>New Record</button>}
+            {props.attributes.user.getUserLevel() > 2 && <button onClick={() => {
+              toggleNewLegerRecord(true)
+            }}>New Record</button>}
           </div>}
         </div>
 
@@ -49,8 +53,11 @@ export default function Ledger(props) {
         <SingleLedger/>
         <SingleLedger/>
 
-
-        <NewLegerForm/>
+        {/* New ledger record form */}
+        <AnimatePresence>
+          {newLegerRecord && <NewLegerForm closeForm={toggleNewLegerRecord}/>}
+        </AnimatePresence>
+        
       </div>
       
   

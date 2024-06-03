@@ -8,12 +8,22 @@ import Evidence from '../../dataModels/Evidence'
 import EvidenceTitle from './EvidenceTitle'
 
 
-export default function NewLegerForm() {
-  const clickOnClose = () => {
-    console.log('User click on close')
-  }
+export default function NewLegerForm(props) {
   // Evidence state of the window
   const [evidenceState, toggleEvidenceState] = useState(false)
+
+  // User entered values 
+  const [newRecord, setNewRecord] = useState({
+    title: '',
+    description: '',
+    amount: 0
+  })
+
+  // User clicks on the create record button
+  const onSubmission = () => {
+    console.log('onData submission', newRecord)
+  }
+
   
   // Evidence array 
   const [evidenceArray, changeEvidenceArray] = useState([])
@@ -23,7 +33,6 @@ export default function NewLegerForm() {
     if(evidenceObj.getDescription() !== "" || evidenceObj.getImageFile() !== null) {
       // Incrementing evidence array
       changeEvidenceArray([...evidenceArray, evidenceObj])
-      console.log('incrementing...')
     }
     toggleEvidenceState(false) // Closing evidence pop up window
   }
@@ -46,7 +55,7 @@ export default function NewLegerForm() {
             <div className="ledger-content-new">
               <label>Title: </label>
               <PrimaryBorder borderRadius='6px' width='50%'>
-                <Input/>
+                <Input onChange={(e) => {setNewRecord({title: e.target.value})}}/>
               </PrimaryBorder>
               
             </div>
@@ -54,7 +63,7 @@ export default function NewLegerForm() {
             <div className="ledger-content-new">
               <label>Description: </label>
               <PrimaryBorder borderRadius='6px' width='100%'>
-                <Input/>
+                <Input onChange={(e) => {setNewRecord({description: e.target.value})}}/>
               </PrimaryBorder>
               
             </div>
@@ -62,7 +71,7 @@ export default function NewLegerForm() {
             <div className="ledger-content-new">
               <label>Amount: </label>
               <PrimaryBorder borderRadius='6px' width='140px'>
-                <Input/>
+                <Input onChange={(e) => {setNewRecord({amount: e.target.value})}}/>
               </PrimaryBorder>
               
             </div>
@@ -74,9 +83,9 @@ export default function NewLegerForm() {
 
                 {/* Here user can see the evidence listed by them  */}
                 {evidenceArray.map((element, index) => {
-                  return(<div className="add-btn" key={index} style={{overflow: 'hidden'}}>
-                  <img src={URL.createObjectURL(element.getImageFile())} alt="Loading" height='120%'/>
-                </div>)
+                  <div className="add-btn" key={index} style={{overflow: 'hidden'}}>
+                  {(element.getImageFile() !== null) && <img src={URL.createObjectURL(element.getImageFile())} alt="Loading" height='120%'/>}
+                </div>
                 })}
       
                 <motion.div className="add-btn"
@@ -85,9 +94,17 @@ export default function NewLegerForm() {
                 >
                   <img src={PlusIcon} alt="plus-icon" width='70%'/>
                 </motion.div>
-           
+                
               
             </div>
+
+              <div className="submission">
+                <button style={{flexGrow: 1, margin: '5px'}} onClick={onSubmission}>CREATE</button>
+                <button style={{border: '2px solid red', flexGrow: 1, margin: '5px'}}
+                onClick={() => {props.closeForm(false)}}
+                >CANCEL</button>
+              </div>
+
             <AnimatePresence>
               {evidenceState && <EvidenceTitle createNew={createNewEvidence} toggleClose={toggleEvidenceState}/>}
             </AnimatePresence>
