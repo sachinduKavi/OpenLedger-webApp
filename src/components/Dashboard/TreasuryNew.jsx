@@ -80,7 +80,7 @@ export default function TreasuryNew(props) {
           <div className="row">
             <div className="cell">
                 <h5 className='input-label'>Treasury Name: </h5>
-                <PrimaryBorder borderRadius='6px'>
+                <PrimaryBorder borderRadius='6px' minWidth='100%'>
                   <Input className='input-box' type='text' onChange={(e) => changeInputValues({...inputValues, treasuryName:e.target.value})}/>
                 </PrimaryBorder>
 
