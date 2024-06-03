@@ -5,6 +5,7 @@ import PrimaryBorder from '../../components/PrimaryBorder'
 import PlusIcon from '../../assets/icons/plus.png'
 import {motion} from 'framer-motion'
 import Evidence from '../../dataModels/Evidence'
+import EvidenceTitle from './EvidenceTitle'
 
 
 export default function NewLegerForm() {
@@ -20,6 +21,12 @@ export default function NewLegerForm() {
   // Select the image and add to and array of evidence object 
   const imageFileSelected = async (e) => {
     console.log(e.target.files)
+  }
+
+  // Add new evidence to the system and display the evidence prompt 
+  const createNewEvidence = () => {
+    console.log('Create new evidence')
+    
   }
 
 
@@ -68,14 +75,14 @@ export default function NewLegerForm() {
       
                 <motion.div className="add-btn"
                   whileTap={{scale: 0.8, transition: {duration: 0.1}}}
-                  onClick={() => {evidenceImageRef.current.click()}}
+                  onClick={createNewEvidence}
                 >
                   <img src={PlusIcon} alt="plus-icon" width='70%'/>
                 </motion.div>
            
               
             </div>
-            
+            <EvidenceTitle/>
           </div>
       </div>
     </div>
