@@ -4,6 +4,7 @@ import {Input} from 'antd'
 import PrimaryBorder from '../../components/PrimaryBorder'
 import PlusIcon from '../../assets/icons/plus.png'
 import {motion} from 'framer-motion'
+import Evidence from '../../dataModels/Evidence'
 
 
 export default function NewLegerForm() {
@@ -11,7 +12,16 @@ export default function NewLegerForm() {
     console.log('User click on close')
   }
 
-  const evidenceImageRef = useRef()
+  
+
+  const evidenceImageRef = useRef() // Reference hook for the image to be selected 
+  // Evidence array 
+  let evidenceArray = []
+  // Select the image and add to and array of evidence object 
+  const imageFileSelected = async (e) => {
+    console.log(e.target.files)
+  }
+
 
   return (
     <div className='ledger-form-overlay'>
@@ -53,7 +63,7 @@ export default function NewLegerForm() {
 
             {/* Add evidence to the ledger record */}
             <label>Add Evidence:</label>
-            <input type="file" style={{visibility:'hidden'}} ref={evidenceImageRef} accept='image/*'/>
+            <input type="file" style={{visibility:'hidden'}} ref={evidenceImageRef} accept='image/*' onChange={imageFileSelected}/>
             <div className="evidence-container">
       
                 <motion.div className="add-btn"
