@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react'
+import React, {useState} from 'react'
 import RedCloseBtn from '../RedCloseBtn'
 import {Input} from 'antd'
 import PrimaryBorder from '../../components/PrimaryBorder'
@@ -15,15 +15,16 @@ export default function NewLegerForm() {
   // Evidence state of the window
   const [evidenceState, toggleEvidenceState] = useState(false)
   
-
   // Evidence array 
   const [evidenceArray, changeEvidenceArray] = useState([])
-  // Add new evidence to the system and display the evidence prompt function
+  // Add new evidence to the evidence array and display the evidence prompt function
   const createNewEvidence = (evidenceObj) => {
-    console.log('Create new evidence', evidenceObj)
-    // Incrementing evidence array
-    changeEvidenceArray([...evidenceArray, evidenceObj])
-    console.log(evidenceArray)
+    // console.log('return object ', evidenceObj)
+    if(evidenceObj.getDescription() !== "" || evidenceObj.getImageFile() !== null) {
+      // Incrementing evidence array
+      changeEvidenceArray([...evidenceArray, evidenceObj])
+      console.log('incrementing...')
+    }
     toggleEvidenceState(false) // Closing evidence pop up window
   }
 
@@ -38,7 +39,7 @@ export default function NewLegerForm() {
             <div className='title-row'>
               <h2>CREATE NEW LEDGER RECORD</h2>
 
-              <RedCloseBtn size={18} onClick={clickOnClose}/>
+      
             </div>
 
 
@@ -70,6 +71,13 @@ export default function NewLegerForm() {
             <label>Add Evidence:</label>
             
             <div className="evidence-container">
+
+                {/* Here user can see the evidence listed by them  */}
+                {evidenceArray.map((element, index) => {
+                  return(<div className="add-btn" key={index} style={{overflow: 'hidden'}}>
+                  <img src={URL.createObjectURL(element.getImageFile())} alt="Loading" height='120%'/>
+                </div>)
+                })}
       
                 <motion.div className="add-btn"
                   whileTap={{scale: 0.8, transition: {duration: 0.1}}}
