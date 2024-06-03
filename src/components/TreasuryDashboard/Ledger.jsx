@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import '../../styles/ledger-record.css'
 
 import MenuImage from '../../assets/icons/3dots.png'
@@ -16,7 +16,6 @@ export default function Ledger(props) {
   } 
 
   const [options, setOptions] = useState(false) // Display overlay options
-  console.log('Object pass by ', props.attributes, props.attributes.user)
   return (
    
       
@@ -55,7 +54,7 @@ export default function Ledger(props) {
 
         {/* New ledger record form */}
         <AnimatePresence>
-          {newLegerRecord && <NewLegerForm closeForm={toggleNewLegerRecord}/>}
+          {newLegerRecord && <NewLegerForm closeForm={toggleNewLegerRecord} treasury={props.attributes.treasury}/>}
         </AnimatePresence>
         
       </div>

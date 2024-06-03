@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import RedCloseBtn from '../RedCloseBtn'
 import {Input} from 'antd'
 import PrimaryBorder from '../../components/PrimaryBorder'
 import PlusIcon from '../../assets/icons/plus.png'
@@ -20,12 +19,6 @@ export default function NewLegerForm(props) {
     amount: 0
   })
 
-  // User clicks on the create record button 
-  const onSubmission = () => {
-    const ledgerRecord = new LedgerRecordModel({...newRecord, evidenceArray: evidenceArray}) // Creating Ledger Record instant
-    console.log('Ledger record', ledgerRecord)
-  }
-
   
   // Evidence array 
   const [evidenceArray, changeEvidenceArray] = useState([])
@@ -37,6 +30,14 @@ export default function NewLegerForm(props) {
       changeEvidenceArray([...evidenceArray, evidenceObj])
     }
     toggleEvidenceState(false) // Closing evidence pop up window
+  }
+
+
+  // User clicks on the create record button 
+  const onSubmission = async () => {
+    // Creating new LedgerRecord instant
+    const ledgerRecord = new LedgerRecordModel({...newRecord, evidenceArray: evidenceArray, treasuryID: props.treasury.getTreasuryID()}) 
+    await ledgerRecord.uploadEvidenceImages() // Trigger to upload images to the firebase
   }
 
 
