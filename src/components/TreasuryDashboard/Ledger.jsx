@@ -10,6 +10,7 @@ import NewLegerForm from './NewLegerForm'
 
 export default function Ledger(props) {
   const [newLegerRecord, toggleNewLegerRecord] = useState(false)
+  
   // Load every single ledger records related to the the treasury
   const loadLedgers = () => {
 
@@ -37,6 +38,7 @@ export default function Ledger(props) {
             <button>Refresh</button>
             {props.attributes.user.getUserLevel() > 2 && <button onClick={() => {
               toggleNewLegerRecord(true)
+              setOptions(false) // Closing options
             }}>New Record</button>}
           </div>}
         </div>

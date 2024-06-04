@@ -11,15 +11,15 @@ import MyTreasuries from '../components/Dashboard/MyTreasuries'
 import News from '../components/Dashboard/News'
 
 import PlusImage from '../assets/icons/plus.png'
-import { SessionContext } from '../Session'
+
 import Border02 from '../components/Border02'
 
 export default class Dashboard extends Component {
-  static contextType = SessionContext;
+  
   constructor() {
     super()
     this.userDetails = JSON.parse(localStorage.getItem('userDetails'))
-    this.childTreasuryRef = createRef()
+    
 
     this.state = {
       newTreasuryPopUp: false,

@@ -6,11 +6,14 @@ import Registration from './screens/Registration'
 import Dashboard from './screens/Dashboard'
 import {SessionContext} from './Session'
 import TreasuryDashboard from './screens/TreasuryDashboard'
+import Process from './components/process'
 
 export const Context = React.createContext()
 
 function App() {
-  const [sessionData, changeSessionData] = useState({name: 'sachindu'}) // Declare session variables
+  const [sessionData, changeSessionData] = useState({
+    processing: false
+  }) // Declare session variables
   // Change Session data
 
 
@@ -27,6 +30,9 @@ function App() {
         </Routes>
   
       </BrowserRouter>
+
+      {/* Global Process trigger */}
+      {sessionData.processing && <Process/>}
     </SessionContext.Provider>
       
   )

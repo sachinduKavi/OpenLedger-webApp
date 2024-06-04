@@ -33,6 +33,11 @@ class LedgerRecordModel {
         }
     }
 
+    // Create new ledger record in the treasury
+    createNewLedgerRecord() {
+        
+    }
+
 
     extractJSON() {
         // Implementing array with all the evidence 

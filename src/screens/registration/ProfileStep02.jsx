@@ -42,7 +42,7 @@ export default function ProfileStep02(props) {
 
     return (
       <div style={{justifyContent:'flex-start'}}>
-        <div className="container">
+        <div className="container-profile">
             
             <DisplayPicture imageFile={imageFile} imageRef={imageInput} width='200px' parentContext={parentContext} editable={true} />
 
