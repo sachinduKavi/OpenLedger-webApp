@@ -13,6 +13,14 @@ class Evidence {
         this.#recordID = recordID
     }
 
+    extractJSON() {
+        return {
+            imageName: this.#imageName,
+            imageLink: this.#imageLink,
+            description: this.#description,
+        }
+    }
+
 
     // Getters and Setters of the evidence class
     getImageFile() {

@@ -20,19 +20,35 @@ class LedgerRecordModel {
     async uploadEvidenceImages() {
         if(this.#evidenceArray !== null) {
             // Clear to proceed
-            await this.#evidenceArray.forEach(async (element) => {
+            for(let i = 0; i < this.#evidenceArray.length; i++) {
                 // Images are uploaded to the firebase to their relevant repository 
                 // New image link is generated and assigned it to the Evidence object
-                const imageLink = await uploadImageFireStore(element.getImageFile(), `evidence/${this.#treasuryID}/${v4()}`)
-                element.setImageLink(imageLink)
-            })
+                this.#evidenceArray[i].setImageName(v4()) // set evidence image name for random string 
+                const imageLink = await uploadImageFireStore(this.#evidenceArray[i].getImageFile(), `evidence/${this.#treasuryID}/${this.#evidenceArray[i].getImageName()}`)
+                this.#evidenceArray[i].setImageLink(imageLink)
+            }
         } else {
             // Evidence array is not set
             console.log('Evidence array is null')
         }
-        console.log('Evidence array', this.#evidenceArray)
     }
 
+
+    extractJSON() {
+        // Implementing array with all the evidence 
+        let evidence = []
+        this.#evidenceArray.forEach(element => {
+            evidence.push(element.extractJSON()) 
+          })
+
+        return {
+            title: this.#title,
+            description: this.#description,
+            amount: this.#amount,
+            treasuryID: this.#treasuryID,
+            evidenceArray: evidence
+        }
+    }
 
     // Getters and Setters
     getTreasuryID() {
