@@ -39,6 +39,7 @@ class LedgerRecordModel {
     }
 
 
+    // Evidence class object is converted to JSON
     extractJSON() {
         // Implementing array with all the evidence 
         let evidence = []
@@ -54,6 +55,7 @@ class LedgerRecordModel {
             evidenceArray: evidence
         }
     }
+
 
     // Getters and Setters
     getTreasuryID() {

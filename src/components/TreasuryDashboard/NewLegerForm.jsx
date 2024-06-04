@@ -29,6 +29,7 @@ export default function NewLegerForm(props) {
     amount: 0
   })
   
+
   // Evidence array 
   const [evidenceArray, changeEvidenceArray] = useState([])
   // Add new evidence to the evidence array and display the evidence prompt function
@@ -41,22 +42,25 @@ export default function NewLegerForm(props) {
     toggleEvidenceState(false) // Closing evidence pop up window
   }
 
+
   // Check whether all the input fields are filled 
   const checkInputValidity = () => {
-    if (newRecord.title === '') setInputState({...inputErrorState, title: true}) 
+    if (newRecord.title === "") setInputState({...inputErrorState, title: true}) 
       else setInputState({...inputErrorState, title: false})
-    if (newRecord.description === '') setInputState({...inputErrorState, description: true})
+    if (newRecord.description === "") setInputState({...inputErrorState, description: true})
       else setInputState({...inputErrorState, description: false})
 
-    if (newRecord.amount === '') setInputState({...inputErrorState, amount: true})
+    if (newRecord.amount === "") setInputState({...inputErrorState, amount: true})
       else setInputState({...inputErrorState, amount: false})
 
     return !inputErrorState.title && !inputErrorState.description && !inputErrorState.amount
   }
 
+
   // User clicks on the create record button 
   const onSubmission = async () => {
     changeSessionData({processing: true}) // Processing effect
+    console.log('input', newRecord.description)
     if(checkInputValidity()) { 
       // Creating new LedgerRecord instant
       let signAmount
@@ -68,7 +72,11 @@ export default function NewLegerForm(props) {
       await ledgerRecord.uploadEvidenceImages() // Trigger to upload images to the firebase
       // Now Ledger record is ready to be transfer to the backend
       console.log('json Extract', ledgerRecord.extractJSON())
+    } else {
+      // All user inputs are not filled to proceed the process
+      console.log('Invalid input')
     }
+
     changeSessionData({processing: false}) // Switch off global processing
   }
 
@@ -90,7 +98,7 @@ export default function NewLegerForm(props) {
             <div className="ledger-content-new">
               <label>Title: </label>
               <PrimaryBorder borderRadius='6px' width='50%'>
-                <Input status={inputErrorState.title? 'error' : ''} onChange={(e) => {setNewRecord({...newRecord, title: e.target.value})}}/>
+                <Input status={inputErrorState.title? 'error' : ''} onChange={(e) => {setNewRecord({...newRecord, title: e.target.value})}} value={newRecord.title}/>
               </PrimaryBorder>
               
             </div>
