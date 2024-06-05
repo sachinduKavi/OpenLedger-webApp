@@ -6,15 +6,21 @@ import SingleLedger from './SingleLedger'
 import { Button } from 'antd'
 import { AnimatePresence } from 'framer-motion'
 import NewLegerForm from './NewLegerForm'
+import {fetchAllLedgerRecords} from '../../query/ledgerQuery'
 
 
 export default function Ledger(props) {
   const [newLegerRecord, toggleNewLegerRecord] = useState(false)
   
   // Load every single ledger records related to the the treasury
-  const loadLedgers = () => {
-
+  const loadLedgers = async () => {
+    await fetchAllLedgerRecords()
   } 
+
+  // Component did mount ?
+  useEffect(() => {
+    loadLedgers()
+  })
 
   const [options, setOptions] = useState(false) // Display overlay options
   return (

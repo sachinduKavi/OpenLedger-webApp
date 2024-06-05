@@ -7,10 +7,13 @@ import Evidence from '../../dataModels/Evidence'
 import EvidenceTitle from './EvidenceTitle'
 import LedgerRecordModel from '../../dataModels/LedgerRecordModel'
 import { SessionContext } from '../../Session'
+import {generateCurrentDateTime} from '../../middleware/GenerateCurrentDateTime'
+import {createLedgerRecord} from '../../query/ledgerQuery'
 
 export default function NewLegerForm(props) {
   // Include global session data
-  const changeSessionData = useContext(SessionContext).changeSessionData
+  const sessionContext = useContext(SessionContext)
+  const changeSessionData = sessionContext.changeSessionData
   // Evidence state of the window
   const [evidenceState, toggleEvidenceState] = useState(false)
   const [positiveRecord, changePositiveRecord] = useState(true)
@@ -68,10 +71,22 @@ export default function NewLegerForm(props) {
         signAmount = newRecord.amount/1
       else 
         signAmount = newRecord.amount/-1
-      const ledgerRecord = new LedgerRecordModel({...newRecord, evidenceArray: evidenceArray, treasuryID: props.treasury.getTreasuryID(), amount: signAmount}) 
+
+      
+      // Creating Ledger Record instant  
+      const ledgerRecord = new LedgerRecordModel({...newRecord, evidenceArray: evidenceArray, treasuryID: props.treasury.getTreasuryID(), amount: signAmount, createdDate: generateCurrentDateTime()}) 
       await ledgerRecord.uploadEvidenceImages() // Trigger to upload images to the firebase
-      // Now Ledger record is ready to be transfer to the backend
-      console.log('json Extract', ledgerRecord.extractJSON())
+      // Send post request to the backend with the ledger record data
+      const response = await createLedgerRecord(ledgerRecord.extractJSON())
+      console.log('Response ', response)
+      if(response.data.procedure) {
+        // Record created successfully
+        props.closeForm(false) // close the form
+      } else {
+        // Error ocurred Record is not created
+
+      }
+
     } else {
       // All user inputs are not filled to proceed the process
       console.log('Invalid input')
@@ -85,7 +100,11 @@ export default function NewLegerForm(props) {
     <div className='ledger-form-overlay'>
       <div className="background-blur"></div>
 
-      <div className="form-content">
+      <motion.div className="form-content"
+        initial={{scale: 0}}
+        animate={{scale: 1}}
+        exit={{scale: 0}}
+      >
           <div className="new-form-ledger">
 
             <div className='title-row'>
@@ -169,7 +188,7 @@ export default function NewLegerForm(props) {
             </AnimatePresence>
             
           </div>
-      </div>
+      </motion.div>
     </div>
   )
 }

@@ -7,13 +7,15 @@ class LedgerRecordModel {
     #amount
     #treasuryID
     #evidenceArray
+    #createdDate
 
-    constructor({title= null, description = null, amount = null, treasuryID = null, evidenceArray = null}) {
+    constructor({title= null, description = null, amount = null, treasuryID = null, evidenceArray = null, createdDate = null}) {
         this.#title = title
         this.#description = description
         this.#amount = amount 
         this.#evidenceArray = evidenceArray
         this.#treasuryID = treasuryID
+        this.#createdDate = createdDate
     }
     
     // Upload evidence images to firebase and creating evidenceLink array
@@ -39,7 +41,7 @@ class LedgerRecordModel {
     }
 
 
-    // Evidence class object is converted to JSON
+    // Ledger class object is converted to JSON
     extractJSON() {
         // Implementing array with all the evidence 
         let evidence = []
@@ -52,12 +54,22 @@ class LedgerRecordModel {
             description: this.#description,
             amount: this.#amount,
             treasuryID: this.#treasuryID,
-            evidenceArray: evidence
+            evidenceArray: evidence,
+            createdDate: this.#createdDate
         }
     }
 
 
     // Getters and Setters
+    getCreatedDate() {
+        return this.#createdDate
+    }
+
+    setCreatedDate(createdDate) {
+        this.#createdDate = createdDate
+    }
+
+
     getTreasuryID() {
         return this.#treasuryID
     }
