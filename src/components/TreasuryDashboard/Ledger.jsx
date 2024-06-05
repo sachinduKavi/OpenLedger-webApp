@@ -11,16 +11,25 @@ import {fetchAllLedgerRecords} from '../../query/ledgerQuery'
 
 export default function Ledger(props) {
   const [newLegerRecord, toggleNewLegerRecord] = useState(false)
+  const [ledgerRecordArray, setLedgerRecordArray] = useState([]) // Ledger record array
   
   // Load every single ledger records related to the the treasury
   const loadLedgers = async () => {
-    await fetchAllLedgerRecords()
+    const response = await fetchAllLedgerRecords()
+
+    if(response.procedure) {
+      // System responded with no errors
+      setLedgerRecordArray(response.ledgerRecords)
+    } else {
+      // System responded with error
+      console.log('Http error occurred')
+    }
   } 
 
   // Component did mount ?
   useEffect(() => {
     loadLedgers()
-  })
+  }, [])
 
   const [options, setOptions] = useState(false) // Display overlay options
   return (
@@ -50,15 +59,12 @@ export default function Ledger(props) {
         </div>
 
         {/* Ledger Records fetch from the database */}
-        <SingleLedger/>
-        <SingleLedger/>
-        <SingleLedger/>
-        <SingleLedger/>
-        <SingleLedger/>
-        <SingleLedger/>
-        <SingleLedger/>
-        <SingleLedger/>
-        <SingleLedger/>
+        {ledgerRecordArray.map((element, index) => {
+          return(<SingleLedger key={index} ledgerRecord={element} keyIndex={index}/>)
+        })}
+
+        
+        
 
         {/* New ledger record form */}
         <AnimatePresence>

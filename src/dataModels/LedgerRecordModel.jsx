@@ -1,5 +1,7 @@
 import {uploadImageFireStore} from '../query/firebaseImageUpload'
 import {v4} from 'uuid'
+import {isClassObject} from '../middleware/auth'
+import Evidence from './Evidence'
 
 class LedgerRecordModel {
     #title
@@ -16,6 +18,18 @@ class LedgerRecordModel {
         this.#evidenceArray = evidenceArray
         this.#treasuryID = treasuryID
         this.#createdDate = createdDate
+
+        if (this.#evidenceArray.length > 0 && !isClassObject(this.#evidenceArray[0])) this.#convertToEvidenceObject()
+    }
+
+
+    // Converting Object array to class object array
+    #convertToEvidenceObject() {
+        let tempObjectArray = []
+        this.#evidenceArray.forEach(element => {
+            tempObjectArray.push(new Evidence(element))
+        });
+        this.#evidenceArray = tempObjectArray
     }
     
     // Upload evidence images to firebase and creating evidenceLink array

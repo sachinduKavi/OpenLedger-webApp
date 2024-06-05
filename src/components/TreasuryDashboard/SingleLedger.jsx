@@ -1,14 +1,20 @@
 import React from 'react'
+import {motion} from 'framer-motion'
 
-export default function SingleLedger() {
+export default function SingleLedger(props) {
+  const ledgerRecord = props.ledgerRecord
+
   return (
-    <div className='single-ledger-border'>
+    <motion.div className='single-ledger-border'
+      initial={{scale: 0}}
+      animate={{scale: 1, transition: {delay: props.keyIndex*0.1, duration: 0.4}}}
+    >
         <div className="background"></div>
         <div className="content">
             <div className="row">
                 <div className="column">
-                    <h2>Bill Payment</h2>
-                    <p>This is the para description I love  </p>
+                    <h2>{ledgerRecord.getTitle()}</h2>
+                    <p>{ledgerRecord.getDescription()}</p>
                 </div>
 
                 <div className="column">
@@ -17,6 +23,6 @@ export default function SingleLedger() {
                 </div>
             </div>
         </div>
-    </div>
+    </motion.div>
   )
 }
