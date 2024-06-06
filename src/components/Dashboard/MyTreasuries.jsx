@@ -68,9 +68,11 @@ const MyTreasuries = forwardRef((props, ref) => {
         
         return(
         <TreasuryGig treasuryDetails={element} key={index}  keyValue={index}/>
-      )}):<div style={{display:'flex', flexGrow:1, justifyContent:'center', alignItems:'center', flexDirection: 'column'}}>
+      )}): <div style={{display:'flex', flexGrow:1, justifyContent:'center', 
+                        alignItems:'center', flexDirection: 'column', border: '1px solid white', 
+                        margin: '30px', borderRadius: '26px'}}>
             <h3>You don't have any currently active treasury groups.</h3>
-            <p style={{color: '#FDFDFD'}}> You can utilize the search bar to locate existing treasury groups. Alternatively, you have the option to create a new group to suit your specific needs.</p>
+            <p style={{color: '#FDFDFD', textAlign: 'center'}}> You can utilize the search bar to locate existing treasury groups. Alternatively, you have the option to create a new group to suit your specific needs.</p>
         </div>}
     </div>
   )

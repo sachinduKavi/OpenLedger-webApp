@@ -37,11 +37,12 @@
     flex-direction: column;
 }
 
+
 .input-box,
 .input-box:focus, .input-box:active
 {
     color: white;
-    min-width: 350px;
+    min-width: 100%;
     background-color: #232238;
     border: none;
     margin: 0;
@@ -66,7 +67,7 @@
 
 .upload-cover {
     overflow: hidden;
-    width: 350px;
+    width: 100%;
     height: 180px;
     background-color: #232238;
     border-radius: inherit;
@@ -100,6 +101,10 @@
 
 }
 
+#switch:hover {
+    margin: 0;
+}
+
 
 .cancel-btn {
     background-color: transparent;
@@ -117,7 +122,9 @@
 .cell {
     display: flex;
     flex-direction: column;
-
+    /* background-color: red; */
+    width: 100%;
+    margin: 10px 30px;
 }
 
 .toggle > p {

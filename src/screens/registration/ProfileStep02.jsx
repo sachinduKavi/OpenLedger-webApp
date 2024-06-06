@@ -21,7 +21,7 @@ export default function ProfileStep02(props) {
 
     // Image selection form the local device 
     const finalizeProfile = async () => {
-      // parentContext.processTrigger(true)
+      parentContext.processTrigger(true)
       parentContext.state.userName = userName
       // Generates a image ID for the user
       const userImageID = v4().slice(0, 20)

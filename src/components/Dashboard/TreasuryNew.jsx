@@ -120,7 +120,7 @@ export default function TreasuryNew(props) {
                 
                 {/* Public Private Switch */}
                 <div className="switch">
-                  <Switch onChange={toggleChange} value={inputValues.publicTreasury}/> 
+                  <Switch onChange={toggleChange} value={inputValues.publicTreasury} id='switch'/> 
 
                   {/* Public Private placeholder */}
                   {inputValues.publicTreasury?<h5 style={{color:'#95F1AF'}}>Public</h5>: <h5 style={{color:'#F45C56'}}>Private</h5>}

@@ -105,8 +105,7 @@ export default class Registration extends Component {
 
     // Creating new user account 
     createNewUser = async () => {
-        console.log('Inside the create user function...')
-
+        console.log('Inside the create user function...', this.state.userName)
         // Sending a request to the backend with data
         const userDetails = {
             userName: this.state.userName,
@@ -116,10 +115,13 @@ export default class Registration extends Component {
             pictureScale: this.state.pictureScale
         } 
         const response = await userRegistration(userDetails)
-        console.log('content', response.content)
+        console.log('content', response)
         // Save user details in the local storage
         // Format user details for local storage
         localStorage.setItem('userDetails', JSON.stringify(response.content))
+
+
+
         this.setState({registerProcess: response.process})
         this.processTrigger(false) // Switch off processing...
         

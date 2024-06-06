@@ -21,6 +21,9 @@ export default class LoginPage extends Component {
 
       processing: false
     }
+    // Clear all unwanted data from the local storage
+    console.log('userTOken')
+    localStorage.clear()
   }
 
   // Discard all the time messages 
