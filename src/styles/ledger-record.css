@@ -58,6 +58,7 @@
     position: absolute;
     inset: 0;
     background-color: black;
+    
     opacity: 0.32;
     border-radius: inherit;
 }
@@ -79,11 +80,27 @@
 .content > .row > .column {
     display: flex;
     flex-direction: column;
-    max-width: 70%;
+    width: fit-content;
+    /* min-width: 70%; */
+}
+
+.content-column {
+    flex-wrap: nowrap;
 }
 
 .amount, .date-time {
     text-align: end;
+    white-space: nowrap;
+    
+}
+
+.date-time {
+    color: rgba(219, 219, 219, 0.87);
+    font-size: 15px;
+}
+
+.description {
+    color: rgba(241, 241, 241, 0.87);
 }
 
 .menu-options {

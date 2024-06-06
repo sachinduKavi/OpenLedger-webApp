@@ -12,6 +12,11 @@ const localStorageToUserClass = (userDetails) => {
     }
 }
 
+function numberFormat(number) {
+    return number.toString().replace(/\\B(?=(\\d{3})+(?!\\d))/g, ",");
+  }
+
 export {
-    emailRegex
+    emailRegex,
+    numberFormat
 }

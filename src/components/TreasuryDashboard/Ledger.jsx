@@ -15,8 +15,9 @@ export default function Ledger(props) {
   
   // Load every single ledger records related to the the treasury
   const loadLedgers = async () => {
+    console.log('Running load ledgers')
     const response = await fetchAllLedgerRecords()
-
+    console.log(response)
     if(response.procedure) {
       // System responded with no errors
       setLedgerRecordArray(response.ledgerRecords)
@@ -42,7 +43,6 @@ export default function Ledger(props) {
 
           <div className="icon-menu" onClick={() => {
             setOptions(!options)
-            console.log('option state', options)
           }}>
 
 
@@ -50,7 +50,7 @@ export default function Ledger(props) {
           </div>
           {/* Only Treasure and CO treasurer has access to add new records */}
           {options && <div className="menu-options">
-            <button>Refresh</button>
+            <button onClick={loadLedgers}>Refresh</button>
             {props.attributes.user.getUserLevel() > 2 && <button onClick={() => {
               toggleNewLegerRecord(true)
               setOptions(false) // Closing options
@@ -68,7 +68,7 @@ export default function Ledger(props) {
 
         {/* New ledger record form */}
         <AnimatePresence>
-          {newLegerRecord && <NewLegerForm closeForm={toggleNewLegerRecord} treasury={props.attributes.treasury}/>}
+          {newLegerRecord && <NewLegerForm closeForm={toggleNewLegerRecord} treasury={props.attributes.treasury} loadLedgers={loadLedgers}/>}
         </AnimatePresence>
         
       </div>

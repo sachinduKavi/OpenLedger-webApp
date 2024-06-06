@@ -42,7 +42,9 @@ export default function NewLegerForm(props) {
       // Incrementing evidence array
       changeEvidenceArray([...evidenceArray, evidenceObj])
     }
+    
     toggleEvidenceState(false) // Closing evidence pop up window
+
   }
 
 
@@ -91,7 +93,7 @@ export default function NewLegerForm(props) {
       // All user inputs are not filled to proceed the process
       console.log('Invalid input')
     }
-
+    props.loadLedgers() // Refresh ledger 
     changeSessionData({processing: false}) // Switch off global processing
   }
 
