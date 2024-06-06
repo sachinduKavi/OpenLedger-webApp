@@ -109,17 +109,18 @@ export default class Registration extends Component {
 
         // Sending a request to the backend with data
         const userDetails = {
-            user_name: this.state.userName,
-            user_email: this.state.currentUserEmail,
-            user_password: this.state.currentUserPassword,
-            dp_link: this.state.userImageLink,
-            picture_scale: this.state.pictureScale
+            userName: this.state.userName,
+            userEmail: this.state.currentUserEmail,
+            userPassword: this.state.currentUserPassword,
+            dpLink: this.state.userImageLink,
+            pictureScale: this.state.pictureScale
         } 
-        this.setState({registerProcess: await userRegistration(userDetails)})
-
+        const response = await userRegistration(userDetails)
+        console.log('content', response.content)
         // Save user details in the local storage
         // Format user details for local storage
-        localStorage.setItem('userDetails', JSON.stringify(userDetails))
+        localStorage.setItem('userDetails', JSON.stringify(response.content))
+        this.setState({registerProcess: response.process})
         this.processTrigger(false) // Switch off processing...
         
     }

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import '../../styles/ledger-record.css'
 
 import MenuImage from '../../assets/icons/3dots.png'
@@ -7,14 +7,18 @@ import { Button } from 'antd'
 import { AnimatePresence } from 'framer-motion'
 import NewLegerForm from './NewLegerForm'
 import {fetchAllLedgerRecords} from '../../query/ledgerQuery'
+import { SessionContext } from '../../Session'
 
 
 export default function Ledger(props) {
+  const sessionData = useContext(SessionContext)
+  const changeSession = sessionData.changeSessionData
   const [newLegerRecord, toggleNewLegerRecord] = useState(false)
   const [ledgerRecordArray, setLedgerRecordArray] = useState([]) // Ledger record array
   
   // Load every single ledger records related to the the treasury
   const loadLedgers = async () => {
+    changeSession({processing: true}) // Global Processing
     console.log('Running load ledgers')
     const response = await fetchAllLedgerRecords()
     console.log(response)
@@ -25,6 +29,7 @@ export default function Ledger(props) {
       // System responded with error
       console.log('Http error occurred')
     }
+    changeSession({processing: false}) // Switch off processing
   } 
 
   // Component did mount ?

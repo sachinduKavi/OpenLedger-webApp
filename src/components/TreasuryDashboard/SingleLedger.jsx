@@ -1,6 +1,5 @@
 import React from 'react'
 import {motion} from 'framer-motion'
-import {numberFormat} from '../../middleware/FormatChecker'
 
 export default function SingleLedger(props) {
   const ledgerRecord = props.ledgerRecord

@@ -50,8 +50,8 @@ const userRegistration = async (userDetails) => {
     console.log("User Details", userDetails)
 
     const response = await cDomain.post('user/newUserRegistration', userDetails, header)
-    
-    return response.data.process_success
+    console.log(response)
+    return {process:response.data.process_success, content: response.data.content}
 }
 
 
