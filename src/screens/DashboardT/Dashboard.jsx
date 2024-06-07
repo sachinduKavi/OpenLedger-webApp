@@ -10,6 +10,11 @@ import PrimaryBorder from '../../components/PrimaryBorder'
 
 export default function Dashboard(props) {
 
+    // Update the treasury balance
+    const updateTreasuryBalance = () => {
+
+    }
+
   return (
     <motion.div className='treasury-dashboard'
         initial={{x: 1500}}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from 'react'
+import React, { useContext, useEffect, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import Treasury from '../dataModels/Treasury'
 import '../styles/treasury-dashboard.css'
@@ -12,9 +12,12 @@ import Process from '../components/process'
 import Treasurer from '../dataModels/Treasurer'
 import Member from '../dataModels/Member'
 import TreasuryOverview from './DashboardT/TreasuryOverview'
-
+import { SessionContext } from '../Session'
 
 export default function TreasuryDashboard(){
+  // import global variables
+  const sessionContext = useContext(SessionContext)
+  console.log(sessionContext)
   // Extracting the object from the local storage
   const [treasury, setTreasury] = useState(new Treasury(JSON.parse(localStorage.getItem('treasury_obj')))) // Creating new class object using local storage data
   // Get user details from the local storage
@@ -83,7 +86,7 @@ export default function TreasuryDashboard(){
     console.log('treasury obj', treasury.getTreasuryID())
     // Check user and treasury validation in the beginning 
     validateTreasury(treasury)
-  }, [treasury])
+  }, [])
 
 
   
