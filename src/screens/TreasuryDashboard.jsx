@@ -16,7 +16,7 @@ import TreasuryOverview from './DashboardT/TreasuryOverview'
 
 export default function TreasuryDashboard(){
   // Extracting the object from the local storage
-  const treasury = new Treasury(JSON.parse(localStorage.getItem('treasury_obj'))) // Creating new class object using local storage data
+  const [treasury, setTreasury] = useState(new Treasury(JSON.parse(localStorage.getItem('treasury_obj')))) // Creating new class object using local storage data
   // Get user details from the local storage
   const userDetails = JSON.parse(localStorage.getItem('userDetails')) // User details
   const [activeUser, setUser] = useState(null) // For user object with their user level
@@ -67,12 +67,23 @@ export default function TreasuryDashboard(){
     toggleProcessing(false)
   }
 
+  // Refresh treasury data 
+  // Dead function ...
+  // const treasuryRefresh = async () => {
+  //   console.log('treasury refresh')
+  //   await treasury.refreshTreasuryDetails()
+
+  //   setTreasury(new Treasury(treasury.extractJSON()))
+
+  //   console.log('treasury details in refresh', treasury)
+  // }
+
   // Component did mount ?
   useEffect(() => {
     console.log('treasury obj', treasury.getTreasuryID())
-    // changeUserDetails(userDetail)
+    // Check user and treasury validation in the beginning 
     validateTreasury(treasury)
-  }, [])
+  }, [treasury])
 
 
   

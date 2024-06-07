@@ -16,9 +16,14 @@ const verifyTreasury =  async (treasuryID) => {
     return await cDomain.post('treasury/verifyTreasury', {treasury_ID: treasuryID, setHeader: true}, header)
 }
 
+const getTreasuryDetails = async (treasuryID) => {
+    return await cDomain.post('treasury/getTreasuryData', {treasuryID: treasuryID}, header)
+}
+
 
 export {
     createNewTreasuryQuery,
     getAllTreasuryParticipantData,
-    verifyTreasury
+    verifyTreasury,
+    getTreasuryDetails
 }

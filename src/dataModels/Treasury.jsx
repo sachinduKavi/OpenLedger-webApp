@@ -1,4 +1,4 @@
-import {createNewTreasuryQuery} from '../query/treasuryQuery'
+import {createNewTreasuryQuery, getTreasuryDetails} from '../query/treasuryQuery'
 
 class Treasury {
     // Private Treasury variables
@@ -29,6 +29,18 @@ class Treasury {
         this.#globalVisibility = globalVisibility
         this.#currentBalance = currentBalance
         this.#userRole = userRole
+
+        console.log('treasury constructor is running')
+    }
+
+
+
+    // Refresh data 
+    async refreshTreasuryDetails() {
+        const treasuryData = await getTreasuryDetails(this.#treasuryID)
+        console.log('treasury respond', treasuryData)
+        if(treasuryData.process)
+            this.constructor(treasuryData.content)
     }
 
     extractJSON() {

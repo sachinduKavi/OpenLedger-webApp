@@ -95,6 +95,7 @@ export default function NewLegerForm(props) {
     }
     props.loadLedgers() // Refresh ledger 
     changeSessionData({processing: false}) // Switch off global processing
+
   }
 
 

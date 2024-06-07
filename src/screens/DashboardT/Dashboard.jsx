@@ -9,6 +9,7 @@ import Ledger from '../../components/TreasuryDashboard/Ledger'
 import PrimaryBorder from '../../components/PrimaryBorder'
 
 export default function Dashboard(props) {
+
   return (
     <motion.div className='treasury-dashboard'
         initial={{x: 1500}}
