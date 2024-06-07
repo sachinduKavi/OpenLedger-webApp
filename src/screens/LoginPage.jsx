@@ -18,6 +18,7 @@ export default class LoginPage extends Component {
       invalidPass: false,
       emailFormatError: false,
       serverError: false,
+      invalidEmail: false,
 
       processing: false
     }
@@ -56,6 +57,8 @@ export default class LoginPage extends Component {
               {this.state.invalidPass&&<TimeMessage header='Incorrect Password' type='error' killFn={this.messageKiller}>You have entered incorrect password, please try it again.</TimeMessage>}
               {/* Invalid email address */}
               {this.state.emailFormatError&&<TimeMessage header='Invalid Email' type='error' killFn={this.messageKiller}>You have entered a invalid email address, please check again and reenter.</TimeMessage>}
+              {/* Unregistered email address */}
+              {this.state.invalidEmail&&<TimeMessage header='Unregistered Email Address' type='error' killFn={this.messageKiller}>Email address you have entered is not registered.</TimeMessage>}
               {/* Server error */}
               {this.state.serverError&&<TimeMessage header='Unknown Error Occurred' type='warnning' killFn={this.messageKiller}>Sorry unknown error occurred with our servers, please try again later.</TimeMessage>}
             </AnimatePresence>

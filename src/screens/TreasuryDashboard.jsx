@@ -11,6 +11,7 @@ import {AnimatePresence} from 'framer-motion'
 import Process from '../components/process'
 import Treasurer from '../dataModels/Treasurer'
 import Member from '../dataModels/Member'
+import TreasuryOverview from './DashboardT/TreasuryOverview'
 
 
 export default function TreasuryDashboard(){
@@ -86,9 +87,13 @@ export default function TreasuryDashboard(){
         {/* Changing screen with responsive for the navigation bar */}
         <div className="screen">
           <AnimatePresence>
+            {/* Dashboard */}
             {panelSwitch.dashboard 
             && !isProcessing 
             && <Dashboard treasuryObj={treasury} userObj={activeUser}/>}
+
+            {/* Treasury */}
+            {panelSwitch.treasury && <TreasuryOverview/>}
 
           </AnimatePresence>
           

@@ -43,7 +43,11 @@ export default function Dashboard(props) {
         </div>
 
         <div className="column">
-
+            {/* Display treasury balance  */}
+            <div className="balance-card">
+                    <h1>CURRENT BALANCE</h1>
+                    <h2>LKR {props.treasuryObj.getBalance().toLocaleString('en-US')}</h2>
+            </div>
         </div>
     </motion.div>
   )

@@ -139,6 +139,7 @@
 }
 
 .form-content > .new-form-ledger {
+    position: relative;
     min-width: 40%;
     border: 3px solid #A2A0D7;
     border-radius: 25px;
@@ -146,7 +147,7 @@
     /* -webkit-backdrop-filter: blur(115px); */
     padding: 60px 30px;
     border: 1px solid var(--btnBorder);
-
+    z-index: 120;
 }
 
 .title-row {

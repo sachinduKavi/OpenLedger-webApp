@@ -54,3 +54,26 @@
 
 }
 
+/* Balance card */
+.balance-card {
+    width: 70%;
+    aspect-ratio: 2;
+    border-radius: 26px;
+    background: linear-gradient(to right, #5A71FB, #5C5AA6, rgb(7, 25, 109));
+    box-shadow: inset 0 0 50px rgb(26, 34, 39);
+    padding: 5%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
+.balance-card > h1 {
+    font-size: 40px;
+}
+
+.balance-card > h2 {
+    font-size: 30px;
+    color: #9DF6F6;
+}
+

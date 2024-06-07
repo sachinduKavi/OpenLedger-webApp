@@ -66,6 +66,10 @@ export default class FormComp extends Component {
         }
       } else {
         // Error unknown occurred
+        if(reply.error == 'invalidEmail') {
+          // User entered unregistered email
+          this.props.parentContext.setState({invalidEmail: true})
+        } else
         this.props.parentContext.setState({serverError: true})
       }
     } else {
