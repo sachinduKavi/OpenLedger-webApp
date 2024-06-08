@@ -73,7 +73,9 @@ export default function Ledger(props) {
 
         {/* New ledger record form */}
         <AnimatePresence>
-          {newLegerRecord && <NewLegerForm closeForm={toggleNewLegerRecord} treasury={props.attributes.treasury} loadLedgers={loadLedgers}/>}
+          {newLegerRecord && <NewLegerForm closeForm={toggleNewLegerRecord} treasury={props.attributes.treasury} loadLedgers={loadLedgers}
+             treasuryUpdate={props.treasuryUpdate}
+          />}
         </AnimatePresence>
         
       </div>

@@ -29,7 +29,6 @@ const generateCurrentDateTime = (regionLocal = "si-LK") => {
       const dateList = formattedDate.split('/')
       const newDate = `${dateList[2]}-${dateList[0]}-${dateList[1]}`
       
-      console.log('date time ', newDate, newTime)
       return `${newDate}#${newTime}`
 }
 

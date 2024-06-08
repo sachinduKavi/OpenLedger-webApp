@@ -1,0 +1,30 @@
+.mini-navigation-border {
+    width: 90%;
+    height: 2rem;
+    background: linear-gradient(to right, #3A3939, #424141, #A09E9E);
+    margin: 10px;
+    border-radius: 26px;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+}
+
+.mini-navigation-border > li {
+    list-style-type: none;
+    margin: 0;
+    height: inherit;
+    font-weight: bold;
+    padding: 0 25px;
+    font-size: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: inherit;
+}
+
+.active {
+    background-color: #DED8FF;
+    color: #37375B;
+}

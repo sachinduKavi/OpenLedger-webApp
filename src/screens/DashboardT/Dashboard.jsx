@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 
 import {Button} from 'antd'
 import '../../styles/dashboard-t.css'
@@ -10,10 +10,9 @@ import PrimaryBorder from '../../components/PrimaryBorder'
 
 export default function Dashboard(props) {
 
-    // Update the treasury balance
-    const updateTreasuryBalance = () => {
-
-    }
+    useEffect(() => {
+        console.log('dashboard is mounting step 02', props.treasuryObj)
+    }, [])
 
   return (
     <motion.div className='treasury-dashboard'
@@ -44,7 +43,7 @@ export default function Dashboard(props) {
 
 
             {/* Ledger  */}
-            <Ledger attributes={{user: props.userObj, treasury: props.treasuryObj}}/>
+            <Ledger attributes={{user: props.userObj, treasury: props.treasuryObj}} treasuryUpdate={props.treasuryUpdate}/>
                     
         </div>
 

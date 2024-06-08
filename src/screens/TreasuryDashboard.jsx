@@ -14,12 +14,20 @@ import Member from '../dataModels/Member'
 import TreasuryOverview from './DashboardT/TreasuryOverview'
 import { SessionContext } from '../Session'
 
+
 export default function TreasuryDashboard(){
-  // import global variables
-  const sessionContext = useContext(SessionContext)
-  console.log(sessionContext)
   // Extracting the object from the local storage
   const [treasury, setTreasury] = useState(new Treasury(JSON.parse(localStorage.getItem('treasury_obj')))) // Creating new class object using local storage data
+  // Update the treasury object
+  // Update the whole UI
+  const treasuryUpdate= (treasuryJSON) => {
+    // const response = await 
+
+    console.log('treasury update function ...', treasuryJSON)
+    setTreasury(new Treasury(treasuryJSON))
+    
+  }
+
   // Get user details from the local storage
   const userDetails = JSON.parse(localStorage.getItem('userDetails')) // User details
   const [activeUser, setUser] = useState(null) // For user object with their user level
@@ -70,23 +78,15 @@ export default function TreasuryDashboard(){
     toggleProcessing(false)
   }
 
-  // Refresh treasury data 
-  // Dead function ...
-  // const treasuryRefresh = async () => {
-  //   console.log('treasury refresh')
-  //   await treasury.refreshTreasuryDetails()
-
-  //   setTreasury(new Treasury(treasury.extractJSON()))
-
-  //   console.log('treasury details in refresh', treasury)
-  // }
-
   // Component did mount ?
   useEffect(() => {
-    console.log('treasury obj', treasury.getTreasuryID())
+    console.log('Local storage update in useEffect')
+    console.log(treasury)
+    // Update local storage every time it update treasury object 
+    localStorage.setItem('treasury_obj', JSON.stringify(treasury.extractJSON()))
     // Check user and treasury validation in the beginning 
     validateTreasury(treasury)
-  }, [])
+  }, [treasury])
 
 
   
@@ -104,10 +104,10 @@ export default function TreasuryDashboard(){
             {/* Dashboard */}
             {panelSwitch.dashboard 
             && !isProcessing 
-            && <Dashboard treasuryObj={treasury} userObj={activeUser}/>}
+            && <Dashboard treasuryObj={treasury} userObj={activeUser} treasuryUpdate={treasuryUpdate}/>}
 
             {/* Treasury */}
-            {panelSwitch.treasury && <TreasuryOverview/>}
+            {panelSwitch.treasury && <TreasuryOverview />}
 
           </AnimatePresence>
           

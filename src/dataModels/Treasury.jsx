@@ -33,14 +33,32 @@ class Treasury {
         console.log('treasury constructor is running')
     }
 
+    // Reset all the instant variables ....
+    setAllValues({treasuryID = null, treasuryName = null, description = null, memberLimit = null, coverImageID = null, treasuryLink = null, publicTreasury = null, ownerID = null, globalVisibility = null, createdDate = null, currentBalance = null, userRole = null}) {
+        this.#treasuryID = treasuryID
+        this.#treasuryName = treasuryName
+        this.#description = description
+        this.#memberLimit = memberLimit
+        this.#coverImageID = coverImageID
+        this.#createdDate = createdDate?.toString().slice(0, 10)?? null
+        this.#treasuryLink = treasuryLink
+        this.#publicTreasury = publicTreasury
+        this.#ownerID = ownerID
+        this.#globalVisibility = globalVisibility
+        this.#currentBalance = currentBalance
+        this.#userRole = userRole
+
+        console.log('treasury running set all function')
+    }
+
 
 
     // Refresh data 
     async refreshTreasuryDetails() {
         const treasuryData = await getTreasuryDetails(this.#treasuryID)
         console.log('treasury respond', treasuryData)
-        if(treasuryData.process)
-            this.constructor(treasuryData.content)
+        if(treasuryData.data.process)
+            this.setAllValues(treasuryData.data.content)
     }
 
     extractJSON() {

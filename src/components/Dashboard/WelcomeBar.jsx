@@ -9,7 +9,6 @@ import '../../styles/welcomeComp.css'
 import MenuImage from '../../assets/logos/olLogo.png'
 
 export default function WelcomeBar(props) {
-    console.log('image link', props.imageLink)
   return (
     <motion.div className="welcome-container"
         initial={{y:-110}}

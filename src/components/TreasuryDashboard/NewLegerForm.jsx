@@ -94,8 +94,18 @@ export default function NewLegerForm(props) {
       console.log('Invalid input')
     }
     props.loadLedgers() // Refresh ledger 
-    changeSessionData({processing: false}) // Switch off global processing
 
+    // updating treasury object 
+
+
+    await props.treasury.refreshTreasuryDetails()
+    console.log('treasury update before', props.treasury)
+
+
+    props.treasuryUpdate(props.treasury.extractJSON())
+
+    changeSessionData({processing: false}) // Switch off global processing
+    
   }
 
 
