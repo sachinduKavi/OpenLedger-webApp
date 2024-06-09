@@ -28,3 +28,8 @@
     background-color: #DED8FF;
     color: #37375B;
 }
+
+.inner-screen-border {
+    width: 100%;
+    height: 100%;
+}
