@@ -100,6 +100,14 @@ class Treasury {
     }
     
 
+    getCreatedDate() {
+        return this.#createdDate
+    }
+
+    setCreatedDate(createdDate) {
+        this.#createdDate = createdDate
+    }
+
     getTreasuryID() {
         return this.#treasuryID
     }

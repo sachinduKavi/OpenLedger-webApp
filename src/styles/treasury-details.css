@@ -1,14 +1,49 @@
 .inner-screen-border {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     padding: 2%;
+    justify-content: start;
 }
 
-.inner-screen-border > .column {
+.inner-screen-border > .row {
     display: flex;
     flex-direction: row;
-    background-color: blue;
     width: 100%;
     
+}
+
+.inner-screen-border > .row > .column {
+        width: 50%;
+        padding: 10px;
+}
+
+.inner-screen-border .card {
+    width: 100%;
+    aspect-ratio: 2;
+    background-color: blue;
+    border-radius: 26px;
+}
+
+.column > .editable-row {
+    display: flex;
+    margin-top: 20px;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+
+.editable-row > img {
+    width: 28px;
+    height: 28px;
+}
+
+.ant-switch:hover {
+    margin: 0;
+}
+
+.ant-input-number {
+    background-color: #1E213A;
+    color: white;
+    font-weight: bold;
 }

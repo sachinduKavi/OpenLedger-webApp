@@ -11,7 +11,7 @@ export default function PrimaryBorder(props) {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    maxWidth: props.width,
+    minWidth: props.width,
     borderRadius: props.borderRadius,
   }  
 
