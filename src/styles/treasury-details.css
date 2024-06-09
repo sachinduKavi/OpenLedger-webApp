@@ -1,0 +1,14 @@
+.inner-screen-border {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2%;
+}
+
+.inner-screen-border > .column {
+    display: flex;
+    flex-direction: row;
+    background-color: blue;
+    width: 100%;
+    
+}

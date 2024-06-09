@@ -107,7 +107,7 @@ export default function TreasuryDashboard(){
             && <Dashboard treasuryObj={treasury} userObj={activeUser} treasuryUpdate={treasuryUpdate}/>}
 
             {/* Treasury */}
-            {panelSwitch.treasury && <TreasuryOverview />}
+            {panelSwitch.treasury && <TreasuryOverview activeUser={activeUser} treasury={{treasury: treasury, treasuryUpdate: treasuryUpdate}}/>}
 
           </AnimatePresence>
           

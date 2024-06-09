@@ -5,7 +5,8 @@ import TreasuryDetails from '../../components/Treaasury/TreasuryDetails'
 
 import '../../styles/treasury-over-view.css'
 
-export default function TreasuryOverview() {
+export default function TreasuryOverview(props) {
+  // Navigation variables use states
     const [navigation, setNavigation] = useState({
       details: true,
       participants: false,
@@ -48,7 +49,7 @@ export default function TreasuryOverview() {
 
       {/* Mini Screen display that changes with the mini navigation bar */}
       <div className="mini-screen">
-        {navigation.details && <TreasuryDetails/>}
+        {navigation.details && <TreasuryDetails activeUser={props.activeUser} treasury={props.treasury}/>}
       </div>
       
 
