@@ -7,6 +7,7 @@ import Dashboard from './screens/Dashboard'
 import {SessionContext} from './Session'
 import TreasuryDashboard from './screens/TreasuryDashboard'
 import Process from './components/process'
+import Redirect from './screens/Redirect'
 
 export const Context = React.createContext()
 
