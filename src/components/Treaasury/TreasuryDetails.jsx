@@ -1,6 +1,7 @@
 import { border } from '@cloudinary/url-gen/qualifiers/background'
 import React from 'react'
 import {Switch, InputNumber} from 'antd'
+import QRCode from 'react-qr-code'
 
 import '../../styles/treasury-details.css'
 
@@ -25,30 +26,26 @@ export default function TreasuryDetails(props) {
       
           </div>
 
-          <div className="column">
+          <div className="column main-details">
             <h1>Treasury Details</h1>
 
             <div className="editable-row">
               <h2>{treasury.getTreasuryName()}</h2>
-              <img src={EditIcon} alt="edit-icon" />
+              <img src={EditIcon} alt="edit-icon" style={{visibility: activeUser.getUserLevel() > 3? 'visible': 'hidden'}}/>
             </div>
 
             <div className="editable-row">
               <h2>{treasury.getTreasuryID()}</h2>
-              <img src={EditIcon} alt="edit-icon" />
             </div>
-            
-            
-          </div>
 
-        </div>
-
-
-        <div className="row">
-          <div className="column" style={{padding: '50px'}}>
             <div className="editable-row">
               <h3>Member Limit</h3>
-              <InputNumber value={treasury.getMemberLimit()}/>
+
+              <div style={{display: 'flex', flexDirection: 'row', width: '15%', justifyContent: 'space-between'}}>
+                <p>{treasury.getMemberLimit()}</p>
+                <img src={EditIcon} alt="edit-icon" style={{visibility: activeUser.getUserLevel() > 3? 'visible': 'hidden'}}/>
+              </div>
+              
             </div>
 
 
@@ -64,18 +61,45 @@ export default function TreasuryDetails(props) {
             </div>
 
             <h4>Created Date: {treasury.getCreatedDate()}</h4>
+            
+            
           </div>
 
-          <div className="column">
+        </div>
+
+
+        <div className="row">
+  
+
+          <div className="column" style={{width: '100%'}}>
             <h2>Description</h2>
 
             <div className="editable-row"  style={{marginTop: '5px'}}>
               <h4 style={{textAlign: 'justify', marginRight: '10px'}}>{treasury.getDescription()}</h4>
-              <img src={EditIcon} alt="edit-icon" />
+              <img src={EditIcon} alt="edit-icon" style={{visibility: activeUser.getUserLevel() > 3? 'visible': 'hidden', cursor: 'pointer'}} />
             </div>
 
 
           </div>
+        </div>
+
+        <div className="row">
+          <h2>Treasury Group Link</h2>
+        </div>
+
+        <div className="row qr-row">
+            <div className="column" style={{width: 'fit-content'}}>
+              <QRCode
+                value={treasury.getTreasuryLink()}
+  
+                style={{ height: "auto", maxHeight: "100%", aspectRatio: 1 }}
+              />
+            </div>
+
+            <div className="column treasury-link">
+              <a href={treasury.getTreasuryLink()} target='blank' style={{color: 'white'}}>{treasury.getTreasuryLink()}</a>
+            </div>
+
         </div>
     </div>
   )

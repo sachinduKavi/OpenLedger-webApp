@@ -40,11 +40,7 @@ export default function TreasuryOverview(props) {
             resetNavigation()
             setNavigation({participants: true})
           }}>Participants</li>
-          <li className={navigation.share && 'active'} onClick={() => {
-            resetNavigation()
-            setNavigation({share: true})
-          }}>Share</li>
-     
+        
       </MiniNavigation>
 
       {/* Mini Screen display that changes with the mini navigation bar */}

@@ -3,6 +3,12 @@
     flex-direction: column;
     padding: 2%;
     justify-content: start;
+    overflow-y: scroll;
+    
+}
+
+.inner-screen-border::-webkit-scrollbar {
+    display: none;
 }
 
 .inner-screen-border > .row {
@@ -17,6 +23,19 @@
         padding: 10px;
 }
 
+.inner-screen-border > .row > .main-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: hsla(234, 33%, 17%, 0.5);
+    padding: 20px;
+    border-radius: 26px;
+}
+
+.qr-row {
+    max-height: 230px;
+}
+
 .inner-screen-border .card {
     width: 100%;
     aspect-ratio: 2;
@@ -26,10 +45,21 @@
 
 .column > .editable-row {
     display: flex;
-    margin-top: 20px;
+    /* margin-top: 20px; */
     flex-direction: row;
     align-items: flex-start;
     justify-content: space-between;
+}
+
+.treasury-link {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.qr-column {
+    width: fit-content;
 }
 
 

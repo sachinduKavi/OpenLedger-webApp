@@ -20,7 +20,7 @@ export default function Dashboard(props) {
         animate={{x: 0, transition: {duration: 0.3}}}
         exit={{y: 1000}}
     >
-        <div className="column">
+        <div className="column" style={{position: 'relative', zIndex: 25}}>
 
             <div className="card-container">
                 <PrimaryBorder borderRadius={26}>
@@ -49,7 +49,7 @@ export default function Dashboard(props) {
 
         <div className="column">
             {/* Display treasury balance  */}
-            <div className="balance-card">
+            <div className="balance-card" style={{position: 'relative', zIndex: 0}}>
                     <h1>CURRENT BALANCE</h1>
                     <h2>LKR {props.treasuryObj.getBalance().toLocaleString('en-US')}</h2>
             </div>
