@@ -102,7 +102,7 @@ export default function NewLegerForm(props) {
     console.log('treasury update before', props.treasury)
 
 
-    props.treasuryUpdate(props.treasury.extractJSON())
+    props.treasuryUpdate(treasury)
 
     changeSessionData({processing: false}) // Switch off global processing
     

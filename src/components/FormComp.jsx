@@ -51,6 +51,7 @@ export default class FormComp extends Component {
         if(reply.accountValidate) { // Password match
           const userData = reply.userDetails
           // Set user details in local storage
+          console.log('local storage set', userData)
           localStorage.setItem('userDetails', JSON.stringify({
             userID: userData.user_ID,
             userEmail: userData.user_email,

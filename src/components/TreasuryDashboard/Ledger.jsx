@@ -65,7 +65,7 @@ export default function Ledger(props) {
 
         {/* Ledger Records fetch from the database */}
         {ledgerRecordArray.map((element, index) => {
-          return(<SingleLedger key={index} ledgerRecord={element} keyIndex={index}/>)
+          return(<SingleLedger key={ledgerRecordArray.length - index} ledgerRecord={element} keyIndex={index}/>)
         })}
 
         

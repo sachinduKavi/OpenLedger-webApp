@@ -17,16 +17,7 @@ import { SessionContext } from '../Session'
 
 export default function TreasuryDashboard(){
   // Extracting the object from the local storage
-  const [treasury, setTreasury] = useState(new Treasury(JSON.parse(localStorage.getItem('treasury_obj')))) // Creating new class object using local storage data
-  // Update the treasury object
-  // Update the whole UI
-  const treasuryUpdate= (treasuryJSON) => {
-    // const response = await 
-
-    console.log('treasury update function ...', treasuryJSON)
-    setTreasury(new Treasury(treasuryJSON))
-    
-  }
+  const [treasury, treasuryUpdate] = useState(new Treasury(JSON.parse(localStorage.getItem('treasury_obj')))) // Creating new class object using local storage data
 
   // Get user details from the local storage
   const userDetails = JSON.parse(localStorage.getItem('userDetails')) // User details
@@ -67,6 +58,7 @@ export default function TreasuryDashboard(){
         // User role is Chair
       } else if (treasuryRole === 'Member') {
         // User role is Member
+        setUser(new Member(userDetails))
       } else {
         // Undefined user role
       }
