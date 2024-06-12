@@ -1,5 +1,6 @@
-
+import {updateTreasuryDetailQuery} from '../query/treasuryQuery'
 import CoTreasurer from "./CoTreasurer"
+import Treasury from './Treasury'
 
 class Treasurer extends CoTreasurer {
     static position = 'Treasurer' 
@@ -19,8 +20,14 @@ class Treasurer extends CoTreasurer {
     }
 
     // Treasurers can update the group settings and data 
-    updateTreasurySettings(settings) {
-        console.log('From treasury', settings)
+    async updateTreasurySettings(columnName, newValue) {
+        const response = await updateTreasuryDetailQuery(columnName, newValue)
+       
+        // Treasury instant will be created and returned 
+        // IF request failed it will return false
+        return (response.status === 200 && response.data.procedure) 
+                ? new Treasury(response.data.updatedTreasury)
+                : false
     }
 
     

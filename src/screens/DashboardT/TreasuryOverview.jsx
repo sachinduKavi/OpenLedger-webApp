@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import {motion} from 'framer-motion'
 import MiniNavigation from '../../components/MiniNavigation'
 import TreasuryDetails from '../../components/Treaasury/TreasuryDetails'
+import Participants from '../../components/Treaasury/Participants'
 
 import '../../styles/treasury-over-view.css'
 
@@ -46,6 +47,8 @@ export default function TreasuryOverview(props) {
       {/* Mini Screen display that changes with the mini navigation bar */}
       <div className="mini-screen">
         {navigation.details && <TreasuryDetails activeUser={props.activeUser} treasury={props.treasury}/>}
+
+        {navigation.participants && <Participants/>}
       </div>
       
 

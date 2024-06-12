@@ -12,6 +12,8 @@ import Process from '../components/process'
 import Treasurer from '../dataModels/Treasurer'
 import Member from '../dataModels/Member'
 import TreasuryOverview from './DashboardT/TreasuryOverview'
+import CoTreasurer from '../dataModels/CoTreasurer'
+import Chair from '../dataModels/Chair'
 import { SessionContext } from '../Session'
 
 
@@ -21,7 +23,7 @@ export default function TreasuryDashboard(){
 
   // Get user details from the local storage
   const userDetails = JSON.parse(localStorage.getItem('userDetails')) // User details
-  const [activeUser, setUser] = useState(null) // For user object with their user level
+  const [activeUser, setUser] = useState(new User(userDetails)) // For user object with their user level
   const [isProcessing, toggleProcessing] = useState(true)
 
   const [panelSwitch, setPanelSwitch] = useState({
@@ -45,7 +47,7 @@ export default function TreasuryDashboard(){
       // Treasury is validated
       const treasuryRole = response.data.user_role // Role in the treasury
       treasury.setUserRole(treasuryRole) // Update user role
-      console.log(treasuryRole)
+      console.log('treasury role',treasuryRole)
       // Creating member, treasurer, co-treasurer, chair instant
       if(treasuryRole === 'Treasurer') {
         // User role is treasurer
@@ -53,14 +55,17 @@ export default function TreasuryDashboard(){
         
       } else if (treasuryRole === 'CoTreasurer') {
         // User role is co treasurer
-
+        setUser(new CoTreasurer(userDetails))
       } else if (treasuryRole === 'Chair') {
         // User role is Chair
+        setUser(new Chair(userDetails))
       } else if (treasuryRole === 'Member') {
         // User role is Member
         setUser(new Member(userDetails))
       } else {
         // Undefined user role
+        // Invalid treasury entrance attempt directed back to login page
+        navigate('/login')
       }
 
     } else {
@@ -84,7 +89,7 @@ export default function TreasuryDashboard(){
   
   return (  
     <div className='container'>
-      <WelcomeBar userName={userDetails?.userName} imageLink={userDetails?.dpLink} imageScale={userDetails?.pictureScale}/>
+      <WelcomeBar userName={userDetails?.userName} imageLink={userDetails?.dpLink} imageScale={userDetails?.pictureScale} position={activeUser.getPosition()}/>
 
       <div className="body-content">
         {/* Navigation bar */}

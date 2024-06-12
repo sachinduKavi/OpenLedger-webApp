@@ -12,6 +12,12 @@ export default function EditTreasuryPopup(props) {
         case 'Description':
             columnName = 'description'
             break
+        case 'Treasury Name':
+            columnName = 'treasury_name'
+            break
+        case 'Member Limit':
+            columnName = 'member_limit'
+            break
     }
 
   return (

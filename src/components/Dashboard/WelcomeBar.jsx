@@ -18,11 +18,16 @@ export default function WelcomeBar(props) {
         <div className="welcome">
             <div className="welcome-inner">
                 <div>
-
+                    <div>
                     <div className="image-div"><img src={MenuImage} alt="menu button"  width={50}/></div>
                     
                     <p><a>Welcome,</a><br/>{props.userName}</p>
+                    </div>
+                    
+
+                    <h4>{props.position}</h4>
                 </div>
+                
             </div>
         </div>
 

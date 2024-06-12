@@ -1,5 +1,5 @@
 import { border } from '@cloudinary/url-gen/qualifiers/background'
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import {Switch, InputNumber} from 'antd'
 import QRCode from 'react-qr-code'
 
@@ -9,28 +9,44 @@ import PrimaryBorder from '../PrimaryBorder'
 import EditIcon from '../../assets/icons/Edit.png'
 import EditTreasuryPopup from '../EditTreasuryPopup'
 
+import { SessionContext } from '../../Session'
+
 export default function TreasuryDetails(props) {
   // Editor prompt values
+  const sessionData = useContext(SessionContext)
+
   const [editorState, changeEditor] = useState({
     name: false,
     memberLimit: false,
-    groupVisibility: false,
-    publicAvailability:  false,
     description: false
   })
+  const resetEditor = () => {
+    changeEditor({
+      name: false,
+      memberLimit: false,
+      description: false
+    })
+  }
+
   // Get instants from the parent 
   const treasury = props.treasury.treasury
   const treasuryUpdate = props.treasury.treasuryUpdate
   const activeUser = props.activeUser
 
-  // Treasurer can change group settings 
-  const changeGroupSettings = async (name) => {
-    activeUser.updateTreasurySettings(name)
-  }
 
   // Update the treasury details
   const updateTreasury = async (columnName, newValue) => {
-    console.log(columnName, newValue)
+    sessionData.changeSessionData({processing: true}) // Global Processing
+    // Trigger to update new value 
+    const treasury = await activeUser.updateTreasurySettings(columnName, newValue)
+    if(treasury) {
+      // Updated successfully
+      treasuryUpdate(treasury)
+    } else {
+      // Update file message
+    }
+    resetEditor()
+    sessionData.changeSessionData({processing: false})
   }
 
   return (
@@ -49,7 +65,11 @@ export default function TreasuryDetails(props) {
 
             <div className="editable-row">
               <h2>{treasury.getTreasuryName()}</h2>
-              <img src={EditIcon} alt="edit-icon" style={{visibility: activeUser.getUserLevel() > 3? 'visible': 'hidden'}}/>
+              <img src={EditIcon} alt="edit-icon" style={{visibility: activeUser.getUserLevel() > 3? 'visible': 'hidden', cursor: 'pointer'}}
+              onClick={() => {
+                changeEditor({editorState, name: true})
+              }}
+              />
             </div>
 
             <div className="editable-row">
@@ -61,7 +81,11 @@ export default function TreasuryDetails(props) {
 
               <div style={{display: 'flex', flexDirection: 'row', width: '15%', justifyContent: 'space-between'}}>
                 <p>{treasury.getMemberLimit()}</p>
-                <img src={EditIcon} alt="edit-icon" style={{visibility: activeUser.getUserLevel() > 3? 'visible': 'hidden', cursor: 'pointer'}}/>
+                <img src={EditIcon} alt="edit-icon" style={{visibility: activeUser.getUserLevel() > 3? 'visible': 'hidden', cursor: 'pointer'}}
+                onClick={() => {
+                  changeEditor({editorState, memberLimit: true})
+                }}
+                />
               </div>
               
             </div>
@@ -69,13 +93,17 @@ export default function TreasuryDetails(props) {
 
             <div className="editable-row">
               <h3>Group Visibility</h3>
-              <Switch value={treasury.getGlobalVisibility()}/>
+              <Switch value={treasury.getGlobalVisibility()} onChange={async () => {
+                updateTreasury('global_visibility', !treasury.getGlobalVisibility())
+              }} disabled={activeUser.getUserLevel() > 3? false: true}/>
             </div>
 
 
             <div className="editable-row">
               <h3>Public Availability</h3>
-              <Switch value={treasury.getPublic()}/>
+              <Switch value={treasury.getPublic()} onChange={async () => {
+                updateTreasury('public_group', !treasury.getPublic())
+              }}  disabled={activeUser.getUserLevel() > 3? false: true}/>
             </div>
 
             <h4>Created Date: {treasury.getCreatedDate()}</h4>
@@ -129,6 +157,10 @@ export default function TreasuryDetails(props) {
         </div>
         {/* Description edit */}
         {editorState.description && <EditTreasuryPopup type='textarea' heading='Description' submit={updateTreasury} close={() => changeEditor({...editorState, description: false})}/>}
+        {/* Treasury name */}
+        {editorState.name && <EditTreasuryPopup type='text' heading='Treasury Name' submit={updateTreasury} close={() => changeEditor({...editorState, name: false})}/>}
+        {/* Member Limit */}
+        {editorState.memberLimit && <EditTreasuryPopup type='number' heading='Member Limit' submit={updateTreasury} close={() => changeEditor({...editorState, memberLimit: false})}/>}
     </div>
   )
 }
