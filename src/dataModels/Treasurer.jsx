@@ -10,7 +10,7 @@ class Treasurer extends CoTreasurer {
 
     // Returns user level 
     getUserLevel() {
-        return 4
+        return super.getUserLevel() + 1
     }
 
     constructor(params) {

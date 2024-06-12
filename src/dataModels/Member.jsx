@@ -4,7 +4,7 @@ class Member extends User {
     static position = 'Member'
 
     getUserLevel() {
-        return 1
+        return super.getUserLevel() + 1
     }
 
     constructor(params) {

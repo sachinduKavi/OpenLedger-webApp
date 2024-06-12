@@ -1,5 +1,5 @@
 import { border } from '@cloudinary/url-gen/qualifiers/background'
-import React from 'react'
+import React, {useState} from 'react'
 import {Switch, InputNumber} from 'antd'
 import QRCode from 'react-qr-code'
 
@@ -7,9 +7,17 @@ import '../../styles/treasury-details.css'
 
 import PrimaryBorder from '../PrimaryBorder'
 import EditIcon from '../../assets/icons/Edit.png'
+import EditTreasuryPopup from '../EditTreasuryPopup'
 
 export default function TreasuryDetails(props) {
-
+  // Editor prompt values
+  const [editorState, changeEditor] = useState({
+    name: false,
+    memberLimit: false,
+    groupVisibility: false,
+    publicAvailability:  false,
+    description: false
+  })
   // Get instants from the parent 
   const treasury = props.treasury.treasury
   const treasuryUpdate = props.treasury.treasuryUpdate
@@ -18,6 +26,11 @@ export default function TreasuryDetails(props) {
   // Treasurer can change group settings 
   const changeGroupSettings = async (name) => {
     activeUser.updateTreasurySettings(name)
+  }
+
+  // Update the treasury details
+  const updateTreasury = async (columnName, newValue) => {
+    console.log(columnName, newValue)
   }
 
   return (
@@ -83,7 +96,7 @@ export default function TreasuryDetails(props) {
               <h4 style={{textAlign: 'justify', marginRight: '10px'}}>{treasury.getDescription()}</h4>
               <img src={EditIcon} alt="edit-icon" style={{visibility: activeUser.getUserLevel() > 3? 'visible': 'hidden', cursor: 'pointer'}} 
                 onClick={() => {
-                  changeGroupSettings('description');
+                  changeEditor({editorState, description: true})
                 }}
               />
             </div>
@@ -114,6 +127,8 @@ export default function TreasuryDetails(props) {
             </div>
 
         </div>
+        {/* Description edit */}
+        {editorState.description && <EditTreasuryPopup type='textarea' heading='Description' submit={updateTreasury} close={() => changeEditor({...editorState, description: false})}/>}
     </div>
   )
 }

@@ -1,6 +1,6 @@
-import Member from "./Member"
+import Chair from "./Chair"
 
-class CoTreasurer extends Member {
+class CoTreasurer extends Chair {
     static position = 'CoTreasurer'
 
     getPosition() {
@@ -9,7 +9,7 @@ class CoTreasurer extends Member {
 
     // Returns user level 
     getUserLevel() {
-        return 3
+        return super.getUserLevel() + 1
     }
     constructor(params) {
         super(params)

@@ -29,9 +29,14 @@ class User {
         this.#pictureScale = pictureScale
     }
 
-    // Update Database with current data
-    async createNewUer() {
-        
+
+    // Getter and setters
+    getPictureScale() {
+        return this.#pictureScale
+    }
+
+    setPictureScale(pictureScale) {
+        this.#pictureScale = pictureScale
     }
 
     setUserID(userID) {
