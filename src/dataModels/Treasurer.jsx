@@ -18,6 +18,11 @@ class Treasurer extends CoTreasurer {
         super(params)
     }
 
+    // Treasurers can update the group settings and data 
+    updateTreasurySettings(settings) {
+        console.log('From treasury', settings)
+    }
+
     
 }
 

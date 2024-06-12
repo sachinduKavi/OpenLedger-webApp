@@ -15,6 +15,11 @@ export default function TreasuryDetails(props) {
   const treasuryUpdate = props.treasury.treasuryUpdate
   const activeUser = props.activeUser
 
+  // Treasurer can change group settings 
+  const changeGroupSettings = async (name) => {
+    activeUser.updateTreasurySettings(name)
+  }
+
   return (
     <div className="inner-screen-border">
         <div className="row">
@@ -43,7 +48,7 @@ export default function TreasuryDetails(props) {
 
               <div style={{display: 'flex', flexDirection: 'row', width: '15%', justifyContent: 'space-between'}}>
                 <p>{treasury.getMemberLimit()}</p>
-                <img src={EditIcon} alt="edit-icon" style={{visibility: activeUser.getUserLevel() > 3? 'visible': 'hidden'}}/>
+                <img src={EditIcon} alt="edit-icon" style={{visibility: activeUser.getUserLevel() > 3? 'visible': 'hidden', cursor: 'pointer'}}/>
               </div>
               
             </div>
@@ -76,7 +81,11 @@ export default function TreasuryDetails(props) {
 
             <div className="editable-row"  style={{marginTop: '5px'}}>
               <h4 style={{textAlign: 'justify', marginRight: '10px'}}>{treasury.getDescription()}</h4>
-              <img src={EditIcon} alt="edit-icon" style={{visibility: activeUser.getUserLevel() > 3? 'visible': 'hidden', cursor: 'pointer'}} />
+              <img src={EditIcon} alt="edit-icon" style={{visibility: activeUser.getUserLevel() > 3? 'visible': 'hidden', cursor: 'pointer'}} 
+                onClick={() => {
+                  changeGroupSettings('description');
+                }}
+              />
             </div>
 
 
@@ -88,12 +97,16 @@ export default function TreasuryDetails(props) {
         </div>
 
         <div className="row qr-row">
-            <div className="column" style={{width: 'fit-content'}}>
-              <QRCode
-                value={treasury.getTreasuryLink()}
-  
-                style={{ height: "auto", maxHeight: "100%", aspectRatio: 1 }}
-              />
+            <div className="column" style={{width: 'fit-content', backgroundColor: 'white', aspectRatio: 1, alignItems: 'center'}}>
+
+
+                <QRCode
+                  value={treasury.getTreasuryLink()}
+    
+                  style={{ height: "auto", maxHeight: "100%", aspectRatio: 1 }}
+                />
+      
+              
             </div>
 
             <div className="column treasury-link">

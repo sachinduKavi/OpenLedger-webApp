@@ -21,6 +21,10 @@
 .inner-screen-border > .row > .column {
         width: 50%;
         padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        
 }
 
 .inner-screen-border > .row > .main-details {
