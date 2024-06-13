@@ -16,3 +16,31 @@
     justify-content: space-between;
     align-items: center;
 }
+
+.single-participant-border > .counter {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+
+.user-details {
+    flex-grow: 2;
+}
+
+.counter {
+    flex-grow: 0.2;
+}
+
+.email {
+    flex-grow: 2;
+}
+
+.mobile-num {
+    flex-grow: 1;
+}
+
+.position {
+    flex-grow: 1;
+}
