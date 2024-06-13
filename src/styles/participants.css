@@ -15,6 +15,13 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    padding: 0 5px;
+    
+}
+
+.single-participant-border:hover {
+    background-color: #817dee;
+    transition: background-color ;
 }
 
 .single-participant-border > .counter {

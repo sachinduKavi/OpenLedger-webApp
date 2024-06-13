@@ -33,11 +33,11 @@ export default function TreasuryOverview(props) {
 
       {/* Mini Navigation bar */}
       <MiniNavigation>
-          <li className={navigation.details && 'active'} onClick={() => {
+          <li className={navigation.details ? 'active': null} onClick={() => {
             resetNavigation()
             setNavigation({details: true})
           }}>Details</li>
-          <li className={navigation.participants && 'active'} onClick={() => {
+          <li className={navigation.participants ? 'active': null} onClick={() => {
             resetNavigation()
             setNavigation({participants: true})
           }}>Participants</li>

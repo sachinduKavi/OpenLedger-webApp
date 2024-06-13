@@ -47,6 +47,15 @@ class User {
 
 
     // Getter and setters
+    getUserMobile() {
+        return this.#mobileNumber
+    }
+
+    setUserMobile(mobileNumber) {
+        this.#mobileNumber = mobileNumber
+    }
+
+
     getPictureScale() {
         return this.#pictureScale
     }

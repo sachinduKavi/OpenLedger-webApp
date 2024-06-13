@@ -4,7 +4,7 @@
     padding: 2%;
     justify-content: start;
     overflow-y: scroll;
-    
+    height: 100%;
 }
 
 .inner-screen-border::-webkit-scrollbar {
@@ -43,7 +43,6 @@
 .inner-screen-border .card {
     width: 100%;
     aspect-ratio: 2;
-    background-color: blue;
     border-radius: 26px;
 }
 

@@ -1,4 +1,5 @@
 import {createNewTreasuryQuery, getTreasuryDetails, getAllTreasuryParticipants} from '../query/treasuryQuery'
+import {userCategorize} from '../middleware/auth'
 
 class Treasury {
     // Private Treasury variables
@@ -51,11 +52,20 @@ class Treasury {
         console.log('treasury running set all function')
     }
 
-    
+    // Load treasury participants to the UI
     async loadTreasuryParticipant() {
         const response = await getAllTreasuryParticipants()
+        let objectArray = []
+        if(response.status === 200 && response.data.procedure) {
+            // Successful response
+            const contentArray = response.data.content
+            console.log('contents',contentArray)
+            contentArray.forEach(element => {
+                objectArray.push(userCategorize(element.user_role, element))
+            })
+        }
 
-        console.log('load Response', response)
+        return objectArray
     }
 
 
