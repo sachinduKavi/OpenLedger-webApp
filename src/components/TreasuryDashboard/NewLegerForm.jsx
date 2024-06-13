@@ -143,9 +143,22 @@ export default function NewLegerForm(props) {
               
             </div>
 
+            <div className="ledger-content-new">
+
+              <label htmlFor="">Category</label>
+            <div className="category-search-box" style={{width: '250px'}}>
+              <PrimaryBorder borderRadius='6px'>
+                <Input id='category-input'/>
+              </PrimaryBorder>
+              
+              <div className="category-search-results">
+                
+              </div>
+                </div>
+            </div>
             
             <div className="ledger-content-new">
-              <label>Amount: </label>
+            <label>Amount: </label>
               <div className="amount-container">
                 <PrimaryBorder borderRadius='6px' width='140px'>
                   <Input status={inputErrorState.amount? 'error' : ''} onChange={(e) => {setNewRecord({...newRecord, amount: e.target.value})}} />
