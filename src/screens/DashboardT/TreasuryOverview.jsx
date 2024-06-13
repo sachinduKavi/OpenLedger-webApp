@@ -48,7 +48,7 @@ export default function TreasuryOverview(props) {
       <div className="mini-screen">
         {navigation.details && <TreasuryDetails activeUser={props.activeUser} treasury={props.treasury}/>}
 
-        {navigation.participants && <Participants/>}
+        {navigation.participants && <Participants activeUser={props.activeUser} treasury={props.treasury}/>}
       </div>
       
 

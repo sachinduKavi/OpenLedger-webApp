@@ -24,11 +24,16 @@ const updateTreasuryDetailQuery = async (columnName, newValue) => {
     return await cDomain.post('treasury/updateTreasurySettings', {columnName: columnName, newValue: newValue}, header)
 }
 
+const getAllTreasuryParticipants = async () => {
+    return await cDomain.get('treasury/getAllTreasuryParticipants', header)
+}
+
 
 export {
     createNewTreasuryQuery,
     getAllTreasuryParticipantData,
     verifyTreasury,
     getTreasuryDetails,
-    updateTreasuryDetailQuery
+    updateTreasuryDetailQuery,
+    getAllTreasuryParticipants
 }

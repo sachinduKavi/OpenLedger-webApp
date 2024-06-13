@@ -11,15 +11,17 @@ class User {
         return 0
     }
 
-    #userID = null
-    #userName = null
-    #userEmail = null
-    #passwordHash = null
-    #dpLink = null
-    #pictureScale = null
+    #userID 
+    #userName 
+    #userEmail
+    #passwordHash
+    #dpLink 
+    #pictureScale 
+    #aboutMe
+    #mobileNumber 
 
 
-    constructor({userID = null, userName = null, userEmail = null, password = null, dpLink = null, pictureScale = null}) {
+    constructor({userID = null, userName = null, userEmail = null, password = null, dpLink = null, pictureScale = null, aboutMe = null, mobileNumber = null}) {
         // Creating new user Instant
         this.#userID = userID
         this.#userName = userName
@@ -27,6 +29,20 @@ class User {
         this.#passwordHash = password
         this.#dpLink = dpLink
         this.#pictureScale = pictureScale
+        this.#aboutMe = aboutMe
+        this.#mobileNumber = mobileNumber
+    }
+
+    extractJSON() {
+        return {
+            userID: this.#userID,
+            userName: this.#userName,
+            userEmail: this.#userEmail,
+            dpLink: this.#dpLink,
+            pictureScale: this.#pictureScale,
+            aboutMe: this.#aboutMe,
+            mobileNumber: this.#mobileNumber
+        }
     }
 
 

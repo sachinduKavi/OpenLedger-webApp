@@ -1,4 +1,4 @@
-import {createNewTreasuryQuery, getTreasuryDetails} from '../query/treasuryQuery'
+import {createNewTreasuryQuery, getTreasuryDetails, getAllTreasuryParticipants} from '../query/treasuryQuery'
 
 class Treasury {
     // Private Treasury variables
@@ -49,6 +49,13 @@ class Treasury {
         this.#userRole = userRole
 
         console.log('treasury running set all function')
+    }
+
+    
+    async loadTreasuryParticipant() {
+        const response = await getAllTreasuryParticipants()
+
+        console.log('load Response', response)
     }
 
 
