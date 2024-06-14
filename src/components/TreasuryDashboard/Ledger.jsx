@@ -32,6 +32,7 @@ export default function Ledger(props) {
     changeSession({processing: false}) // Switch off processing
   } 
 
+  
   // Component did mount ?
   useEffect(() => {
     loadLedgers()

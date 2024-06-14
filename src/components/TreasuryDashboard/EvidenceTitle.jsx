@@ -15,6 +15,7 @@ export default function EvidenceTitle(props) {
         position: 'absolute',
         inset: 0,
         display: 'flex',
+        zIndex: 30,
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',

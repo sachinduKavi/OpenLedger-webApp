@@ -9,6 +9,9 @@ import LedgerRecordModel from '../../dataModels/LedgerRecordModel'
 import { SessionContext } from '../../Session'
 import {generateCurrentDateTime} from '../../middleware/GenerateCurrentDateTime'
 import {createLedgerRecord} from '../../query/ledgerQuery'
+import SearchResult from '../Treaasury/SearchResult'
+import SingleLedger from './SingleLedger'
+import { delay } from 'framer-motion/dom'
 
 export default function NewLegerForm(props) {
   // Include global session data
@@ -29,9 +32,20 @@ export default function NewLegerForm(props) {
   const [newRecord, setNewRecord] = useState({
     title: '',
     description: '',
+    category: '',
     amount: 0
   })
+
+  // Search results visibility 
+  const [searchResultsState, setSearchResultState] = useState(false)
+
+  // Leger record categories
+  const [ledgerCategories, setCategories] = useState(['Transportation', 'Food and Beverages', 'Communication'])
   
+  // Fetch type of categories from the database 
+  const loadCategories = () => {
+
+  }
 
   // Evidence array 
   const [evidenceArray, changeEvidenceArray] = useState([])
@@ -50,15 +64,25 @@ export default function NewLegerForm(props) {
 
   // Check whether all the input fields are filled 
   const checkInputValidity = () => {
+    let state = true
     if (newRecord.title === "") setInputState({...inputErrorState, title: true}) 
-      else setInputState({...inputErrorState, title: false})
+      else {
+        setInputState({...inputErrorState, title: false}) 
+        state = false
+      }
     if (newRecord.description === "") setInputState({...inputErrorState, description: true})
-      else setInputState({...inputErrorState, description: false})
+      else {
+        setInputState({...inputErrorState, description: false}) 
+        state = false
+      }
 
     if (newRecord.amount === "") setInputState({...inputErrorState, amount: true})
-      else setInputState({...inputErrorState, amount: false})
+      else {
+        setInputState({...inputErrorState, amount: false}) 
+        state = false
+      }
 
-    return !inputErrorState.title && !inputErrorState.description && !inputErrorState.amount
+    return state
   }
 
 
@@ -146,14 +170,31 @@ export default function NewLegerForm(props) {
             <div className="ledger-content-new">
 
               <label htmlFor="">Category</label>
+
+
+
+            {/* Search bar which will display all the ledger categories as suggestions  */}
             <div className="category-search-box" style={{width: '250px'}}>
               <PrimaryBorder borderRadius='6px'>
-                <Input id='category-input'/>
+                <Input id='category-input' onFocus={() => {
+                  setSearchResultState(true)
+                }}
+                  onBlur={async () => {
+                    setTimeout(() => {
+                      setSearchResultState(false)
+                    }, 100)
+                  }}
+                />
               </PrimaryBorder>
               
-              <div className="category-search-results">
-                
-              </div>
+              {searchResultsState && <div className="category-search-results">
+                {ledgerCategories.map((element, index) => <SearchResult key={index} stateChange={[newRecord, setNewRecord]}>{element}</SearchResult>)}
+              </div>}
+
+
+
+
+
                 </div>
             </div>
             

@@ -251,12 +251,23 @@
 
 .category-search-box {
     position: relative;
+    z-index: 20;
 }
 
 .category-search-results {
     width: 100%;
-    background-color: #6CDB9A;
     height: 200px;
 
     position: absolute;
+}
+
+.search-result {
+    padding: 12px;
+    background-color: rgb(6, 18, 29);
+}
+
+.search-result:hover {
+    background-color: aliceblue;
+    color: #232238;
+    cursor: pointer;
 }
