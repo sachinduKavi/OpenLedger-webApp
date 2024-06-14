@@ -26,4 +26,8 @@ const userCategorize = (userRole, userDetails) => {
     }
 }
 
-export {isClassObject, userCategorize}
+const capitalize = (value) => {
+    return value.charAt(0).toUpperCase() + value.slice(1)
+}
+
+export {isClassObject, userCategorize, capitalize}

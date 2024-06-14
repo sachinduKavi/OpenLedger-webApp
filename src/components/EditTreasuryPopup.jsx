@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import {Input, Button} from 'antd'
 import PrimaryBorder from './PrimaryBorder'
+import {capitalize} from '../middleware/auth'
 
 import '../styles/edit-component.css'
 
@@ -30,7 +31,7 @@ export default function EditTreasuryPopup(props) {
             <label htmlFor="">{props.heading}</label>
 
             <PrimaryBorder borderRadius='6px' width='100%'>
-                <Input placeholder='Enter new value' type={props.type} onChange={(e) => changeValue(e.target.value)}/>
+                <Input placeholder='Enter new value' type={props.type} onChange={(e) => changeValue(capitalize(e.target.value))}/>
             </PrimaryBorder>
 
             <div className="button-action">

@@ -11,11 +11,11 @@ import {generateCurrentDateTime} from '../../middleware/GenerateCurrentDateTime'
 import {createLedgerRecord, getLegerCategories} from '../../query/ledgerQuery'
 import SearchResult from '../Treaasury/SearchResult'
 import SingleLedger from './SingleLedger'
-import { delay } from 'framer-motion/dom'
+import {capitalize} from '../../middleware/auth'
 
 export default function NewLegerForm(props) {
   // Include global session data
-  let ledgerCategoriesAll = []
+  let [ledgerCategoriesAll, setLedgerCategoriesAll] = useState([])
   const sessionContext = useContext(SessionContext)
   const changeSessionData = sessionContext.changeSessionData
   // Evidence state of the window
@@ -41,34 +41,32 @@ export default function NewLegerForm(props) {
   const [searchResultsState, setSearchResultState] = useState(false)
 
   // Leger record categories
-  const [ledgerCategories, setCategories] = useState(ledgerCategoriesAll)
+  const [ledgerCategoriesFilter, setCategories] = useState(ledgerCategoriesAll)
   
   // Fetch type of categories from the database 
   const loadCategories = async () => {
     const response = await getLegerCategories()
     if(response.status === 200 && response.data.procedure) {
       // Successful response
-      ledgerCategoriesAll = response.data.content
-      setCategories(ledgerCategoriesAll)
+      const content = response.data.content
+      setLedgerCategoriesAll(content)
+      setCategories(content)
     }
   }
 
   // Filtering ledger categories
   const filterLedgerCategories = (inputValue) => {
+    console.log('filter', ledgerCategoriesAll)
     let tempArray = []
     if(inputValue !== "") {
-      
+
       ledgerCategoriesAll.forEach(element => {
-        console.log(element, inputValue.toUpperCase())
         if(element.toUpperCase().includes(inputValue.toUpperCase())) {
-          console.log('value match')
           tempArray.push(element)
         }
       })
-      console.log('tempory', tempArray)
       setCategories(tempArray)
     } else {
-      console.log('empty value')
       setCategories(ledgerCategoriesAll)
     }
     console.log('input value', inputValue)
@@ -78,7 +76,7 @@ export default function NewLegerForm(props) {
   // Component did mount ?
   useEffect(() => {
     loadCategories()
-  })
+  }, [])
 
   // Evidence array 
   const [evidenceArray, changeEvidenceArray] = useState([])
@@ -182,7 +180,7 @@ export default function NewLegerForm(props) {
             <div className="ledger-content-new">
               <label>Title: </label>
               <PrimaryBorder borderRadius='6px' width='50%'>
-                <Input status={inputErrorState.title? 'error' : ''} onChange={(e) => {setNewRecord({...newRecord, title: e.target.value})}} value={newRecord.title}/>
+                <Input status={inputErrorState.title? 'error' : ''} onChange={(e) => {setNewRecord({...newRecord, title: capitalize(e.target.value)})}} value={newRecord.title}/>
               </PrimaryBorder>
               
             </div>
@@ -190,7 +188,7 @@ export default function NewLegerForm(props) {
             <div className="ledger-content-new">
               <label>Description: </label>
               <PrimaryBorder borderRadius='6px' width='100%'>
-                <Input status={inputErrorState.description? 'error' : ''} onChange={(e) => {setNewRecord({...newRecord, description: e.target.value})}}/>
+                <Input status={inputErrorState.description? 'error' : ''} onChange={(e) => {setNewRecord({...newRecord, description: capitalize(e.target.value)})}}/>
               </PrimaryBorder>
               
             </div>
@@ -206,7 +204,7 @@ export default function NewLegerForm(props) {
               <PrimaryBorder borderRadius='6px'>
                 <Input id='category-input' value={newRecord.category}
                 onChange={(e) => {
-                  setNewRecord({...newRecord, category: e.target.value})
+                  setNewRecord({...newRecord, category: capitalize(e.target.value)})
                   filterLedgerCategories(e.target.value.trim())
                 }}
                 onFocus={() => {
@@ -222,7 +220,7 @@ export default function NewLegerForm(props) {
               </PrimaryBorder>
               
               {searchResultsState && <div className="category-search-results">
-                {ledgerCategories.map((element, index) => <SearchResult key={index} setNewRecord={setNewRecord} newRecord={newRecord}>{element}</SearchResult>)}
+                {ledgerCategoriesFilter.map((element, index) => <SearchResult key={index} setNewRecord={setNewRecord} newRecord={newRecord}>{element}</SearchResult>)}
               </div>}
 
 
