@@ -10,14 +10,16 @@ class LedgerRecordModel {
     #treasuryID
     #evidenceArray
     #createdDate
+    #category
 
-    constructor({title= null, description = null, amount = null, treasuryID = null, evidenceArray = null, createdDate = null}) {
+    constructor({title= null, description = null, amount = null, treasuryID = null, evidenceArray = null, createdDate = null, category = null}) {
         this.#title = title
         this.#description = description
         this.#amount = amount 
         this.#evidenceArray = evidenceArray
         this.#treasuryID = treasuryID
         this.#createdDate = createdDate
+        this.#category = category
 
         if (this.#evidenceArray.length > 0 && !isClassObject(this.#evidenceArray[0])) this.#convertToEvidenceObject()
     }
@@ -69,12 +71,21 @@ class LedgerRecordModel {
             amount: this.#amount,
             treasuryID: this.#treasuryID,
             evidenceArray: evidence,
-            createdDate: this.#createdDate
+            createdDate: this.#createdDate,
+            category: this.#category
         }
     }
 
 
     // Getters and Setters
+    getCategory() {
+        return this.#category
+    }
+
+    setCategory(category) {
+        this.#category = category
+    }
+
     getCreatedDate() {
         return this.#createdDate
     }

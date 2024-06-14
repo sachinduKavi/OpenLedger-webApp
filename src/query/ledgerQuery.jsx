@@ -27,7 +27,13 @@ const fetchAllLedgerRecords = async () => {
     }
 }
 
+
+const getLegerCategories = async () => {
+    return await cDomain.get('ledger/loadCategories', header)
+}
+
 export {
     createLedgerRecord,
-    fetchAllLedgerRecords
+    fetchAllLedgerRecords,
+    getLegerCategories
 }

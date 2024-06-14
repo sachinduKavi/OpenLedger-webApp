@@ -1,12 +1,12 @@
 import React from 'react'
 
 export default function SearchResult(props) {
-    const [newRecord, setNewRecord] = props.stateChange
 
+  const categoryName = props.children
   return (
     <div className='search-result' onClick={() => {
-        console.log('onclick',props.children)
-        setNewRecord({...newRecord, category: props.children})
+        console.log('onclick', categoryName)
+        props.setNewRecord({...props.newRecord, category: categoryName})
     }}>
         <h3>{props.children}</h3>
     </div>

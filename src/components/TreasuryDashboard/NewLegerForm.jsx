@@ -8,13 +8,14 @@ import EvidenceTitle from './EvidenceTitle'
 import LedgerRecordModel from '../../dataModels/LedgerRecordModel'
 import { SessionContext } from '../../Session'
 import {generateCurrentDateTime} from '../../middleware/GenerateCurrentDateTime'
-import {createLedgerRecord} from '../../query/ledgerQuery'
+import {createLedgerRecord, getLegerCategories} from '../../query/ledgerQuery'
 import SearchResult from '../Treaasury/SearchResult'
 import SingleLedger from './SingleLedger'
 import { delay } from 'framer-motion/dom'
 
 export default function NewLegerForm(props) {
   // Include global session data
+  let ledgerCategoriesAll = []
   const sessionContext = useContext(SessionContext)
   const changeSessionData = sessionContext.changeSessionData
   // Evidence state of the window
@@ -40,12 +41,44 @@ export default function NewLegerForm(props) {
   const [searchResultsState, setSearchResultState] = useState(false)
 
   // Leger record categories
-  const [ledgerCategories, setCategories] = useState(['Transportation', 'Food and Beverages', 'Communication'])
+  const [ledgerCategories, setCategories] = useState(ledgerCategoriesAll)
   
   // Fetch type of categories from the database 
-  const loadCategories = () => {
-
+  const loadCategories = async () => {
+    const response = await getLegerCategories()
+    if(response.status === 200 && response.data.procedure) {
+      // Successful response
+      ledgerCategoriesAll = response.data.content
+      setCategories(ledgerCategoriesAll)
+    }
   }
+
+  // Filtering ledger categories
+  const filterLedgerCategories = (inputValue) => {
+    let tempArray = []
+    if(inputValue !== "") {
+      
+      ledgerCategoriesAll.forEach(element => {
+        console.log(element, inputValue.toUpperCase())
+        if(element.toUpperCase().includes(inputValue.toUpperCase())) {
+          console.log('value match')
+          tempArray.push(element)
+        }
+      })
+      console.log('tempory', tempArray)
+      setCategories(tempArray)
+    } else {
+      console.log('empty value')
+      setCategories(ledgerCategoriesAll)
+    }
+    console.log('input value', inputValue)
+    
+  }
+
+  // Component did mount ?
+  useEffect(() => {
+    loadCategories()
+  })
 
   // Evidence array 
   const [evidenceArray, changeEvidenceArray] = useState([])
@@ -64,22 +97,22 @@ export default function NewLegerForm(props) {
 
   // Check whether all the input fields are filled 
   const checkInputValidity = () => {
-    let state = true
+    let state = false
     if (newRecord.title === "") setInputState({...inputErrorState, title: true}) 
       else {
         setInputState({...inputErrorState, title: false}) 
-        state = false
+        state = true
       }
     if (newRecord.description === "") setInputState({...inputErrorState, description: true})
       else {
         setInputState({...inputErrorState, description: false}) 
-        state = false
+        state = true
       }
 
     if (newRecord.amount === "") setInputState({...inputErrorState, amount: true})
       else {
         setInputState({...inputErrorState, amount: false}) 
-        state = false
+        state = true
       }
 
     return state
@@ -89,7 +122,6 @@ export default function NewLegerForm(props) {
   // User clicks on the create record button 
   const onSubmission = async () => {
     changeSessionData({processing: true}) // Processing effect
-    console.log('input', newRecord.description)
     if(checkInputValidity()) { 
       // Creating new LedgerRecord instant
       let signAmount
@@ -107,7 +139,8 @@ export default function NewLegerForm(props) {
       console.log('Response ', response)
       if(response.data.procedure) {
         // Record created successfully
-        props.closeForm(false) // close the form
+
+        
       } else {
         // Error ocurred Record is not created
 
@@ -120,16 +153,11 @@ export default function NewLegerForm(props) {
     props.loadLedgers() // Refresh ledger 
 
     // updating treasury object 
-
-
     await props.treasury.refreshTreasuryDetails()
-    console.log('treasury update before', props.treasury)
-
-
-    props.treasuryUpdate(treasury)
+    console.log('treasury update before')
 
     changeSessionData({processing: false}) // Switch off global processing
-    
+    props.closeForm(false) // close the form
   }
 
 
@@ -176,19 +204,25 @@ export default function NewLegerForm(props) {
             {/* Search bar which will display all the ledger categories as suggestions  */}
             <div className="category-search-box" style={{width: '250px'}}>
               <PrimaryBorder borderRadius='6px'>
-                <Input id='category-input' onFocus={() => {
+                <Input id='category-input' value={newRecord.category}
+                onChange={(e) => {
+                  setNewRecord({...newRecord, category: e.target.value})
+                  filterLedgerCategories(e.target.value.trim())
+                }}
+                onFocus={() => {
                   setSearchResultState(true)
                 }}
                   onBlur={async () => {
                     setTimeout(() => {
+                      console.log('blur')
                       setSearchResultState(false)
-                    }, 100)
+                    }, 200)
                   }}
                 />
               </PrimaryBorder>
               
               {searchResultsState && <div className="category-search-results">
-                {ledgerCategories.map((element, index) => <SearchResult key={index} stateChange={[newRecord, setNewRecord]}>{element}</SearchResult>)}
+                {ledgerCategories.map((element, index) => <SearchResult key={index} setNewRecord={setNewRecord} newRecord={newRecord}>{element}</SearchResult>)}
               </div>}
 
 
@@ -221,6 +255,8 @@ export default function NewLegerForm(props) {
               
             </div>
 
+
+
             {/* Add evidence to the ledger record */}
             <label>Add Evidence:</label>
             
@@ -239,9 +275,10 @@ export default function NewLegerForm(props) {
                 >
                   <img src={PlusIcon} alt="plus-icon" width='70%'/>
                 </motion.div>
-                
               
             </div>
+
+
 
               <div className="submission">
                 <button style={{flexGrow: 1, margin: '5px'}} onClick={onSubmission}>CREATE</button>

@@ -23,10 +23,10 @@ function App() {
 
         <Routes>
           <Route path='/' element={<LoginPage/>}/>
-          <Route path='login' element={<LoginPage/>}/>
-          <Route path='register' element={<Registration/>}/>
-          <Route path='dashboard' element={<Dashboard/>}/>
-          <Route path='treasury' element={<TreasuryDashboard/>}/>
+          <Route path='/login' element={<LoginPage/>}/>
+          <Route path='/register' element={<Registration/>}/>
+          <Route path='/dashboard' element={<Dashboard/>}/>
+          <Route path='/treasury' element={<TreasuryDashboard/>}/>
         </Routes>
   
       </BrowserRouter>
