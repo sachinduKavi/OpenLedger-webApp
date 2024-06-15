@@ -57,7 +57,7 @@ export default function ProfileStep02(props) {
               <button className='classic-btn' style={{marginTop:'20px'}} onClick={finalizeProfile}>Finish Setup</button>
             </div>
         </div>
-        <img src={OpenledgerLogo} alt="" className='openledger-logo'/>
+        <img src={OpenledgerLogo} alt="" className='openledger-logo' style={{visibility: 'hidden'}}/>
       </div>
     )
 

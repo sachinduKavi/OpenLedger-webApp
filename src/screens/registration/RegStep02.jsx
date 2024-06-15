@@ -111,7 +111,7 @@ export default function EmailCode(props) {
       <button className='classic-btn' onClick={onPinSubmission}>Verify</button>
       
     </div>
-    <img src={OpenledgerLogo} alt="" className='openledger-logo'/>
+    <img src={OpenledgerLogo} alt="" className='openledger-logo' style={{visibility: 'hidden'}}/>
     </div>
   )
 }

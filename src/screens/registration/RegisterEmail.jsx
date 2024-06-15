@@ -107,7 +107,7 @@ export default class RegisterEmail extends Component {
 
                 
                 </div>
-                <img src={OpenledgerLogo} alt="" className='openledger-logo'/>
+                <img src={OpenledgerLogo} alt="" className='openledger-logo' style={{visibility: 'hidden'}}/>
             </div>
         )
     }
