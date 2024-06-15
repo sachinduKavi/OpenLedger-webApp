@@ -19,16 +19,30 @@ export default function SingleLedger(props) {
         <div className="background"></div>
         <div className="content">
             <div className="row">
-                <div className="column content-column">
+                <div className="column content-column" style={{flexGrow: 3}}>
                     <h2>{ledgerRecord.getTitle()}</h2>
-                    <p className='description'>{ledgerRecord.getDescription()}</p>
+                   
                 </div>
 
-                <div className="column">
-                  <h3 className="amount">LKR {amount.toLocaleString('en-US')}</h3>
-                  <p className="date-time">{dateTime[0]}</p>
-                  <p className="date-time">{dateTime[1]} {(time > 12)? 'PM': 'AM'}</p>
+                <div className="column" style={{flexGrow: 1, flexDirection: 'column'}}>
+                  <h4 className="category"> {ledgerRecord.getCategory()}</h4>
                 </div>
+
+                <div className="column" style={{flexGrow: 1}}>
+                  <h3 className="amount">LKR {amount.toLocaleString('en-US')}</h3>
+                  
+                </div>
+            </div>
+
+            <div className="row">
+              <div className="column" style={{flexGrow: 9}}>
+                <p className='description' style={{color: '#e0e0e0'}}>{ledgerRecord.getDescription()}</p>
+              </div>
+            
+              <div className="column" style={{flexGrow: 1, width: 'fit-content'}}>
+                <p className="date-time">{dateTime[0]}</p>
+                <p className="date-time">{dateTime[1]} {(time > 12)? 'PM': 'AM'}</p>
+              </div>
             </div>
         </div>
     </motion.div>

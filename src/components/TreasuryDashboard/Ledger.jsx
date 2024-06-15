@@ -19,9 +19,7 @@ export default function Ledger(props) {
   // Load every single ledger records related to the the treasury
   const loadLedgers = async () => {
     changeSession({processing: true}) // Global Processing
-    console.log('Running load ledgers')
     const response = await fetchAllLedgerRecords()
-    console.log(response)
     if(response.procedure) {
       // System responded with no errors
       setLedgerRecordArray(response.ledgerRecords)

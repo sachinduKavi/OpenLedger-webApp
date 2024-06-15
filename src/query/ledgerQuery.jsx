@@ -11,7 +11,6 @@ const createLedgerRecord = async (record) => {
 const fetchAllLedgerRecords = async () => {
     const res = await cDomain.get('ledger/allLedgerRecords', header)
     let ledgerArray = null
-
     if(res.data.procedure) {
         const content = res.data.content
         ledgerArray = []
