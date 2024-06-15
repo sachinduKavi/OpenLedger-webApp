@@ -19,16 +19,16 @@ export default function SingleLedger(props) {
         <div className="background"></div>
         <div className="content">
             <div className="row">
-                <div className="column content-column" style={{flexGrow: 3}}>
+                <div className="column" style={{flexBasis: '700px'}}>
                     <h2>{ledgerRecord.getTitle()}</h2>
                    
                 </div>
 
-                <div className="column" style={{flexGrow: 1, flexDirection: 'column'}}>
+                <div className="column" >
                   <h4 className="category"> {ledgerRecord.getCategory()}</h4>
                 </div>
 
-                <div className="column" style={{flexGrow: 1}}>
+                <div className="column" >
                   <h3 className="amount">LKR {amount.toLocaleString('en-US')}</h3>
                   
                 </div>

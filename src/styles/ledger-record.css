@@ -76,16 +76,14 @@
     
     
     align-items: center;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
 
 .content > .row > .column {
     display: flex;
     flex-direction: column;
     margin: 0 2px;
-    /* background-color: #6CDB9A; */
-    /* width: fit-content; */
-    /* min-width: 70%; */
+    flex: 1 1 auto;
 }
 
 .content-column {
