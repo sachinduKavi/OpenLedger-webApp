@@ -1,7 +1,22 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {motion} from 'framer-motion'
+import MiniNavigation from '../../components/MiniNavigation'
 
 export default function Reports() {
+    const [navigation, setNavigation] = useState({
+        estimation: true,
+        cashflow: false,
+      })
+
+      const resetNavigation = () => {
+        setNavigation({
+            estimation: true,
+            cashflow: false,
+          })
+      }
+
+
+
   return (
     <motion.div className='panel-outside-border'
       initial={{x: 1500}}
@@ -9,6 +24,17 @@ export default function Reports() {
       exit={{y: 1000, transition: {delay: 0.1}}}
     >
 
+        <MiniNavigation>
+            <li className={navigation.estimation ? 'active': null} onClick={() => {
+                resetNavigation()
+                setNavigation({estimation: true})
+            }}>Estimate</li>
+            <li className={navigation.cashflow ? 'active': null} onClick={() => {
+                resetNavigation()
+                setNavigation({cashflow: true})
+            }}>Cash Flow Statement</li>
+
+        </MiniNavigation>
 
 
 
