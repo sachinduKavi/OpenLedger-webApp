@@ -15,6 +15,11 @@ import TreasuryOverview from './DashboardT/TreasuryOverview'
 import CoTreasurer from '../dataModels/CoTreasurer'
 import Chair from '../dataModels/Chair'
 import { SessionContext } from '../Session'
+import Reports from './Reports/Reports'
+import Transaction from './Transaction/Transaction'
+import LedgerChat from './LedgerChat/LedgerChar'
+import Complaints from './Complaints/Complaints'
+import Announcement from './Announcement/Announcement'
 
 
 export default function TreasuryDashboard(){
@@ -106,6 +111,21 @@ export default function TreasuryDashboard(){
             {/* Treasury */}
             {panelSwitch.treasury && <TreasuryOverview activeUser={activeUser} treasury={{treasury: treasury, treasuryUpdate: treasuryUpdate}}/>}
 
+
+            {/* Reports */}
+            {panelSwitch.reports && <Reports activeUser={activeUser} treasury={{treasury: treasury, treasuryUpdate: treasuryUpdate}}/>}
+
+            {/* Transaction */}
+            {panelSwitch.transaction && <Transaction activeUser={activeUser} treasury={{treasury: treasury, treasuryUpdate: treasuryUpdate}}/>}
+
+            {/* Announcement */}
+            {panelSwitch.announcement && <Announcement activeUser={activeUser} treasury={{treasury: treasury, treasuryUpdate: treasuryUpdate}}/>}
+
+            {/* Ledger Chat */}
+            {panelSwitch.ledgerChat && <LedgerChat activeUser={activeUser} treasury={{treasury: treasury, treasuryUpdate: treasuryUpdate}}/>}
+
+            {/* Complaints */}
+            {panelSwitch.complaints && <Complaints activeUser={activeUser} treasury={{treasury: treasury, treasuryUpdate: treasuryUpdate}}/>}
           </AnimatePresence>
           
         </div>
