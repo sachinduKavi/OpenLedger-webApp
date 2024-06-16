@@ -16,8 +16,3 @@
     flex-direction: column;
     margin: 5px;
 }
-
-
-.editor-column {
-    justify-content: start;
-}

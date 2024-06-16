@@ -3,6 +3,7 @@ import '../../styles/estimate.css'
 
 import ReportPaper from './ReportPaper'
 import EstimateEditor from './EstimateEditor'
+import PrimaryBorder from '../../components/PrimaryBorder'
 
 export default function Estimate() {
     const [estimateValues, setEstimateValues] = useState(null)
@@ -18,8 +19,11 @@ export default function Estimate() {
 
             </div>
 
-            <div className="editor-column column">
-              <EstimateEditor/>
+            <div className="column" style={{justifyContent: 'start'}}>
+           
+                <EstimateEditor/>
+  
+              
             </div>
         </div>
     </div>

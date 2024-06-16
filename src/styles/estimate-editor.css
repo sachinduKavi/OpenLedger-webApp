@@ -1,9 +1,75 @@
 .estimate-editor-border {
     width: 100%;
     height: 70vh;
-    background-color: antiquewhite;
+    border: 3px solid #B7B5EB;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    box-shadow: inset 0 0 55px rgba(0, 0, 0, 0.116);
+    /* margin: 0 20px; */
+    padding: 20px 30px;
 }
 
-.editor-column {
-    justify-content: start;
+.estimate-editor-border > .row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 30px;
 }
+
+.estimate-editor-border > .row > img {
+    cursor: pointer;
+}
+
+.estimate-editor-border label {
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+
+.small-border {
+    width: 90%;
+    border: 1px solid rgba(255, 255, 255, 0.671);
+    border-radius: 6px;
+    /* min-height: 50px; */
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    padding: 0 15px 15px 15px;
+}
+
+.small-border > .row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: end;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.expense-add-button {
+    padding: 5px;
+    margin: 5px 5px 0 5px;
+    border-radius: 100%;
+}
+
+.small-border .row .column {
+    margin: 0 10px;
+}
+
+.editor-control-panel {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    width: 100%;
+}
+
+.editor-control-panel .row {
+    display: flex;
+    flex-direction: row;
+}
+
+
+

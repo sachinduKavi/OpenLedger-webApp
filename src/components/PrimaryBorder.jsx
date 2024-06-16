@@ -6,13 +6,14 @@ export default function PrimaryBorder(props) {
     padding: '2px',
     background: 'linear-gradient(to right,#B7B5EB,#63609E)',
     width: 'inherit',
-    height: 'inherit',
+    height: 'fit-content',
     xFlexGrow: 1,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    minWidth: props.width,
+    maxWidth: props.width,
     borderRadius: props.borderRadius,
+    margin: props.margin
   }  
 
   return (
