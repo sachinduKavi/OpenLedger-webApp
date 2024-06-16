@@ -1,0 +1,77 @@
+.report-paper-border {
+    background-color: white;
+    width: 100%;
+    aspect-ratio: 500/707;
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    color: black;
+    padding-top: 30px;
+    align-items: center;
+}
+
+.report-paper-border * {
+    font-family: 'Times New Roman', 'Times', 'serif';
+}
+
+.report-paper-border > .estimate-report {
+    
+    font-size: 1.4vw;
+    font-weight: normal;
+    padding: 0;
+}
+
+.report-paper-border > .treasury-name {
+    font-family: 'Arial', 'Helvetica', 'sans-serif';
+    font-weight: bold;
+    font-size: 1.6vw;
+    padding: 0;
+    letter-spacing: -1px;
+}
+
+.report-paper-border > .estimate-name {
+    font-size: 1.1vw;
+}
+
+.report-content {
+    box-sizing: border-box;
+    width: 100%;
+    height: fit-content;
+    padding: 20px 40px;
+
+}
+
+.report-content > .row {
+    display: flex;
+    flex-direction: row;
+}
+
+.report-content > .row .column {
+    display: flex;
+    flex-direction: column;
+    margin: 0 5px;
+    flex: 1 1 0;
+}
+
+.report-content p {
+    font-size: 0.9vw;
+    text-align: justify;
+}
+
+.transaction-table {
+    width: 100%;
+    height: fit-content;
+    padding: 0 8%;
+}
+
+.transaction-table > table {
+    width: 100%;
+    font-size: 0.82vw;
+}
+
+
+
+.transaction-table td, th {
+    height: 20px;
+
+}

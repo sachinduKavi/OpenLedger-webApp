@@ -1,0 +1,23 @@
+.inner-screen-border {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+}
+
+.inner-screen-border > .row {
+    display: flex;
+    flex-direction: row;
+
+    flex: 1 1 0;
+}
+
+.inner-screen-border > .row > .column {
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+}
+
+
+.editor-column {
+    justify-content: start;
+}

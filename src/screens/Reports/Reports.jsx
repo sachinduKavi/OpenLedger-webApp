@@ -1,6 +1,9 @@
 import React, {useState} from 'react'
 import {motion} from 'framer-motion'
 import MiniNavigation from '../../components/MiniNavigation'
+import '../../styles/treasury-over-view.css'
+
+import Estimate from './Estimate'
 
 export default function Reports() {
     const [navigation, setNavigation] = useState({
@@ -35,6 +38,13 @@ export default function Reports() {
             }}>Cash Flow Statement</li>
 
         </MiniNavigation>
+
+        <div className="mini-screen">
+
+            {navigation.estimation && <Estimate/>}
+
+
+        </div>
 
 
 

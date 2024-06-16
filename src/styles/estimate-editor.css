@@ -1,0 +1,9 @@
+.estimate-editor-border {
+    width: 100%;
+    height: 70vh;
+    background-color: antiquewhite;
+}
+
+.editor-column {
+    justify-content: start;
+}

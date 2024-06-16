@@ -1,6 +1,8 @@
 import React from 'react'
 import {motion} from 'framer-motion'
 
+
+
 export default function Announcement() {
   return (
     <motion.div className='panel-outside-border'
