@@ -54,7 +54,7 @@ export default function TreasuryDetails(props) {
         <div className="row">
           <div className="column">
 
-            <PrimaryBorder width='100%' borderRadius='26px'>
+            <PrimaryBorder width='100%' borderRadius='26px' flex='1'>
               <div className="card" style={{background: `url('${treasury.getCoverImageID()}')`, backgroundSize: 'cover'}}></div>
             </PrimaryBorder>  
       

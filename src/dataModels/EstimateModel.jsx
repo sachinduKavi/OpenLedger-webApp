@@ -7,12 +7,17 @@ class EstimateReport {
     #description
     #expenseArray
     #signatureArray
+    #overseerages
+    #insuranceDate
 
-    constructor({name = null, description = null, expenseArray = [], signatureArray = [], estimationID = 'AUTO'}) {
+    constructor({name = null, description = null, expenseArray = [], signatureArray = [], estimationID = 'AUTO', overseerages = 0, insuranceDate = null}) {
         this.#name = name
         this.#description = description
         this.#expenseArray = expenseArray
         this.#signatureArray = signatureArray
+        this.#estimationID = estimationID 
+        this.#overseerages = overseerages
+        this.#insuranceDate = insuranceDate
 
         if(this.#expenseArray.length > 0 && !isClassObject(this.#expenseArray[0])) this.#convertToExpenseObject()
     }
@@ -27,12 +32,32 @@ class EstimateReport {
         return {
             name: this.#name,
             description: this.#description,
-            expenseArray:  this.#expenseArray,
-            signatureArray: this.#signatureArray
+            overseerages: this.#overseerages,
+            expenseArray:  this.#expenseArray.map((element) => {
+                return element.extractJSON()
+            }),
+            signatureArray: this.#signatureArray,
+            insuranceDate: this.#insuranceDate
         }
     }
 
     // Getters and Setters
+    getInsuranceDate() {
+        return this.#insuranceDate
+    }
+
+    setInsuranceDate(insuranceDate) {
+        this.#insuranceDate = insuranceDate
+    }
+
+    getOverseerages() {
+        return this.#overseerages
+    }
+
+    setOverseerages(overseerages) {
+        this.#overseerages = overseerages
+    }
+
     getEstimationID() {
         return this.#estimationID
     }
@@ -65,7 +90,7 @@ class EstimateReport {
     setExpenseArray(expenseArray) {
         this.#expenseArray = expenseArray;
         if (expenseArray.length > 0 && !isClassObject(expenseArray[0])) {
-        this.#convertToExpenseObject();
+            this.#convertToExpenseObject();
         }
     }
 

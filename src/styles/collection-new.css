@@ -1,0 +1,42 @@
+.collection-border {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.collection-container{
+    position: relative;
+    z-index: 20;
+    width: 95%;
+    height: 70%;
+    border: 2px solid #C4B8FF;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.collection-container > .row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.collection-border .column {
+    display: flex;
+    flex-direction: column;
+}
+
+.participant-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #C4B8FF;
+    flex-grow: 1;
+}

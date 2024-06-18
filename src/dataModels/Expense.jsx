@@ -21,6 +21,9 @@ class Expense {
 
     }
 
+    calculateExpense() {
+        return this.#quantity * this.#rate
+    }
 
     // Getters and Setters
     getItemOfWork() {
@@ -28,7 +31,7 @@ class Expense {
     }
     
     setItemOfWork(itemOfWork) {
-    this.#itemOfWork = itemOfWork
+        this.#itemOfWork = itemOfWork
     }
     
     getQuantity() {

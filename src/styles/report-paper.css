@@ -26,6 +26,11 @@
     font-weight: bold;
     font-size: 1.6vw;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     letter-spacing: -1px;
 }
 
@@ -73,5 +78,18 @@
 
 .transaction-table td, th {
     height: 20px;
-
+    text-align: center;
 }
+
+.treasury-name {
+    text-align: center;
+    line-height: 1.9rem;
+}
+
+.rupee-format {
+    align-items: end;
+    text-align: end;
+    padding-right: 5px;
+}
+
+
