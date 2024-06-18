@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 
 import {Input, DatePicker} from 'antd'
 import LeftBackIcon from '../../assets/icons/leftback.png'
@@ -19,9 +19,23 @@ const {TextArea} = Input
 export default function EstimateEditor(props) {
     const estimateValues = props.estimate.estimateValues
     const setEstimate = props.estimate.setEstimateValues
+    const treasury = props.treasury
 
     // New Collection state
     const [collectionState, setCollectionState] = useState(true)
+    // Participant array load from the database and update the UI
+    const [participantArray, setParticipantsArray] = useState([])
+    const loadParticipants = async () => {
+        const tempArray = await treasury.loadTreasuryParticipant()
+        console.log(tempArray)
+        setParticipantsArray(tempArray)
+    }
+
+    useEffect(() => {
+        loadParticipants()
+    }, [])
+
+
 
     // Expense array of the estimate object 
     const expenseArray = estimateValues.getExpenseArray()

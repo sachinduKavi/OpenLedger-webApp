@@ -35,8 +35,6 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #C4B8FF;
+    align-items: flex-start;
     flex-grow: 1;
 }

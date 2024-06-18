@@ -3,8 +3,11 @@ import '../../styles/collection-new.css'
 
 import {Input, Checkbox} from 'antd'
 import PrimaryBorder from '../../components/PrimaryBorder'
+import Participants from './Participants'
 
 export default function CreateCollection(props) {
+console.log(props.participantArray)
+
   return (
     <div className='collection-border'>
         <div className="background-blur" style={{borderRadius: '20px', zIndex: 20}}></div>
@@ -31,7 +34,11 @@ export default function CreateCollection(props) {
             {/* Participant container */}
             <div className="participant-container">
 
+                {props.participantArray.map((element, index) => {
+                    return (<Participants key={index} user={element}/>)
+                })}
                 
+
             </div>
 
         </div>

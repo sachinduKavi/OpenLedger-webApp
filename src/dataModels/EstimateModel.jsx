@@ -9,8 +9,9 @@ class EstimateReport {
     #signatureArray
     #overseerages
     #insuranceDate
+    #participantsArray
 
-    constructor({name = null, description = null, expenseArray = [], signatureArray = [], estimationID = 'AUTO', overseerages = 0, insuranceDate = null}) {
+    constructor({name = null, description = null, expenseArray = [], signatureArray = [], estimationID = 'AUTO', overseerages = 0, insuranceDate = null, participantsArray}) {
         this.#name = name
         this.#description = description
         this.#expenseArray = expenseArray
@@ -18,6 +19,7 @@ class EstimateReport {
         this.#estimationID = estimationID 
         this.#overseerages = overseerages
         this.#insuranceDate = insuranceDate
+        this.#participantsArray = participantsArray
 
         if(this.#expenseArray.length > 0 && !isClassObject(this.#expenseArray[0])) this.#convertToExpenseObject()
     }
@@ -37,7 +39,8 @@ class EstimateReport {
                 return element.extractJSON()
             }),
             signatureArray: this.#signatureArray,
-            insuranceDate: this.#insuranceDate
+            insuranceDate: this.#insuranceDate,
+            participantsArray: this.#participantsArray
         }
     }
 

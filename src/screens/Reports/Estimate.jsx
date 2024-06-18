@@ -6,6 +6,7 @@ import EstimateEditor from './EstimateEditor'
 import EstimateReport from '../../dataModels/EstimateModel'
 
 export default function Estimate(props) {
+
     const [estimateValues, setEstimateValues] = useState(new EstimateReport({}))
 
 
@@ -21,7 +22,7 @@ export default function Estimate(props) {
 
             <div className="column" style={{justifyContent: 'start'}}>
            
-                <EstimateEditor estimate={{estimateValues: estimateValues, setEstimateValues: setEstimateValues}}/>
+                <EstimateEditor estimate={{estimateValues: estimateValues, setEstimateValues: setEstimateValues}} treasury={props.treasury}/>
   
               
             </div>
