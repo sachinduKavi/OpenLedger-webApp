@@ -113,7 +113,7 @@ export default function TreasuryDashboard(){
 
 
             {/* Reports */}
-            {panelSwitch.reports && <Reports activeUser={activeUser} treasury={{treasury: treasury, treasuryUpdate: treasuryUpdate}}/>}
+            {panelSwitch.reports && <Reports activeUser={activeUser} treasury={treasury}/>}
 
             {/* Transaction */}
             {panelSwitch.transaction && <Transaction activeUser={activeUser} treasury={{treasury: treasury, treasuryUpdate: treasuryUpdate}}/>}

@@ -5,6 +5,8 @@ import jsPDF from 'jspdf'
 
 export default function ReportPaper(props) {
   const pdfRef = useRef()
+  const estimateValues = props.estimate.estimateValues
+  const setEstimate = props.estimate.setEstimateValues
 
   return (
     <div className='report-paper-border' ref={pdfRef}>
@@ -12,7 +14,7 @@ export default function ReportPaper(props) {
 
       <h2 className='treasury-name'>AIESEC: Develop your leadership</h2>
 
-      <p className='estimate-name'>Surasetha 2024</p>
+      <p className='estimate-name'>{estimateValues.getName()}</p>
 
 
       <div className="report-content">
@@ -23,7 +25,7 @@ export default function ReportPaper(props) {
             </div>
 
             <div className="column" style={{flexGrow: '5'}}>
-              <p>This report outlines the estimated cost of building materials for the [Project Name] project. It serves as a planning tool to understand the material budget and potential cost fluctuations.</p>
+              <p>{estimateValues.getDescription()}</p>
             </div>
           </div>
 
@@ -32,7 +34,7 @@ export default function ReportPaper(props) {
               <p>Estimation vote</p>
             </div>
 
-            <div className="column"><p>: TS0000000000000001</p></div>
+            <div className="column"><p>: {estimateValues.getEstimationID()}</p></div>
           </div>
 
           <div className="row">
@@ -40,7 +42,7 @@ export default function ReportPaper(props) {
               <p>Treasury ID</p>
             </div>
 
-            <div className="column"><p>: TS0000000000000001</p></div>
+            <div className="column"><p>: {props.treasury.getTreasuryID()}</p></div>
           </div>
 
           <div className="row">

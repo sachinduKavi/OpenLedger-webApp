@@ -1,13 +1,14 @@
-const {isClassObject} = require('../middleware/auth')
-const Expense = require('./Expense')
+import {isClassObject} from '../middleware/auth'
+import Expense from './Expense'
 
 class EstimateReport {
+    #estimationID
     #name
     #description
     #expenseArray
     #signatureArray
 
-    constructor({name = '', description = '', expenseArray = [], signatureArray = []}) {
+    constructor({name = null, description = null, expenseArray = [], signatureArray = [], estimationID = 'AUTO'}) {
         this.#name = name
         this.#description = description
         this.#expenseArray = expenseArray
@@ -32,6 +33,15 @@ class EstimateReport {
     }
 
     // Getters and Setters
+    getEstimationID() {
+        return this.#estimationID
+    }
+
+    setEstimationID(estimationID) {
+        this.#estimationID = estimationID
+    }
+
+
     getName() {
         return this.#name;
     }
@@ -69,4 +79,4 @@ class EstimateReport {
 
 }
 
-module.exports = EstimateReport
+export default EstimateReport

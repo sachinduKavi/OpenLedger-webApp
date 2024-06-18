@@ -5,7 +5,7 @@ import '../../styles/treasury-over-view.css'
 
 import Estimate from './Estimate'
 
-export default function Reports() {
+export default function Reports(props) {
     const [navigation, setNavigation] = useState({
         estimation: true,
         cashflow: false,
@@ -41,7 +41,7 @@ export default function Reports() {
 
         <div className="mini-screen">
 
-            {navigation.estimation && <Estimate/>}
+            {navigation.estimation && <Estimate treasury={props.treasury}/>}
 
 
         </div>

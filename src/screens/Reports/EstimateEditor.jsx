@@ -5,12 +5,17 @@ import LeftBackIcon from '../../assets/icons/leftback.png'
 import PrimaryBorder from '../../components/PrimaryBorder'
 import PlusIcon from '../../assets/icons/plus.png'
 import PDFicon from '../../assets/icons/pdfDownload.png'
+import EstimateReport from '../../dataModels/EstimateModel'
+import {capitalize} from '../../middleware/auth'
 
 import '../../styles/estimate-editor.css'
 
 const {TextArea} = Input
 
-export default function EstimateEditor() {
+export default function EstimateEditor(props) {
+    const estimateValues = props.estimate.estimateValues
+    const setEstimate = props.estimate.setEstimateValues
+
   return (
     <div className='estimate-editor-border'>
         <div className="row">
@@ -22,12 +27,22 @@ export default function EstimateEditor() {
         <label>Estimation Report</label>
         
         <PrimaryBorder borderRadius="6px" width='60%'>
-         <Input/>
+         <Input 
+            value={capitalize(estimateValues.getName())}
+            onChange={(e) => {
+            estimateValues.setName(e.target.value)
+            setEstimate(new EstimateReport(estimateValues.extractJSON()))
+         }}/>
         </PrimaryBorder>
         
         <label>Description</label>
         <PrimaryBorder borderRadius='6px'>
-            <TextArea/>
+            <TextArea 
+            value={capitalize(estimateValues.getDescription())}
+            onChange={(e) => {
+            estimateValues.setDescription(e.target.value)
+            setEstimate(new EstimateReport(estimateValues.extractJSON()))
+         }}/>
         </PrimaryBorder>
 
         <label htmlFor="">Expense</label>

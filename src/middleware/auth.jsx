@@ -27,7 +27,7 @@ const userCategorize = (userRole, userDetails) => {
 }
 
 const capitalize = (value) => {
-    return value.charAt(0).toUpperCase() + value.slice(1)
+    return value !== null? value.charAt(0).toUpperCase() + value.slice(1): ''
 }
 
 export {isClassObject, userCategorize, capitalize}

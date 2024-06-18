@@ -3,10 +3,10 @@ import '../../styles/estimate.css'
 
 import ReportPaper from './ReportPaper'
 import EstimateEditor from './EstimateEditor'
-import PrimaryBorder from '../../components/PrimaryBorder'
+import EstimateReport from '../../dataModels/EstimateModel'
 
-export default function Estimate() {
-    const [estimateValues, setEstimateValues] = useState(null)
+export default function Estimate(props) {
+    const [estimateValues, setEstimateValues] = useState(new EstimateReport({}))
 
 
   return (
@@ -14,14 +14,14 @@ export default function Estimate() {
         <div className="row">
             <div className="column">
 
-              <ReportPaper/>
+              <ReportPaper estimate={{estimateValues: estimateValues, setEstimateValues: setEstimateValues}} treasury={props.treasury}/>
                 
 
             </div>
 
             <div className="column" style={{justifyContent: 'start'}}>
            
-                <EstimateEditor/>
+                <EstimateEditor estimate={{estimateValues: estimateValues, setEstimateValues: setEstimateValues}}/>
   
               
             </div>
