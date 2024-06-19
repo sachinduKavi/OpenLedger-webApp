@@ -1,17 +1,29 @@
 import React from 'react'
 
-import {Checkbox} from 'antd'
+import PrimaryBorder from '../../components/PrimaryBorder'
+import {Checkbox, Input} from 'antd'
 import '../../styles/estimate-participants.css'
 
-export default function Participants() {
+export default function Participants(props) {
+  const user = props.user
+  
+
   return (
     <div className='participant-border'>
-        <h4>Sachindu Kavishka</h4>
+        <div className="column">
+          <h4>{user.getUserName()}</h4>
 
-        <h6>US0000000000000001</h6>
+          <h6>{user.getUserId()}</h6>
+        </div>
 
+        <div className="column" style={{alignItems: 'flex-end'}}>
+ 
+        </div>
         
-        <Checkbox/>
+          <div className="column">
+            <Checkbox value={true}/>
+          </div>
+        
 
         
     </div>

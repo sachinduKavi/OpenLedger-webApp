@@ -21,22 +21,6 @@ export default function EstimateEditor(props) {
     const setEstimate = props.estimate.setEstimateValues
     const treasury = props.treasury
 
-    // New Collection state
-    const [collectionState, setCollectionState] = useState(true)
-    // Participant array load from the database and update the UI
-    const [participantArray, setParticipantsArray] = useState([])
-    const loadParticipants = async () => {
-        const tempArray = await treasury.loadTreasuryParticipant()
-        console.log(tempArray)
-        setParticipantsArray(tempArray)
-    }
-
-    useEffect(() => {
-        loadParticipants()
-    }, [])
-
-
-
     // Expense array of the estimate object 
     const expenseArray = estimateValues.getExpenseArray()
 
@@ -57,7 +41,13 @@ export default function EstimateEditor(props) {
         }))
         // Update treasury estimate report 
         setEstimate(new EstimateReport(estimateValues.extractJSON()))
-        console.log('no errors ocurred...')
+        // Reset expense
+        setEstimate({
+            itemOfWork: '',
+            quantity: 0,
+            unit: '',
+            rate: 0
+        })
     }
 
   return (
@@ -176,9 +166,7 @@ export default function EstimateEditor(props) {
                 
                 {/* Participants can be add here */}
                 <div className="column">
-                    <PrimaryBorder borderRadius='10px'>
-                    <button onClick={() => {setCollectionState(true)}}>Collection</button>
-                    </PrimaryBorder>
+                    
                         
                 </div>
 
@@ -195,6 +183,8 @@ export default function EstimateEditor(props) {
                     <PrimaryBorder width='fit-content' borderRadius='8px' margin='0 0 0 10px'>
                         <button style={{backgroundColor: 'red'}}>DISCARD</button>
                     </PrimaryBorder>
+
+               
                 </div>
 
                 <div className="row" style={{marginTop: '10px'}}>
@@ -215,7 +205,7 @@ export default function EstimateEditor(props) {
             
         </div>
 
-        {collectionState && <CreateCollection/>}
+        
         
     </div>
   )

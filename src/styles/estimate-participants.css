@@ -1,7 +1,7 @@
 .participant-border {
     display: flex;
     flex-direction: row;
-    height: 50px;
+    height: fit-content;
     width: 100%;
     border-radius: 10px;
     align-items: center;
@@ -9,6 +9,7 @@
     padding: 5px;
     background-color: black;
     border: 1px solid white;
+    margin-top: 10px;
 }
 
 .check-box {
@@ -20,4 +21,15 @@
 
 .ant-checkbox-wrapper {
     margin: 0;
+}
+
+.allocation-amount::placeholder {
+    color: aliceblue;
+}
+
+.participant-border .column {
+    display: flex;
+
+    flex-direction: column;
+    justify-content: center;
 }
