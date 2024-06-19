@@ -44,6 +44,10 @@ class EstimateReport {
         }
     }
 
+    saveEstimate() {
+        console.log(this.extractJSON())
+    }
+
     // Getters and Setters
     getInsuranceDate() {
         return this.#insuranceDate

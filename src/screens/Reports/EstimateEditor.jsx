@@ -42,12 +42,19 @@ export default function EstimateEditor(props) {
         // Update treasury estimate report 
         setEstimate(new EstimateReport(estimateValues.extractJSON()))
         // Reset expense
-        setEstimate({
+        setExpense({
             itemOfWork: '',
             quantity: 0,
             unit: '',
             rate: 0
         })
+    }
+
+
+    // User click on save button
+    // this will save currently working project on the database
+    const saveEstimation = async () => {
+        estimateValues.saveEstimate()
     }
 
   return (
@@ -109,7 +116,12 @@ export default function EstimateEditor(props) {
                     <div className="column">
                         <label htmlFor="">Unit</label>
                         <PrimaryBorder borderRadius='6px'>
-                            <Input/>
+                            <Input 
+                            value={expenseInputs.unit}
+                            onChange={(e)=> {
+                                setExpense({...expenseInputs, unit: capitalize(e.target.value)})
+                            }}
+                            />
                         </PrimaryBorder>
                     </div>
 
@@ -177,7 +189,7 @@ export default function EstimateEditor(props) {
             <div className="editor-control-panel">
                 <div className="row">
                     <PrimaryBorder width='fit-content' borderRadius='8px'>
-                        <button>SAVE</button>
+                        <button onClick={saveEstimation}>SAVE</button>
                     </PrimaryBorder>
 
                     <PrimaryBorder width='fit-content' borderRadius='8px' margin='0 0 0 10px'>

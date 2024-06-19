@@ -18,10 +18,11 @@ class User {
     #dpLink 
     #pictureScale 
     #aboutMe
-    #mobileNumber 
+    #mobileNumber
+    #userSignature 
 
 
-    constructor({userID = null, userName = null, userEmail = null, password = null, dpLink = null, pictureScale = null, aboutMe = null, mobileNumber = null}) {
+    constructor({userID = null, userName = null, userEmail = null, password = null, dpLink = null, pictureScale = null, aboutMe = null, mobileNumber = null, userSignature = null}) {
         // Creating new user Instant
         this.#userID = userID
         this.#userName = userName
@@ -31,6 +32,7 @@ class User {
         this.#pictureScale = pictureScale
         this.#aboutMe = aboutMe
         this.#mobileNumber = mobileNumber
+        this.#userSignature = userSignature
     }
 
     extractJSON() {
@@ -47,6 +49,15 @@ class User {
 
 
     // Getter and setters
+    getUserSignature(){
+        return this.#userSignature
+    }
+
+    setUserSignature(userSignature) {
+        this.#userSignature = userSignature
+    }
+
+
     getUserMobile() {
         return this.#mobileNumber
     }
