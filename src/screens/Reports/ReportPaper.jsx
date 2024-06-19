@@ -2,6 +2,8 @@ import React, {useRef} from 'react'
 import '../../styles/report-paper.css'
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
+
+
 import {numberFormat} from '../../middleware/FormatChecker'
 
 
@@ -12,6 +14,14 @@ export default function ReportPaper(props) {
 
   const expenseArray = estimateValues.getExpenseArray()
   let netTotal = 0
+
+
+  // Converting PDF to canvas
+  const downloadPDF = () => {
+    
+  }
+
+
   return (
     <div className='report-paper-border' ref={pdfRef}>
       <h2 className='estimate-report'>ESTIMATE REPORT</h2>
@@ -114,8 +124,12 @@ export default function ReportPaper(props) {
       <p>Digital Signature</p>
       </div>
 
-      <div className="digital-signature">
-
+      <div className="digital-signature"  style={{ whiteSpace: 'pre-wrap', fontSize: 13}}>
+            {
+              estimateValues.getSignatureArray().map((element, index) => <p key={index}>
+                {element}
+              </p>)
+            }
       </div>
 
     </div>

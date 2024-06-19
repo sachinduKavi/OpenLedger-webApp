@@ -92,4 +92,16 @@
     padding-right: 5px;
 }
 
+.digital-signature {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.digital-signature > p{
+    margin: 0 10px 10px 0;
+    
+}
+
 

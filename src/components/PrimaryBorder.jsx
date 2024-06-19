@@ -14,7 +14,8 @@ export default function PrimaryBorder(props) {
     alignItems: 'center',
     maxWidth: props.width,
     borderRadius: props.borderRadius,
-    margin: props.margin
+    margin: props.margin,
+    visibility: props.visibility??'visible'
   }  
 
   return (

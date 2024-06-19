@@ -22,7 +22,9 @@ export default function Estimate(props) {
 
             <div className="column" style={{justifyContent: 'start'}}>
            
-                <EstimateEditor estimate={{estimateValues: estimateValues, setEstimateValues: setEstimateValues}} treasury={props.treasury}/>
+                <EstimateEditor estimate={{estimateValues: estimateValues, setEstimateValues: setEstimateValues}} treasury={props.treasury}
+                  activeUser={props.activeUser}
+                />
   
               
             </div>

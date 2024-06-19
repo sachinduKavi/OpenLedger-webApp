@@ -57,7 +57,8 @@ export default class FormComp extends Component {
             userEmail: userData.user_email,
             userName: userData.user_name,
             dpLink: userData.dp_link,
-            pictureScale: userData.picture_scale
+            pictureScale: userData.picture_scale,
+            userSignature: userData.userSignature
           }))
           // Navigate to Dashboard 
           this.props.parentContext.setState({loginComplete: true})

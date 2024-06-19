@@ -9,9 +9,9 @@ class EstimateReport {
     #signatureArray
     #overseerages
     #insuranceDate
-    #participantsArray
 
-    constructor({name = null, description = null, expenseArray = [], signatureArray = [], estimationID = 'AUTO', overseerages = 0, insuranceDate = null, participantsArray}) {
+
+    constructor({name = null, description = null, expenseArray = [], signatureArray = [], estimationID = 'AUTO', overseerages = 0, insuranceDate = null}) {
         this.#name = name
         this.#description = description
         this.#expenseArray = expenseArray
@@ -19,7 +19,7 @@ class EstimateReport {
         this.#estimationID = estimationID 
         this.#overseerages = overseerages
         this.#insuranceDate = insuranceDate
-        this.#participantsArray = participantsArray
+ 
 
         if(this.#expenseArray.length > 0 && !isClassObject(this.#expenseArray[0])) this.#convertToExpenseObject()
     }
@@ -39,8 +39,7 @@ class EstimateReport {
                 return element.extractJSON()
             }),
             signatureArray: this.#signatureArray,
-            insuranceDate: this.#insuranceDate,
-            participantsArray: this.#participantsArray
+            insuranceDate: this.#insuranceDate
         }
     }
 
@@ -48,7 +47,10 @@ class EstimateReport {
         console.log(this.extractJSON())
     }
 
+
+
     // Getters and Setters
+
     getInsuranceDate() {
         return this.#insuranceDate
     }

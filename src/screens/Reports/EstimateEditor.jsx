@@ -20,6 +20,9 @@ export default function EstimateEditor(props) {
     const estimateValues = props.estimate.estimateValues
     const setEstimate = props.estimate.setEstimateValues
     const treasury = props.treasury
+    const activeUser = props.activeUser
+
+    console.log('user', activeUser)
 
     // Expense array of the estimate object 
     const expenseArray = estimateValues.getExpenseArray()
@@ -36,7 +39,7 @@ export default function EstimateEditor(props) {
         expenseArray.push(new Expense({
             itemOfWork: expenseInputs.itemOfWork, 
             quantity: expenseInputs.quantity,
-            unit: expenseInputs.quantity,
+            unit: expenseInputs.unit,
             rate: expenseInputs.rate
         }))
         // Update treasury estimate report 
@@ -200,16 +203,22 @@ export default function EstimateEditor(props) {
                 </div>
 
                 <div className="row" style={{marginTop: '10px'}}>
-                    <PrimaryBorder width='fit-content' borderRadius='8px'>
-                        <button>ADD SIGNATURE</button>
-                    </PrimaryBorder>
+                    
 
-                    <PrimaryBorder width='fit-content' borderRadius='8px' margin='0 0 0 10px'>
+                    <PrimaryBorder width='fit-content' borderRadius='8px'>
                         <button>PUBLISH</button>
                     </PrimaryBorder>
 
                     <PrimaryBorder width='fit-content' borderRadius='8px' margin='0 0 0 10px'>
                         <button style={{padding: '2px 5px'}}><img width={25} src={PDFicon} alt="download-icon" /></button>
+                    </PrimaryBorder>
+
+                    <PrimaryBorder width='fit-content' borderRadius='8px' margin='0 0 0 10px'>
+                        <button onClick={() => {
+                            // Add user signature to the estimate document
+                            estimateValues.setSignatureArray([...estimateValues.getSignatureArray(), activeUser.getUserSignature()])
+                            setEstimate(new EstimateReport(estimateValues.extractJSON()))
+                        }}>ADD SIGNATURE</button>
                     </PrimaryBorder>
                 </div>
             </div>

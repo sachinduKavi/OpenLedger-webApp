@@ -41,7 +41,7 @@ export default function Reports(props) {
 
         <div className="mini-screen">
 
-            {navigation.estimation && <Estimate treasury={props.treasury}/>}
+            {navigation.estimation && <Estimate treasury={props.treasury} activeUser={props.activeUser}/>}
 
 
         </div>
