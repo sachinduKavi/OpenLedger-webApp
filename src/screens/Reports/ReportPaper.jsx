@@ -1,14 +1,23 @@
-import React, {useRef} from 'react'
+import React, {useRef, useContext, forwardRef, useImperativeHandle} from 'react'
+
 import '../../styles/report-paper.css'
+
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
+
+import { SessionContext } from '../../Session'
 
 
 import {numberFormat} from '../../middleware/FormatChecker'
 
 
-export default function ReportPaper(props) {
+const ReportPaper = forwardRef((props, ref) => {
+  
+
+
   const pdfRef = useRef()
+  const sessionData = useContext(SessionContext)
+  const changeSessionData = sessionData.changeSessionData
   const estimateValues = props.estimate.estimateValues
   const setEstimate = props.estimate.setEstimateValues
 
@@ -18,8 +27,35 @@ export default function ReportPaper(props) {
 
   // Converting PDF to canvas
   const downloadPDF = () => {
+   
+    console.log('downloading document...')
+    const input = pdfRef.current
+    html2canvas(input, {
+      scale: 7,
+      useCORS: true}
+    ).then(canvas => {
+      const imgData = canvas.toDataURL('image/png')
+      const pdf = new jsPDF('p', 'mm', 'a4', true)
+      const pdfWidth = pdf.internal.pageSize.getWidth()
+      const pdfHeight = pdf.internal.pageSize.getHeight()
+      const imgHeight = canvas.height
+      const imgWidth = canvas.width
+
+      const ratio = Math.min(pdfWidth/imgWidth, pdfHeight/imgHeight)
+      const imgX = (pdfWidth - imgWidth*ratio)
+      const imgY = 0
+
+      pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth*ratio, imgHeight*ratio)
+      pdf.save(`Estimate Report ${estimateValues.getEstimationID()}`)
+
+    })
+
     
   }
+
+  useImperativeHandle(ref, () => ({
+    downloadPDF,
+  }))
 
 
   return (
@@ -134,4 +170,8 @@ export default function ReportPaper(props) {
 
     </div>
   )
-}
+})
+
+export default ReportPaper
+
+

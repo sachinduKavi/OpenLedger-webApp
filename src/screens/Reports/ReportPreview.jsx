@@ -10,9 +10,6 @@ export default function ReportPreview() {
 
             <button style={{backgroundColor: '#32AF4E'}}>NEW</button>
         </div>
-
-        
-        
     </div>
   )
 }
