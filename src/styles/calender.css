@@ -1,0 +1,77 @@
+.calendar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+  }
+  
+  .react-calendar {
+    background-color: #1e1e1e; /* Dark grey background for the calendar */
+    border: none; /* Remove default border */
+    border-radius: 12px; /* Rounded corners for modern look */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+    padding: 20px; /* More padding for a clean layout */
+    color: #e0e0e0; /* Light grey text color inside the calendar */
+  }
+  
+  .react-calendar__tile {
+    background: #1e1e1e; /* Dark grey background for calendar tiles */
+    color: #e0e0e0; /* Light grey text color for calendar tiles */
+    border-radius: 8px; /* Rounded corners for tiles */
+    transition: background-color 0.2s ease; /* Smooth transition on hover */
+  }
+  
+  .react-calendar__tile--active {
+    background: #0046df !important; /* Blue for active date */
+    color: #000000 !important; /* White text for active date */
+  }
+  
+  .react-calendar__tile--now {
+    background: #007bff !important; /* Blue for today's date */
+    color: #ffffff !important;
+  }
+  
+  .react-calendar__tile:hover {
+    background: #333333; /* Slightly lighter grey on hover */
+    color: #000000;
+  }
+
+  .react-calendar__tile:focus {
+    background: #007bff !important; /* Blue for today's date */
+    color: #ffffff !important;
+  }
+  
+  .react-calendar__navigation {
+    background-color: #1e1e1e; /* Dark grey background for navigation */
+    color: #e0e0e0; /* Light grey text color for navigation */
+    margin-bottom: 10px;
+  }
+  
+  .react-calendar__navigation button {
+    color: #007bff; /* Blue for navigation buttons */
+    border: none; /* Remove default border */
+    background: none; /* Remove background */
+    font-size: 16px; /* Larger font size for buttons */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: color 0.2s ease; /* Smooth transition on hover */
+  }
+  
+  .react-calendar__navigation button:hover {
+    color: #0056b3; /* Darker blue on hover */
+  }
+  
+  .react-calendar__month-view__weekdays {
+    background-color: #1e1e1e; /* Dark grey background for weekdays */
+    color: #007bff; /* Blue for weekdays */
+    font-weight: bold; /* Bold text for weekdays */
+  }
+  
+  .react-calendar__month-view__days__day--weekend {
+    color: #d9534f; /* Red color for weekends */
+  }
+  
+  .calender p {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #007bff; /* Blue for current date and time */
+  }
