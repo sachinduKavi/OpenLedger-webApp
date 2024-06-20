@@ -15,7 +15,7 @@ class Expense {
 
     extractJSON() {
         return {
-            expenseId: this.#expenseID,
+            expenseID: this.#expenseID,
             itemOfWork: this.#itemOfWork,
             quantity: this.#quantity,
             rate: this.#rate,

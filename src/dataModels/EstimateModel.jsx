@@ -1,5 +1,6 @@
 import {isClassObject} from '../middleware/auth'
 import Expense from './Expense'
+import {saveEstimateReportQuery} from '../query/reportQuery'
 
 class EstimateReport {
     #estimationID
@@ -47,8 +48,17 @@ class EstimateReport {
         }
     }
 
-    saveEstimate() {
-        console.log('save estimation' ,JSON.stringify(this.extractJSON()))
+    // Save the estimate report in the database 
+    async saveEstimate() {
+        const response = await saveEstimateReportQuery(this.extractJSON())
+
+        if(response.status === 200){
+            this.#estimationID = response.data.estimationID
+            return {
+                process: response.data.process,
+                errorMessage: response.data.errorMessage}
+        } else return false
+
     }
 
 

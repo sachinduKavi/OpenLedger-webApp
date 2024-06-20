@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useContext} from 'react'
 
 import {Input, DatePicker} from 'antd'
 import LeftBackIcon from '../../assets/icons/leftback.png'
@@ -13,10 +13,14 @@ import dayjs from 'dayjs'
 import CreateCollection from './CreateCollection'
 import '../../styles/estimate-editor.css'
 import { format } from '@cloudinary/url-gen/actions/delivery'
+import { SessionContext } from '../../Session'
 
 const {TextArea} = Input
 
 export default function EstimateEditor(props) {
+    const sessionData = useContext(SessionContext)
+    const changeSessionData = sessionData.changeSessionData
+
     const estimateValues = props.estimate.estimateValues
     const setEstimate = props.estimate.setEstimateValues
     const treasury = props.treasury
@@ -55,7 +59,13 @@ export default function EstimateEditor(props) {
     // User click on save button
     // this will save currently working project on the database
     const saveEstimation = async () => {
-        estimateValues.saveEstimate()
+        changeSessionData({processing: true})
+        const res = await estimateValues.saveEstimate()
+        if(res) {
+            // Update the estimation data
+            setEstimate(new EstimateReport(estimateValues.extractJSON()))
+        }
+        changeSessionData({processing: false})
     }
 
 
