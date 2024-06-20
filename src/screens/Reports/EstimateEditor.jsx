@@ -60,6 +60,8 @@ export default function EstimateEditor(props) {
         estimateValues.saveEstimate()
     }
 
+
+
   return (
     <div className='estimate-editor-border'>
         <div className="row">
@@ -215,9 +217,12 @@ export default function EstimateEditor(props) {
 
                     <PrimaryBorder width='fit-content' borderRadius='8px' margin='0 0 0 10px'>
                         <button onClick={() => {
-                            // Add user signature to the estimate document
+                            //Check whether the signature already exists
+                            if(!estimateValues.getSignatureArray().includes(activeUser.getUserSignature())) {
+                                // Add user signature to the estimate document
                             estimateValues.setSignatureArray([...estimateValues.getSignatureArray(), activeUser.getUserSignature()])
                             setEstimate(new EstimateReport(estimateValues.extractJSON()))
+                            }
                         }}>ADD SIGNATURE</button>
                     </PrimaryBorder>
                 </div>
