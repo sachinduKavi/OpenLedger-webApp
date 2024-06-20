@@ -89,7 +89,7 @@ export default function ReportPaper(props) {
 
             {expenseArray.map((element, index) => {
               netTotal += element.calculateExpense()
-              return(<tr>
+              return(<tr key={index}>
                     <td>{index+1}</td>
                     <td>{element.getQuantity()}</td>
                     <td>{element.getUnit()}</td>

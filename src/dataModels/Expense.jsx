@@ -1,10 +1,12 @@
 class Expense {
+    #expenseID
     #itemOfWork
     #quantity
     #unit
     #rate
 
-    constructor({itemOfWork = '',  quantity = '', unit = null, rate = null}) {
+    constructor({itemOfWork = '',  quantity = '', unit = null, rate = null, expenseID = null}) {
+        this.#expenseID = expenseID
         this.#itemOfWork = itemOfWork
         this.#quantity = quantity
         this.#unit = unit
@@ -13,6 +15,7 @@ class Expense {
 
     extractJSON() {
         return {
+            expenseId: this.#expenseID,
             itemOfWork: this.#itemOfWork,
             quantity: this.#quantity,
             rate: this.#rate,
@@ -26,6 +29,15 @@ class Expense {
     }
 
     // Getters and Setters
+    getExpenseID() {
+        return this.#expenseID
+    }
+
+    setExpenseID(expenseID) {
+        this.#expenseID = expenseID
+    }
+
+
     getItemOfWork() {
         return this.#itemOfWork
     }

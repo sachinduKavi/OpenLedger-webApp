@@ -22,8 +22,6 @@ export default function EstimateEditor(props) {
     const treasury = props.treasury
     const activeUser = props.activeUser
 
-    console.log('user', activeUser)
-
     // Expense array of the estimate object 
     const expenseArray = estimateValues.getExpenseArray()
 
