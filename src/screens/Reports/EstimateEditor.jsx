@@ -11,7 +11,9 @@ import Expense from '../../dataModels/Expense'
 
 import dayjs from 'dayjs'
 import CreateCollection from './CreateCollection'
+
 import '../../styles/estimate-editor.css'
+
 import { format } from '@cloudinary/url-gen/actions/delivery'
 import { SessionContext } from '../../Session'
 
@@ -220,7 +222,12 @@ export default function EstimateEditor(props) {
                     </PrimaryBorder>
 
                     <PrimaryBorder width='fit-content' borderRadius='8px' margin='0 0 0 10px'>
-                        <button style={{padding: '2px 5px'}}><img width={25} src={PDFicon} alt="download-icon" /></button>
+                        <button style={{padding: '2px 5px'}}><img width={25} src={PDFicon} alt="download-icon" 
+                        onClick={() => {
+                            console.log('download hello')
+                            props.pdfDownloadReference.current.downloadPDF()
+                        }}
+                        /></button>
                     </PrimaryBorder>
 
                     <PrimaryBorder width='fit-content' borderRadius='8px' margin='0 0 0 10px'>
