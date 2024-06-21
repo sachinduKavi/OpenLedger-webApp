@@ -6,7 +6,12 @@ const saveEstimateReportQuery = async (estimateDetails) => {
     return await cDomain.post('estimation/saveEstimation', estimateDetails, header)
 }
 
+const getAllEstimationsQuery = async () => {
+    return await cDomain.get('estimation/allEstimation', header)
+}
+
 
 export {
-    saveEstimateReportQuery
+    saveEstimateReportQuery,
+    getAllEstimationsQuery
 }

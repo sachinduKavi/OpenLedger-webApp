@@ -8,7 +8,7 @@ import ReportPreview from './ReportPreview'
 
 export default function Estimate(props) {
     const reportDocumentRef = useRef()
-    const [estimateValues, setEstimateValues] = useState(new EstimateReport({}))
+    const [estimateValues, setEstimateValues] = useState(null)
 
 
   return (
@@ -16,19 +16,27 @@ export default function Estimate(props) {
         <div className="row">
             <div className="column">
 
-              <ReportPaper estimate={{estimateValues: estimateValues, setEstimateValues: setEstimateValues}} treasury={props.treasury} ref={reportDocumentRef}/>
+              {
+                (estimateValues !== null)
+                ? <ReportPaper estimate={{estimateValues: estimateValues, setEstimateValues: setEstimateValues}} treasury={props.treasury} ref={reportDocumentRef}/>
+                : <div className="placeholder">
+                    <h5>Select a report to preview or create new report</h5>
+                  </div>
+              }
                 
 
             </div>
 
             <div className="column" style={{justifyContent: 'start'}}>
 
-                <ReportPreview/>
+                {(estimateValues === null || props.activeUser.getUserLevel() < 2)
+
+                ? <ReportPreview setEstimateValues={setEstimateValues}/>
            
-                {/* <EstimateEditor estimate={{estimateValues: estimateValues, setEstimateValues: setEstimateValues}} treasury={props.treasury}
+                : <EstimateEditor estimate={{estimateValues: estimateValues, setEstimateValues: setEstimateValues}} treasury={props.treasury}
                   activeUser={props.activeUser}
                   pdfDownloadReference={reportDocumentRef}
-                />  */}
+                />  }
   
               
             </div>

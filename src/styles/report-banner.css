@@ -1,0 +1,23 @@
+.report-banner-border {
+    width: 100%;
+    background-color: whitesmoke;
+    min-height: 100px;
+    display: flex;
+    flex-direction: row;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.report-banner-border > .column {
+    display: flex;
+    flex-direction: column;
+    margin: 0 10px;
+    justify-content: center;
+    flex: 1;
+}
+
+.report-banner-border > .column * {
+    color: black;
+}

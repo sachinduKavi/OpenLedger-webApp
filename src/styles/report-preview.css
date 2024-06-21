@@ -19,3 +19,16 @@
     justify-content: space-between;
 
 }
+
+.report-preview-border > .content {
+    width: 100%;
+    flex-grow: 1;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.report-preview-border > .content::-webkit-scrollbar {
+    display: none;
+}

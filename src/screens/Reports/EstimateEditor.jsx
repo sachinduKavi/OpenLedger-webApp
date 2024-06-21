@@ -75,7 +75,9 @@ export default function EstimateEditor(props) {
   return (
     <div className='estimate-editor-border'>
         <div className="row">
-            <img src={LeftBackIcon} alt="back-icon"  width={30} height={30}/>
+            <img src={LeftBackIcon} alt="back-icon"  width={30} height={30} onClick={() => {
+                setEstimate(null)
+            }}/>
 
             <h2>GENERATE ESTIMATION REPORT</h2>
         </div>

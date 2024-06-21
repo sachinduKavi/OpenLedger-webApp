@@ -1,6 +1,6 @@
 import {isClassObject} from '../middleware/auth'
 import Expense from './Expense'
-import {saveEstimateReportQuery} from '../query/reportQuery'
+import {saveEstimateReportQuery, getAllEstimationsQuery} from '../query/reportQuery'
 
 class EstimateReport {
     #estimationID
@@ -11,9 +11,10 @@ class EstimateReport {
     #overseerages
     #insuranceDate
     #status
+    #publisher
 
 
-    constructor({name = null, description = null, expenseArray = [], signatureArray = [], estimationID = 'AUTO', overseerages = 0, insuranceDate = null, status = 'DRAFT'}) {
+    constructor({name = null, description = null, expenseArray = [], signatureArray = [], estimationID = 'AUTO', overseerages = 0, insuranceDate = null, status = 'DRAFT', publisher = null}) {
         this.#name = name
         this.#description = description
         this.#expenseArray = expenseArray
@@ -22,6 +23,7 @@ class EstimateReport {
         this.#overseerages = overseerages
         this.#insuranceDate = insuranceDate
         this.#status = status
+        this.#publisher = publisher
  
 
         if(this.#expenseArray.length > 0 && !isClassObject(this.#expenseArray[0])) this.#convertToExpenseObject()
@@ -44,7 +46,8 @@ class EstimateReport {
             }),
             signatureArray: this.#signatureArray,
             insuranceDate: this.#insuranceDate,
-            status: this.#status
+            status: this.#status,
+            publisher: this.#publisher
         }
     }
 
@@ -61,9 +64,36 @@ class EstimateReport {
 
     }
 
+    // Load all the estimate records from the backend 
+    static async fetchAllEstimations() {
+        const response = await getAllEstimationsQuery()
+
+        // Converting response data into estimate instants 
+        const estimateArray = response.data.content.map(element => {
+            return new EstimateReport(element)
+        })
+
+        console.log(response)
+        return (response.status === 200) 
+            ? {
+                process: response.data.process,
+                errorMessage: response.data.errorMessage,
+                estimateArray: estimateArray
+            }
+            : false;
+    } 
+
 
 
     // Getters and Setters
+    getPublisher() { 
+        return this.#publisher
+    }
+
+    setPublisher(publisher) {
+        this.#publisher = publisher
+    }
+
     getStatus(){
         return this.#status
     }
