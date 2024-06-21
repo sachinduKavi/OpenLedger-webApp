@@ -1,6 +1,6 @@
 import {isClassObject} from '../middleware/auth'
 import Expense from './Expense'
-import {saveEstimateReportQuery, getAllEstimationsQuery} from '../query/reportQuery'
+import {saveEstimateReportQuery, getAllEstimationsQuery, deleteEstimationQuery} from '../query/reportQuery'
 
 class EstimateReport {
     #estimationID
@@ -82,6 +82,19 @@ class EstimateReport {
             }
             : false;
     } 
+
+
+    // User wants to delete the record 
+    async deleteRecord() {
+        console.log('delete record', this.#estimationID)
+        const response = await deleteEstimationQuery(this.#estimationID)
+        return (response.status === 200)
+            ? {
+                proceed: response.data.proceed,
+                errorMessage: response.data.errorMessage
+            }
+            : false
+    }
 
 
 

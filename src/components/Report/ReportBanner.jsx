@@ -29,7 +29,7 @@ export default function ReportBanner(props) {
         <div className="column" style={{alignItems: 'flex-end'}}>
             <h4 style={{color: '#32AF4E'}}>PUBLISHED</h4>
             <h5>{estimate.getPublisher()}</h5>
-            <h6>2024/06/20</h6>
+            <h6>{estimate.getInsuranceDate()}</h6>
         </div>
 
         

@@ -10,8 +10,13 @@ const getAllEstimationsQuery = async () => {
     return await cDomain.get('estimation/allEstimation', header)
 }
 
+const deleteEstimationQuery = async (estimationID) => {
+    return await cDomain.post('estimation/deleteEstimation', {estimationID: estimationID}, header)
+}
+
 
 export {
     saveEstimateReportQuery,
-    getAllEstimationsQuery
+    getAllEstimationsQuery,
+    deleteEstimationQuery
 }

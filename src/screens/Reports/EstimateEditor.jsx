@@ -59,15 +59,30 @@ export default function EstimateEditor(props) {
 
 
     // User click on save button
-    // this will save currently working project on the database
+    // this will save currently working estimate on the database
     const saveEstimation = async () => {
         changeSessionData({processing: true})
         const res = await estimateValues.saveEstimate()
+        console.log(res)
         if(res) {
             // Update the estimation data
             setEstimate(new EstimateReport(estimateValues.extractJSON()))
         }
         changeSessionData({processing: false})
+    }
+
+    // User click on Discard button
+    const discardEstimate = async () => {
+        if(window.confirm("Are you sure you want to delete the estimation report ?")) {
+            const res = await estimateValues.deleteRecord()
+            if(res.proceed) {
+                // Deletion is successful ** Alert notification 
+
+            } else {
+                // Deletion is failed ** error message
+            }
+            setEstimate(null) // Remove the current estimate data
+        }
     }
 
 
@@ -193,7 +208,7 @@ export default function EstimateEditor(props) {
                     </PrimaryBorder>
                 </div>
                 
-                {/* Participants can be add here */}
+
                 <div className="column">
                     
                         
@@ -210,7 +225,7 @@ export default function EstimateEditor(props) {
                     </PrimaryBorder>
 
                     <PrimaryBorder width='fit-content' borderRadius='8px' margin='0 0 0 10px'>
-                        <button style={{backgroundColor: 'red'}}>DISCARD</button>
+                        <button style={{backgroundColor: 'red'}} onClick={discardEstimate}>DISCARD</button>
                     </PrimaryBorder>
 
                

@@ -31,7 +31,7 @@ export default function Estimate(props) {
 
                 {(estimateValues === null || props.activeUser.getUserLevel() < 2)
 
-                ? <ReportPreview setEstimateValues={setEstimateValues}/>
+                ? <ReportPreview setEstimateValues={setEstimateValues} activeUser={props.activeUser}/>
            
                 : <EstimateEditor estimate={{estimateValues: estimateValues, setEstimateValues: setEstimateValues}} treasury={props.treasury}
                   activeUser={props.activeUser}

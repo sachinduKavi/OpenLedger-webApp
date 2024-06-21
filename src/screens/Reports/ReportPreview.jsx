@@ -30,7 +30,13 @@ export default function ReportPreview(props) {
         <div className="row">
             <h2>REPORT PREVIEW</h2>
 
-            <button style={{backgroundColor: '#32AF4E'}}>NEW</button>
+            <button style={{backgroundColor: '#32AF4E', 
+              visibility: props.activeUser.getUserLevel() > 1 
+              && props.activeUser.getPosition() !== 'Chair' ? 'visible': 'hidden'}}
+              onClick={() => {
+                props.setEstimateValues(new EstimateReport({}))
+              }}
+              >NEW</button>
 
         </div>
 
