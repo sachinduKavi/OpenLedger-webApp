@@ -45,6 +45,8 @@
 }
 
 .control-panel {
+    position: absolute;
+    right: -200px;   
     margin-bottom: 10px;
     visibility: visible;
     box-shadow: 0 0 5px rgb(243, 243, 243);
