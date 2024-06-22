@@ -31,6 +31,9 @@ export default function EstimateEditor(props) {
     // Expense array of the estimate object 
     const expenseArray = estimateValues.getExpenseArray()
 
+    // Track on the changes applied 
+    const [formChange, setChange] = useState(false)
+
     const [expenseInputs, setExpense] = useState({
         itemOfWork: '',
         quantity: 0,
@@ -69,6 +72,7 @@ export default function EstimateEditor(props) {
             setEstimate(new EstimateReport(estimateValues.extractJSON()))
         }
         changeSessionData({processing: false})
+        setChange(false) // Disable save button
     }
 
     // User click on Discard button
@@ -84,6 +88,14 @@ export default function EstimateEditor(props) {
             setEstimate(null) // Remove the current estimate data
         }
     }
+
+
+    // Change the publish status of the document
+    const changeEstimateState = (state) => {
+        console.log('current value', estimateValues.getStatus(), state)
+        estimateValues.setStatus(state)
+        saveEstimation() // Saving the estimate document 
+    } 
 
 
 
@@ -104,6 +116,7 @@ export default function EstimateEditor(props) {
             <Input 
                 value={capitalize(estimateValues.getName())}
                 onChange={(e) => {
+                setChange(true) // Enable save button
                 estimateValues.setName(e.target.value)
                 setEstimate(new EstimateReport(estimateValues.extractJSON()))
             }}/>
@@ -114,6 +127,7 @@ export default function EstimateEditor(props) {
                 <TextArea 
                 value={capitalize(estimateValues.getDescription())}
                 onChange={(e) => {
+                setChange(true) // Enable save button
                 estimateValues.setDescription(e.target.value)
                 setEstimate(new EstimateReport(estimateValues.extractJSON()))
             }}/>
@@ -126,6 +140,7 @@ export default function EstimateEditor(props) {
                     <Input 
                     value={expenseInputs.itemOfWork}
                     onChange={(e)=> {
+                        setChange(true) // Enable save button
                         setExpense({...expenseInputs, itemOfWork: capitalize(e.target.value)})
                     }}
                     />
@@ -139,6 +154,7 @@ export default function EstimateEditor(props) {
                             <Input type='number'
                             value={expenseInputs.quantity}
                             onChange={(e)=> {
+                                setChange(true) // Enable save button
                                 setExpense({...expenseInputs, quantity: capitalize(e.target.value)})
                             }}
                             />
@@ -151,6 +167,7 @@ export default function EstimateEditor(props) {
                             <Input 
                             value={expenseInputs.unit}
                             onChange={(e)=> {
+                                setChange(true) // Enable save button
                                 setExpense({...expenseInputs, unit: capitalize(e.target.value)})
                             }}
                             />
@@ -163,6 +180,7 @@ export default function EstimateEditor(props) {
                             <Input type='number'
                             value={expenseInputs.rate}
                             onChange={(e)=> {
+                                setChange(true) // Enable save button
                                 setExpense({...expenseInputs, rate: capitalize(e.target.value)})
                             }}
                             />
@@ -187,6 +205,7 @@ export default function EstimateEditor(props) {
                             type='number'
                             value={estimateValues.getOverseerages()}
                             onChange={(e) => {
+                            setChange(true) // Enable save button
                             estimateValues.setOverseerages(e.target.value)
                             setEstimate(new EstimateReport(estimateValues.extractJSON()))
                         }}/>
@@ -200,7 +219,7 @@ export default function EstimateEditor(props) {
                         format='YYYY-MM-DD'
                         
                         onChange={(date, dateString) => {
-                        console.log(dateString)
+                        setChange(true) // Enable save button
                         estimateValues.setInsuranceDate(dateString)
                         setEstimate(new EstimateReport(estimateValues.extractJSON()))
                         }}
@@ -221,7 +240,7 @@ export default function EstimateEditor(props) {
             <div className="editor-control-panel">
                 <div className="row">
                     <PrimaryBorder width='fit-content' borderRadius='8px'>
-                        <button onClick={saveEstimation}>SAVE</button>
+                        <button onClick={saveEstimation} disabled={!formChange}>SAVE</button>
                     </PrimaryBorder>
 
                     <PrimaryBorder width='fit-content' borderRadius='8px' margin='0 0 0 10px'>
@@ -235,7 +254,12 @@ export default function EstimateEditor(props) {
                     
 
                     <PrimaryBorder width='fit-content' borderRadius='8px'>
-                        <button>PUBLISH</button>
+                        {
+                            estimateValues.getStatus() === 'PUBLISHED'
+                            ? <button disabled={formChange} onClick={() => changeEstimateState('DRAFT')}>UNPUBLISHED</button>
+                            : <button disabled={formChange} onClick={() => changeEstimateState('PUBLISHED')}>PUBLISH</button>
+                        }
+                        
                     </PrimaryBorder>
 
                     <PrimaryBorder width='fit-content' borderRadius='8px' margin='0 0 0 10px'>
@@ -248,14 +272,24 @@ export default function EstimateEditor(props) {
                     </PrimaryBorder>
 
                     <PrimaryBorder width='fit-content' borderRadius='8px' margin='0 0 0 10px'>
+                        {/* Only Chair & Treasurer is able to add signature */}
+                        {(activeUser.getPosition === 'Chair' || activeUser.getPosition() === 'Treasurer') && 
                         <button onClick={() => {
+                            setChange(true) // Enable save button
                             //Check whether the signature already exists
                             if(!estimateValues.getSignatureArray().includes(activeUser.getUserSignature())) {
                                 // Add user signature to the estimate document
                             estimateValues.setSignatureArray([...estimateValues.getSignatureArray(), activeUser.getUserSignature()])
                             setEstimate(new EstimateReport(estimateValues.extractJSON()))
+                            } else {
+                                // Remove the signature from the document
+                                let tempSignatureArray = estimateValues.getSignatureArray()
+                                const index = tempSignatureArray.indexOf(activeUser.getUserSignature())
+                                tempSignatureArray.splice(index, 1) // Removing signature from the temp array
+                                estimateValues.setSignatureArray(tempSignatureArray)
+                                setEstimate(new EstimateReport(estimateValues.extractJSON())) 
                             }
-                        }}>ADD SIGNATURE</button>
+                        }}>SIGNATURE</button>}
                     </PrimaryBorder>
                 </div>
             </div>

@@ -44,7 +44,7 @@ export default function ReportPreview(props) {
           
           {
             estimateArray.map((element, index) => {
-              return(<ReportBanner key={index} estimate={element} setEstimateValues={props.setEstimateValues}/>)
+              return(<ReportBanner key={index} estimate={element} setEstimateValues={props.setEstimateValues} activeUser={props.activeUser}/>)
             })
           }
         </div>

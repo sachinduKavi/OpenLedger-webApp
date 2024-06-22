@@ -9,7 +9,11 @@ import EstimateReport from '../../dataModels/EstimateModel'
 
 export default function ReportBanner(props) {
     const estimate = props.estimate
+    const user = props.activeUser
 
+    // Returns null if the user level is less or equal to 2
+    // Drafts can be accessed by only high rankers 
+    if(user.getUserLevel() <= 2 && estimate.getStatus() === 'DRAFT')  return null
   return (
     <motion.div className='report-banner-border'
         whileTap={{scale: 0.95}}
@@ -27,7 +31,11 @@ export default function ReportBanner(props) {
  
 
         <div className="column" style={{alignItems: 'flex-end'}}>
-            <h4 style={{color: '#32AF4E'}}>PUBLISHED</h4>
+            {estimate.getStatus() === 'PUBLISHED'
+                ? <h4 style={{color: '#32AF4E'}}>PUBLISHED</h4>
+                : <h4 style={{color: 'red'}}>DRAFT</h4> 
+            }
+            
             <h5>{estimate.getPublisher()}</h5>
             <h6>{estimate.getInsuranceDate()}</h6>
         </div>
