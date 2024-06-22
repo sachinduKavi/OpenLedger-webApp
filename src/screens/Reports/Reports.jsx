@@ -15,6 +15,7 @@ export default function Reports(props) {
         setNavigation({
             estimation: true,
             cashflow: false,
+            collection: false
           })
       }
 
@@ -35,7 +36,11 @@ export default function Reports(props) {
             <li className={navigation.cashflow ? 'active': null} onClick={() => {
                 resetNavigation()
                 setNavigation({cashflow: true})
-            }}>Cash Flow Statement</li>
+            }}>CFSR</li>
+            <li className={navigation.collection ? 'active': null} onClick={() => {
+                resetNavigation()
+                setNavigation({collection: true})
+            }}>Collection</li>
 
         </MiniNavigation>
 
