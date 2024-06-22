@@ -1,0 +1,47 @@
+.cashflow-paper-border {
+    position: relative;
+    width: 100%;
+    background-color: white;
+    /* height: 50px; */
+    aspect-ratio: 1/1.414;
+    padding: 2vw 1vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cashflow-paper-border * {
+    color: black;
+    font-family: 'Times New Roman', 'Times', 'serif';
+}
+
+.cashflow-paper-border h2 {
+    font-size: 1.4vw;
+}
+
+.cashflow-paper-border .treasury-name {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.6vw;
+    letter-spacing: -1px;
+    line-height: 1;
+}
+
+.report-details {
+    width: 100%;
+    height: 100px;
+    margin: 10px;
+    padding: 1vw 3vw;
+}
+
+.report-details > .row {
+    display: flex;
+    flex-direction: row;
+}
+
+.report-details > .row .column {
+    flex: 1;
+}
+
+.report-details > .row .column > p {
+    font-size: 0.9vw;
+}

@@ -83,7 +83,7 @@
 
 .treasury-name {
     text-align: center;
-    line-height: 1.9rem;
+    line-height:1;
 }
 
 .rupee-format {
@@ -101,7 +101,7 @@
 
 .digital-signature > p{
     margin: 0 10px 10px 0;
-    
+    font-size: 0.8vw;
 }
 
 

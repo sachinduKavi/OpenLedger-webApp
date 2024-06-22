@@ -1,7 +1,9 @@
 import React, { useContext, useEffect, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import Treasury from '../dataModels/Treasury'
+
 import '../styles/treasury-dashboard.css'
+
 import { verifyTreasury } from '../query/treasuryQuery'
 import WelcomeBar from '../components/Dashboard/WelcomeBar'
 import Navigation from '../components/TreasuryDashboard/Navigation'
