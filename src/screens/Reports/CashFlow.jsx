@@ -1,5 +1,6 @@
 import React from 'react'
 import CashFlowPaper from './CashFlowPaper'
+import CashflowEditor from './CashflowEditor'
 
 import '../../styles/cashflow.css'
 
@@ -12,8 +13,8 @@ export default function CashFlow() {
           <CashFlowPaper/>
         </div>
 
-        <div className="column">
-
+        <div className="column" style={{justifyContent: 'flex-start'}}>
+          <CashflowEditor/>
         </div>
 
       </div>
