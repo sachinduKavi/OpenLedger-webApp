@@ -50,7 +50,7 @@ export default function Reports(props) {
 
             {navigation.estimation && <Estimate treasury={props.treasury} activeUser={props.activeUser}/>}
 
-            {navigation.cashflow && <CashFlow/>}
+            {navigation.cashflow && <CashFlow treasury={props.treasury} activeUser={props.activeUser}/>}
         </div>
 
 

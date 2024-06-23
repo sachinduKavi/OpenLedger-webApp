@@ -1,0 +1,22 @@
+.cashflow .row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+   
+}
+
+
+.cashflow .ant-picker {
+    background-color: #37375B;
+    color: white;
+}
+
+.cashflow input {
+    margin: 0;
+    color: white;
+}
+
+.cashflow .ant-picker input::placeholder {
+    color: white;
+}
+

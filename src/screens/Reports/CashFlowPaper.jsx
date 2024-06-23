@@ -2,12 +2,16 @@ import React from 'react'
 
 import '../../styles/cashflow-paper.css'
 
-export default function CashFlowPaper() {
+export default function CashFlowPaper(props) {
+
+    // Cashflow instant
+    const cashflow = props.cashflow
+
   return (
     <div className='cashflow-paper-border'>
         <h2>CASHFLOW STATEMENT REPORT</h2>
 
-        <h2 className='treasury-name'>AISEC: Your leader ship development partnear</h2>
+        <h2 className='treasury-name'>{props.treasury.getTreasuryName()}</h2>
 
 
 
@@ -18,7 +22,7 @@ export default function CashFlowPaper() {
                 </div>
 
                 <div className="column">
-                    <p>: CF0000000000000001</p>
+                    <p>: {cashflow.getReportID()}</p>
                 </div>
             </div>
 
@@ -28,7 +32,7 @@ export default function CashFlowPaper() {
                 </div>
 
                 <div className="column">
-                    <p>: CF0000000000000001</p>
+                    <p>: {props.treasury.getTreasuryID()}</p>
                 </div>
             </div>
 
@@ -38,7 +42,7 @@ export default function CashFlowPaper() {
                 </div>
 
                 <div className="column">
-                    <p>: 2024-06-24</p>
+                    <p>: {cashflow.getInsuranceDate()}</p>
                 </div>
             </div>
 
@@ -48,7 +52,7 @@ export default function CashFlowPaper() {
                 </div>
 
                 <div className="column">
-                    <p>: Detailed</p>
+                    <p>: {cashflow.getDocumentType()}</p>
                 </div>
             </div>
         </div>
