@@ -6,7 +6,10 @@ export default function CashFlowPaper(props) {
 
     // Cashflow instant
     const cashflow = props.cashflow
-    
+    let incomeTotal = 0
+    let expenseTotal = 0
+
+    console.log('Array', cashflow.getExpenseArray())
   return (
     <div className='cashflow-paper-border'>
         <h2>CASHFLOW STATEMENT REPORT</h2>
@@ -63,31 +66,40 @@ export default function CashFlowPaper(props) {
         <div className="income">
                 <h3>INCOME</h3>
 
-                {
+                {   
+
                     Object.keys(cashflow.getIncomeArray()).map((category, index) => {
-                        console.log(category)
+            
                         let categoryTotal = 0
+                        let categoryLen = cashflow.getIncomeArray()[category]?.length??0 - 1
                         return (
-                            <>
+                            <div key={index}>
                                 <h3 className="category"> {category} </h3>
                                 {
-                                    
                                     cashflow.getIncomeArray()[category].map((element01, index01) => {
                                         categoryTotal += element01.amount
+                                        incomeTotal += element01.amount
                                         return (<div className="row" key={index01}>
                                     
-                                            <div className="record"><p >{element01.title}</p></div>
+                                            <div className="record"><p style={{lineHeight: 1}}>{element01.title} <i style={{fontSize: '10px', margin: '0'}}>({element01.createdDate})</i></p></div>
                                             <div className="amount num"><p >{element01.amount}</p></div>
-                                            <div className="category-total num"><p >{categoryTotal}</p></div>
+                                            <div className="category-total num"><p style={{visibility: categoryLen === index01?'visible': 'hidden'}}>{categoryTotal}</p></div>
                                             <div className='num'></div>
                         
                                         </div>)
                                     })
                                 }
-                            </>
+                            </div>
                         )
                     })
                 }
+
+                <div className='total'>
+                    <div className="gross-total-name record"><h4>GROSS INCOME</h4></div>
+                    <div className="num"></div>
+                    <div className="num">{incomeTotal}</div>
+                    <div className="num">{incomeTotal}</div>
+                </div>
 
             </div>
 
@@ -95,42 +107,49 @@ export default function CashFlowPaper(props) {
             <div className="expense">
                 <h3>EXPENSE</h3>
 
-                <h3 className="category"> Transportation </h3>
-                <div className="row">
-                    <div className="record"><p>Bus Fees</p></div>
-                    <div className="amount num"><p> 78545</p></div>
-                    <div className="category-total num"><p >45000</p></div>
-                    <div className='num'></div>
-       
-                </div>
-                <div className="row">
-                    <div className="record"><p >Sunith Sir</p></div>
-                    <div className="amount num"><p >78545</p></div>
-                    <div className="category-total num"><p >45000</p></div>
-                    <div className='num'></div>
-          
-                </div>
-                <div className="row">
-                    <div className="record"><p >Sunith Sir</p></div>
-                    <div className="amount num"><p >78545</p></div>
-                    <div className="category-total num"><p >45000</p></div>
-                    <div className='num'></div>
-               
-                </div>
+                {   
+
+                    Object.keys(cashflow.getExpenseArray()).map((category, index) => {
+                        let categoryTotal = 0
+                        
+                        let categoryLen = cashflow.getIncomeArray()[category]?.length??0 - 1
+                        return (
+                            <div key={index}>
+                                <h3 className="category"> {category} </h3>
+                                {
+                                    
+                                    cashflow.getIncomeArray()[category].map((element01, index01) => {
+                                        categoryTotal += element01.amount
+                                        expenseTotal += element01.amount
+                                        return (<div className="row" key={index01}>
+                                    
+                                            <div className="record"><p style={{lineHeight: 1}}>{element01.title} <i style={{fontSize: '10px', margin: '0'}}>({element01.createdDate})</i></p></div>
+                                            <div className="amount num"><p >{element01.amount}</p></div>
+                                            <div className="category-total num"><p style={{visibility: categoryLen === index01?'visible': 'hidden'}}>{categoryTotal}</p></div>
+                                            <div className='num'></div>
+                        
+                                        </div>)
+                                    })
+                                }
+                            </div>
+                        )
+                    })
+                }
 
                 <div className='total'>
-                    <div className="gross-total-name record"><h4>TOTAL EXPENSE</h4></div>
+                    <div className="gross-total-name record"><h4>GROSS INCOME</h4></div>
                     <div className="num"></div>
-                    <div className="num">45822</div>
-                    <div className="num"></div>
+                    <div className="num">{expenseTotal}</div>
+                    <div className="num">{expenseTotal}</div>
                 </div>
+
             </div>
 
             <div className="net-balance">
                 <div className="net-balance-name"><h4>NET BALANCE</h4></div>
                 <div className="num"></div>
                 <div className="num"></div>
-                <div className="num">458563</div>
+                <div className="num">{incomeTotal-expenseTotal}</div>
             </div>
         </div>
 
