@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 import {DatePicker, Switch} from 'antd'
 import PDFicon from '../../assets/icons/pdfDownload.png'
@@ -14,12 +14,26 @@ export default function CashflowEditor(props) {
 
   const cashflow = props.cashFlow.cashflow
   const setCashflow = props.cashFlow.setCashflow
+ 
+  const [documentType, setDocumentType] = useState(true)
 
   // User click on update button
-  // THis will update the data or create new record
-  const updateCashflow = () => {
-    setCashflow(new CashflowReportModel(cashflow.extractJSON()))
-    console.log('cashflow Records', JSON.stringify(cashflow.extractJSON()))
+  // This will update the existing record or create new record
+  const updateCashflow = async () => {
+    cashflow.setDocumentType(documentType ? 'DETAILED': 'SUMMARY')
+    const res = await cashflow.saveCashflowRecord()
+    if(res) {
+      if(res.process) {
+        // Data proceed successfully
+        setCashflow(new CashflowReportModel(res.content)) // Set values from the database
+      } else {
+        // Function not proceed
+        console.log('Server error', res.errorMessage) 
+      }
+    } else {    
+      // Connection Error ** notify user
+      throw "Network Error"
+    }
   }
 
 
@@ -41,11 +55,13 @@ export default function CashflowEditor(props) {
       <div className="row" style={{marginTop: '15px'}}>
         <label htmlFor="" style={{margin: '0 40px 0 0'}}>Document Type</label>
         <Switch
+        value={documentType}
           onChange={(e) => {
-            if(e) cashflow.setDocumentType('DETAILED')
-            else cashflow.setDocumentType('SUMMARY')
+            setDocumentType(e)
           }}
         />
+
+        <h4 style={{marginLeft: '15px'}}>{documentType?'DETAILED': 'SUMMARY'}</h4>
       </div>
 
       <div className="row">

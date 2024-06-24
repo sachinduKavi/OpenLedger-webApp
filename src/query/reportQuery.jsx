@@ -14,9 +14,14 @@ const deleteEstimationQuery = async (estimationID) => {
     return await cDomain.post('estimation/deleteEstimation', {estimationID: estimationID}, header)
 }
 
+const saveCashflow = async (cashflowData) => {
+    return await cDomain.post('cashflow/saveCashflow', cashflowData, header)
+}
+
 
 export {
     saveEstimateReportQuery,
     getAllEstimationsQuery,
-    deleteEstimationQuery
+    deleteEstimationQuery,
+    saveCashflow
 }

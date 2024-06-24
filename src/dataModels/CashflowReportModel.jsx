@@ -1,27 +1,31 @@
+import {saveCashflow} from '../query/reportQuery'
+
 class CashflowReportModel {
     #reportID 
     #treasuryID
     #insuranceDate
     #documentType
     #rangeStart
+    #publisher
     #rangeEnd
     #incomeArray
     #expenseArray
     #status 
 
-    constructor({reportID = 'AUTO', treasuryID = null, insuranceDate = null, documentType = null, rangeStart = null, rangeEnd = null, incomeArray = [], status = null, expenseArray = []}) {
+    constructor({reportID = 'AUTO', treasuryID = null, insuranceDate = null, documentType = null, rangeStart = null, rangeEnd = null, incomeArray = {}, status = 'DETAILED', expenseArray = {}, publisher = null}) {
         this.#reportID = reportID,
         this.#treasuryID = treasuryID,
         this.#insuranceDate = insuranceDate
         this.#documentType = documentType
         this.#rangeStart = rangeStart
+        this.#publisher = publisher
         this.#rangeEnd = rangeEnd
         this.#incomeArray = incomeArray
         this.#expenseArray = expenseArray
         this.#status = status
 
-        if (this.#incomeArray.length > 0 && !isClassObject(this.#incomeArray[0])) this.#convertToLedgerEvidenceIncome()
-        if (this.#expenseArray.length > 0 && !isClassObject(this.#expenseArray[0])) this.#convertToLedgerEvidenceExpense()
+        // if (this.#incomeArray.length > 0 && !isClassObject(this.#incomeArray[0])) this.#convertToLedgerEvidenceIncome()
+        // if (this.#expenseArray.length > 0 && !isClassObject(this.#expenseArray[0])) this.#convertToLedgerEvidenceExpense()
     }
 
     extractJSON() {
@@ -31,35 +35,36 @@ class CashflowReportModel {
             insuranceDate: this.#insuranceDate,
             documentType: this.#documentType,
             rangeStart: this.#rangeStart,
+            publisher: this.#publisher,
             rangeEnd: this.#rangeEnd,
             status: this.#status,
-            incomeArray: this.#incomeArray.map(element => {
-                return element.extractJSON()
-            }),
-            expenseArray: this.#expenseArray.map(element => {
-                return element.extractJSON()
-            })
+            incomeArray: this.#incomeArray,
+            expenseArray: this.#expenseArray
         }
     }
 
-    #convertToLedgerEvidenceIncome() {
-        let tempObjectArray = []
-        this.#incomeArray.forEach(element => {
-            tempObjectArray.push(new LedgerRecord(element))
-        });
-        this.#incomeArray = tempObjectArray
-    }
-
-    #convertToLedgerEvidenceExpense() {
-        let tempObjectArray = []
-        this.#expenseArray.forEach(element => {
-            tempObjectArray.push(new LedgerRecord(element))
-        });
-        this.#expenseArray = tempObjectArray
+    // Save the record in the database
+    async saveCashflowRecord() {
+        const response = await saveCashflow(this.extractJSON())
+        return (response.status === 200)
+        ? {
+            // Request worked
+            process: response.data.proceed,
+            content: response.data.content,
+            errorMessage: response.data.errorMessage
+        } : false
     }
 
 
     // Getters and Setters
+    getPublisher() {
+        return this.#publisher
+    }
+
+    setPublisher(publisher) {
+        this.#publisher = publisher
+    }
+
     getStatus() {
         return this.#status
     }
