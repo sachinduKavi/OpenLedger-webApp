@@ -21,7 +21,9 @@ export default function CashflowEditor(props) {
   // This will update the existing record or create new record
   const updateCashflow = async () => {
     cashflow.setDocumentType(documentType ? 'DETAILED': 'SUMMARY')
-    const res = await cashflow.saveCashflowRecord()
+    console.log(cashflow)
+    const res = await cashflow.saveCashflowRecord() // Update backend
+    console.log('response', res)
     if(res) {
       if(res.process) {
         // Data proceed successfully
