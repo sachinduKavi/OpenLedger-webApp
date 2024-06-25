@@ -1,4 +1,6 @@
-import React from 'react'
+import React, {createRef} from 'react'
+import html2canvas from 'html2canvas'
+import jsPDF from 'jspdf'
 
 import '../../styles/cashflow-paper.css'
 
@@ -9,9 +11,36 @@ export default function CashFlowPaper(props) {
     let incomeTotal = 0
     let expenseTotal = 0
 
+    const pdfRef = createRef()
+
+     // Converting PDF to canvas
+  const downloadPDF = () => {
+    console.log('downloading document...')
+    const input = pdfRef.current
+    html2canvas(input, {
+      scale: 7,
+      useCORS: true}
+    ).then(canvas => {
+      const imgData = canvas.toDataURL('image/png')
+      const pdf = new jsPDF('p', 'mm', 'a4', true)
+      const pdfWidth = pdf.internal.pageSize.getWidth()
+      const pdfHeight = pdf.internal.pageSize.getHeight()
+      const imgHeight = canvas.height
+      const imgWidth = canvas.width
+
+      const ratio = Math.min(pdfWidth/imgWidth, pdfHeight/imgHeight)
+      const imgX = (pdfWidth - imgWidth*ratio)
+      const imgY = 0
+
+      pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth*ratio, imgHeight*ratio)
+      pdf.save(`Estimate Report ${cashflow.getReportID()}`)
+
+    })
+}
+
     console.log('Array', cashflow.getExpenseArray())
   return (
-    <div className='cashflow-paper-border'>
+    <div className='cashflow-paper-border' ref={pdfRef} onClick={downloadPDF}>
         <h2>CASHFLOW STATEMENT REPORT</h2>
 
         <h2 className='treasury-name'>{props.treasury.getTreasuryName()}</h2>
@@ -71,10 +100,10 @@ export default function CashFlowPaper(props) {
                     Object.keys(cashflow.getIncomeArray()).map((category, index) => {
             
                         let categoryTotal = 0
-                        let categoryLen = cashflow.getIncomeArray()[category]?.length??0 - 1
+                        let categoryLen = cashflow.getIncomeArray()[category].length - 1
                         return (
                             <div key={index}>
-                                <h3 className="category"> {category} </h3>
+                                <h3 className="category"> {category.replace('_', ' ')} </h3>
                                 {
                                     cashflow.getIncomeArray()[category].map((element01, index01) => {
                                         categoryTotal += element01.amount
@@ -94,11 +123,11 @@ export default function CashFlowPaper(props) {
                     })
                 }
 
-                <div className='total'>
+                <div className='total row'>
                     <div className="gross-total-name record"><h4>GROSS INCOME</h4></div>
                     <div className="num"></div>
-                    <div className="num">{incomeTotal}</div>
-                    <div className="num">{incomeTotal}</div>
+                    <div className="num"><p>{incomeTotal}</p></div>
+                    <div className="num"><p>{incomeTotal}</p></div>
                 </div>
 
             </div>
@@ -112,10 +141,10 @@ export default function CashFlowPaper(props) {
                     Object.keys(cashflow.getExpenseArray()).map((category, index) => {
                         let categoryTotal = 0
                         
-                        let categoryLen = cashflow.getIncomeArray()[category]?.length??0 - 1
+                        let categoryLen = cashflow.getIncomeArray()[category].length - 1
                         return (
                             <div key={index}>
-                                <h3 className="category"> {category} </h3>
+                                <h3 className="category"> {category.replace('_', ' ')} </h3>
                                 {
                                     
                                     cashflow.getIncomeArray()[category].map((element01, index01) => {
@@ -136,26 +165,28 @@ export default function CashFlowPaper(props) {
                     })
                 }
 
-                <div className='total'>
+                <div className='total row'>
                     <div className="gross-total-name record"><h4>GROSS INCOME</h4></div>
                     <div className="num"></div>
-                    <div className="num">{expenseTotal}</div>
-                    <div className="num">{expenseTotal}</div>
+                    <div className="num"><p>{expenseTotal}</p></div>
+                    <div className="num"><p>{expenseTotal}</p></div>
                 </div>
 
             </div>
 
-            <div className="net-balance">
+            <div className="net-balance row">
                 <div className="net-balance-name"><h4>NET BALANCE</h4></div>
                 <div className="num"></div>
                 <div className="num"></div>
-                <div className="num">{incomeTotal-expenseTotal}</div>
+                <div className="num"><p>{incomeTotal-expenseTotal}</p></div>
             </div>
         </div>
 
         <p className='signature'>Digital Signature</p>
-        <div className="digital-signature">
-
+        <div className="digital-signature"   style={{ whiteSpace: 'pre-wrap', fontSize: 13}}>
+                {
+                    cashflow.getSignatureArray().map((element, index) => <p key={index}>{element}</p>)
+                }
         </div>
     </div>
   )

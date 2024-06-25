@@ -18,7 +18,7 @@ export default function CashFlow(props) {
         </div>
 
         <div className="column" style={{justifyContent: 'flex-start'}}>
-          <CashflowEditor cashFlow={{cashflow: cashFlow, setCashflow:setCashFlow}}/>
+          <CashflowEditor cashFlow={{cashflow: cashFlow, setCashflow:setCashFlow}} activeUser={props.activeUser}/>
         </div>
 
       </div>

@@ -11,8 +11,9 @@ class CashflowReportModel {
     #incomeArray
     #expenseArray
     #status 
+    #signatureArray
 
-    constructor({reportID = 'AUTO', treasuryID = null, insuranceDate = null, documentType = null, rangeStart = null, rangeEnd = null, incomeArray = {}, status = 'DETAILED', expenseArray = {}, publisher = null}) {
+    constructor({reportID = 'AUTO', treasuryID = null, insuranceDate = null, documentType = null, rangeStart = null, rangeEnd = null, incomeArray = {}, status = 'DETAILED', expenseArray = {}, publisher = null, signatureArray = []}) {
         this.#reportID = reportID,
         this.#treasuryID = treasuryID,
         this.#insuranceDate = insuranceDate
@@ -23,6 +24,7 @@ class CashflowReportModel {
         this.#incomeArray = incomeArray
         this.#expenseArray = expenseArray
         this.#status = status
+        this.#signatureArray = signatureArray
 
         // if (this.#incomeArray.length > 0 && !isClassObject(this.#incomeArray[0])) this.#convertToLedgerEvidenceIncome()
         // if (this.#expenseArray.length > 0 && !isClassObject(this.#expenseArray[0])) this.#convertToLedgerEvidenceExpense()
@@ -39,7 +41,8 @@ class CashflowReportModel {
             rangeEnd: this.#rangeEnd,
             status: this.#status,
             incomeArray: this.#incomeArray,
-            expenseArray: this.#expenseArray
+            expenseArray: this.#expenseArray,
+            signatureArray: this.#signatureArray
         }
     }
 
@@ -57,6 +60,14 @@ class CashflowReportModel {
 
 
     // Getters and Setters
+    getSignatureArray() {
+        return this.#signatureArray
+    }
+
+    setSignatureArray(signatureArray) {
+        this.#signatureArray = signatureArray
+    }
+
     getPublisher() {
         return this.#publisher
     }
