@@ -138,7 +138,11 @@ export default function CashflowEditor(props) {
             </PrimaryBorder>
 
             <PrimaryBorder borderRadius='10px' margin='0 0 0 10px'>
-              <button style={{padding: '2px 5px'}}><img src={PDFicon} alt="" width='25' /></button>
+              <button style={{padding: '2px 5px'}}><img src={PDFicon} alt="" width='25' 
+              onClick={() => {
+                props.pdfDownloadRef.current.downloadPDF()
+              }}
+              /></button>
             </PrimaryBorder>
 
 
