@@ -67,7 +67,9 @@ export default function CashflowEditor(props) {
   return (
     <div className='estimate-editor-border cashflow'>
       <div className="row">
-        <img src={BackIcon} alt="back-icon" />
+        <img src={BackIcon} alt="back-icon" onClick={() => {
+          setCashflow(null)
+        }}/>
         <h2>CASHFLOW STATEMENT REPORT EDITOR</h2>
       </div>
 

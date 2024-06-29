@@ -8,7 +8,7 @@ import ReportPreviewCashflow from './ReportPreviewCashflow'
 
 export default function CashFlow(props) {
   // Current cashflow values
-  const [cashFlow, setCashFlow] = useState(new CashflowReportModel({}))
+  const [cashFlow, setCashFlow] = useState(null)
   const documentRef = useRef()
 
   return (
@@ -18,16 +18,21 @@ export default function CashFlow(props) {
         <div className="column" >
 
           
-
-          <CashFlowPaper cashflow={cashFlow} treasury={props.treasury} ref={documentRef}/>
+          {cashFlow !== null &&
+          <CashFlowPaper cashflow={cashFlow} treasury={props.treasury} ref={documentRef}/>}
         </div>
 
         <div className="column" style={{justifyContent: 'flex-start'}}>
+
+          
         
-          <ReportPreviewCashflow activeUser={props.activeUser}/>
-          {/* <CashflowEditor cashFlow={{cashflow: cashFlow, setCashflow:setCashFlow}} activeUser={props.activeUser}
+          {
+            cashFlow === null 
+            ? <ReportPreviewCashflow activeUser={props.activeUser} setCashflow={setCashFlow}/>
+
+            : <CashflowEditor cashFlow={{cashflow: cashFlow, setCashflow:setCashFlow}} activeUser={props.activeUser}
             pdfDownloadRef={documentRef}
-          /> */}
+          />}
         </div>
 
       </div>

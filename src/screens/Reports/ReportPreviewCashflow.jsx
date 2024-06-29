@@ -1,15 +1,29 @@
 import React, {useEffect, useState} from 'react'
 
+import { getAllCashflow } from '../../query/reportQuery'
+
 import '../../styles/report-preview.css'
-import ReportBanner from '../../components/Report/ReportBanner'
-import EstimateReport from '../../dataModels/EstimateModel'
+import ReportBannerCashflow from '../../components/Report/ReportBannerCashflow'
+
 
 export default function ReportPreviewCashflow(props) {
   const [cashflowArray, setCashflowArray] = useState([]) // Stores the estimate list
 
   // Load all the estimation reports publish on the database
   const loadReports = async () => {
-    
+    const response = await getAllCashflow()
+    if(response.status === 200) {
+      // No connection error
+
+      if(response.data.proceed) {
+        // Processed executed successfully
+        setCashflowArray(response.data.content) // Setting cashflow list
+      } else {
+        // Method error in the backend
+      }
+    } else {
+      // Network error
+    }
   } 
 
   // Component did mount ?
@@ -27,7 +41,7 @@ export default function ReportPreviewCashflow(props) {
               visibility: props.activeUser.getUserLevel() > 1 
               && props.activeUser.getPosition() !== 'Chair' ? 'visible': 'hidden'}}
               onClick={() => {
-                props.setCashflowArray(new EstimateReport({}))
+                
               }}
               >NEW</button>
 
@@ -37,7 +51,7 @@ export default function ReportPreviewCashflow(props) {
           
           {
             cashflowArray.map((element, index) => {
-              return(<ReportBanner key={index} estimate={element} setEstimateValues={props.setEstimateValues} activeUser={props.activeUser}/>)
+              return(<ReportBannerCashflow key={index} cashflow={element} setCashflow={props.setCashflow}/>)
             })
           }
         </div>

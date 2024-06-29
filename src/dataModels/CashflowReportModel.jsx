@@ -59,6 +59,7 @@ class CashflowReportModel {
     }
 
 
+
     // Getters and Setters
     getSignatureArray() {
         return this.#signatureArray
