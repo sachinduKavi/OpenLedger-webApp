@@ -7,6 +7,7 @@ import '../../styles/cashflow.css'
 import ReportPreviewCashflow from './ReportPreviewCashflow'
 
 export default function CashFlow(props) {
+
   // Current cashflow values
   const [cashFlow, setCashFlow] = useState(null)
   const documentRef = useRef()
@@ -18,8 +19,11 @@ export default function CashFlow(props) {
         <div className="column" >
 
           
-          {cashFlow !== null &&
-          <CashFlowPaper cashflow={cashFlow} treasury={props.treasury} ref={documentRef}/>}
+          {cashFlow !== null
+          ? <CashFlowPaper cashflow={cashFlow} treasury={props.treasury} ref={documentRef}/>
+          : <div className="placeholder">
+              <h5>Select a report to preview or create new report</h5>
+            </div>}
         </div>
 
         <div className="column" style={{justifyContent: 'flex-start'}}>
@@ -27,7 +31,7 @@ export default function CashFlow(props) {
           
         
           {
-            cashFlow === null 
+            cashFlow === null || props.activeUser.getUserLevel() < 2
             ? <ReportPreviewCashflow activeUser={props.activeUser} setCashflow={setCashFlow}/>
 
             : <CashflowEditor cashFlow={{cashflow: cashFlow, setCashflow:setCashFlow}} activeUser={props.activeUser}

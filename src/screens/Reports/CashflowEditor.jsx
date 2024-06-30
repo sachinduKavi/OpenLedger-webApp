@@ -22,6 +22,8 @@ export default function CashflowEditor(props) {
  
   const [documentType, setDocumentType] = useState(true)
 
+  const [formChange, setChange] = useState(false) // State of the form whether user made any new changes to the form
+
   const [dates, setDates] = useState({
     insuranceDate: cashflow.getInsuranceDate()?? generateCurrentDate(),
     rangeStart: cashflow.getRangeStart()?? generateCurrentDate(),
@@ -40,7 +42,6 @@ export default function CashflowEditor(props) {
 
     cashflow.setDocumentType(documentType ? 'DETAILED': 'SUMMARY')
     const res = await cashflow.saveCashflowRecord() // Update backend
-    console.log('response', res)
     if(res) {
       if(res.process) {
         // Data proceed successfully
@@ -53,7 +54,7 @@ export default function CashflowEditor(props) {
       // Connection Error ** notify user
       throw "Network Error"
     }
-
+    setChange(false)
     changeSessionData({processing: false}) // loading screen
   }
 
@@ -61,6 +62,17 @@ export default function CashflowEditor(props) {
   const changeCashflowState = (state) => {
     cashflow.setStatus(state)
     updateCashflow()
+  }
+
+
+  // Delete the cashflow report from the database 
+  const cashflowReportDiscard = () => {
+    if(cashflow.reportDiscard()) {
+      // Report deleted successfully
+      setCashflow(null) // directing back to report preview
+    } else {
+      // Record deletion error
+    }
   }
 
 
@@ -78,6 +90,7 @@ export default function CashflowEditor(props) {
         <DatePicker 
         value={dayjs(dates.insuranceDate)}
         onChange={(e, stringDate) => {
+          setChange(true)
           setDates({...dates, insuranceDate: stringDate})
         }}/>
       </PrimaryBorder>
@@ -88,6 +101,7 @@ export default function CashflowEditor(props) {
         <Switch
         value={documentType}
           onChange={(e) => {
+            setChange(true)
             setDocumentType(e)
           }}
         />
@@ -102,7 +116,8 @@ export default function CashflowEditor(props) {
           <DatePicker 
           value={dayjs(dates.rangeStart)}
           onChange={(e, stringDate) => {
-          setDates({...dates, rangeStart: stringDate})
+            setChange(true)
+            setDates({...dates, rangeStart: stringDate})
         }}/>
           </PrimaryBorder>
         </div>
@@ -113,7 +128,8 @@ export default function CashflowEditor(props) {
           <DatePicker 
           value={dayjs(dates.rangeEnd)}
           onChange={(e, stringDate) => {
-          setDates({...dates, rangeEnd: stringDate})
+            setChange(true)
+            setDates({...dates, rangeEnd: stringDate})
         }}/>
           </PrimaryBorder>
         </div>
@@ -122,11 +138,11 @@ export default function CashflowEditor(props) {
       <div className="column">
           <div className="row">
             <PrimaryBorder borderRadius='10px'>
-              <button onClick={updateCashflow}>UPDATE</button>
+              <button onClick={updateCashflow} disabled={!formChange}>UPDATE</button>
             </PrimaryBorder>
 
             <PrimaryBorder borderRadius='10px' margin='0 0 0 10px'>
-              <button style={{backgroundColor: 'red'}}>DISCARD</button>
+              <button style={{backgroundColor: 'red'}} onClick={cashflowReportDiscard}>DISCARD</button>
             </PrimaryBorder>
           </div>
 
@@ -134,8 +150,8 @@ export default function CashflowEditor(props) {
             <PrimaryBorder borderRadius='10px'>
                 {
                   cashflow.getStatus() === 'PUBLISHED'
-                  ? <button onClick={() => changeCashflowState('DRAFT')}>UNPUBLISHED</button>
-                  : <button onClick={() => changeCashflowState('PUBLISHED')}>PUBLISH</button>
+                  ? <button onClick={() => changeCashflowState('DRAFT')} disabled={formChange}>UNPUBLISHED</button>
+                  : <button onClick={() => changeCashflowState('PUBLISHED')} disabled={formChange}>PUBLISH</button>
                 }
             </PrimaryBorder>
 
@@ -148,11 +164,13 @@ export default function CashflowEditor(props) {
             </PrimaryBorder>
 
 
-            <PrimaryBorder borderRadius='10px' margin='0 0 0 10px'>
+            {(activeUser.getPosition() === 'Chair' || activeUser.getPosition() === 'Treasurer') &&
+              
+              <PrimaryBorder borderRadius='10px' margin='0 0 0 10px'>
               {/* Only Chair & Treasurer is able to add signature */}
-              {(activeUser.getPosition === 'Chair' || activeUser.getPosition() === 'Treasurer') && 
+               
                         <button onClick={() => {
-                            // setChange(true) // Enable save button
+                            setChange(true) // Enable save button
                             //Check whether the signature already exists
                             if(!cashflow.getSignatureArray().includes(activeUser.getUserSignature())) {
                                 // Add user signature to the estimate document
@@ -166,8 +184,8 @@ export default function CashflowEditor(props) {
                                 cashflow.setSignatureArray(tempSignatureArray)
                                 setCashflow(new CashflowReportModel(cashflow.extractJSON())) 
                             }
-                        }}>SIGNATURE</button>}
-            </PrimaryBorder>
+                        }}>SIGNATURE</button>
+            </PrimaryBorder>}
 
 
           </div>

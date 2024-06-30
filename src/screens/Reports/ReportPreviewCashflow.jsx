@@ -4,6 +4,7 @@ import { getAllCashflow } from '../../query/reportQuery'
 
 import '../../styles/report-preview.css'
 import ReportBannerCashflow from '../../components/Report/ReportBannerCashflow'
+import CashflowReportModel from '../../dataModels/CashflowReportModel'
 
 
 export default function ReportPreviewCashflow(props) {
@@ -19,7 +20,7 @@ export default function ReportPreviewCashflow(props) {
         // Processed executed successfully
         setCashflowArray(response.data.content) // Setting cashflow list
       } else {
-        // Method error in the backend
+        // Backend process error
       }
     } else {
       // Network error
@@ -41,7 +42,7 @@ export default function ReportPreviewCashflow(props) {
               visibility: props.activeUser.getUserLevel() > 1 
               && props.activeUser.getPosition() !== 'Chair' ? 'visible': 'hidden'}}
               onClick={() => {
-                
+                props.setCashflow(new CashflowReportModel({}))
               }}
               >NEW</button>
 
@@ -51,7 +52,8 @@ export default function ReportPreviewCashflow(props) {
           
           {
             cashflowArray.map((element, index) => {
-              return(<ReportBannerCashflow key={index} cashflow={element} setCashflow={props.setCashflow}/>)
+              if(props.activeUser.getUserLevel() > 1 || element.status === 'PUBLISHED')
+                return(<ReportBannerCashflow key={index} cashflow={element} setCashflow={props.setCashflow}/>)
             })
           }
         </div>

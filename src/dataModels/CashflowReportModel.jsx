@@ -1,4 +1,4 @@
-import {saveCashflow} from '../query/reportQuery'
+import {discardCashflowQuery, saveCashflow} from '../query/reportQuery'
 
 class CashflowReportModel {
     #reportID 
@@ -43,6 +43,7 @@ class CashflowReportModel {
             incomeArray: this.#incomeArray,
             expenseArray: this.#expenseArray,
             signatureArray: this.#signatureArray
+            
         }
     }
 
@@ -56,6 +57,13 @@ class CashflowReportModel {
             content: response.data.content,
             errorMessage: response.data.errorMessage
         } : false
+    }
+
+    async reportDiscard() {
+        const response = await discardCashflowQuery(this.#reportID)
+        return response.status === 200 
+            ? response.data.proceed
+            : false
     }
 
 
