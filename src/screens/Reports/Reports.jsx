@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import {motion} from 'framer-motion'
 import MiniNavigation from '../../components/MiniNavigation'
 import CashFlow from './CashFlow'
+import Collection from './Collection'
 
 import '../../styles/treasury-over-view.css'
 
@@ -51,6 +52,8 @@ export default function Reports(props) {
             {navigation.estimation && <Estimate treasury={props.treasury} activeUser={props.activeUser}/>}
 
             {navigation.cashflow && <CashFlow treasury={props.treasury} activeUser={props.activeUser}/>}
+
+            {navigation.collection && <Collection treasury={props.treasury} activeUser={props.activeUser}/>}
         </div>
 
 

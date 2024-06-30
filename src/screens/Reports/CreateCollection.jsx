@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import '../../styles/collection-new.css'
 
 import {Input, Checkbox} from 'antd'
@@ -8,6 +8,7 @@ import Participants from './Participants'
 export default function CreateCollection(props) {
     // Collection participants are the members who have signed for the collection 
     const [collectionParticipants, setCollectionParticipants] = useState(props.collectionParticipants??[]) 
+    const treasury = props.treasury
 
     // Participant array load from the database and update the UI
     const [participantArray, setParticipantsArray] = useState([])

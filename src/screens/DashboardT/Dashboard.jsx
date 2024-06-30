@@ -55,7 +55,7 @@ export default function Dashboard(props) {
                     <h2>LKR {props.treasuryObj.getBalance().toLocaleString('en-US')}</h2>
             </div>
             
-            <div className="calender">
+            <div className="calender" style={{alignSelf: 'start'}}>
                 <CalendarComponent/>
             </div>
         </div>

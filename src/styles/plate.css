@@ -1,7 +1,7 @@
 .plate {
     display: flex;
     flex-direction: row;
-    width: 350px;
+    width: 20vw;
     
     height: fit-content;
     padding: 20px;
@@ -38,9 +38,11 @@
 .plate > h2 {
     
     letter-spacing: 0.08em;
-    font-size: 1.8em;
+    font-size: 1.8vw;
 }
 
 .plate > img {
     margin-right: 20px;
+    width: 2.3vw;
+    height: 2.3vw;
 }
