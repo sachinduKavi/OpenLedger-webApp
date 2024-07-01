@@ -23,7 +23,6 @@ export default function CreateCollection(props) {
 
   return (
     <div className='collection-border'>
-        <div className="background-blur" style={{borderRadius: '20px', zIndex: 20}}></div>
 
         <div className="collection-container">
             <h2>COLLECTION</h2>

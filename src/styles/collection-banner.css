@@ -1,0 +1,41 @@
+.collection-banner-border {
+    background-color: #3b3b3b;
+    width: 100%;
+    min-height: 50px;
+    padding: 2%;
+    border-radius: 10px;
+    display: flex;
+    margin-top: 10px;
+    flex-direction: column;
+}
+
+.top-heading {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: end;
+}
+
+.collection-banner-border .row {
+    display: flex;
+    flex-direction: row;
+    min-height: 20px;
+    width: 100%;
+    
+    justify-content: space-between;
+}
+
+.end-column {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.collection-banner-border .row * {
+    margin: 0;
+    padding: 0;
+}
+
+.deadline {
+    font-size: 12px;
+}

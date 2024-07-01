@@ -1,0 +1,31 @@
+.collection-area {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0;
+    width: 100%;
+  
+}
+
+.new-button {
+    width: 100px;
+    margin-left: 20px;
+    background-color: #32AF4E;
+}
+
+.collection-area > .row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 50px;
+    margin-top: 20px;
+    flex: 1 1 0;
+    justify-content: space-evenly;
+}
+
+.collection-area .column {
+    display: flex;
+    flex-direction: column;
+    float: 1 1 0;
+    width: 48%;
+    padding: 1%;
+}
