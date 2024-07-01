@@ -26,7 +26,7 @@ export default function Collection(props) {
 
         <div className="column">
 
-          <CreateCollection/>
+          <CreateCollection treasury={props.treasury}/>
         </div>
       </div>      
 

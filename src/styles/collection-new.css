@@ -2,27 +2,55 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    flex: 1 1 0;
+    padding: 20px;
     align-items: center;
-    padding: 10px;
+    background-color: hsla(140, 18%, 3%, 0.70);
+    border-radius: 10px;
+}
+
+.collection-container label {
+    color: #C1B5FF;
+    font-weight: bold;
+    font-size: 11px;
 }
 
 .collection-container{
     position: relative;
-    z-index: 20;
     width: 95%;
-    height: 70%;
-    border: 2px solid #C4B8FF;
-    border-radius: 20px;
-    backdrop-filter: blur(10px);
-    padding: 10px;
+    flex: 1 1 0;
+   
     display: flex;
     flex-direction: column;
 }
 
-.collection-container > .row {
+.collection-container .collection-name {
+    flex: 1 1 calc(70%);
+}
+
+.collection-container .description {
+    flex: 1 1 calc(80%)
+}
+
+.collection-container .collection-amount {
+    flex: 1 1 calc(40%);
+}
+
+.collection-container .row {
     display: flex;
     flex-direction: row;
+    align-items: end;
     justify-content: space-between;
+}
+
+.auto-assign {
+    font-size: 8px;
+    text-wrap:wrap;
+    width: 10px;
+}
+
+.collection-container .same-level {
+    flex: 1 1 calc(30%);
 }
 
 .collection-border .column {
