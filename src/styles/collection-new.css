@@ -58,6 +58,11 @@
     width: 10px;
 }
 
+:where(.css-dev-only-do-not-override-42nv3w).ant-input-outlined.ant-input-disabled, :where(.css-dev-only-do-not-override-42nv3w).ant-input-outlined[disabled] {
+    background-color: #232238;
+    color: white;
+}
+
 .collection-container .same-level {
     flex: 1 1 calc(30%);
 }

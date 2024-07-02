@@ -5,17 +5,27 @@ import {Input, Checkbox, DatePicker} from 'antd'
 import PrimaryBorder from '../../components/PrimaryBorder'
 import Participants from './Participants'
 import CalculateIcon from '../../assets/icons/Calculator.png'
+import CollectionModel from '../../dataModels/CollectionDataModel'
+
 
 export default function CreateCollection(props) {
-    // Collection participants are the members who have signed for the collection 
-    const [collectionParticipants, setCollectionParticipants] = useState(props.collectionParticipants??[]) 
-    const treasury = props.treasury
+    const treasury = props.treasury // Treasury instant from parent
+
+    // Collection instant from the parent 
+    const collection = props.collection
+    const setCollection = props.setCollection
+
+    const [selectedParticipants, setSelectedParticipants] = useState([]) // Selected participants for the collection 
 
     // Participant array load from the database and update the UI
-    const [participantArray, setParticipantsArray] = useState([])
+    const [collectionParticipants, setCollectionParticipants] = useState(props.collectionParticipants??[]) 
     const loadParticipants = async () => {
         const tempArray = await treasury.loadTreasuryParticipant()
+
         setCollectionParticipants(tempArray)
+        CollectionModel.autoAssignCount = tempArray.length // Set initial auto assign value of the class variable
+
+
     }
 
     const {TextArea} = Input
@@ -34,7 +44,12 @@ export default function CreateCollection(props) {
                 <div className="column collection-name">
                 <label htmlFor="">Collection Name</label>
                 <PrimaryBorder borderRadius='6px'>
-                    <Input type='text'/>
+                    <Input type='text' value={collection.getCollectionName()} 
+                        onChange={(e) => {
+                            collection.setCollectionName(e.target.value)
+                            setCollection(new CollectionModel(collection.extractJSON()))
+                        }}
+                    />
                 </PrimaryBorder>
                 
                 </div>
@@ -42,7 +57,13 @@ export default function CreateCollection(props) {
                 <div className="column collection-amount">
                     <label htmlFor="">Collection Amount LKR</label>
                     <PrimaryBorder borderRadius='6px'>
-                        <Input type='number'/>
+                        <Input type='number' 
+                            value={collection.getAmount()}
+                            onChange={(e) => {
+                                collection.setAmount(e.target.value)
+                                setCollection(new CollectionModel(collection.extractJSON()))
+                            }}
+                        />
                     </PrimaryBorder>
                 </div>
             </div>
@@ -52,14 +73,23 @@ export default function CreateCollection(props) {
                 <div className="column same-level">
                     <label htmlFor="">Allocated from treasury</label>
                     <PrimaryBorder borderRadius='6px'>
-                        <Input type='number'/>
+                        <Input type='number'
+                            value={collection.getTreasuryAllocation()}
+                            onChange={(e) => {
+                                collection.setTreasuryAllocation(e.target.value)
+                                setCollection(new CollectionModel(collection.extractJSON()))
+                            }}
+                        />
                     </PrimaryBorder>
                 </div>
 
                 <div className="column same-level">
                     <label htmlFor="">Divide among participants</label>
                     <PrimaryBorder borderRadius='6px'>
-                        <Input type='number'/>
+                        <Input type='number'
+                            disabled
+                            value={collection.getDividedAmount()}
+                        />
                     </PrimaryBorder>
                 </div>
 
@@ -80,7 +110,13 @@ export default function CreateCollection(props) {
                 <div className="column description">
                     <label htmlFor="">Description</label>
                     <PrimaryBorder borderRadius='6px'>
-                        <TextArea type='text' rows={4}/>
+                        <TextArea type='text' rows={4}
+                            value={collection.getDescription()}
+                            onChange={(e) => {
+                                collection.setDescription(e.target.value)
+                                setCollection(new CollectionModel(collection.extractJSON()))
+                            }}
+                        />
                         
                     </PrimaryBorder>
                 </div>
@@ -88,26 +124,36 @@ export default function CreateCollection(props) {
                 <div className="column">
                     <label htmlFor="">published Date</label>
                     <PrimaryBorder borderRadius='6px'>
-                        <DatePicker/>
+                        <DatePicker
+                            onChange={(e, strDate) => {
+                                collection.setPublishedDate(strDate)
+                                setCollection(new CollectionModel(collection.extractJSON()))
+                            }}
+                        />
                     </PrimaryBorder>
 
                     <label htmlFor="">Deadline</label>
                     <PrimaryBorder borderRadius='6px'>
-                        <DatePicker />
+                        <DatePicker 
+                            onChange={(e, strDate) => {
+                                collection.setDeadline(strDate)
+                                setCollection(new CollectionModel(collection.extractJSON()))
+                            }}
+                        />
                     </PrimaryBorder>
                 </div>
 
             </div>
 
             <div className="row">
-                <label htmlFor="">Participants</label>
+                <label htmlFor="">Participants {CollectionModel.autoAssignCount}/{collectionParticipants.length}</label>
             </div>
 
             {/* Participant container */}
             <div className="participant-container">
 
                 {collectionParticipants.map((element, index) => {
-                    return (<Participants key={index} user={element}/>)
+                    return (<Participants key={index} user={element} collection={{collection: collection, setCollection: setCollection}}/>)
                 })}
 
                 

@@ -8,17 +8,21 @@ class CollectionModel {
     #publishedDate
     #deadline
     #participantArray
+    #manualAssigned
 
-    constructor({collectionID = null, collectionName = null, amount = null, treasuryAllocation = null, dividedAmount = null, description = null, publishedDate = null, deadline = null, participantArray = []}) {
+    static autoAssignCount = 0
+
+    constructor({collectionID = null, collectionName = null, amount = 0, treasuryAllocation = 0, description = null, publishedDate = null, deadline = null, participantArray = []}, manualAssigned = 0) {
         this.#collectionID = collectionID
         this.#collectionName = collectionName
         this.#amount = amount
         this.#treasuryAllocation = treasuryAllocation
-        this.#dividedAmount = dividedAmount
+        this.#dividedAmount = amount - treasuryAllocation
         this.#description = description
         this.#publishedDate = publishedDate
         this.#deadline = deadline
         this.#participantArray = participantArray
+        this.#manualAssigned = manualAssigned
     }
 
 
@@ -37,8 +41,24 @@ class CollectionModel {
     }
 
 
+    // Calculate the amount for one participant 
+    calOneAmount(length) {
+        return CollectionModel.autoAssignCount !== 0 
+            ? this.#dividedAmount / CollectionModel.autoAssignCount
+            : 0
+    }
+
+
 
     // Getters & Setters
+    setManualAssigned(manualAssigned) {
+        this.#manualAssigned = manualAssigned
+    }
+
+    getManualAssigned() {
+        return this.#manualAssigned
+    }
+
     getCollectionID() {
         return this.#collectionID;
     }
@@ -75,8 +95,8 @@ class CollectionModel {
         return this.#dividedAmount;
     }
 
-    setDividedAmount(dividedAmount) {
-        this.#dividedAmount = dividedAmount;
+    calculateDividedAmount() {
+        this.#dividedAmount = this.#amount - this.#treasuryAllocation - this.#manualAssigned
     }
 
     getDescription() {
