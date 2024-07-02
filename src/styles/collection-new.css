@@ -102,6 +102,11 @@
     color: white;
 }
 
+.control-keys {
+    display: flex;
+    flex-direction: row;
+}
+
 
 
 

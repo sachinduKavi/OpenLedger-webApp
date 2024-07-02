@@ -110,20 +110,19 @@ export default function CreateCollection(props) {
                     return (<Participants key={index} user={element}/>)
                 })}
 
-{collectionParticipants.map((element, index) => {
-                    return (<Participants key={index} user={element}/>)
-                })}
-
-{collectionParticipants.map((element, index) => {
-                    return (<Participants key={index} user={element}/>)
-                })}
-                
                 
 
             </div>
 
             <div className="control-keys">
-                Hello
+                <PrimaryBorder borderRadius='10px' width='fit-content' margin='0 15px 0 0'>
+                    <button>SAVE</button>
+                </PrimaryBorder>
+
+                <PrimaryBorder borderRadius='10px' width='fit-content' margin='0 15px 0 0'>
+                    <button>PUBLISH</button>
+                </PrimaryBorder>
+                
             </div>
             
      
