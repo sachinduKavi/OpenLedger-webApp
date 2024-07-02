@@ -6,7 +6,7 @@
 }
 
 
-.cashflow .ant-picker {
+.ant-picker {
     background-color: #37375B;
     color: white;
 }
@@ -16,7 +16,7 @@
     color: white;
 }
 
-.cashflow .ant-picker input::placeholder {
+.ant-picker input::placeholder {
     color: white;
 }
 

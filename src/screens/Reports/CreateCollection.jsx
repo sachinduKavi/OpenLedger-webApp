@@ -99,14 +99,31 @@ export default function CreateCollection(props) {
 
             </div>
 
+            <div className="row">
+                <label htmlFor="">Participants</label>
+            </div>
+
             {/* Participant container */}
             <div className="participant-container">
 
                 {collectionParticipants.map((element, index) => {
                     return (<Participants key={index} user={element}/>)
                 })}
+
+{collectionParticipants.map((element, index) => {
+                    return (<Participants key={index} user={element}/>)
+                })}
+
+{collectionParticipants.map((element, index) => {
+                    return (<Participants key={index} user={element}/>)
+                })}
+                
                 
 
+            </div>
+
+            <div className="control-keys">
+                Hello
             </div>
             
      

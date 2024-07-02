@@ -9,6 +9,15 @@
     border-radius: 10px;
 }
 
+.participant-container {
+    overflow-y: scroll;
+    flex: 1 1 0;
+}
+
+.participant-container::-webkit-scrollbar {
+    display: none;
+}
+
 .collection-container label {
     color: #C1B5FF;
     font-weight: bold;
@@ -65,3 +74,35 @@
     align-items: flex-start;
     flex-grow: 1;
 }
+
+.ant-picker {
+    background-color: #232238;
+    color: white;
+    width: 100%;
+    margin: 0;
+}
+
+
+.ant-picker:hover, .ant-picker:focus {
+    background-color: #232238;
+    color: white;
+}
+
+.ant-picker-input input {
+    margin: 0;
+    padding: 0;
+}
+
+.ant-picker-input input::placeholder {
+    color: rgb(255, 255, 255);
+}
+
+:where(.css-dev-only-do-not-override-42nv3w).ant-picker-outlined:focus, :where(.css-dev-only-do-not-override-42nv3w).ant-picker-outlined:focus-within{
+    background-color: #232238;
+    color: white;
+}
+
+
+
+
+
