@@ -17,12 +17,14 @@ class CollectionModel {
         this.#collectionName = collectionName
         this.#amount = amount
         this.#treasuryAllocation = treasuryAllocation
-        this.#dividedAmount = amount - treasuryAllocation
+        this.#dividedAmount = amount - treasuryAllocation - manualAssigned
         this.#description = description
         this.#publishedDate = publishedDate
         this.#deadline = deadline
         this.#participantArray = participantArray
         this.#manualAssigned = manualAssigned
+
+        console.log('manual assigned ', this.#manualAssigned)
     }
 
 
@@ -36,6 +38,7 @@ class CollectionModel {
             description: this.#description,
             publishedDate: this.#publishedDate,
             deadline: this.#deadline,
+            manualAssigned: this.#manualAssigned,
             participantArray: this.#participantArray
         }
     }
@@ -46,6 +49,15 @@ class CollectionModel {
         return CollectionModel.autoAssignCount !== 0 
             ? this.#dividedAmount / CollectionModel.autoAssignCount
             : 0
+    }
+
+    incrementManualAssign(value) {
+        this.#manualAssigned += parseFloat(value)
+        console.log('from class', this.#manualAssigned)
+    }
+
+    decrementManualAssign(value) {
+        this.#manualAssigned -= value
     }
 
 

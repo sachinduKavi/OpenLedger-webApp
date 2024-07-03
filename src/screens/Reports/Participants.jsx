@@ -12,6 +12,8 @@ export default function Participants(props) {
   
   const [selected, setSelected] = useState(true)
 
+  const [amount, setAmount] = useState(0)
+
   const collection = props.collection.collection
   const setCollection = props.collection.setCollection
 
@@ -55,7 +57,13 @@ export default function Participants(props) {
           <PrimaryBorder borderRadius='10px'>
             <Input type='number'
               disabled={selected}
-              value={selected? collection.calOneAmount(2): 0}
+              value={selected? collection.calOneAmount(2): amount}
+              onChange={(e) => {
+                setAmount(e.target.value)
+                console.log('current value', collection.getManualAssigned())
+                collection.setManualAssigned(e.target.value)
+                setCollection(new CollectionModel(collection.extractJSON()))
+              }}  
             />
           </PrimaryBorder>
         </div>
@@ -66,7 +74,10 @@ export default function Participants(props) {
           <Checkbox
             checked={selected}
             onChange={(e) => {
-              participantState(e.target.checked)
+              if(CollectionModel.autoAssignCount > 1 || e.target.checked)
+                participantState(e.target.checked)
+              else 
+                console.log('System should have at least 1 member to balance the account')
             }}
           />
         </div>
