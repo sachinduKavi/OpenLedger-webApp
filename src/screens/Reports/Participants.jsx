@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 
 import PrimaryBorder from '../../components/PrimaryBorder'
-import {Checkbox, Input} from 'antd'
+import {Checkbox, Col, Input} from 'antd'
 import SimpleDP from '../../components/SimpleDP'
 import CollectionModel from '../../dataModels/CollectionDataModel'
 
@@ -60,10 +60,18 @@ export default function Participants(props) {
               value={selected? collection.calOneAmount(2): amount}
               onChange={(e) => {
                 setAmount(e.target.value)
-                console.log('current value', collection.getManualAssigned())
-                collection.setManualAssigned(e.target.value)
-                setCollection(new CollectionModel(collection.extractJSON()))
               }}  
+              onBlur={(e) => {
+                for(let i = 0; i < collection.participantArray.length; i++) {
+                  console.log(collection.participantArray[i].userID, user.getUserId())
+                  if(collection.participantArray[i].userID === user.getUserId()) {
+                    // IF user ID is match update amount
+                    collection.participantArray[i].amount = amount
+                    break
+                  }
+                }
+                setCollection(new CollectionModel(collection.extractJSON()))
+              }}
             />
           </PrimaryBorder>
         </div>
@@ -74,10 +82,24 @@ export default function Participants(props) {
           <Checkbox
             checked={selected}
             onChange={(e) => {
-              if(CollectionModel.autoAssignCount > 1 || e.target.checked)
+              if(CollectionModel.autoAssignCount > 1 || e.target.checked){
+                if(e.target.checked) {
+                  // Reset the participant array variables
+                  for(let i = 0; i < collection.participantArray.length; i++) {
+                    console.log(collection.participantArray[i].userID, user.getUserId())
+                    if(collection.participantArray[i].userID === user.getUserId()) {
+                      // IF user ID is match update amount
+                      collection.participantArray[i].amount = 0
+                      break
+                    }
+                  }
+                  setAmount(0)
+                }
                 participantState(e.target.checked)
-              else 
+              } else 
                 console.log('System should have at least 1 member to balance the account')
+
+              setCollection(new CollectionModel(collection.extractJSON()))
             }}
           />
         </div>

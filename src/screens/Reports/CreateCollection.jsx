@@ -22,6 +22,17 @@ export default function CreateCollection(props) {
     const loadParticipants = async () => {
         const tempArray = await treasury.loadTreasuryParticipant()
 
+        // Adding all the treasury participants to collection array
+        collection.participantArray = []
+        tempArray.forEach(element => {
+            collection.participantArray.push({
+                userID: element.getUserId(),
+                amount: 0,
+                state: "PENDING",
+                lastUpdate: '2024-10-25'
+            })
+        });
+
         setCollectionParticipants(tempArray)
         CollectionModel.autoAssignCount = tempArray.length // Set initial auto assign value of the class variable
 

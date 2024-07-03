@@ -7,12 +7,12 @@ class CollectionModel {
     #description
     #publishedDate
     #deadline
-    #participantArray
+    participantArray
     #manualAssigned
 
     static autoAssignCount = 0
 
-    constructor({collectionID = null, collectionName = null, amount = 0, treasuryAllocation = 0, description = null, publishedDate = null, deadline = null, participantArray = []}, manualAssigned = 0) {
+    constructor({collectionID = null, collectionName = null, amount = 0, treasuryAllocation = 0, description = null, publishedDate = null, deadline = null, participantArray = [], manualAssigned = 0}) {
         this.#collectionID = collectionID
         this.#collectionName = collectionName
         this.#amount = amount
@@ -21,14 +21,17 @@ class CollectionModel {
         this.#description = description
         this.#publishedDate = publishedDate
         this.#deadline = deadline
-        this.#participantArray = participantArray
+        this.participantArray = participantArray
         this.#manualAssigned = manualAssigned
 
-        console.log('manual assigned ', this.#manualAssigned)
+        console.log('manual assigned ', this.#manualAssigned, manualAssigned)
     }
 
 
     extractJSON() {
+        // Update manual assign value
+        this.calculateManualAssign()
+        console.log('in extract', this.#manualAssigned)
         return {
             collectionID: this.#collectionID,
             collectionName: this.#collectionName,
@@ -39,8 +42,16 @@ class CollectionModel {
             publishedDate: this.#publishedDate,
             deadline: this.#deadline,
             manualAssigned: this.#manualAssigned,
-            participantArray: this.#participantArray
+            participantArray: this.participantArray
         }
+    }
+
+
+    calculateManualAssign() {
+        this.#manualAssigned = 0
+        this.participantArray.forEach(element => {
+            this.#manualAssigned += parseFloat(element.amount)
+        });
     }
 
 
@@ -133,14 +144,6 @@ class CollectionModel {
 
     setDeadline(deadline) {
         this.#deadline = deadline;
-    }
-
-    getParticipantArray() {
-        return this.#participantArray;
-    }
-
-    setParticipantArray(participantArray) {
-        this.#participantArray = participantArray;
     }
 
 
