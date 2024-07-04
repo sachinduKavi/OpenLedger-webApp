@@ -14,6 +14,10 @@ export default function CollectionBanner() {
         <p>LKR 4800/8000</p>
         </div>
 
+        <div className="draft">
+            <h6>DRAFT</h6>
+        </div>
+
         <PollBar height='7px' margin='4px 0 4px 0' process={60}/>
 
         <div className="row">

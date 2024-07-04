@@ -4,7 +4,9 @@ class CollectionModel {
     #amount
     #treasuryAllocation
     #dividedAmount
+    #publisher
     #description
+    #status
     #publishedDate
     #deadline
     participantArray
@@ -12,7 +14,7 @@ class CollectionModel {
 
     static autoAssignCount = 0
 
-    constructor({collectionID = null, collectionName = null, amount = 0, treasuryAllocation = 0, description = null, publishedDate = null, deadline = null, participantArray = [], manualAssigned = 0}) {
+    constructor({collectionID = 'AUTO', collectionName = null, amount = 0, treasuryAllocation = 0, description = null, publishedDate = null, deadline = null, participantArray = [], manualAssigned = 0, publisher = null, status = 'DRAFT'}) {
         this.#collectionID = collectionID
         this.#collectionName = collectionName
         this.#amount = amount
@@ -21,6 +23,8 @@ class CollectionModel {
         this.#description = description
         this.#publishedDate = publishedDate
         this.#deadline = deadline
+        this.#status = status
+        this.#publisher = publisher
         this.participantArray = participantArray
         this.#manualAssigned = manualAssigned
     }
@@ -39,6 +43,8 @@ class CollectionModel {
             description: this.#description,
             publishedDate: this.#publishedDate,
             deadline: this.#deadline,
+            publisher: this.#publisher,
+            status: this.#status,
             manualAssigned: this.#manualAssigned,
             participantArray: this.participantArray
         }
@@ -53,8 +59,14 @@ class CollectionModel {
     }
 
 
+    // Save the Collection 
+    saveCollection() {
+        console.log('collection values', JSON.stringify(this.extractJSON()))
+    }
+
+
     // Calculate the amount for one participant 
-    calOneAmount(length) {
+    calOneAmount() {
         return CollectionModel.autoAssignCount !== 0 
             ? this.#dividedAmount / CollectionModel.autoAssignCount
             : 0
@@ -72,6 +84,22 @@ class CollectionModel {
 
 
     // Getters & Setters
+    getPublisher() {
+        return this.#publisher
+    }
+
+    setPublisher(publisher) {
+        this.#publisher = publisher
+    }
+
+    getStatus() {
+        return this.#status
+    }
+
+    setStatus(status) {
+        this.#status = status
+    }
+
     setManualAssigned(manualAssigned) {
         this.#manualAssigned = manualAssigned
     }

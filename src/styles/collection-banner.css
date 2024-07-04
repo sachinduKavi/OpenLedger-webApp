@@ -39,3 +39,9 @@
 .deadline {
     font-size: 12px;
 }
+
+.draft > h6 {
+    color: #FF3A3A;
+    font-weight: bold;
+    font-size: 0.7vw;
+}

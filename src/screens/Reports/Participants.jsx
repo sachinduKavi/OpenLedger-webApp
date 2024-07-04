@@ -23,6 +23,7 @@ export default function Participants(props) {
     setSelected(prev => prev)
   }, [])
 
+
   const participantState = (state) => {
     if(state) {
       CollectionModel.autoAssignCount++
@@ -63,11 +64,10 @@ export default function Participants(props) {
               }}  
               onBlur={(e) => {
                 for(let i = 0; i < collection.participantArray.length; i++) {
-                  console.log(collection.participantArray[i].userID, user.getUserId())
                   if(collection.participantArray[i].userID === user.getUserId()) {
                     // IF user ID is match update amount
                     collection.participantArray[i].amount = amount
-                    break
+                    
                   }
                 }
                 setCollection(new CollectionModel(collection.extractJSON()))
@@ -86,14 +86,23 @@ export default function Participants(props) {
                 if(e.target.checked) {
                   // Reset the participant array variables
                   for(let i = 0; i < collection.participantArray.length; i++) {
-                    console.log(collection.participantArray[i].userID, user.getUserId())
                     if(collection.participantArray[i].userID === user.getUserId()) {
                       // IF user ID is match update amount
                       collection.participantArray[i].amount = 0
+                      collection.participantArray[i].autoAssigned = true
                       break
-                    }
+                    } 
                   }
                   setAmount(0)
+                
+                } else {
+                  for(let i = 0; i < collection.participantArray.length; i++) {
+                    if(collection.participantArray[i].userID === user.getUserId()) {
+                      // IF user ID is match update amount
+                      collection.participantArray[i].autoAssigned = false
+                      break
+                    } 
+                  }
                 }
                 participantState(e.target.checked)
               } else {

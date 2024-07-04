@@ -15,7 +15,10 @@ export default function CreateCollection(props) {
     const collection = props.collection
     const setCollection = props.setCollection
 
-    const [selectedParticipants, setSelectedParticipants] = useState([]) // Selected participants for the collection 
+   // Save collection on database 
+   const saveCollection = () => {
+    collection.saveCollection()
+   }
 
     // Participant array load from the database and update the UI
     const [collectionParticipants, setCollectionParticipants] = useState(props.collectionParticipants??[]) 
@@ -29,6 +32,7 @@ export default function CreateCollection(props) {
                 userID: element.getUserId(),
                 amount: 0,
                 state: "PENDING",
+                autoAssigned: true,
                 lastUpdate: '2024-10-25'
             })
         });
@@ -173,11 +177,15 @@ export default function CreateCollection(props) {
 
             <div className="control-keys">
                 <PrimaryBorder borderRadius='10px' width='fit-content' margin='0 15px 0 0'>
-                    <button>SAVE</button>
+                    <button onClick={saveCollection}>SAVE</button>
                 </PrimaryBorder>
 
                 <PrimaryBorder borderRadius='10px' width='fit-content' margin='0 15px 0 0'>
                     <button>PUBLISH</button>
+                </PrimaryBorder>
+
+                <PrimaryBorder borderRadius='10px' width='fit-content' margin='0 15px 0 0'>
+                    <button style={{backgroundColor: 'red'}}>DISCARD</button>
                 </PrimaryBorder>
                 
             </div>
