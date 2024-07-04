@@ -57,7 +57,7 @@ export default function Participants(props) {
           <PrimaryBorder borderRadius='10px'>
             <Input type='number'
               disabled={selected}
-              value={selected? collection.calOneAmount(2): amount}
+              value={selected? Number(collection.calOneAmount(2).toFixed(2)): amount}
               onChange={(e) => {
                 setAmount(e.target.value)
               }}  
@@ -96,9 +96,10 @@ export default function Participants(props) {
                   setAmount(0)
                 }
                 participantState(e.target.checked)
-              } else 
+              } else {
+                // Warring message should be displayed
                 console.log('System should have at least 1 member to balance the account')
-
+              }
               setCollection(new CollectionModel(collection.extractJSON()))
             }}
           />

@@ -24,6 +24,8 @@ export default function CashflowEditor(props) {
 
   const [formChange, setChange] = useState(false) // State of the form whether user made any new changes to the form
 
+
+  // Assign current data if it is a new cashflow report
   const [dates, setDates] = useState({
     insuranceDate: cashflow.getInsuranceDate()?? generateCurrentDate(),
     rangeStart: cashflow.getRangeStart()?? generateCurrentDate(),

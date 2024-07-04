@@ -81,7 +81,7 @@ export default function TreasuryDashboard(){
     }
     toggleProcessing(false)
   }
-
+  
   // Component did mount ?
   useEffect(() => {
     console.log('Local storage update in useEffect')

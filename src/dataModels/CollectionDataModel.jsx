@@ -23,8 +23,6 @@ class CollectionModel {
         this.#deadline = deadline
         this.participantArray = participantArray
         this.#manualAssigned = manualAssigned
-
-        console.log('manual assigned ', this.#manualAssigned, manualAssigned)
     }
 
 
