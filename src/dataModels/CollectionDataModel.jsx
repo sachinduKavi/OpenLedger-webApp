@@ -9,12 +9,13 @@ class CollectionModel {
     #status
     #publishedDate
     #deadline
+    #publisherName
     participantArray
     #manualAssigned
 
     static autoAssignCount = 0
 
-    constructor({collectionID = 'AUTO', collectionName = null, amount = 0, treasuryAllocation = 0, description = null, publishedDate = null, deadline = null, participantArray = [], manualAssigned = 0, publisher = null, status = 'DRAFT'}) {
+    constructor({collectionID = 'AUTO', collectionName = null, amount = 0, treasuryAllocation = 0, description = null, publishedDate = null, deadline = null, participantArray = [], manualAssigned = 0, publisher = null, status = 'DRAFT', publisherName = null}) {
         this.#collectionID = collectionID
         this.#collectionName = collectionName
         this.#amount = amount
@@ -23,6 +24,7 @@ class CollectionModel {
         this.#description = description
         this.#publishedDate = publishedDate
         this.#deadline = deadline
+        this.#publisherName = publisherName
         this.#status = status
         this.#publisher = publisher
         this.participantArray = participantArray
@@ -44,6 +46,7 @@ class CollectionModel {
             publishedDate: this.#publishedDate,
             deadline: this.#deadline,
             publisher: this.#publisher,
+            publisherName: this.#publisherName,
             status: this.#status,
             manualAssigned: this.#manualAssigned,
             participantArray: this.participantArray
@@ -54,7 +57,8 @@ class CollectionModel {
     calculateManualAssign() {
         this.#manualAssigned = 0
         this.participantArray.forEach(element => {
-            this.#manualAssigned += parseFloat(element.amount)
+            if(!element.autoAssign)
+                this.#manualAssigned += parseFloat(element.amount)
         });
     }
 
