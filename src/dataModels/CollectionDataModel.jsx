@@ -1,3 +1,5 @@
+import { collectionSaveQuery } from "../query/reportQuery"
+
 class CollectionModel {
     #collectionID
     #collectionName
@@ -29,13 +31,14 @@ class CollectionModel {
         this.#publisher = publisher
         this.participantArray = participantArray
         this.#manualAssigned = manualAssigned
+
+        
     }
 
 
     extractJSON() {
         // Update manual assign value
         this.calculateManualAssign()
-        console.log('in extract', this.#manualAssigned)
         return {
             collectionID: this.#collectionID,
             collectionName: this.#collectionName,
@@ -64,8 +67,16 @@ class CollectionModel {
 
 
     // Save the Collection 
-    saveCollection() {
-        console.log('collection values', JSON.stringify(this.extractJSON()))
+    async saveCollection() {
+        const response = await collectionSaveQuery(this.extractJSON())
+        console.log(response)
+        return (response.status === 200) 
+            ? {
+                process: response.data.proceed,
+                collection: new CollectionModel(response.data.content),
+                errorMessage: response.data.errorMessage
+            } 
+            : false
     }
 
 
@@ -78,7 +89,6 @@ class CollectionModel {
 
     incrementManualAssign(value) {
         this.#manualAssigned += parseFloat(value)
-        console.log('from class', this.#manualAssigned)
     }
 
     decrementManualAssign(value) {
@@ -88,6 +98,14 @@ class CollectionModel {
 
 
     // Getters & Setters
+    getPublisherName() {
+        return this.#publisherName
+    }
+
+    setPublisherName(publisherName) {
+        this.#publisherName = publisherName
+    }
+
     getPublisher() {
         return this.#publisher
     }

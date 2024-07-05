@@ -15,10 +15,21 @@ export default function CreateCollection(props) {
     const collection = props.collection
     const setCollection = props.setCollection
 
-   // Save collection on database 
-   const saveCollection = () => {
-    collection.saveCollection()
-   }
+    // Save collection on database 
+    const saveCollection = async () => {
+        const res = await collection.saveCollection()
+        console.log('response', res)
+        if(res) {
+            if(res.process) {
+                // Response successful
+                setCollection(new CollectionModel(res.collection.extractJSON())) // Update UI
+            } else {
+                // Server Error **Display error message
+            }
+        } else {
+            // Network error ocurred **Display error message
+        }
+    }
 
     // Participant array load from the database and update the UI
     const [collectionParticipants, setCollectionParticipants] = useState(props.collectionParticipants??[]) 
@@ -46,14 +57,15 @@ export default function CreateCollection(props) {
     const {TextArea} = Input
 
     useEffect(() => {
-        loadParticipants()
+        if(collectionParticipants.length < 1)
+            loadParticipants()
     }, [])
 
   return (
     <div className='collection-border'>
 
         <div className="collection-container">
-            <h2>COLLECTION</h2>
+            <h2>COLLECTION </h2> <h6>{collection.getCollectionID()}</h6>
             
             <div className="row">
                 <div className="column collection-name">

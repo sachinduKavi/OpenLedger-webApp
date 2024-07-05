@@ -30,6 +30,10 @@ const discardCashflowQuery = async (reportID) => {
     return await cDomain.put('cashflow/discard', {reportID: reportID}, header)
 }
 
+const collectionSaveQuery = async (collection) => {
+    return await cDomain.post('collection/saveCollection', collection, header)
+} 
+
 
 export {
     saveEstimateReportQuery,
@@ -38,5 +42,6 @@ export {
     saveCashflow,
     getAllCashflow,
     getCashflowReport,
-    discardCashflowQuery
+    discardCashflowQuery,
+    collectionSaveQuery
 }
