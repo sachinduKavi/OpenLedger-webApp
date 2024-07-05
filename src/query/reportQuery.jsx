@@ -34,6 +34,10 @@ const collectionSaveQuery = async (collection) => {
     return await cDomain.post('collection/saveCollection', collection, header)
 } 
 
+const loadALlTreasuryCollections = async () => {
+    return await cDomain.get('collection/getAllCollections', header)
+}
+
 
 export {
     saveEstimateReportQuery,
@@ -43,5 +47,6 @@ export {
     getAllCashflow,
     getCashflowReport,
     discardCashflowQuery,
-    collectionSaveQuery
+    collectionSaveQuery,
+    loadALlTreasuryCollections
 }

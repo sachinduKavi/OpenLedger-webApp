@@ -1,15 +1,20 @@
 import React from 'react'
+import {motion} from 'framer-motion'
 
 import '../../styles/collection-banner.css'
 
 import PollBar from '../../components/PollBar'
 
-export default function CollectionBanner() {
+export default function CollectionBanner(props) {
+    const collection = props.collection
+
   return (
-    <div className='collection-banner-border'>
+    <motion.div className='collection-banner-border'
+        whileTap={{scale: 0.98, transition: {duration: 0.1}}}
+    >
         
         <div className="top-heading">
-        <h2>Monthly Membership Fees</h2>
+        <h2>{collection.getCollectionName()}</h2>
 
         <p>LKR 4800/8000</p>
         </div>
@@ -37,6 +42,6 @@ export default function CollectionBanner() {
             </div>
 
         </div>
-    </div>
+    </motion.div>
   )
 }

@@ -29,3 +29,13 @@
     width: 48%;
     padding: 1%;
 }
+
+.collection-banner-container {
+    width: 100%;
+    flex: 1 1 0;
+    overflow-y: scroll;
+}
+
+.collection-banner-container::-webkit-scrollbar {
+    display: none;
+}

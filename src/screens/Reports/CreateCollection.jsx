@@ -42,7 +42,7 @@ export default function CreateCollection(props) {
             collection.participantArray.push({
                 userID: element.getUserId(),
                 amount: 0,
-                state: "PENDING",
+                paidAmount: 0,
                 autoAssigned: true,
                 lastUpdate: '2024-10-25'
             })
@@ -65,7 +65,7 @@ export default function CreateCollection(props) {
     <div className='collection-border'>
 
         <div className="collection-container">
-            <h2>COLLECTION </h2> <h6>{collection.getCollectionID()}</h6>
+            <h2>COLLECTION </h2> <h6>{collection.getCollectionID()} {collection.getStatus()}</h6>
             
             <div className="row">
                 <div className="column collection-name">

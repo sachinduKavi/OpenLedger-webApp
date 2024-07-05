@@ -1,4 +1,4 @@
-import { collectionSaveQuery } from "../query/reportQuery"
+import { collectionSaveQuery, loadALlTreasuryCollections } from "../query/reportQuery"
 
 class CollectionModel {
     #collectionID
@@ -77,6 +77,28 @@ class CollectionModel {
                 errorMessage: response.data.errorMessage
             } 
             : false
+    }
+
+
+    // Load all the collections related to treasury ID
+    static async fetchAllCollections() {
+        
+        const response = await loadALlTreasuryCollections()
+        if(response.status === 200 && response.data.proceed) {
+          
+            const collectionArray = response.data.content??[] // Receive to collection array
+            
+
+            let collectionObjArray = []
+            collectionArray.forEach(element => {
+                collectionObjArray.push(new CollectionModel(element))
+            })
+           
+            return collectionObjArray
+    
+        } 
+
+        return false
     }
 
 
