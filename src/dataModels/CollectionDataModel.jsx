@@ -14,10 +14,11 @@ class CollectionModel {
     #publisherName
     participantArray
     #manualAssigned
+    autoAssignCount
 
     // static autoAssignCount = 0
 
-    constructor({collectionID = 'AUTO', collectionName = null, amount = 0, treasuryAllocation = 0, description = null, publishedDate = null, deadline = null, participantArray = [], manualAssigned = 0, publisher = null, status = 'DRAFT', publisherName = null}) {
+    constructor({collectionID = 'AUTO', collectionName = null, amount = 0, treasuryAllocation = 0, description = null, publishedDate = null, deadline = null, participantArray = [], manualAssigned = 0, publisher = null, status = 'DRAFT', publisherName = null, autoAssignCount = 0}) {
         this.#collectionID = collectionID
         this.#collectionName = collectionName
         this.#amount = amount
@@ -29,6 +30,7 @@ class CollectionModel {
         this.#publisherName = publisherName
         this.#status = status
         this.#publisher = publisher
+        this.autoAssignCount = autoAssignCount
         this.participantArray = participantArray
         this.#manualAssigned = manualAssigned
     }
@@ -50,7 +52,8 @@ class CollectionModel {
             publisherName: this.#publisherName,
             status: this.#status,
             manualAssigned: this.#manualAssigned,
-            participantArray: this.participantArray
+            participantArray: this.participantArray,
+            autoAssignCount: this.autoAssignCount
         }
     }
 
@@ -62,7 +65,7 @@ class CollectionModel {
                 this.#manualAssigned += parseFloat(element.amount)
         });
 
-        console.log('manual assigned', this.#manualAssigned)
+        // console.log('manual assigned', this.#manualAssigned)
     }
 
 
@@ -104,16 +107,9 @@ class CollectionModel {
 
     // Calculate the amount for one participant 
     calOneAmount() {
-        let count
-        this.participantArray.forEach(element=>{
-            console.log(element)
-            if(!Boolean(element.autoAssigned)) {
-                count++
-            }
-        })
-
-        return CollectionModel.autoAssignCount !== 0 
-            ? this.#dividedAmount / count
+        console.log(this.#dividedAmount, this.autoAssignCount)
+        return this.autoAssignCount !== 0 
+            ? this.#dividedAmount / this.autoAssignCount
             : 0
     }
 

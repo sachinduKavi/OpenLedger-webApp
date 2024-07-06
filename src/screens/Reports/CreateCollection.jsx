@@ -57,9 +57,7 @@ export default function CreateCollection(props) {
         });
 
         setCollectionParticipants(tempArray)
-        CollectionModel.autoAssignCount = tempArray.length // Set initial auto assign value of the class variable
-
-
+        collection.autoAssignCount = collection.participantArray.length
     }
 
     const {TextArea} = Input
@@ -160,7 +158,7 @@ export default function CreateCollection(props) {
                     <label htmlFor="">published Date</label>
                     <PrimaryBorder borderRadius='6px'>
                         <DatePicker
-                            value={dayjs(collection.getPublishedDate())}
+                            value={dayjs(collection.getPublishedDate()?? new Date())}
                             onChange={(e, strDate) => {
                                 collection.setPublishedDate(strDate)
                                 setCollection(new CollectionModel(collection.extractJSON()))
@@ -171,7 +169,7 @@ export default function CreateCollection(props) {
                     <label htmlFor="">Deadline</label>
                     <PrimaryBorder borderRadius='6px'>
                         <DatePicker 
-                            value={dayjs(collection.getDeadline())}
+                            value={dayjs(collection.getPublishedDate()?? new Date())}
                             onChange={(e, strDate) => {
                                 collection.setDeadline(strDate)
                                 setCollection(new CollectionModel(collection.extractJSON()))
@@ -183,7 +181,7 @@ export default function CreateCollection(props) {
             </div>
 
             <div className="row">
-                <label htmlFor="">Participants {CollectionModel.autoAssignCount}/{collectionParticipants.length}</label>
+                <label htmlFor="">Participants {collection.autoAssignCount}/{collectionParticipants.length}</label>
             </div>
 
             {/* Participant container */}

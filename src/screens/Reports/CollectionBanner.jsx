@@ -20,7 +20,8 @@ export default function CollectionBanner(props) {
     <motion.div className='collection-banner-border'
         whileTap={{scale: 0.98, transition: {duration: 0.1}}}
         onClick={() => {
-            console.log('banner click')
+            // console.log('banner click')
+            // console.log('banner', collection.extractJSON())
             props.setCollection(new CollectionModel(collection.extractJSON()))
         }}
     >

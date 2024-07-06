@@ -28,7 +28,7 @@ export default function Participants(props) {
   const [selected, setSelected] = useState(Boolean(participant.autoAssigned))
  
 
-  const [amount, setAmount] = useState(!selected?participant.amount:0)
+  const [amount, setAmount] = useState(0)
 
 
   // Component did mount ?
@@ -38,14 +38,13 @@ export default function Participants(props) {
 
 
   const participantState = (state) => {
-    // if(state) {
-    //   CollectionModel.autoAssignCount++
-    // } else {
-    //   CollectionModel.autoAssignCount--
-    // }
-    
+    if(state) {
+      collection.autoAssignCount++
+    } else {
+      collection.autoAssignCount--
+    }
     setSelected(state) // Change state of the participant
-    setCollection(new CollectionModel(collection.extractJSON()))
+    // setCollection(new CollectionModel(collection.extractJSON()))
   }
 
 
@@ -71,7 +70,7 @@ export default function Participants(props) {
           <PrimaryBorder borderRadius='10px'>
             <Input type='number'
               disabled={selected}
-              value={selected? Number(collection.calOneAmount(2).toFixed(2)): amount}
+              value={selected? Number(collection.calOneAmount().toFixed(2)): amount}
               onChange={(e) => {
                 setAmount(e.target.value)
               }}  
@@ -80,7 +79,7 @@ export default function Participants(props) {
                   if(collection.participantArray[i].userID === user.getUserId()) {
                     // IF user ID is match update amount
                     collection.participantArray[i].amount = amount
-                    
+                    break
                   }
                 }
                 setCollection(new CollectionModel(collection.extractJSON()))
@@ -95,7 +94,7 @@ export default function Participants(props) {
           <Checkbox
             checked={selected}
             onChange={(e) => {
-              if(CollectionModel.autoAssignCount > 1 || e.target.checked){
+              if(collection.autoAssignCount > 1 || e.target.checked){
                 if(e.target.checked) {
                   // Reset the participant array variables
                   for(let i = 0; i < collection.participantArray.length; i++) {
