@@ -15,7 +15,7 @@ class CollectionModel {
     participantArray
     #manualAssigned
 
-    static autoAssignCount = 0
+    // static autoAssignCount = 0
 
     constructor({collectionID = 'AUTO', collectionName = null, amount = 0, treasuryAllocation = 0, description = null, publishedDate = null, deadline = null, participantArray = [], manualAssigned = 0, publisher = null, status = 'DRAFT', publisherName = null}) {
         this.#collectionID = collectionID
@@ -31,8 +31,6 @@ class CollectionModel {
         this.#publisher = publisher
         this.participantArray = participantArray
         this.#manualAssigned = manualAssigned
-
-        
     }
 
 
@@ -63,6 +61,8 @@ class CollectionModel {
             if(!element.autoAssign)
                 this.#manualAssigned += parseFloat(element.amount)
         });
+
+        console.log('manual assigned', this.#manualAssigned)
     }
 
 
@@ -104,8 +104,16 @@ class CollectionModel {
 
     // Calculate the amount for one participant 
     calOneAmount() {
+        let count
+        this.participantArray.forEach(element=>{
+            console.log(element)
+            if(!Boolean(element.autoAssigned)) {
+                count++
+            }
+        })
+
         return CollectionModel.autoAssignCount !== 0 
-            ? this.#dividedAmount / CollectionModel.autoAssignCount
+            ? this.#dividedAmount / count
             : 0
     }
 

@@ -10,12 +10,25 @@ import '../../styles/estimate-participants.css'
 export default function Participants(props) {
   const user = props.user
   
-  const [selected, setSelected] = useState(true)
-
-  const [amount, setAmount] = useState(0)
-
+  // Parent collection state
   const collection = props.collection.collection
   const setCollection = props.collection.setCollection
+  
+  let participant = null
+  // Get participant data from the collection
+  for(const element of collection.participantArray) {
+    if(user.getUserId() === element.userID) {
+      participant = element
+      break
+    }
+  }
+
+  console.log('participant amount', participant.amount, Boolean(participant.autoAssigned), CollectionModel.autoAssignCount)
+  
+  const [selected, setSelected] = useState(Boolean(participant.autoAssigned))
+ 
+
+  const [amount, setAmount] = useState(!selected?participant.amount:0)
 
 
   // Component did mount ?
@@ -25,11 +38,11 @@ export default function Participants(props) {
 
 
   const participantState = (state) => {
-    if(state) {
-      CollectionModel.autoAssignCount++
-    } else {
-      CollectionModel.autoAssignCount--
-    }
+    // if(state) {
+    //   CollectionModel.autoAssignCount++
+    // } else {
+    //   CollectionModel.autoAssignCount--
+    // }
     
     setSelected(state) // Change state of the participant
     setCollection(new CollectionModel(collection.extractJSON()))

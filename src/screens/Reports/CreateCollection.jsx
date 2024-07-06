@@ -3,6 +3,7 @@ import '../../styles/collection-new.css'
 
 import {Input, Checkbox, DatePicker} from 'antd'
 import PrimaryBorder from '../../components/PrimaryBorder'
+import dayjs from 'dayjs'
 import Participants from './Participants'
 import CalculateIcon from '../../assets/icons/Calculator.png'
 import CollectionModel from '../../dataModels/CollectionDataModel'
@@ -159,6 +160,7 @@ export default function CreateCollection(props) {
                     <label htmlFor="">published Date</label>
                     <PrimaryBorder borderRadius='6px'>
                         <DatePicker
+                            value={dayjs(collection.getPublishedDate())}
                             onChange={(e, strDate) => {
                                 collection.setPublishedDate(strDate)
                                 setCollection(new CollectionModel(collection.extractJSON()))
@@ -169,6 +171,7 @@ export default function CreateCollection(props) {
                     <label htmlFor="">Deadline</label>
                     <PrimaryBorder borderRadius='6px'>
                         <DatePicker 
+                            value={dayjs(collection.getDeadline())}
                             onChange={(e, strDate) => {
                                 collection.setDeadline(strDate)
                                 setCollection(new CollectionModel(collection.extractJSON()))
