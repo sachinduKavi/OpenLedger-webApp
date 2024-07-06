@@ -1,3 +1,4 @@
+import { generateCurrentDate } from "../middleware/GenerateCurrentDateTime"
 import { collectionSaveQuery, loadALlTreasuryCollections } from "../query/reportQuery"
 
 class CollectionModel {
@@ -18,7 +19,7 @@ class CollectionModel {
 
     // static autoAssignCount = 0
 
-    constructor({collectionID = 'AUTO', collectionName = null, amount = 0, treasuryAllocation = 0, description = null, publishedDate = new Date(), deadline = new Date(), participantArray = [], manualAssigned = 0, publisher = null, status = 'DRAFT', publisherName = null, autoAssignCount = 0}) {
+    constructor({collectionID = 'AUTO', collectionName = null, amount = 0, treasuryAllocation = 0, description = null, publishedDate = generateCurrentDate(), deadline = generateCurrentDate(), participantArray = [], manualAssigned = 0, publisher = null, status = 'DRAFT', publisherName = null, autoAssignCount = 0}) {
         this.#collectionID = collectionID
         this.#collectionName = collectionName
         this.#amount = amount
@@ -65,7 +66,7 @@ class CollectionModel {
                 this.#manualAssigned += parseFloat(element.amount)
         });
 
-        // console.log('manual assigned', this.#manualAssigned)
+        console.log('manual assigned', this.#manualAssigned)
     }
 
 
@@ -87,6 +88,7 @@ class CollectionModel {
     static async fetchAllCollections() {
         
         const response = await loadALlTreasuryCollections()
+        console.log('response', response)
         if(response.status === 200 && response.data.proceed) {
           
             const collectionArray = response.data.content??[] // Receive to collection array

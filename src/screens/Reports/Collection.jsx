@@ -18,6 +18,7 @@ export default function Collection(props) {
   // Load treasury collections from the database
   const loadTreasuryCollections = async () => {
     const res = await CollectionModel.fetchAllCollections()
+    console.log('in load teasury', res)
     if(res) {
       setCollectionArray(res)
     } else {

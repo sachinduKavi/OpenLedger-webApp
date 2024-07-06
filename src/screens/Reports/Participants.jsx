@@ -17,9 +17,7 @@ export default function Participants(props) {
   
   
   const [selected, setSelected] = useState(Boolean(user.autoAssigned))
- 
-
-  const [amount, setAmount] = useState(user.autoAssigned? user.amount: 0)
+  const [amount, setAmount] = useState(0)
 
 
   // Component did mount ?

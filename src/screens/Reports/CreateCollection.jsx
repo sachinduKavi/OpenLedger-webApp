@@ -7,6 +7,7 @@ import dayjs from 'dayjs'
 import Participants from './Participants'
 import CalculateIcon from '../../assets/icons/Calculator.png'
 import CollectionModel from '../../dataModels/CollectionDataModel'
+import { generateCurrentDate } from '../../middleware/GenerateCurrentDateTime'
 
 
 export default function CreateCollection(props) {
@@ -176,7 +177,7 @@ export default function CreateCollection(props) {
                     <label htmlFor="">Deadline</label>
                     <PrimaryBorder borderRadius='6px'>
                         <DatePicker 
-                            value={dayjs(collection.getPublishedDate())}
+                            value={dayjs(collection.getDeadline())}
                             onChange={(e, strDate) => {
                                 collection.setDeadline(strDate)
                                 setCollection(new CollectionModel(collection.extractJSON()))
