@@ -15,6 +15,11 @@ export default function CreateCollection(props) {
     const collection = props.collection
     const setCollection = props.setCollection
 
+    // useEffect(() => {
+    //     setCollection(props.collection)
+    // }, [])
+
+
     // Save collection on database 
     const saveCollection = async () => {
         const res = await collection.saveCollection()
@@ -22,7 +27,8 @@ export default function CreateCollection(props) {
         if(res) {
             if(res.process) {
                 // Response successful
-                setCollection(new CollectionModel(res.collection.extractJSON())) // Update UI
+                setCollection(new CollectionModel(res.collection.extractJSON())) // Update parent collection 
+                props.setLoadState(true)
             } else {
                 // Server Error **Display error message
             }
@@ -30,6 +36,7 @@ export default function CreateCollection(props) {
             // Network error ocurred **Display error message
         }
     }
+
 
     // Participant array load from the database and update the UI
     const [collectionParticipants, setCollectionParticipants] = useState(props.collectionParticipants??[]) 
