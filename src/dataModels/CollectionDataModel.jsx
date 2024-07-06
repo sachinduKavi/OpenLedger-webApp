@@ -18,7 +18,7 @@ class CollectionModel {
 
     // static autoAssignCount = 0
 
-    constructor({collectionID = 'AUTO', collectionName = null, amount = 0, treasuryAllocation = 0, description = null, publishedDate = null, deadline = null, participantArray = [], manualAssigned = 0, publisher = null, status = 'DRAFT', publisherName = null, autoAssignCount = 0}) {
+    constructor({collectionID = 'AUTO', collectionName = null, amount = 0, treasuryAllocation = 0, description = null, publishedDate = new Date(), deadline = new Date(), participantArray = [], manualAssigned = 0, publisher = null, status = 'DRAFT', publisherName = null, autoAssignCount = 0}) {
         this.#collectionID = collectionID
         this.#collectionName = collectionName
         this.#amount = amount

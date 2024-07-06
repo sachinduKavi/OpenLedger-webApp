@@ -42,22 +42,29 @@ export default function CreateCollection(props) {
     // Participant array load from the database and update the UI
     const [collectionParticipants, setCollectionParticipants] = useState(props.collectionParticipants??[]) 
     const loadParticipants = async () => {
-        const tempArray = await treasury.loadTreasuryParticipant()
-
         // Adding all the treasury participants to collection array
-        collection.participantArray = []
-        tempArray.forEach(element => {
-            collection.participantArray.push({
-                userID: element.getUserId(),
-                amount: 0,
-                paidAmount: 0,
-                autoAssigned: true,
-                lastUpdate: '2024-10-25'
-            })
-        });
+        if(collection.getCollectionID() === 'AUTO') {
+            // New collection 
+            const tempArray = await treasury.loadTreasuryParticipant()
+            collection.participantArray = []
+            tempArray.forEach(element => {
+                collection.participantArray.push({
+                    userID: element.getUserId(),
+                    dpLink: element.getDisplayPictureId(),
+                    userName: element.getUserName(),
+                    amount: 0,
+                    paidAmount: 0,
+                    autoAssigned: true,
+                    lastUpdate: '2024-10-25'
+                })
+            });
+            collection.autoAssignCount = collection.participantArray.length
+           
+        } else { 
+            collection.autoAssignCount = 25
+        }
 
-        setCollectionParticipants(tempArray)
-        collection.autoAssignCount = collection.participantArray.length
+        setCollectionParticipants(collection.participantArray)
     }
 
     const {TextArea} = Input
@@ -158,7 +165,7 @@ export default function CreateCollection(props) {
                     <label htmlFor="">published Date</label>
                     <PrimaryBorder borderRadius='6px'>
                         <DatePicker
-                            value={dayjs(collection.getPublishedDate()?? new Date())}
+                            value={dayjs(collection.getPublishedDate())}
                             onChange={(e, strDate) => {
                                 collection.setPublishedDate(strDate)
                                 setCollection(new CollectionModel(collection.extractJSON()))
@@ -169,7 +176,7 @@ export default function CreateCollection(props) {
                     <label htmlFor="">Deadline</label>
                     <PrimaryBorder borderRadius='6px'>
                         <DatePicker 
-                            value={dayjs(collection.getPublishedDate()?? new Date())}
+                            value={dayjs(collection.getPublishedDate())}
                             onChange={(e, strDate) => {
                                 collection.setDeadline(strDate)
                                 setCollection(new CollectionModel(collection.extractJSON()))

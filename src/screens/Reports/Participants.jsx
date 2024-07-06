@@ -10,25 +10,16 @@ import '../../styles/estimate-participants.css'
 export default function Participants(props) {
   const user = props.user
   
+  console.log('participant user', user)
   // Parent collection state
   const collection = props.collection.collection
   const setCollection = props.collection.setCollection
   
-  let participant = null
-  // Get participant data from the collection
-  for(const element of collection.participantArray) {
-    if(user.getUserId() === element.userID) {
-      participant = element
-      break
-    }
-  }
-
-  console.log('participant amount', participant.amount, Boolean(participant.autoAssigned), CollectionModel.autoAssignCount)
   
-  const [selected, setSelected] = useState(Boolean(participant.autoAssigned))
+  const [selected, setSelected] = useState(Boolean(user.autoAssigned))
  
 
-  const [amount, setAmount] = useState(0)
+  const [amount, setAmount] = useState(user.autoAssigned? user.amount: 0)
 
 
   // Component did mount ?
@@ -54,13 +45,13 @@ export default function Participants(props) {
           <div className="row">
 
             <div className='dp-container mini-column'>
-              <SimpleDP size='40px' imageLink={user.getDisplayPictureId()} imageScale={{x: 0, y:0, scale: 1}}/>
+              <SimpleDP size='40px' imageLink={user.dpLink} imageScale={{x: 0, y:0, scale: 1}}/>
             </div>
             
 
             <div className="mini-column name-card">
-              <h5>{user.getUserName()}</h5>
-              <h5>{user.getUserId()}</h5>
+              <h5>{user.userName}</h5>
+              <h5>{user.userID}</h5>
             </div>
           </div>
         </div>
@@ -75,13 +66,7 @@ export default function Participants(props) {
                 setAmount(e.target.value)
               }}  
               onBlur={(e) => {
-                for(let i = 0; i < collection.participantArray.length; i++) {
-                  if(collection.participantArray[i].userID === user.getUserId()) {
-                    // IF user ID is match update amount
-                    collection.participantArray[i].amount = amount
-                    break
-                  }
-                }
+                user.amount = amount
                 setCollection(new CollectionModel(collection.extractJSON()))
               }}
             />
@@ -97,24 +82,11 @@ export default function Participants(props) {
               if(collection.autoAssignCount > 1 || e.target.checked){
                 if(e.target.checked) {
                   // Reset the participant array variables
-                  for(let i = 0; i < collection.participantArray.length; i++) {
-                    if(collection.participantArray[i].userID === user.getUserId()) {
-                      // IF user ID is match update amount
-                      collection.participantArray[i].amount = 0
-                      collection.participantArray[i].autoAssigned = true
-                      break
-                    } 
-                  }
+                  user.amount = 0
+                  user.autoAssigned = true 
                   setAmount(0)
-                
                 } else {
-                  for(let i = 0; i < collection.participantArray.length; i++) {
-                    if(collection.participantArray[i].userID === user.getUserId()) {
-                      // IF user ID is match update amount
-                      collection.participantArray[i].autoAssigned = false
-                      break
-                    } 
-                  }
+                  user.autoAssigned = false
                 }
                 participantState(e.target.checked)
               } else {
