@@ -13,6 +13,7 @@ import {SessionContext} from '../../Session'
 
 export default function CreateCollection(props) {
     const changeSessionData = useContext(SessionContext).changeSessionData
+    const activeUser = props.activeUser
 
     const treasury = props.treasury // Treasury instant from parent
 
@@ -69,24 +70,41 @@ export default function CreateCollection(props) {
             });
             collection.autoAssignCount = collection.participantArray.length
             setCollection(new CollectionModel(collection.extractJSON()))
-            console.log('extraction success')
         }
 
 
     }
 
-
     // Delete the collection
-    const discardCollection = () => {
+    const discardCollection = async () => {
+        // IF collection was never created
+        if(collection.getCollectionID() === 'AUTO') {
+            setCollection(null)
+            return
+        }
 
+        // Display confirmation alert
+        if(window.confirm("Are you sure you want to delete the collection?")) {
+            changeSessionData({processing: true})
+            const res = await collection.deleteCollection()
+            if(res && res.proceed) {
+                setCollection(null) // Set collection to null
+                props.setLoadState(true)
+            } else {
+                // Deletion was unsuccessful ** Display error message
+            }
+            
+            changeSessionData({processing: false})
+        }
+        
     }
     
     const {TextArea} = Input
 
     useEffect(() => {
         // if(collectionParticipants.length < 1)
-            loadParticipants()
-    }, [])
+        loadParticipants()
+    }, [props.newCollectionState])
 
   return (
     <div className='collection-border'>
@@ -220,7 +238,7 @@ export default function CreateCollection(props) {
 
             </div>
 
-            <div className="control-keys">
+            <div className="control-keys"  style={{display: (activeUser.getUserLevel() > 2) ? 'flex': 'none'}}>
                 <PrimaryBorder borderRadius='10px' width='fit-content' margin='0 15px 0 0'>
                     <button onClick={saveCollection} disabled={!changeForm}>SAVE</button>
                 </PrimaryBorder>
@@ -236,7 +254,7 @@ export default function CreateCollection(props) {
                 </PrimaryBorder>
 
                 <PrimaryBorder borderRadius='10px' width='fit-content' margin='0 15px 0 0'>
-                    <button style={{backgroundColor: 'red'}}>DISCARD</button>
+                    <button style={{backgroundColor: 'red'}} onClick={discardCollection}>DISCARD</button>
                 </PrimaryBorder>
                 
             </div>

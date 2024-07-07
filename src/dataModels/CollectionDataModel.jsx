@@ -1,5 +1,5 @@
 import { generateCurrentDate } from "../middleware/GenerateCurrentDateTime"
-import { collectionSaveQuery, loadALlTreasuryCollections } from "../query/reportQuery"
+import { collectionSaveQuery, loadALlTreasuryCollections, discardCollectionQuery} from "../query/reportQuery"
 
 class CollectionModel {
     #collectionID
@@ -115,6 +115,17 @@ class CollectionModel {
         } 
 
         return false
+    }
+
+    // Remove collection from the database
+    async deleteCollection() {
+        const response = await discardCollectionQuery(this.#collectionID)
+        return response.status === 200 
+            ? {
+                proceed: response.data.proceed,
+                errorMessage: response.data.errorMessage
+            }
+            : false
     }
 
 

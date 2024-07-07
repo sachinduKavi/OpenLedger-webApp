@@ -38,6 +38,10 @@ const loadALlTreasuryCollections = async () => {
     return await cDomain.get('collection/getAllCollections', header)
 }
 
+const discardCollectionQuery =  async (collectionID) => {
+    return await cDomain.put('collection/discardCollection', {collectionID: collectionID}, header)
+}
+ 
 
 export {
     saveEstimateReportQuery,
@@ -48,5 +52,6 @@ export {
     getCashflowReport,
     discardCashflowQuery,
     collectionSaveQuery,
-    loadALlTreasuryCollections
+    loadALlTreasuryCollections,
+    discardCollectionQuery
 }

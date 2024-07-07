@@ -65,6 +65,7 @@ export default function Participants(props) {
               disabled={selected}
               value={amount}
               onChange={(e) => {
+                user.amount = e.target.value
                 setAmount(e.target.value)
               }}  
               onBlur={(e) => {

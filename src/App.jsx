@@ -7,6 +7,8 @@ import Dashboard from './screens/Dashboard'
 import {SessionContext} from './Session'
 import TreasuryDashboard from './screens/TreasuryDashboard'
 import Process from './components/process'
+import { UserCardSession } from './UserCardSession'
+import UserCardInfo from './components/UserCardInfo'
 
 export const Context = React.createContext()
 
@@ -16,9 +18,12 @@ function App() {
   }) // Declare session variables
   // Change Session data
 
+  const [userDetails, setUserDetail] = useState(null)
+  const [userCartState, setUserCardState] = useState(false)
 
   return (
     <SessionContext.Provider value={{sessionData, changeSessionData}}>
+      {/* <SessionContext.Provider value={{setUserDetail, setUserCardState}}> */}
       <BrowserRouter>
 
         <Routes>
@@ -31,8 +36,14 @@ function App() {
   
       </BrowserRouter>
 
+
       {/* Global Process trigger */}
       {sessionData.processing && <Process/>}
+
+      {/* Global User card */}
+      {userCartState && <UserCardInfo/>}
+
+      {/* </SessionContext.Provider> */}
     </SessionContext.Provider>
       
   )
