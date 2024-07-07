@@ -10,35 +10,39 @@ import '../../styles/estimate-participants.css'
 export default function Participants(props) {
   const user = props.user
   
-  // console.log('participant user', user)
+  
   // Parent collection state
   const collection = props.collection.collection
   const setCollection = props.collection.setCollection
   
-  // console.log('participant auto assign', user, Boolean(user.autoAssigned))
-  const [selected, setSelected] = useState(Boolean(user.autoAssigned))
-  const [amount, setAmount] = useState(0)
 
+  const [selected, setSelected] = useState(user.autoAssigned)
+  const [amount, setAmount] = useState(0)
 
   // Component did mount ?
   useEffect(() => {
-    setSelected(prev => prev)
-  }, [])
+    setSelected(user.autoAssigned)
+    setAmount(selected? Number(collection.calOneAmount().toFixed(2)): user.amount)
+  })
 
 
   const participantState = (state) => {
+    console.log(state)
     if(state) {
       collection.autoAssignCount++
     } else {
       collection.autoAssignCount--
     }
     setSelected(state) // Change state of the participant
-    // setCollection(new CollectionModel(collection.extractJSON()))
+    setCollection(new CollectionModel(collection.extractJSON()))
   }
 
 
   return (
     <div className='participant-border'>
+
+      <div className="background-lock" style={{visibility: (collection.getCollectionID() === 'AUTO')?'hidden': 'visible'}}></div>
+
         <div className="mini-column user-card">
           <div className="row">
 
@@ -59,7 +63,7 @@ export default function Participants(props) {
           <PrimaryBorder borderRadius='10px'>
             <Input type='number'
               disabled={selected}
-              value={selected? Number(collection.calOneAmount().toFixed(2)): amount}
+              value={amount}
               onChange={(e) => {
                 setAmount(e.target.value)
               }}  
@@ -89,7 +93,7 @@ export default function Participants(props) {
                 participantState(e.target.checked)
               } else {
                 // Warring message should be displayed
-                console.log('System should have at least 1 member to balance the account')
+                console.warn('System should have at least 1 member to balance the account')
               }
               setCollection(new CollectionModel(collection.extractJSON()))
             }}

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import '../../styles/collection-new.css'
 
 import {Input, Checkbox, DatePicker} from 'antd'
@@ -7,23 +7,25 @@ import dayjs from 'dayjs'
 import Participants from './Participants'
 import CalculateIcon from '../../assets/icons/Calculator.png'
 import CollectionModel from '../../dataModels/CollectionDataModel'
-import { generateCurrentDate } from '../../middleware/GenerateCurrentDateTime'
+
+import {SessionContext} from '../../Session'
 
 
 export default function CreateCollection(props) {
+    const changeSessionData = useContext(SessionContext).changeSessionData
+
     const treasury = props.treasury // Treasury instant from parent
 
     // Collection instant from the parent 
     const collection = props.collection
     const setCollection = props.setCollection
 
-    // useEffect(() => {
-    //     setCollection(props.collection)
-    // }, [])
-
+    const [changeForm, setChangeForm] = useState(false)
 
     // Save collection on database 
     const saveCollection = async () => {
+        changeSessionData({processing: true}) // Processing 
+        setChangeForm(false)
         const res = await collection.saveCollection()
         if(res) {
             if(res.process) {
@@ -36,11 +38,17 @@ export default function CreateCollection(props) {
         } else {
             // Network error ocurred **Display error message
         }
+        changeSessionData({processing: false})
     }
 
 
+    // Publish the the collection record
+    const publishCollection = (state) => {
+        collection.setStatus(state)
+        saveCollection()
+    }
+
     // Participant array load from the database and update the UI
-    const [collectionParticipants, setCollectionParticipants] = useState(props.collection.participantArray) 
     const loadParticipants = async () => {
         // Adding all the treasury participants to collection array
         console.log('load from database**')
@@ -60,18 +68,23 @@ export default function CreateCollection(props) {
                 })
             });
             collection.autoAssignCount = collection.participantArray.length
-           
-        } else { 
-            collection.autoAssignCount = 25
+            setCollection(new CollectionModel(collection.extractJSON()))
+            console.log('extraction success')
         }
 
-        setCollectionParticipants(collection.participantArray)
+
     }
 
+
+    // Delete the collection
+    const discardCollection = () => {
+
+    }
+    
     const {TextArea} = Input
 
     useEffect(() => {
-        if(collectionParticipants.length < 1)
+        // if(collectionParticipants.length < 1)
             loadParticipants()
     }, [])
 
@@ -87,6 +100,7 @@ export default function CreateCollection(props) {
                 <PrimaryBorder borderRadius='6px'>
                     <Input type='text' value={collection.getCollectionName()} 
                         onChange={(e) => {
+                            setChangeForm(true)
                             collection.setCollectionName(e.target.value)
                             setCollection(new CollectionModel(collection.extractJSON()))
                         }}
@@ -99,6 +113,7 @@ export default function CreateCollection(props) {
                     <label htmlFor="">Collection Amount LKR</label>
                     <PrimaryBorder borderRadius='6px'>
                         <Input type='number' 
+                            disabled={!(collection.getCollectionID() === 'AUTO')}
                             value={collection.getAmount()}
                             onChange={(e) => {
                                 collection.setAmount(e.target.value)
@@ -115,6 +130,7 @@ export default function CreateCollection(props) {
                     <label htmlFor="">Allocated from treasury</label>
                     <PrimaryBorder borderRadius='6px'>
                         <Input type='number'
+                            disabled={!(collection.getCollectionID() === 'AUTO')}
                             value={collection.getTreasuryAllocation()}
                             onChange={(e) => {
                                 collection.setTreasuryAllocation(e.target.value)
@@ -135,12 +151,9 @@ export default function CreateCollection(props) {
                 </div>
 
                 <div className="column same-level">
-                    <div className="row" style={{justifyContent:'center', padding: '0 5px', width: '50%', alignItems: 'center'}} >
-                        
+                    <div className="row" style={{justifyContent:'center', padding: '0 5px', width: '50%', alignItems: 'center'}} >                
                         <img src={CalculateIcon} alt="calculator-icon" />
-                        <p className='auto-assign'>AUTO ASSIGN</p>
-                      
-                        
+                        <p className='auto-assign'>AUTO ASSIGN</p>       
                     </div>
                 </div>
 
@@ -154,6 +167,7 @@ export default function CreateCollection(props) {
                         <TextArea type='text' rows={4}
                             value={collection.getDescription()}
                             onChange={(e) => {
+                                setChangeForm(true)
                                 collection.setDescription(e.target.value)
                                 setCollection(new CollectionModel(collection.extractJSON()))
                             }}
@@ -168,6 +182,7 @@ export default function CreateCollection(props) {
                         <DatePicker
                             value={dayjs(collection.getPublishedDate())}
                             onChange={(e, strDate) => {
+                                setChangeForm(true)
                                 collection.setPublishedDate(strDate)
                                 setCollection(new CollectionModel(collection.extractJSON()))
                             }}
@@ -179,6 +194,7 @@ export default function CreateCollection(props) {
                         <DatePicker 
                             value={dayjs(collection.getDeadline())}
                             onChange={(e, strDate) => {
+                                setChangeForm(true)
                                 collection.setDeadline(strDate)
                                 setCollection(new CollectionModel(collection.extractJSON()))
                             }}
@@ -189,13 +205,14 @@ export default function CreateCollection(props) {
             </div>
 
             <div className="row">
-                <label htmlFor="">Participants {collection.calculateAutoAssignCount()}/{collectionParticipants.length}</label>
+                <label htmlFor="">Participants {collection.calculateAutoAssignCount()}/{collection.participantArray.length}</label>
             </div>
 
             {/* Participant container */}
             <div className="participant-container">
 
-                {collectionParticipants.map((element, index) => {
+                {collection.participantArray.map((element, index) => {
+                    console.log(element.autoAssigned)
                     return (<Participants key={index} user={element} collection={{collection: collection, setCollection: setCollection}}/>)
                 })}
 
@@ -205,11 +222,17 @@ export default function CreateCollection(props) {
 
             <div className="control-keys">
                 <PrimaryBorder borderRadius='10px' width='fit-content' margin='0 15px 0 0'>
-                    <button onClick={saveCollection}>SAVE</button>
+                    <button onClick={saveCollection} disabled={!changeForm}>SAVE</button>
                 </PrimaryBorder>
 
                 <PrimaryBorder borderRadius='10px' width='fit-content' margin='0 15px 0 0'>
-                    <button>PUBLISH</button>
+
+                    {
+                        (collection.getStatus() === 'PUBLISHED') 
+                            ? <button onClick={() => publishCollection('DRAFT')} disabled={changeForm}>UNPUBLISHED</button>
+                            : <button onClick={() => publishCollection('PUBLISHED')} disabled={changeForm}>PUBLISH</button>
+                    }
+                    
                 </PrimaryBorder>
 
                 <PrimaryBorder borderRadius='10px' width='fit-content' margin='0 15px 0 0'>

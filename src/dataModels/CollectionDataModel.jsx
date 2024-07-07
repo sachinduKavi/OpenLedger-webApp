@@ -66,7 +66,7 @@ class CollectionModel {
                 this.#manualAssigned += parseFloat(element.amount)
         });
 
-        console.log('manual assigned', this.#manualAssigned)
+        // console.log('manual assigned', this.#manualAssigned)
     }
 
     calculateAutoAssignCount() {
@@ -120,7 +120,6 @@ class CollectionModel {
 
     // Calculate the amount for one participant 
     calOneAmount() {
-        console.log(this.#dividedAmount, this.autoAssignCount)
         return this.calculateAutoAssignCount() !== 0 
             ? this.#dividedAmount / this.calculateAutoAssignCount()
             : 0
