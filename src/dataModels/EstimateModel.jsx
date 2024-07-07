@@ -73,7 +73,6 @@ class EstimateReport {
             return new EstimateReport(element)
         })
 
-        console.log(response)
         return (response.status === 200) 
             ? {
                 process: response.data.process,

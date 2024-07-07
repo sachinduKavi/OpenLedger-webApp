@@ -52,7 +52,6 @@ export default function CreateCollection(props) {
     // Participant array load from the database and update the UI
     const loadParticipants = async () => {
         // Adding all the treasury participants to collection array
-        console.log('load from database**')
         if(collection.getCollectionID() === 'AUTO') {
             // New collection   
             const tempArray = await treasury.loadTreasuryParticipant()
@@ -230,7 +229,6 @@ export default function CreateCollection(props) {
             <div className="participant-container">
 
                 {collection.participantArray.map((element, index) => {
-                    console.log(element.autoAssigned)
                     return (<Participants key={index} user={element} collection={{collection: collection, setCollection: setCollection}}/>)
                 })}
 

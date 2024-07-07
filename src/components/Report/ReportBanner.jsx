@@ -18,7 +18,6 @@ export default function ReportBanner(props) {
     <motion.div className='report-banner-border'
         whileTap={{scale: 0.95}}
         onClick={() => {
-            console.log('click')
             props.setEstimateValues(new EstimateReport(estimate.extractJSON()))
         }}
     >

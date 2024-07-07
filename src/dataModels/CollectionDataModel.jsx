@@ -84,7 +84,6 @@ class CollectionModel {
     // Save the Collection 
     async saveCollection() {
         const response = await collectionSaveQuery(this.extractJSON())
-        console.log(response)
         return (response.status === 200) 
             ? {
                 process: response.data.proceed,
@@ -99,7 +98,6 @@ class CollectionModel {
     static async fetchAllCollections() {
         
         const response = await loadALlTreasuryCollections()
-        console.log('response', response)
         if(response.status === 200 && response.data.proceed) {
           
             const collectionArray = response.data.content??[] // Receive to collection array
