@@ -10,12 +10,12 @@ import '../../styles/estimate-participants.css'
 export default function Participants(props) {
   const user = props.user
   
-  console.log('participant user', user)
+  // console.log('participant user', user)
   // Parent collection state
   const collection = props.collection.collection
   const setCollection = props.collection.setCollection
   
-  
+  // console.log('participant auto assign', user, Boolean(user.autoAssigned))
   const [selected, setSelected] = useState(Boolean(user.autoAssigned))
   const [amount, setAmount] = useState(0)
 

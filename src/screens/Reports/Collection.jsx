@@ -18,7 +18,6 @@ export default function Collection(props) {
   // Load treasury collections from the database
   const loadTreasuryCollections = async () => {
     const res = await CollectionModel.fetchAllCollections()
-    console.log('in load teasury', res)
     if(res) {
       setCollectionArray(res)
     } else {
@@ -29,18 +28,16 @@ export default function Collection(props) {
   useEffect(() => {
     
     if(loadParticipants) {
-      console.log('update', collectionData)
       loadTreasuryCollections()
       setLoadState(false)
     }
+
+    // console.log('collection', collectionData)
     
   }, [collectionData])
 
   return (
     <div className='collection-area'>
-
-      
-        
 
       <div className="row">
         <div className="column">

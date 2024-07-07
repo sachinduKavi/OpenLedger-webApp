@@ -25,7 +25,6 @@ export default function CreateCollection(props) {
     // Save collection on database 
     const saveCollection = async () => {
         const res = await collection.saveCollection()
-        console.log('response', res)
         if(res) {
             if(res.process) {
                 // Response successful
@@ -41,11 +40,12 @@ export default function CreateCollection(props) {
 
 
     // Participant array load from the database and update the UI
-    const [collectionParticipants, setCollectionParticipants] = useState(props.collectionParticipants??[]) 
+    const [collectionParticipants, setCollectionParticipants] = useState(props.collection.participantArray) 
     const loadParticipants = async () => {
         // Adding all the treasury participants to collection array
+        console.log('load from database**')
         if(collection.getCollectionID() === 'AUTO') {
-            // New collection 
+            // New collection   
             const tempArray = await treasury.loadTreasuryParticipant()
             collection.participantArray = []
             tempArray.forEach(element => {
@@ -189,7 +189,7 @@ export default function CreateCollection(props) {
             </div>
 
             <div className="row">
-                <label htmlFor="">Participants {collection.autoAssignCount}/{collectionParticipants.length}</label>
+                <label htmlFor="">Participants {collection.calculateAutoAssignCount()}/{collectionParticipants.length}</label>
             </div>
 
             {/* Participant container */}

@@ -69,6 +69,17 @@ class CollectionModel {
         console.log('manual assigned', this.#manualAssigned)
     }
 
+    calculateAutoAssignCount() {
+        this.autoAssignCount = 0
+        this.participantArray.forEach(element => {
+            if(element.autoAssigned) {
+                this.autoAssignCount++
+            }
+        })
+
+        return this.autoAssignCount
+    }
+
 
     // Save the Collection 
     async saveCollection() {
@@ -110,8 +121,8 @@ class CollectionModel {
     // Calculate the amount for one participant 
     calOneAmount() {
         console.log(this.#dividedAmount, this.autoAssignCount)
-        return this.autoAssignCount !== 0 
-            ? this.#dividedAmount / this.autoAssignCount
+        return this.calculateAutoAssignCount() !== 0 
+            ? this.#dividedAmount / this.calculateAutoAssignCount()
             : 0
     }
 

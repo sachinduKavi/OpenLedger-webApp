@@ -21,7 +21,7 @@ export default function CollectionBanner(props) {
         whileTap={{scale: 0.98, transition: {duration: 0.1}}}
         onClick={() => {
             // console.log('banner click')
-            // console.log('banner', collection.extractJSON())
+            // console.log('banner', collection)
             props.setCollection(new CollectionModel(collection.extractJSON()))
         }}
     >
