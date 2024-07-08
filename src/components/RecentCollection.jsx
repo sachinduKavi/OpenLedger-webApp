@@ -36,10 +36,12 @@ export default function RecentCollection(props) {
             <div className="col-content">
                 <h2>COLLECTION</h2>
 
-                <p className='content-fonts'>{collectionData.getDescription()}</p>
-                <p className='content-fonts'>Deadline: {collectionData.getDeadline()}</p>
+                <h5>{collectionData.getCollectionName().toUpperCase()}</h5>
 
-                <PollBar process={60} height='5px' margin='4px 0 4px 0'/>
+                <p className='content-fonts'>{collectionData.getDescription()}</p>
+                <p className='content-fonts' style={{color: '#FF3A3A'}}>Deadline: {collectionData.getDeadline()}</p>
+
+                <PollBar process={(collectionData.calculateCollectedAmount()/ collectionData.getAmount()) * 100} height='5px' margin='4px 0 4px 0'/>
 
                 <div className="row">
                     <p className="content-fonts">LKR {collectionData.calculateCollectedAmount()} / {collectionData.getAmount()}</p>
