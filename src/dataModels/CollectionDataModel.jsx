@@ -1,5 +1,5 @@
 import { generateCurrentDate } from "../middleware/GenerateCurrentDateTime"
-import { collectionSaveQuery, loadALlTreasuryCollections, discardCollectionQuery} from "../query/reportQuery"
+import { collectionSaveQuery, loadALlTreasuryCollections, discardCollectionQuery, fetchSingleCollectionQuery} from "../query/reportQuery"
 
 class CollectionModel {
     #collectionID
@@ -20,6 +20,23 @@ class CollectionModel {
     // static autoAssignCount = 0
 
     constructor({collectionID = 'AUTO', collectionName = null, amount = 0, treasuryAllocation = 0, description = null, publishedDate = generateCurrentDate(), deadline = generateCurrentDate(), participantArray = [], manualAssigned = 0, publisher = null, status = 'DRAFT', publisherName = null, autoAssignCount = 0}) {
+        this.#collectionID = collectionID
+        this.#collectionName = collectionName
+        this.#amount = amount
+        this.#treasuryAllocation = treasuryAllocation
+        this.#dividedAmount = amount - treasuryAllocation - manualAssigned
+        this.#description = description
+        this.#publishedDate = publishedDate
+        this.#deadline = deadline
+        this.#publisherName = publisherName
+        this.#status = status
+        this.#publisher = publisher
+        this.autoAssignCount = autoAssignCount
+        this.participantArray = participantArray
+        this.#manualAssigned = manualAssigned
+    }
+
+    assignValues({collectionID = 'AUTO', collectionName = null, amount = 0, treasuryAllocation = 0, description = null, publishedDate = generateCurrentDate(), deadline = generateCurrentDate(), participantArray = [], manualAssigned = 0, publisher = null, status = 'DRAFT', publisherName = null, autoAssignCount = 0}) {
         this.#collectionID = collectionID
         this.#collectionName = collectionName
         this.#amount = amount
@@ -79,6 +96,38 @@ class CollectionModel {
 
         return this.autoAssignCount
     }
+
+    // Load latest collection
+    async LoadSingleRecord() {
+        if(this.#collectionID === 'AUTO') this.$collectionID = null // Changing collection ID to Null if not provided 
+
+        const response = await fetchSingleCollectionQuery(this.#collectionID)
+        if(response.status === 200 && response.data.proceed) {
+            this.assignValues(response.data.content) // assign collection values 
+            return true
+        }
+
+        return false
+    }
+
+    // Calculate total collected amount + treasury allocation 
+    calculateCollectedAmount() {
+        let amount = this.#treasuryAllocation??0
+        this.participantArray.forEach(element => {
+            amount += element.paidAmount
+        })
+        return amount
+    }
+
+    // Fetch participant record related to UserID
+    fetchMyRecord(userID) {
+        for(const element of this.participantArray) {
+            if(element.userID ===  userID) return element
+        }
+
+        return null
+    }
+
 
 
     // Save the Collection 

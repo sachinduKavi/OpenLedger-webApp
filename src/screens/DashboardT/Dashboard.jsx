@@ -49,16 +49,16 @@ export default function Dashboard(props) {
                     
         </div>
 
-        <div className="column">
+        <div className="column scroll-column">
             {/* Display treasury balance  */}
-            <div className="balance-card" style={{position: 'relative', zIndex: 0}}>
+            <div className="balance-card" style={{position: 'relative', zIndex: 0, flex: '0 0 calc(25%)'}}>
                     <h1>CURRENT BALANCE</h1>
                     <h2>LKR {props.treasuryObj.getBalance().toLocaleString('en-US')}</h2>
             </div>
 
 
             {/* Recent Collections */}
-            <RecentCollection/>
+            <RecentCollection activeUser={props.userObj}/>
             
             <div className="calender" style={{alignSelf: 'start'}}>
                 <CalendarComponent/>

@@ -90,3 +90,11 @@
     color: #9DF6F6;
 }
 
+
+.treasury-dashboard .scroll-column {
+    overflow-y: scroll;
+}
+
+.treasury-dashboard .scroll-column::-webkit-scrollbar {
+    display: none;
+}

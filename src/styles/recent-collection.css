@@ -20,7 +20,7 @@
     background-color: black;
 }
 
-.collection-container > .col-content {
+.recent-collection-border .col-content {
     position: relative;
     inset: 0;
     z-index: 50;
@@ -30,7 +30,27 @@
 }
 
 .recent-collection-border .content-fonts {
+    font-family: "Roboto";
     font-size: 0.85vw;
-    font-weight: bold;
+}
 
+.recent-collection-border .payment-container {
+    position: relative;
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+}
+
+.recent-collection-border .row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.recent-collection-border .action-button {
+    background-color: red;
+    font-size: small;
 }
