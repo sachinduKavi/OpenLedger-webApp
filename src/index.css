@@ -1,6 +1,30 @@
+/* src/fonts.css */
+@font-face {
+  font-family: 'Roboto';
+  src: url('./assets/fonts/Roboto_Mono/Roboto-Medium.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('./assets/fonts/Roboto_Mono/Roboto-Bold.ttf');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('./assets/fonts/poppins/Poppins-Bold.ttf');
+  font-weight: bold;
+  font-style: normal;
+}
+
+
+
 
 *{
-  font-family: "Nunito Sans", sans-serif;
+  font-family: "Roboto";
   box-sizing: border-box;
   margin: 0;
   padding: 0;

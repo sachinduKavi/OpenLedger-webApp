@@ -8,6 +8,7 @@ import Ledger from '../../components/TreasuryDashboard/Ledger'
 
 import PrimaryBorder from '../../components/PrimaryBorder'
 import CalendarComponent from '../../components/Calender'
+import RecentCollection from '../../components/RecentCollection'
 
 export default function Dashboard(props) {
 
@@ -54,6 +55,10 @@ export default function Dashboard(props) {
                     <h1>CURRENT BALANCE</h1>
                     <h2>LKR {props.treasuryObj.getBalance().toLocaleString('en-US')}</h2>
             </div>
+
+
+            {/* Recent Collections */}
+            <RecentCollection/>
             
             <div className="calender" style={{alignSelf: 'start'}}>
                 <CalendarComponent/>
