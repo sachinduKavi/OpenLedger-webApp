@@ -1,7 +1,8 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useContext} from 'react'
 import CreateCollection from './CreateCollection'
 import PrimaryBorder from '../../components/PrimaryBorder'
 import CollectionBanner from './CollectionBanner'
+import { SessionContext } from '../../Session'
 
 import '../../styles/collection.css'
 
@@ -9,6 +10,7 @@ import '../../styles/collection.css'
 import CollectionModel from '../../dataModels/CollectionDataModel'
 
 export default function Collection(props) {
+  const changeSessionData = useContext(SessionContext).changeSessionData
   const activeUser = props.activeUser
 
   const [collectionData, setCollection] = useState(null) // Currently active collection
@@ -20,12 +22,14 @@ export default function Collection(props) {
 
   // Load treasury collections from the database
   const loadTreasuryCollections = async () => {
+    changeSessionData({processing: true})
     const res = await CollectionModel.fetchAllCollections()
     if(res) {
       setCollectionArray(res)
     } else {
       // Display error message
     }
+    changeSessionData({processing: false})
   }
 
   useEffect(() => {
@@ -52,7 +56,7 @@ export default function Collection(props) {
             {
               collectionArray.map((element, index) => {
                 if(activeUser.getUserLevel() > 2 || element.getStatus() !== 'DRAFT')
-                return (<CollectionBanner key={index} collection={element} setCollection={setCollection}/>)
+                return (<CollectionBanner key={index} collection={element} setCollection={setCollection} index={index}/>)
               })
             }
         

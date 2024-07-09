@@ -10,7 +10,7 @@ export default function CollectionBanner(props) {
     const collection = props.collection
 
     // Calculate paid amount 
-    let totalCollected = 0
+    let totalCollected = collection.getTreasuryAllocation()
     collection.participantArray.forEach(element => {
         totalCollected += element.paidAmount
     })
@@ -18,10 +18,10 @@ export default function CollectionBanner(props) {
 
   return (
     <motion.div className='collection-banner-border'
+        initial={{scale: 0}}
+        animate={{scale: 1, transition: {delay: props.index*0.1, duration: 0.4}}}
         whileTap={{scale: 0.98, transition: {duration: 0.1}}}
         onClick={() => {
-            // console.log('banner click')
-            // console.log('banner', collection.participantArray)
             props.setCollection(new CollectionModel(collection.extractJSON()))
         }}
     >
