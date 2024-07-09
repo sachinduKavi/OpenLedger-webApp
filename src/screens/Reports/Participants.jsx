@@ -46,12 +46,12 @@ export default function Participants(props) {
         <div className="mini-column user-card">
           <div className="row">
 
-            <div className='dp-container mini-column'>
+            <div className='dp-container mini-column' style={{flex: '0 0 0'}}>
               <SimpleDP size='40px' imageLink={user.dpLink} imageScale={{x: 0, y:0, scale: 1}}/>
             </div>
             
 
-            <div className="mini-column name-card">
+            <div className="mini-column name-card" style={{flex: '2 1 0'}}>
               <h5>{user.userName}</h5>
               <h5>{user.userID}</h5>
             </div>

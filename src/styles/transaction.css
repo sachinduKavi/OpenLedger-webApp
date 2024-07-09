@@ -1,0 +1,50 @@
+.transaction .row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+.transaction * {
+    font-family: "Roboto";
+}
+
+.transaction .transaction-method {
+    margin-left: 5px;
+    font-size: 12px;
+}
+
+.service-charge {
+    font-size: small;
+    line-height: 1;
+}
+
+.service-charge p {
+    text-align: center;
+}
+
+.transaction .mini-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.transaction label {
+    color: #C1B5FF;
+    font-weight: bold;
+    font-size: 11px;
+}
+
+.transaction .column {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0;
+    margin: 1%;
+}
+
+.mini-column {
+    display: flex;
+    flex: 1 1 0;
+    padding: 0 2%;
+    margin: 5px 0;
+}

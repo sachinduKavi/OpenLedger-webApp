@@ -44,7 +44,11 @@
 .participant-border .user-card {
     background-color: #7387AE;
     padding: 10px;
+    display: flex;
+    /* flex: 1 1 0; */
+    flex-direction: row;
 }
+
 
 .participant-border .mini-column {
     display: flex;
