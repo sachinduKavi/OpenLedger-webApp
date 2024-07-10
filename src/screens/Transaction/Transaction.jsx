@@ -6,7 +6,7 @@ import TransactionForm from './TransactionForm'
 import '../../styles/transaction.css'
 
 
-export default function Transaction() {
+export default function Transaction(props) {
   return (
     <motion.div className='panel-outside-border transaction'
       initial={{x: 1500}}
@@ -23,7 +23,7 @@ export default function Transaction() {
             </div>
 
             <div className="mini-column">
-                <TransactionForm/>
+                <TransactionForm activeUser={props.activeUser}/>
             </div>
 
           </div>
@@ -32,7 +32,7 @@ export default function Transaction() {
 
 
           <div className="column">
-            
+          <a href="https://www.payhere.lk" target="_blank"><img src="https://www.payhere.lk/downloads/images/payhere_long_banner_dark.png" alt="PayHere" width="400"/></a>
           </div>
       </div>
 

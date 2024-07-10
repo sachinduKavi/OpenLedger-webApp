@@ -1,14 +1,17 @@
 import React, {useState, useEffect} from 'react'
 import {Input, Switch} from 'antd'
 const {TextArea} = Input
+import PayHerePayment from '../../components/PayHerePayment'
 
 import PrimaryBorder from '../../components/PrimaryBorder'
 
 import '../../styles/transaction-form.css'
 
-export default function TransactionForm() {
+export default function TransactionForm(props) {
 
     const [methodState, setMethodState] = useState(true)  // Transaction method
+
+    const [transactionReady, setTransactionReady] = useState(false)
 
     const [transactionValues, setValues] = useState({
         amount: 0,
@@ -18,6 +21,11 @@ export default function TransactionForm() {
         evidence: null
     })
 
+
+    const checkTransactionReady = () => {
+        if(transactionValues.amount > 0 && transactionValues.reference.length > 0) 
+            setTransactionReady(true)
+    }
 
 
     // Transaction proceed 
@@ -37,6 +45,7 @@ export default function TransactionForm() {
                 <PrimaryBorder borderRadius='6px'>
                     <Input type='number' onChange={(e) => {
                         setValues({...transactionValues, amount: e.target.value})
+                        checkTransactionReady()
                     }}/>
                 </PrimaryBorder>                
             </div>
@@ -60,6 +69,7 @@ export default function TransactionForm() {
                     value={transactionValues.reference}
                     onChange={(e) => {
                         setValues({...transactionValues, reference: e.target.value.toUpperCase()})
+                        checkTransactionReady()
                     }}/>
                 </PrimaryBorder>                
             </div>
@@ -73,6 +83,7 @@ export default function TransactionForm() {
                             value={methodState}
                             onChange={(e) => {
                                 setMethodState(e)
+                                checkTransactionReady()
                             }}
                         />
                     </div>
@@ -85,6 +96,7 @@ export default function TransactionForm() {
 
         <div className="mini-row">
             <div className="column">
+                <label htmlFor="">**Note</label>
                 <PrimaryBorder borderRadius='6px'>
                     <TextArea rows={3}
                         onChange={(e) => {
@@ -108,7 +120,8 @@ export default function TransactionForm() {
 
         <div className="mini-row">
             <PrimaryBorder borderRadius='6px'>
-                <button onClick={transactionProceed}>PROCEED</button>
+                {/* <button onClick={transactionProceed}>PROCEED</button> */}
+                <PayHerePayment transactionReady={transactionReady} payment={transactionValues}/>
             </PrimaryBorder>
         </div>
         
