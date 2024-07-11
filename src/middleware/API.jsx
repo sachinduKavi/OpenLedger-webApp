@@ -4,8 +4,12 @@ import { linkWithCredential } from "firebase/auth"
 // https://openledgers.netlify.app/
 
 
+// const temp_domain = axios.create({
+//     baseURL: "http://localhost:3500"
+// })
+
 const temp_domain = axios.create({
-    baseURL: "http://localhost:3500"
+    baseURL: "https://openledger-backend.onrender.com"
 })
 
 const mainDomain = axios.create({
