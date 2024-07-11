@@ -3,6 +3,7 @@ import {motion} from 'framer-motion'
 
 import TransactionForm from './TransactionForm'
 import Payment from '../../dataModels/Payment'
+import MyCollections from './MyCollections'
 
 import '../../styles/transaction.css'
 
@@ -22,12 +23,12 @@ export default function Transaction(props) {
 
           <div className="column">
 
-            <div className="mini-column">
-
+            <div className="mini-column-pay">
+              <MyCollections activeUser={props.activeUser} setCurrentPayment={setCurrentPayment}/>
             </div>
 
-            <div className="mini-column">
-                <TransactionForm activeUser={props.activeUser} payment={{currentPayment:currentPayment , setCurrentPayment: setCurrentPayment}}/>
+            <div className="mini-column-pay">
+              <TransactionForm activeUser={props.activeUser} payment={{currentPayment:currentPayment , setCurrentPayment: setCurrentPayment}}/>
             </div>
 
           </div>
@@ -36,7 +37,7 @@ export default function Transaction(props) {
 
 
           <div className="column">
-          <a href="https://www.payhere.lk" target="_blank"><img src="https://www.payhere.lk/downloads/images/payhere_long_banner_dark.png" alt="PayHere" width="400"/></a>
+          <a href="https://www.payhere.lk" target="_blank"><img src="https://www.payhere.lk/downloads/images/payhere_long_banner_dark.png" alt="PayHere" width="100%"/></a>
           </div>
       </div>
 

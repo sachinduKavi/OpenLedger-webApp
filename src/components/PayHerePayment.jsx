@@ -6,30 +6,33 @@ const PayHerePayment = (props) => {
   const user = props.user
 
   const [hash, setHash] = useState("");
+  const amount = paymentValues.getAmount()*1.033
+
 
   useEffect(() => {
     // // Define PayHere event handlers
     payhere.onCompleted = function (orderId) {
         console.log("Payment completed. OrderID:", orderId);
         // Implement your logic here for successful payment
-    };
+        props.success()
+    }
 
     payhere.onDismissed = function () {
         console.log("Payment dismissed");
         // Implement your logic here for dismissed payment
-    };
+    }
 
     payhere.onError = function (error) {
         console.log("Error:", error);
         // Implement your logic here for payment errors
-    };
+    }
   }, [])
 
   const generateHash = async () => {
     const data = {
       merchant_id: "1226760", // Replace with your Merchant ID
       order_id: paymentValues.getPaymentID(),
-      amount: Number(paymentValues.getAmount()),
+      amount: amount,
       currency: "LKR",
       merchant_secret: "MzQ3MTE5MzAwMzMwMzk4MjgyMzEzMTMwOTI5NTgzMzI1NTAyMzkzMA==" // Replace with your Merchant Secret
     };
@@ -51,7 +54,7 @@ const PayHerePayment = (props) => {
       notify_url: "#",
       order_id: paymentValues.getPaymentID(),
       items: paymentValues.getReference(),
-      amount: String(paymentValues.calAmountWithTax()),
+      amount: amount,
       currency: "LKR",
       hash: hash,
       first_name: user.getUserName(),

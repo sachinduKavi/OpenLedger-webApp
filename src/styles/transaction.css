@@ -38,13 +38,13 @@
 .transaction .column {
     display: flex;
     flex-direction: column;
-    flex: 1 1 0;
+    flex: 1 1 calc(100%);
     margin: 1%;
 }
 
-.mini-column {
+.mini-column-pay {
     display: flex;
-    flex: 1 1 0;
+    height: 50%;
     padding: 0 2%;
     margin: 5px 0;
 }

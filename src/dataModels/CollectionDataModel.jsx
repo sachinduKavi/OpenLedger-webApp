@@ -86,6 +86,22 @@ class CollectionModel {
         // console.log('manual assigned', this.#manualAssigned)
     }
 
+
+    static async filterByUser(userID) {
+        let filterList = []
+        const collectionArray = await this.fetchAllCollections()
+        for(const element of collectionArray) {
+            for(const miniElement of element.participantArray) {
+                if(miniElement.userID === userID) {
+                    filterList.push(element)
+                    break
+                }
+            }
+        }
+
+        return filterList
+    }
+
     calculateAutoAssignCount() {
         this.autoAssignCount = 0
         this.participantArray.forEach(element => {

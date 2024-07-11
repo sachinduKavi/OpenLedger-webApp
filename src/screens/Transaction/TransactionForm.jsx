@@ -13,18 +13,8 @@ export default function TransactionForm(props) {
     const setCurrentPayment = props.payment.setCurrentPayment
     const activeUser = props.activeUser
 
-
-    const [methodState, setMethodState] = useState(true)  // Transaction method
-
-    const [transactionReady, setTransactionReady] = useState(false)
-
-    // const [transactionValues, setValues] = useState({
-    //     amount: 0,
-    //     reference: "",
-    //     transactionMethod: methodState,
-    //     note: "",
-    //     evidence: null
-    // })
+    // Transaction state that ready from transaction to proceed
+    const [transactionReady, setTransactionReady] = useState(false || payment.getFromCollection())
 
 
     const checkTransactionReady = () => {
@@ -32,6 +22,21 @@ export default function TransactionForm(props) {
             setTransactionReady(true)
     }
 
+    // Component did mount ?
+    useEffect(() => {
+        console.log("payment", payment)
+        checkTransactionReady()
+    })
+
+
+
+    // Online payment succeed from payhere
+    const onlinePaymentSuccess = async () => {
+        // Make the payment verified
+        payment.setStatus("VERIFIED", payment)
+        await payment.successPaymentPayHere()
+
+    }
 
     // Transaction proceed 
     const transactionProceed = async () => {
@@ -42,28 +47,33 @@ export default function TransactionForm(props) {
 
   return (
     <div className='transaction-form'>
-        <h2>TRANSACTION</h2>
+        <div className="row">
+            <h2>TRANSACTION</h2>
+
+
+        </div>
+        
 
         <div className="mini-row">
             <div className="column" style={{flex: '0 0 calc(35%)'}}>
-                <label htmlFor="">Amount</label>
+                <label htmlFor="">Amount LKR</label>
                 <PrimaryBorder borderRadius='6px'>
                     <Input type='number' 
                     value={payment.getAmount()}
                     onChange={(e) => {
                         payment.setAmount(Number(e.target.value))
                         setCurrentPayment(new Payment(payment.extractJSON()))
-                        checkTransactionReady()
+                        // checkTransactionReady()
                     }}/>
                 </PrimaryBorder>                
             </div>
 
-            <div className="column service-charge" style={{display: methodState ? 'flex' : 'none'}}>
-                <p>+3% Service<br/>Charge</p>
+            <div className="column service-charge" style={{display: payment.getOnlinePayment() ? 'flex' : 'none'}}>
+                <p>+3.3% Service<br/>Charge</p>
             </div>
 
             <div className="column">
-                <p>= {methodState?Number(payment.getAmount()*1.03).toFixed(2): payment.getAmount()}/-</p>
+                <p>= {payment.getOnlinePayment()? Number(payment.getAmount()*1.033).toFixed(2): payment.getAmount()}/-</p>
             </div>
             
         </div>
@@ -74,11 +84,13 @@ export default function TransactionForm(props) {
                 <label htmlFor="">Reference</label>
                 <PrimaryBorder borderRadius='6px'>
                     <Input type='text' 
+                    disabled={payment.getFromCollection()}
+                    maxLength={20}
                     value={payment.getReference()}
                     onChange={(e) => {
                         payment.setReference((e.target.value).toUpperCase())
                         setCurrentPayment(new Payment(payment.extractJSON()))
-                        checkTransactionReady()
+                        // checkTransactionReady()
                     }}/>
                 </PrimaryBorder>                
             </div>
@@ -89,15 +101,15 @@ export default function TransactionForm(props) {
                 <div className="row">
                     <div>
                         <Switch 
-                            value={methodState}
+                            value={payment.getOnlinePayment()}
                             onChange={(e) => {
-                                setMethodState(e)
-                                checkTransactionReady()
+                                payment.setOnlinePayment(e)
+                                setCurrentPayment(new Payment(payment.extractJSON()))
                             }}
                         />
                     </div>
                     
-                    <p className='transaction-method'>{methodState? 'PAYMENT GATEWAY': 'BANK TRANSACTION'}</p>
+                    <p className='transaction-method'>{payment.getOnlinePayment()? 'PAYMENT GATEWAY': 'BANK TRANSACTION'}</p>
                 </div>
 
             </div>
@@ -108,6 +120,7 @@ export default function TransactionForm(props) {
                 <label htmlFor="">**Note</label>
                 <PrimaryBorder borderRadius='6px'>
                     <TextArea rows={3}
+                        maxLength={256}
                         value={payment.getNote()}
                         onChange={(e) => {
                             payment.setNote(capitalize(e.target.value))
@@ -121,7 +134,7 @@ export default function TransactionForm(props) {
         </div>
 
 
-        <div className="mini-row" style={{visibility: methodState ? 'hidden': 'visible'}}>
+        <div className="mini-row" style={{visibility: payment.getOnlinePayment() ? 'hidden': 'visible'}}>
             <div className="column">
                 <label htmlFor="">Evidence</label>
                 <Input rows={3} type='file'/>
@@ -132,7 +145,9 @@ export default function TransactionForm(props) {
         <div className="mini-row">
             <PrimaryBorder borderRadius='6px'>
                 {/* <button onClick={transactionProceed}>PROCEED</button> */}
-                <PayHerePayment transactionReady={transactionReady} payment={payment} user={activeUser}/>
+                <PayHerePayment transactionReady={transactionReady} payment={payment} user={activeUser}
+                    success={onlinePaymentSuccess}
+                />
             </PrimaryBorder>
         </div>
         
