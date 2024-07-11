@@ -3,6 +3,7 @@ import { generateHashCodeQuery } from '../query/paymentQuery';
 
 const PayHerePayment = (props) => {
   const paymentValues = props.payment
+  const user = props.user
 
   const [hash, setHash] = useState("");
 
@@ -27,8 +28,8 @@ const PayHerePayment = (props) => {
   const generateHash = async () => {
     const data = {
       merchant_id: "1226760", // Replace with your Merchant ID
-      order_id: paymentValues.reference.replace(" ", "_"),
-      amount: Number(paymentValues.amount),
+      order_id: paymentValues.getPaymentID(),
+      amount: Number(paymentValues.getAmount()),
       currency: "LKR",
       merchant_secret: "MzQ3MTE5MzAwMzMwMzk4MjgyMzEzMTMwOTI5NTgzMzI1NTAyMzkzMA==" // Replace with your Merchant Secret
     };
@@ -39,6 +40,7 @@ const PayHerePayment = (props) => {
   }
 
   const handlePayment = async () => {
+    console.log('user', user)
     await generateHash();
 
     const payment = {
@@ -46,16 +48,16 @@ const PayHerePayment = (props) => {
       merchant_id: "1226760",
       return_url: undefined,
       cancel_url: undefined,
-      notify_url: "http://localhost:3500/transaction/paymentNotification",
-      order_id: paymentValues.reference.replace(" ", "_"),
-      items: "Door bell wireless",
-      amount: Number(paymentValues.amount),
+      notify_url: "#",
+      order_id: paymentValues.getPaymentID(),
+      items: paymentValues.getReference(),
+      amount: String(paymentValues.calAmountWithTax()),
       currency: "LKR",
       hash: hash,
-      first_name: "Saman",
-      last_name: "Perera",
-      email: "samanp@gmail.com",
-      phone: "0771234567",
+      first_name: user.getUserName(),
+      last_name: "",
+      email: user.getUserEmail(),
+      phone: user.getUserMobile(),
       address: "No.1, Galle Road",
       city: "Colombo",
       country: "Sri Lanka",

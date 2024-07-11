@@ -9,7 +9,7 @@ class Payment {
     #note
 
 
-    constructor({paymentID = null, treasuryID = null, userID = null, status = null, amount = null, date = null, reference = null, note = null}) {
+    constructor({paymentID = 'AUTO', treasuryID = null, userID = null, status = null, amount = 0, date = null, reference = "", note = null}) {
         this.#paymentID = paymentID
         this.#treasuryID = treasuryID
         this.#userID = userID
@@ -35,6 +35,10 @@ class Payment {
         }
     }
 
+
+    calAmountWithTax() {
+        return this.#amount*1.03
+    }
 
     
     // Getters

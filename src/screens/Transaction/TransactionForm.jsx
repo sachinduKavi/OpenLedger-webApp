@@ -2,28 +2,33 @@ import React, {useState, useEffect} from 'react'
 import {Input, Switch} from 'antd'
 const {TextArea} = Input
 import PayHerePayment from '../../components/PayHerePayment'
-
+import {capitalize} from '../../middleware/auth'
 import PrimaryBorder from '../../components/PrimaryBorder'
 
 import '../../styles/transaction-form.css'
+import Payment from '../../dataModels/Payment'
 
 export default function TransactionForm(props) {
+    const payment = props.payment.currentPayment
+    const setCurrentPayment = props.payment.setCurrentPayment
+    const activeUser = props.activeUser
+
 
     const [methodState, setMethodState] = useState(true)  // Transaction method
 
     const [transactionReady, setTransactionReady] = useState(false)
 
-    const [transactionValues, setValues] = useState({
-        amount: 0,
-        reference: "",
-        transactionMethod: methodState,
-        note: "",
-        evidence: null
-    })
+    // const [transactionValues, setValues] = useState({
+    //     amount: 0,
+    //     reference: "",
+    //     transactionMethod: methodState,
+    //     note: "",
+    //     evidence: null
+    // })
 
 
     const checkTransactionReady = () => {
-        if(transactionValues.amount > 0 && transactionValues.reference.length > 0) 
+        if(payment?.getAmount() > 0 && payment?.getReference().length > 0) 
             setTransactionReady(true)
     }
 
@@ -43,8 +48,11 @@ export default function TransactionForm(props) {
             <div className="column" style={{flex: '0 0 calc(35%)'}}>
                 <label htmlFor="">Amount</label>
                 <PrimaryBorder borderRadius='6px'>
-                    <Input type='number' onChange={(e) => {
-                        setValues({...transactionValues, amount: e.target.value})
+                    <Input type='number' 
+                    value={payment.getAmount()}
+                    onChange={(e) => {
+                        payment.setAmount(Number(e.target.value))
+                        setCurrentPayment(new Payment(payment.extractJSON()))
                         checkTransactionReady()
                     }}/>
                 </PrimaryBorder>                
@@ -55,7 +63,7 @@ export default function TransactionForm(props) {
             </div>
 
             <div className="column">
-                <p>= {methodState?Number(transactionValues.amount*1.03).toFixed(2): transactionValues.amount}/-</p>
+                <p>= {methodState?Number(payment.getAmount()*1.03).toFixed(2): payment.getAmount()}/-</p>
             </div>
             
         </div>
@@ -66,9 +74,10 @@ export default function TransactionForm(props) {
                 <label htmlFor="">Reference</label>
                 <PrimaryBorder borderRadius='6px'>
                     <Input type='text' 
-                    value={transactionValues.reference}
+                    value={payment.getReference()}
                     onChange={(e) => {
-                        setValues({...transactionValues, reference: e.target.value.toUpperCase()})
+                        payment.setReference((e.target.value).toUpperCase())
+                        setCurrentPayment(new Payment(payment.extractJSON()))
                         checkTransactionReady()
                     }}/>
                 </PrimaryBorder>                
@@ -99,8 +108,10 @@ export default function TransactionForm(props) {
                 <label htmlFor="">**Note</label>
                 <PrimaryBorder borderRadius='6px'>
                     <TextArea rows={3}
+                        value={payment.getNote()}
                         onChange={(e) => {
-                            setValues({...transactionValues, note: e.target.value})
+                            payment.setNote(capitalize(e.target.value))
+                            setCurrentPayment(new Payment(payment.extractJSON()))
                         }}
                     />
                 </PrimaryBorder>
@@ -121,7 +132,7 @@ export default function TransactionForm(props) {
         <div className="mini-row">
             <PrimaryBorder borderRadius='6px'>
                 {/* <button onClick={transactionProceed}>PROCEED</button> */}
-                <PayHerePayment transactionReady={transactionReady} payment={transactionValues}/>
+                <PayHerePayment transactionReady={transactionReady} payment={payment} user={activeUser}/>
             </PrimaryBorder>
         </div>
         

@@ -1,12 +1,16 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {motion} from 'framer-motion'
 
 import TransactionForm from './TransactionForm'
+import Payment from '../../dataModels/Payment'
 
 import '../../styles/transaction.css'
 
 
 export default function Transaction(props) {
+  const [currentPayment, setCurrentPayment] = useState(new Payment({}))
+
+
   return (
     <motion.div className='panel-outside-border transaction'
       initial={{x: 1500}}
@@ -23,7 +27,7 @@ export default function Transaction(props) {
             </div>
 
             <div className="mini-column">
-                <TransactionForm activeUser={props.activeUser}/>
+                <TransactionForm activeUser={props.activeUser} payment={{currentPayment:currentPayment , setCurrentPayment: setCurrentPayment}}/>
             </div>
 
           </div>
