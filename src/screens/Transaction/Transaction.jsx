@@ -12,6 +12,7 @@ import '../../styles/transaction.css'
 export default function Transaction(props) {
   const [currentPayment, setCurrentPayment] = useState(new Payment({}))
 
+  const [update, setUpdate] = useState(false) // Page refresh with update
 
 
   return (
@@ -26,11 +27,15 @@ export default function Transaction(props) {
           <div className="column">
 
             <div className="mini-column-pay">
-              <MyCollections activeUser={props.activeUser} setCurrentPayment={setCurrentPayment}/>
+              <MyCollections activeUser={props.activeUser} setCurrentPayment={setCurrentPayment}
+                update={update}
+              />
             </div>
 
             <div className="mini-column-pay">
-              <TransactionForm activeUser={props.activeUser} payment={{currentPayment:currentPayment , setCurrentPayment: setCurrentPayment}}/>
+              <TransactionForm activeUser={props.activeUser} payment={{currentPayment:currentPayment , setCurrentPayment: setCurrentPayment}}
+                setUpdate={setUpdate} update={update}
+              />
             </div>
 
           </div>
@@ -42,7 +47,7 @@ export default function Transaction(props) {
             <a href="https://www.payhere.lk" target="_blank"><img src="https://www.payhere.lk/downloads/images/payhere_long_banner_dark.png" alt="PayHere" width="100%"/></a>
           
 
-            <PaymentHistory/>
+            <PaymentHistory update={update}/>
           </div>
       </div>
 

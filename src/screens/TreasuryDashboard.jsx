@@ -102,6 +102,7 @@ export default function TreasuryDashboard(){
           duration: 15000
         }}
       />
+      
       <WelcomeBar userName={userDetails?.userName} imageLink={userDetails?.dpLink} imageScale={userDetails?.pictureScale} position={activeUser.getPosition()}/>
 
       <div className="body-content">

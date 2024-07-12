@@ -1,6 +1,5 @@
 import { generateCurrentDate } from "../middleware/GenerateCurrentDateTime"
-import { createPaymentRecordQuery } from "../query/paymentQuery"
-
+import { createPaymentRecordQuery, getAllPaymentsQuery } from "../query/paymentQuery"
 
 class Payment {
     #paymentID
@@ -14,9 +13,10 @@ class Payment {
     #onlinePayment
     #fromCollection
     #note
+    #userName
 
 
-    constructor({paymentID = 'AUTO', treasuryID = null, userID = null, status = null, amount = 0, date = generateCurrentDate(), reference = "", note = null, evidence = null, onlinePayment = true, fromCollection = false}) {
+    constructor({paymentID = 'AUTO', treasuryID = null, userID = null, status = null, amount = 0, date = generateCurrentDate(), reference = "", note = null, evidence = null, onlinePayment = true, fromCollection = false, userName = null}) {
         this.#paymentID = paymentID
         this.#treasuryID = treasuryID
         this.#userID = userID
@@ -28,7 +28,7 @@ class Payment {
         this.#fromCollection = fromCollection
         this.#onlinePayment = onlinePayment
         this.#evidence = evidence
-        
+        this.#userName = userName
     }
 
 
@@ -44,7 +44,8 @@ class Payment {
             reference: this.#reference,
             note: this.#note,
             evidence: this.#evidence,
-            fromCollection: this.#fromCollection
+            fromCollection: this.#fromCollection,
+            userName: this.#userName
         }
     }
 
@@ -60,6 +61,23 @@ class Payment {
     }
 
 
+    // Load all the payments from the backend
+    async loadAllPayments() {
+        const response = await getAllPaymentsQuery()
+        if (response.status === 200 && response.data.proceed) {
+            const jsonArray = response.data.content
+            let paymentArray = []
+            jsonArray.forEach(element => {
+                paymentArray.push(new Payment(element))
+            });
+
+            return paymentArray
+        } else {
+            return false
+        }
+    }
+
+
 
 
 
@@ -67,8 +85,17 @@ class Payment {
         return this.#amount*1.03
     }
 
+
     
     // Getters & Setters
+    getUserName() {
+        return this.#userName
+    }
+
+    setUserName(userName) {
+        this.#userName = userName
+    }
+
     getFromCollection() {
         return this.#fromCollection
     }
@@ -76,8 +103,6 @@ class Payment {
     setFromCollection(fromCollection) {
         this.#fromCollection = fromCollection
     }
-
-
 
     getOnlinePayment() {
         return this.#onlinePayment

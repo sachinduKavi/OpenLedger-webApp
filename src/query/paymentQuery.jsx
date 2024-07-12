@@ -7,12 +7,17 @@ const generateHashCodeQuery = async (values) => {
 }
 
 
-const createPaymentRecordQuery = (paymentDetails) => {
-    return cDomain.post('transaction/paymentSuccess', paymentDetails, header)
+const createPaymentRecordQuery = async (paymentDetails) => {
+    return await cDomain.post('transaction/paymentSuccess', paymentDetails, header)
+}
+
+const getAllPaymentsQuery = async () => {
+    return await cDomain.get('transaction/loadAllTreasuryTransactions', header)
 }
 
 
 export {
     generateHashCodeQuery,
-    createPaymentRecordQuery
+    createPaymentRecordQuery,
+    getAllPaymentsQuery
 }

@@ -17,6 +17,7 @@
     border-radius: 10px;
     background-color: #1C1F30;
     display: flex;
+    cursor: pointer;
     flex-direction: row;
     border: 0.1px solid rgba(255, 255, 255, 0.103);
 }   
@@ -24,11 +25,22 @@
 .single-payment .status-column {
     justify-content: center;
     align-items: center;
+    flex: 1 1 0;
+}
+
+.single-payment .status-column .payment-method {
+    text-align: center;
+}
+
+.single-payment .amount-column {
+    justify-content: center;
+    flex: 0 0 calc(25%) !important;
 }
 
 .single-payment .reference {
     font-size: 1.48vw;
     white-space: nowrap;
+    
 }
 
 .single-payment .payee {
@@ -36,6 +48,6 @@
 }
 
 .single-payment .column-1 {
-    flex: 0 0 calc(50%);
+    flex: 0 0 calc(50%) !important;
 }
 

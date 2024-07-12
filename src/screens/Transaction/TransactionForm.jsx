@@ -16,7 +16,7 @@ export default function TransactionForm(props) {
     const activeUser = props.activeUser
 
     // Transaction state that ready from transaction to proceed
-    const [transactionReady, setTransactionReady] = useState(true || payment.getFromCollection())
+    const [transactionReady, setTransactionReady] = useState(false || payment.getFromCollection())
 
     const checkTransactionReady = () => {
         if(payment?.getAmount() > 0 && payment?.getReference().length > 0) 
@@ -32,11 +32,13 @@ export default function TransactionForm(props) {
             // Payment completed successfully 
             setCurrentPayment(new Payment({}))
             // Successful message
-            toast.custom(<ToastCustom type='success'>Your Payment was Successful.</ToastCustom>);
+            toast.custom(<ToastCustom type='success' header='Payment Success'>Your Payment was Successful.</ToastCustom>);
         } else {
             // Payment error contact your merchant admin
-            toast.custom(<ToastCustom type='error'>Sorry, Payment was not successful. Please contact your merchant.</ToastCustom>);
+            toast.custom(<ToastCustom type='error' header='Payment Failed'>Sorry, Payment was not successful. Please contact your merchant.</ToastCustom>);
         }
+
+        props.setUpdate(!props.update)
      }
 
 
@@ -46,6 +48,7 @@ export default function TransactionForm(props) {
         // Successful message
         toast.custom(<ToastCustom type='error'>Sorry, Payment was not successful. Please contact your merchant.</ToastCustom>);
         console.log('transaction Proceed', payment.extractJSON())
+        props.setUpdate(!props.update)
     }
 
 

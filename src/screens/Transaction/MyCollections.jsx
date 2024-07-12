@@ -18,7 +18,7 @@ export default function MyCollections(props) {
 
     useEffect(() => {
         loadCollections()
-    }, [])
+    }, [props.update])
 
   return (
     <div className='collection-mini-border'>
