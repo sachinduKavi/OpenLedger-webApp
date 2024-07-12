@@ -20,7 +20,7 @@ const PayHerePayment = (props) => {
     payhere.onDismissed = function () {
         console.log("Payment dismissed");
         // Implement your logic here for dismissed payment
-        props.success()
+  
     }
 
     payhere.onError = function (error) {

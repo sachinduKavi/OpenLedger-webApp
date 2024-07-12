@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import Treasury from '../dataModels/Treasury'
+import toast, {Toaster} from 'react-hot-toast'
 
 import '../styles/treasury-dashboard.css'
 
@@ -96,6 +97,11 @@ export default function TreasuryDashboard(){
   
   return (  
     <div className='container'>
+      <Toaster position='top-right'
+        toastOptions={{
+          duration: 15000
+        }}
+      />
       <WelcomeBar userName={userDetails?.userName} imageLink={userDetails?.dpLink} imageScale={userDetails?.pictureScale} position={activeUser.getPosition()}/>
 
       <div className="body-content">

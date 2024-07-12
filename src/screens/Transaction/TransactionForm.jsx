@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import {Input, Switch} from 'antd'
 const {TextArea} = Input
+import toast, {Toaster} from 'react-hot-toast'
 import PayHerePayment from '../../components/PayHerePayment'
 import {capitalize} from '../../middleware/auth'
 import PrimaryBorder from '../../components/PrimaryBorder'
+import ToastCustom from '../../components/ToastCustom'
 
 import '../../styles/transaction-form.css'
 import Payment from '../../dataModels/Payment'
@@ -21,14 +23,28 @@ export default function TransactionForm(props) {
             setTransactionReady(true)
     }
 
-    // Payhere payment success
+
+
+    // Payhere payment success 
     const onPaymentSuccess = async () => { 
         payment.setStatus("VERIFIED") 
-        await payment.successPaymentPayHere()
-    }
+        if(await payment.successPaymentPayHere()) {
+            // Payment completed successfully 
+            setCurrentPayment(new Payment({}))
+            // Successful message
+            toast.custom(<ToastCustom type='success'>Your Payment was Successful.</ToastCustom>);
+        } else {
+            // Payment error contact your merchant admin
+            toast.custom(<ToastCustom type='error'>Sorry, Payment was not successful. Please contact your merchant.</ToastCustom>);
+        }
+     }
+
+
 
     // Transaction proceed 
     const transactionProceed = async () => {
+        // Successful message
+        toast.custom(<ToastCustom type='error'>Sorry, Payment was not successful. Please contact your merchant.</ToastCustom>);
         console.log('transaction Proceed', payment.extractJSON())
     }
 
@@ -36,6 +52,8 @@ export default function TransactionForm(props) {
 
   return (
     <div className='transaction-form'>
+        
+
         <div className="row">
             <h2>TRANSACTION</h2>
 
@@ -141,6 +159,8 @@ export default function TransactionForm(props) {
 
             <button onClick={transactionProceed}>Test Pay</button>
         </div>
+
+        
         
     </div>
 

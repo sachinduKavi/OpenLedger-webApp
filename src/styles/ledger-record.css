@@ -36,6 +36,10 @@
     font-size: 25px;
 }
 
+.ledger-border * {
+    font-family: "Roboto";
+}
+
 .ledger-border .row {
     display: flex;
     width: 100%;
@@ -103,6 +107,7 @@
 
 .description {
     color: rgba(241, 241, 241, 0.87);
+    font-size: 1vw;
 }
 
 .menu-options {

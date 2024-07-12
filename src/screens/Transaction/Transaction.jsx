@@ -4,6 +4,7 @@ import {motion} from 'framer-motion'
 import TransactionForm from './TransactionForm'
 import Payment from '../../dataModels/Payment'
 import MyCollections from './MyCollections'
+import PaymentHistory from './PaymentHistory'
 
 import '../../styles/transaction.css'
 
@@ -38,7 +39,10 @@ export default function Transaction(props) {
 
 
           <div className="column">
-          <a href="https://www.payhere.lk" target="_blank"><img src="https://www.payhere.lk/downloads/images/payhere_long_banner_dark.png" alt="PayHere" width="100%"/></a>
+            <a href="https://www.payhere.lk" target="_blank"><img src="https://www.payhere.lk/downloads/images/payhere_long_banner_dark.png" alt="PayHere" width="100%"/></a>
+          
+
+            <PaymentHistory/>
           </div>
       </div>
 

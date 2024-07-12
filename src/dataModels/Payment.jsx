@@ -1,4 +1,6 @@
 import { generateCurrentDate } from "../middleware/GenerateCurrentDateTime"
+import { createPaymentRecordQuery } from "../query/paymentQuery"
+
 
 class Payment {
     #paymentID
@@ -53,7 +55,8 @@ class Payment {
 
     // Payment success through payhere
     async successPaymentPayHere() {
-        console.log(JSON.stringify(this.extractJSON()))
+        const response = await createPaymentRecordQuery(this.extractJSON())
+        return response.status === 200 && response.data.proceed
     }
 
 
