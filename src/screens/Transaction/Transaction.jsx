@@ -12,6 +12,7 @@ export default function Transaction(props) {
   const [currentPayment, setCurrentPayment] = useState(new Payment({}))
 
 
+
   return (
     <motion.div className='panel-outside-border transaction'
       initial={{x: 1500}}

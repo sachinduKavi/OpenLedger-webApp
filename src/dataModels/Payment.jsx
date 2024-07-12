@@ -1,3 +1,5 @@
+import { generateCurrentDate } from "../middleware/GenerateCurrentDateTime"
+
 class Payment {
     #paymentID
     #treasuryID
@@ -12,7 +14,7 @@ class Payment {
     #note
 
 
-    constructor({paymentID = 'AUTO', treasuryID = null, userID = null, status = null, amount = 0, date = null, reference = "", note = null, evidence = null, onlinePayment = true, fromCollection = false}) {
+    constructor({paymentID = 'AUTO', treasuryID = null, userID = null, status = null, amount = 0, date = generateCurrentDate(), reference = "", note = null, evidence = null, onlinePayment = true, fromCollection = false}) {
         this.#paymentID = paymentID
         this.#treasuryID = treasuryID
         this.#userID = userID
@@ -51,7 +53,7 @@ class Payment {
 
     // Payment success through payhere
     async successPaymentPayHere() {
-        console.log(this.extractJSON())
+        console.log(JSON.stringify(this.extractJSON()))
     }
 
 

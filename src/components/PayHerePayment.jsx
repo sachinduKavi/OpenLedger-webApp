@@ -12,7 +12,7 @@ const PayHerePayment = (props) => {
   useEffect(() => {
     // // Define PayHere event handlers
     payhere.onCompleted = function (orderId) {
-        console.log("Payment completed. OrderID:", orderId);
+        console.log("Payment completed. OrderID:", orderId, paymentValues);
         // Implement your logic here for successful payment
         props.success()
     }
@@ -20,13 +20,14 @@ const PayHerePayment = (props) => {
     payhere.onDismissed = function () {
         console.log("Payment dismissed");
         // Implement your logic here for dismissed payment
+        props.success()
     }
 
     payhere.onError = function (error) {
         console.log("Error:", error);
         // Implement your logic here for payment errors
     }
-  }, [])
+  }, [paymentValues])
 
   const generateHash = async () => {
     const data = {

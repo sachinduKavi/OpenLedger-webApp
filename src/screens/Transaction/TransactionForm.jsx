@@ -14,33 +14,21 @@ export default function TransactionForm(props) {
     const activeUser = props.activeUser
 
     // Transaction state that ready from transaction to proceed
-    const [transactionReady, setTransactionReady] = useState(false || payment.getFromCollection())
-
+    const [transactionReady, setTransactionReady] = useState(true || payment.getFromCollection())
 
     const checkTransactionReady = () => {
         if(payment?.getAmount() > 0 && payment?.getReference().length > 0) 
             setTransactionReady(true)
     }
 
-    // Component did mount ?
-    useEffect(() => {
-        console.log("payment", payment)
-        checkTransactionReady()
-    })
-
-
-
-    // Online payment succeed from payhere
-    const onlinePaymentSuccess = async () => {
-        // Make the payment verified
-        payment.setStatus("VERIFIED", payment)
+    // Payhere payment success
+    const onPaymentSuccess = async () => {  
         await payment.successPaymentPayHere()
-
     }
 
     // Transaction proceed 
     const transactionProceed = async () => {
-        console.log(transactionValues)
+        console.log('transaction Proceed', payment.extractJSON())
     }
 
 
@@ -63,7 +51,7 @@ export default function TransactionForm(props) {
                     onChange={(e) => {
                         payment.setAmount(Number(e.target.value))
                         setCurrentPayment(new Payment(payment.extractJSON()))
-                        // checkTransactionReady()
+                        checkTransactionReady()
                     }}/>
                 </PrimaryBorder>                
             </div>
@@ -90,7 +78,7 @@ export default function TransactionForm(props) {
                     onChange={(e) => {
                         payment.setReference((e.target.value).toUpperCase())
                         setCurrentPayment(new Payment(payment.extractJSON()))
-                        // checkTransactionReady()
+                        checkTransactionReady()
                     }}/>
                 </PrimaryBorder>                
             </div>
@@ -146,9 +134,11 @@ export default function TransactionForm(props) {
             <PrimaryBorder borderRadius='6px'>
                 {/* <button onClick={transactionProceed}>PROCEED</button> */}
                 <PayHerePayment transactionReady={transactionReady} payment={payment} user={activeUser}
-                    success={onlinePaymentSuccess}
+                    success={onPaymentSuccess}
                 />
             </PrimaryBorder>
+
+            <button onClick={transactionProceed}>Test Pay</button>
         </div>
         
     </div>
