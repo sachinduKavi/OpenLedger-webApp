@@ -22,7 +22,8 @@ export default function TransactionForm(props) {
     }
 
     // Payhere payment success
-    const onPaymentSuccess = async () => {  
+    const onPaymentSuccess = async () => { 
+        payment.setStatus("VERIFIED") 
         await payment.successPaymentPayHere()
     }
 

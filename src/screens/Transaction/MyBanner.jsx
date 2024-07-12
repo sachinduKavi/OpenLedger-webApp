@@ -14,8 +14,9 @@ export default function MyBanner(props) {
             break
         } 
     }
+
     // Remove already paid collections
-    if(participant.amount <= participant.paidAmount) return null
+    if((participant.amount <= participant.paidAmount) || collection.getStatus() === "DRAFT") return null
   return (
     <motion.div className='my-banner-border'
         whileTap={{scale: 0.95}}
@@ -35,7 +36,7 @@ export default function MyBanner(props) {
         </div>
 
         <div className="column" style={{alignItems: 'flex-end'}}>
-            <h5>LKR {participant.amount} | {collection.getAmount()}</h5>
+            <h5>LKR {participant.amount} - {participant.paidAmount} = {participant.amount - participant.paidAmount}| {collection.getAmount()}</h5>
         </div>
     </motion.div>
   )
