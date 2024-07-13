@@ -7,6 +7,8 @@ import {capitalize} from '../../middleware/auth'
 import PrimaryBorder from '../../components/PrimaryBorder'
 import ToastCustom from '../../components/ToastCustom'
 import Refresh from '../../assets/icons/Refresh.png'
+import { uploadImageFireStore } from '../../query/firebaseImageUpload'
+import { v4 } from 'uuid'
 
 import '../../styles/transaction-form.css'
 import Payment from '../../dataModels/Payment'
@@ -17,7 +19,7 @@ export default function TransactionForm(props) {
     const activeUser = props.activeUser
 
     // Transaction state that ready from transaction to proceed
-    const [transactionReady, setTransactionReady] = useState(false || payment.getFromCollection())
+    const [transactionReady, setTransactionReady] = useState(false)
 
     const checkTransactionReady = () => {
         if(payment?.getAmount() > 0 && payment?.getReference().length > 0) 
@@ -58,12 +60,31 @@ export default function TransactionForm(props) {
 
 
     // Bank Transaction process
-    const proceedBankTransaction = () => {
+    const proceedBankTransaction = async () => {
         if(payment.getEvidence() !== null) {
+            // Uploading evidence file
+            if(typeof payment.getEvidence() === 'object') {
+                const imageLink = await uploadImageFireStore(payment.getEvidence(), `paymentEvidence/${v4().slice(0, 20)}`)
+                payment.setEvidence(imageLink)
+            }
+
+            payment.setStatus("PENDING") // Set payment state to pending to verify
+            if(await payment.successPaymentPayHere()) {
+                // Payment completed successfully 
+                setCurrentPayment(new Payment({}))
+                // Successful message
+                toast.custom(<ToastCustom type='success' header='Payment Success'>Your Payment was Successful.</ToastCustom>);
+            } else {
+                // Payment error contact your merchant admin
+                toast.custom(<ToastCustom type='error' header='Payment Failed'>Sorry, Payment was not successful. Please contact your merchant.</ToastCustom>);
+            }
+    
+            props.setUpdate(!props.update)
+
 
         } else {
             // Evidence is not set
-            toast.custom(<ToastCustom type='warnning' header='No Evidence'>Please select proper payment proof.</ToastCustom>);
+            toast.custom(<ToastCustom type='warnning' header='No Evidence'>Please provide proper payment proof.</ToastCustom>);
         }
     }
 
@@ -169,7 +190,7 @@ export default function TransactionForm(props) {
                 <input type='file' accept='image/*' 
                     onChange={(e) => {
                         payment.setEvidence(e.target.files[0])
-                        setCurrentPayment(payment.extractJSON())
+                        setCurrentPayment(new Payment(payment.extractJSON()))
                     }}  
                 />
             </div>
