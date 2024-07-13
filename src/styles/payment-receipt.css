@@ -21,7 +21,7 @@
 }
 
 .payment-receipt {
-    width: 350px;
+    width: 400px;
     max-height: 500px;
     position: relative;
     display: flex;

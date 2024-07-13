@@ -15,9 +15,14 @@ const getAllPaymentsQuery = async () => {
     return await cDomain.get('transaction/loadAllTreasuryTransactions', header)
 }
 
+const stateModifyQuery = async (payment, updateRecord) => {
+    return await cDomain.post('transaction/stateModify', {payment: payment, updateRecord: updateRecord}, header)
+}
+
 
 export {
     generateHashCodeQuery,
     createPaymentRecordQuery,
-    getAllPaymentsQuery
+    getAllPaymentsQuery,
+    stateModifyQuery
 }

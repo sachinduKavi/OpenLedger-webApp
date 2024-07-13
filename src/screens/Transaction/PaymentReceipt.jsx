@@ -4,7 +4,20 @@ import '../../styles/payment-receipt.css'
 
 export default function PaymentReceipt(props) {
   const payment = props.payment
-  console.log(payment.getEvidence())
+  const incrementGate = payment.getStatus() === 'PENDING' || payment.getStatus() === 'REJECTED'
+
+  // Payment state modification 
+  const stateModification = async (modiStatus) => {
+      if(incrementGate && modiStatus) {
+        // Increment the treasury balance
+        await payment.paymentApproved()
+      } else if(incrementGate && !modiStatus) {
+        payment.setStatus('REJECTED')
+        await payment.paymentUpdate()
+      }
+  }
+
+
   return (
     <div className='payment-receipt-cover'>
 
@@ -80,10 +93,15 @@ export default function PaymentReceipt(props) {
             }
           
           {
-            !payment.getOnlinePayment() &&
+            true &&
             <div className="row state-btn">
-            <h4 style={{cursor: 'pointer',color: "green"}}>APPROVE</h4>
-            <h4 style={{cursor: 'pointer',color: "#EA4335"}}>REJECT</h4>
+            {payment.getStatus() !== 'VERIFIED' && <h4 style={{cursor: 'pointer',color: "green"}}
+              onClick={() => stateModification(true)}
+            >APPROVE</h4>}
+            {payment.getStatus() !== 'PENDING' && <h4 style={{cursor: 'pointer',color: "#FFA43C"}}>PENDING</h4>}
+            {payment.getStatus() !== 'REJECTED' && <h4 style={{cursor: 'pointer',color: "#EA4335"}}
+                onClick={() => stateModification(false)}
+            >REJECT</h4>}
           </div>}
 
         </div>
