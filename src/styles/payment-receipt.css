@@ -1,0 +1,86 @@
+.payment-receipt-cover {
+    position: fixed;
+    inset: 0;
+    z-index: 36;
+    border-radius: inherit;
+}
+
+.payment-receipt-cover {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.payment-receipt * {
+    color: black;
+}
+
+.payment-receipt .heading {
+    align-self: center;
+}
+
+.payment-receipt {
+    width: 350px;
+    max-height: 500px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    z-index: 100;
+    background-color: white;
+}
+
+.payment-receipt .scroll-container {
+    width: 100%;
+    /* flex: 0 0 0; */
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.payment-receipt .scroll-container::-webkit-scrollbar {
+    display: none;
+}
+
+.payment-receipt .row {
+    flex: 0 0 0;
+    margin: 0;
+    padding: 0;
+}
+
+.payment-receipt .amount-detail {
+    margin: 0 0 0 10%;
+    width: 80%;
+}
+
+.payment-receipt .row * {
+    font-size: 12px;
+}
+
+.payment-receipt .col-name {
+    flex: 1 0 calc(40%);
+    margin: 0;
+    font-weight: bolder;
+}
+
+.payment-receipt .col-data {
+    margin: 0;
+}
+
+.payment-receipt .payment-proof {
+    display: flex;
+    flex-direction: column;
+}
+
+.payment-receipt .state-btn {
+    padding: 15px;
+    justify-content: space-evenly;
+}
+
+.payment-proof .state-btn  {
+    cursor: pointer;
+}

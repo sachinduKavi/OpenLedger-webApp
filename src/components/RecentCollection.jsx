@@ -46,7 +46,7 @@ export default function RecentCollection(props) {
                 <div className="row">
                     <p className="content-fonts">LKR {collectionData.calculateCollectedAmount()} / {collectionData.getAmount()}</p>
 
-                    <p className="content-fonts">{(collectionData.calculateCollectedAmount()/ collectionData.getAmount()) * 100}%</p>
+                    <p className="content-fonts">{((collectionData.calculateCollectedAmount()/ collectionData.getAmount()) * 100).toFixed(2)}%</p>
                 </div>
             </div>
         </div>

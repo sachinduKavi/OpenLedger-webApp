@@ -28,6 +28,7 @@ export default function MyBanner(props) {
                 onlinePayment: true,
                 fromCollection: true
             }))
+        
         }}
     >
         <div className="column">

@@ -1,10 +1,11 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import {motion} from 'framer-motion'
 
 import TransactionForm from './TransactionForm'
 import Payment from '../../dataModels/Payment'
 import MyCollections from './MyCollections'
 import PaymentHistory from './PaymentHistory'
+import PaymentReceipt from './PaymentReceipt'
 
 import '../../styles/transaction.css'
 
@@ -13,6 +14,25 @@ export default function Transaction(props) {
   const [currentPayment, setCurrentPayment] = useState(new Payment({}))
 
   const [update, setUpdate] = useState(false) // Page refresh with update
+
+  const [receiptState, setReceiptState] = useState(false)
+  
+  
+  const receiptRef = useRef()
+  // Receipt will disappear when user click outside the container
+  const receiptContainer = (e) => {
+    if(receiptState && !receiptRef.current?.contains(e.target)) {
+      setReceiptState(false)
+    }
+  }
+  useEffect(() => {
+    
+    document.addEventListener("mousedown", receiptContainer)
+
+    return(()=> {
+      document.removeEventListener("mousedown", receiptContainer)
+    })
+  })
 
 
   return (
@@ -28,7 +48,7 @@ export default function Transaction(props) {
 
             <div className="mini-column-pay">
               <MyCollections activeUser={props.activeUser} setCurrentPayment={setCurrentPayment}
-                update={update}
+                update={update} 
               />
             </div>
 
@@ -47,12 +67,16 @@ export default function Transaction(props) {
             <a href="https://www.payhere.lk" target="_blank"><img src="https://www.payhere.lk/downloads/images/payhere_long_banner_dark.png" alt="PayHere" width="100%"/></a>
           
 
-            <PaymentHistory update={update}/>
+            <PaymentHistory update={update} setReceiptState={setReceiptState}
+              setPayment={setCurrentPayment}
+            />
           </div>
       </div>
 
-
-
+      {
+        receiptState && <PaymentReceipt receiptRef={receiptRef} payment={currentPayment}/>
+      }
+      
 
     </motion.div>
   )

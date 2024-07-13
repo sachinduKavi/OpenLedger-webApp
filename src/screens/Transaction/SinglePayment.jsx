@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import {motion} from 'framer-motion'
+import Payment from '../../dataModels/Payment'
 
 export default function SinglePayment(props) {
     const payment = props.payment
@@ -11,7 +12,10 @@ export default function SinglePayment(props) {
         animate={{scale: 1, transition: {delay: 0.1 + delayTime*0.2, duration: 0.5}}}
         whileTap={{scale: 0.95, transition: {duration: 0.1, delay: 0}}}
         transition={{delay: 0, duration: 0.1}}
-        // onClick={setDelay(0)} 
+        onClick={() => {
+            props.setPayment(new Payment(payment.extractJSON()))
+            props.setReceiptState(true)
+        }}
     >
         <div className="column column-1">
             <h2 className='reference'>{payment.getReference()}</h2>

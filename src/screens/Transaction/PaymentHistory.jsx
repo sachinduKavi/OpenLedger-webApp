@@ -32,7 +32,9 @@ export default function PaymentHistory(props) {
         
         {
             paymentArray.map((element, index) => {
-                return (<SinglePayment key={index} payment={element} delay={index}/>)
+                return (<SinglePayment key={index} payment={element} delay={index}
+                    setReceiptState={props.setReceiptState} setPayment={props.setPayment}
+                />)
             })
         }
     </div>

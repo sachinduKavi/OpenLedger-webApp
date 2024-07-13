@@ -14,7 +14,7 @@ import '../../styles/transaction-form.css'
 import Payment from '../../dataModels/Payment'
 
 export default function TransactionForm(props) {
-    const payment = props.payment.currentPayment
+    const payment = props.payment.currentPayment.getPaymentID() === 'AUTO' ? props.payment.currentPayment : new Payment({})
     const setCurrentPayment = props.payment.setCurrentPayment
     const activeUser = props.activeUser
 
@@ -65,6 +65,7 @@ export default function TransactionForm(props) {
             // Uploading evidence file
             if(typeof payment.getEvidence() === 'object') {
                 const imageLink = await uploadImageFireStore(payment.getEvidence(), `paymentEvidence/${v4().slice(0, 20)}`)
+                console.log('image Link', imageLink)
                 payment.setEvidence(imageLink)
             }
 

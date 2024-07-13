@@ -27,7 +27,7 @@ export default function MyCollections(props) {
         {
             collectionArray.map((element, index) => {
                 return(<MyBanner collection={element} key={index} userID={props.activeUser.getUserId()}
-                    setCurrentPayment={props.setCurrentPayment}
+                    setCurrentPayment={props.setCurrentPayment} 
                 />)
             })
         }
