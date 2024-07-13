@@ -36,7 +36,7 @@ export default function MyBanner(props) {
         </div>
 
         <div className="column" style={{alignItems: 'flex-end'}}>
-            <h5>LKR {participant.amount} - {participant.paidAmount} = {participant.amount - participant.paidAmount}| {collection.getAmount()}</h5>
+            <h5>LKR {participant.amount} {(participant.paidAmount > 0) ?participant.paidAmount/-1: null} = {participant.amount - participant.paidAmount}| {collection.getAmount()}</h5>
         </div>
     </motion.div>
   )

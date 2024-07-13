@@ -1,13 +1,17 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {motion} from 'framer-motion'
 
 export default function SinglePayment(props) {
     const payment = props.payment
-
+    const [delayTime, setDelay] = useState(props.delay)
   return (
+    // Fix this issue
     <motion.div className='single-payment'
         initial={{scale: 0}}
-        animate={{scale: 1, transition: {delay: 0.1 + props.delay*0.2, duration: 0.5}}}
+        animate={{scale: 1, transition: {delay: 0.1 + delayTime*0.2, duration: 0.5}}}
+        whileTap={{scale: 0.95, transition: {duration: 0.1, delay: 0}}}
+        transition={{delay: 0, duration: 0.1}}
+        // onClick={setDelay(0)} 
     >
         <div className="column column-1">
             <h2 className='reference'>{payment.getReference()}</h2>
@@ -31,7 +35,7 @@ export default function SinglePayment(props) {
         </div>
 
         <div className="column amount-column">
-            <h3 className='amount'>LKR {payment.getAmount()}</h3>
+            <h3 className='amount'>LKR {payment.getAmount().toLocaleString('en-US')}</h3>
         </div>
     </motion.div>
   )

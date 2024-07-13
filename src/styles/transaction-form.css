@@ -7,3 +7,9 @@
     padding: 10px 4%;
     border-radius: 10px;
 }
+
+.transaction-form .head-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

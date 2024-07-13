@@ -6,6 +6,7 @@ import PayHerePayment from '../../components/PayHerePayment'
 import {capitalize} from '../../middleware/auth'
 import PrimaryBorder from '../../components/PrimaryBorder'
 import ToastCustom from '../../components/ToastCustom'
+import Refresh from '../../assets/icons/Refresh.png'
 
 import '../../styles/transaction-form.css'
 import Payment from '../../dataModels/Payment'
@@ -22,6 +23,10 @@ export default function TransactionForm(props) {
         if(payment?.getAmount() > 0 && payment?.getReference().length > 0) 
             setTransactionReady(true)
     }
+
+    useEffect(() => {
+        checkTransactionReady()
+    })
 
 
 
@@ -43,7 +48,7 @@ export default function TransactionForm(props) {
 
 
 
-    // Transaction proceed 
+    // Transaction proceed test function 
     const transactionProceed = async () => {
         // Successful message
         toast.custom(<ToastCustom type='error'>Sorry, Payment was not successful. Please contact your merchant.</ToastCustom>);
@@ -52,15 +57,29 @@ export default function TransactionForm(props) {
     }
 
 
+    // Bank Transaction process
+    const proceedBankTransaction = () => {
+        if(payment.getEvidence() !== null) {
+
+        } else {
+            // Evidence is not set
+            toast.custom(<ToastCustom type='warnning' header='No Evidence'>Please select proper payment proof.</ToastCustom>);
+        }
+    }
+
+
 
   return (
     <div className='transaction-form'>
         
 
-        <div className="row">
+        <div className="head-row">
             <h2>TRANSACTION</h2>
 
-
+            <img src={Refresh} alt="refresh" width='25' height='25'
+                style={{cursor: 'pointer'}}
+                onClick={() => setCurrentPayment(new Payment({}))}
+            />
         </div>
         
 
@@ -73,7 +92,7 @@ export default function TransactionForm(props) {
                     onChange={(e) => {
                         payment.setAmount(Number(e.target.value))
                         setCurrentPayment(new Payment(payment.extractJSON()))
-                        checkTransactionReady()
+                        // checkTransactionReady()
                     }}/>
                 </PrimaryBorder>                
             </div>
@@ -83,7 +102,7 @@ export default function TransactionForm(props) {
             </div>
 
             <div className="column">
-                <p>= {payment.getOnlinePayment()? Number(payment.getAmount()*1.033).toFixed(2): payment.getAmount()}/-</p>
+                <p>= {payment.getOnlinePayment()? Number(payment.getAmount()*1.033).toLocaleString('en-US'): payment.getAmount().toLocaleString('en-US')}/-</p>
             </div>
             
         </div>
@@ -100,7 +119,7 @@ export default function TransactionForm(props) {
                     onChange={(e) => {
                         payment.setReference((e.target.value).toUpperCase())
                         setCurrentPayment(new Payment(payment.extractJSON()))
-                        checkTransactionReady()
+                        // checkTransactionReady()
                     }}/>
                 </PrimaryBorder>                
             </div>
@@ -147,20 +166,36 @@ export default function TransactionForm(props) {
         <div className="mini-row" style={{visibility: payment.getOnlinePayment() ? 'hidden': 'visible'}}>
             <div className="column">
                 <label htmlFor="">Evidence</label>
-                <Input rows={3} type='file'/>
+                <input type='file' accept='image/*' 
+                    onChange={(e) => {
+                        payment.setEvidence(e.target.files[0])
+                        setCurrentPayment(payment.extractJSON())
+                    }}  
+                />
             </div>
 
         </div>
 
-        <div className="mini-row">
-            <PrimaryBorder borderRadius='6px'>
-                {/* <button onClick={transactionProceed}>PROCEED</button> */}
-                <PayHerePayment transactionReady={transactionReady} payment={payment} user={activeUser}
-                    success={onPaymentSuccess}
-                />
-            </PrimaryBorder>
+        <div className="mini-row" style={{justifyContent: 'center'}}>
 
-            <button onClick={transactionProceed}>Test Pay</button>
+            {
+                payment.getOnlinePayment() 
+                    ?
+                    <PrimaryBorder borderRadius='10px'>
+                        <PayHerePayment transactionReady={transactionReady} payment={payment} user={activeUser}
+                            success={onPaymentSuccess}
+                        />
+                    </PrimaryBorder>
+                    : 
+                    <PrimaryBorder borderRadius='10px'>
+                        <button onClick={proceedBankTransaction} disabled={!transactionReady}>PROCEED</button>
+                    </PrimaryBorder>
+                    
+                    
+            }
+            
+
+            
         </div>
 
         

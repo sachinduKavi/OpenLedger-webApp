@@ -88,6 +88,14 @@ class Payment {
 
     
     // Getters & Setters
+    getEvidence() {
+        return this.#evidence
+    }
+
+    setEvidence(evidence) {
+        this.#evidence = evidence
+    }
+
     getUserName() {
         return this.#userName
     }
