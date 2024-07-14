@@ -10,6 +10,8 @@ export default function PaymentReceipt(props) {
   const incrementGate = payment.getStatus() === 'PENDING' || payment.getStatus() === 'REJECTED'
   const decrementGate = payment.getStatus() === 'VERIFIED'
 
+  console.log(payment)
+
   // Payment state modification 
   const stateModification = async (modiStatus) => {
       changeSessionData({processing: true}) // Processing 
@@ -20,6 +22,7 @@ export default function PaymentReceipt(props) {
         await payment.decrementStatus()
       } else if(incrementGate && modiStatus === 'VERIFIED') {
         // Increment the treasury balance
+        console.log('Verified payment', payment.extractJSON())
         await payment.paymentApproved()
       } else if(incrementGate) {
         // Change status treasury balance in neutral 

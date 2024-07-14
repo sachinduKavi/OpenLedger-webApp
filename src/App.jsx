@@ -22,7 +22,7 @@ function App() {
   const [userCartState, setUserCardState] = useState(false)
 
   return (
-    <SessionContext.Provider value={{sessionData, changeSessionData}}>
+    <SessionContext.Provider value={{sessionData, changeSessionData, setUserCardState}}>
       {/* <SessionContext.Provider value={{setUserDetail, setUserCardState}}> */}
       <BrowserRouter>
 

@@ -30,6 +30,10 @@ export default function TransactionForm(props) {
         checkTransactionReady()
     })
 
+    const testFunction = () => {
+        console.log(payment.extractJSON())
+    }
+
 
 
     // Payhere payment success 
@@ -216,6 +220,7 @@ export default function TransactionForm(props) {
                     
             }
             
+            <button onClick={testFunction}>TestFunction</button>
 
             
         </div>

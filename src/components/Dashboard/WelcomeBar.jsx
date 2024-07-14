@@ -1,7 +1,8 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {motion} from 'framer-motion'
 
 import SimpleDP from '../SimpleDP'
+import { SessionContext } from '../../Session'
 
 
 import '../../styles/welcomeComp.css'
@@ -9,6 +10,9 @@ import '../../styles/welcomeComp.css'
 import MenuImage from '../../assets/logos/olLogo.png'
 
 export default function WelcomeBar(props) {
+
+    const setUserCard = useContext(SessionContext).setUserCardState
+   
   return (
     <motion.div className="welcome-container"
         initial={{y:-110}}
@@ -43,8 +47,10 @@ export default function WelcomeBar(props) {
                 
             </div>
 
-            
+            <div onClick={() => {setUserCard(true)}}>
             <SimpleDP imageLink={props.imageLink} size={45} imageScale={props.imageScale}/>
+            </div>
+            
             
         
         </div>
