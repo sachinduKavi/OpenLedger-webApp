@@ -1,5 +1,5 @@
 import { generateCurrentDate } from "../middleware/GenerateCurrentDateTime"
-import { createPaymentRecordQuery, getAllPaymentsQuery, stateModifyQuery } from "../query/paymentQuery"
+import { createPaymentRecordQuery, getAllPaymentsQuery, stateModifyQuery, decrementStatusQuery } from "../query/paymentQuery"
 
 class Payment {
     #paymentID
@@ -77,18 +77,26 @@ class Payment {
         }
     }
 
+    async decrementStatus() {
+        this.#date = generateCurrentDate() // Update last update date
+        const response = await decrementStatusQuery(this.extractJSON())
+        console.log(response)
+        return response.status === 200 && response.data.proceed
+    }
+
 
     // Payment state update and incrementing treasury
     async paymentApproved() {
-        this.#status = 'VERIFIED' // Verify payment state
         const response = await stateModifyQuery(this.extractJSON(), true)
         console.log('response', response)
+        return response.status === 200 && response.data.proceed
     }
 
     // Update payment state without inserting ledger record
     async paymentUpdate() {
         const response = await stateModifyQuery(this.extractJSON(), false)
         console.log('response', response)
+        return response.status === 200 && response.data.proceed
     }
 
 

@@ -1,20 +1,34 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import {SessionContext} from '../../Session'
+import Payment from '../../dataModels/Payment'
 
 import '../../styles/payment-receipt.css'
 
 export default function PaymentReceipt(props) {
+  const changeSessionData = useContext(SessionContext).changeSessionData
   const payment = props.payment
   const incrementGate = payment.getStatus() === 'PENDING' || payment.getStatus() === 'REJECTED'
+  const decrementGate = payment.getStatus() === 'VERIFIED'
 
   // Payment state modification 
   const stateModification = async (modiStatus) => {
-      if(incrementGate && modiStatus) {
+      changeSessionData({processing: true}) // Processing 
+      payment.setStatus(modiStatus)
+      let res
+      if(decrementGate) {
+        // Decrement treasury balance 
+        await payment.decrementStatus()
+      } else if(incrementGate && modiStatus === 'VERIFIED') {
         // Increment the treasury balance
         await payment.paymentApproved()
-      } else if(incrementGate && !modiStatus) {
-        payment.setStatus('REJECTED')
+      } else if(incrementGate) {
+        // Change status treasury balance in neutral 
         await payment.paymentUpdate()
       }
+
+      props.setPayment(new Payment(payment.extractJSON()))
+      props.setUpdate(!props.update)
+      changeSessionData({processing: false}) // Processing 
   }
 
 
@@ -96,11 +110,13 @@ export default function PaymentReceipt(props) {
             true &&
             <div className="row state-btn">
             {payment.getStatus() !== 'VERIFIED' && <h4 style={{cursor: 'pointer',color: "green"}}
-              onClick={() => stateModification(true)}
+              onClick={() => stateModification("VERIFIED")}
             >APPROVE</h4>}
-            {payment.getStatus() !== 'PENDING' && <h4 style={{cursor: 'pointer',color: "#FFA43C"}}>PENDING</h4>}
+            {payment.getStatus() !== 'PENDING' && <h4 style={{cursor: 'pointer',color: "#FFA43C"}} 
+                onClick={() => stateModification("PENDING")}
+            >PENDING</h4>}
             {payment.getStatus() !== 'REJECTED' && <h4 style={{cursor: 'pointer',color: "#EA4335"}}
-                onClick={() => stateModification(false)}
+                onClick={() => stateModification("REJECTED")}
             >REJECT</h4>}
           </div>}
 

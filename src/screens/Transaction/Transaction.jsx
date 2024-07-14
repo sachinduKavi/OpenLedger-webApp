@@ -74,7 +74,9 @@ export default function Transaction(props) {
       </div>
 
       {
-        receiptState && <PaymentReceipt receiptRef={receiptRef} payment={currentPayment}/>
+        receiptState && <PaymentReceipt receiptRef={receiptRef} payment={currentPayment} setPayment={setCurrentPayment}
+        setUpdate={setUpdate} update={update}
+        />
       }
       
 

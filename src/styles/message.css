@@ -69,7 +69,7 @@
 }
 
 .content > h3, p {
-    font-family: 'MYFonts';
+    /* font-family: 'MYFonts'; */
 }
 
 @keyframes animate-width {

@@ -19,10 +19,15 @@ const stateModifyQuery = async (payment, updateRecord) => {
     return await cDomain.post('transaction/stateModify', {payment: payment, updateRecord: updateRecord}, header)
 }
 
+const decrementStatusQuery = async (payment) => {
+    return await cDomain.post('transaction/decrementStatus', {payment: payment}, header)
+}
+
 
 export {
     generateHashCodeQuery,
     createPaymentRecordQuery,
     getAllPaymentsQuery,
-    stateModifyQuery
+    stateModifyQuery,
+    decrementStatusQuery
 }
