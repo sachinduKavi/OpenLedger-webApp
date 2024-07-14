@@ -107,7 +107,7 @@ export default function PaymentReceipt(props) {
             }
           
           {
-            true &&
+            props.activeUser.getUserLevel() > 2 &&
             <div className="row state-btn">
             {payment.getStatus() !== 'VERIFIED' && <h4 style={{cursor: 'pointer',color: "green"}}
               onClick={() => stateModification("VERIFIED")}

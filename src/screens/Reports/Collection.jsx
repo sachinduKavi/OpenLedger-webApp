@@ -45,10 +45,12 @@ export default function Collection(props) {
 
       <div className="row">
         <div className="column">
-        <button className='new-button' onClick={() => {
+
+          {activeUser.getUserLevel() > 2 &&
+          <button className='new-button' onClick={() => {
           setNewCollectionState(!newCollectionState)
           setCollection(new CollectionModel({}))
-          }}>New</button>
+          }}>New</button>}
           
 
           {/* List collection  */}

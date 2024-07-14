@@ -109,6 +109,8 @@ export default function CreateCollection(props) {
     <div className='collection-border'>
 
         <div className="collection-container">
+
+            {activeUser.getUserLevel() <= 2 && <div className="background-blur" style={{opacity: 0}}></div>}
             <h2>COLLECTION </h2> <h6>{collection.getCollectionID()} {collection.getStatus()}</h6>
             
             <div className="row">
