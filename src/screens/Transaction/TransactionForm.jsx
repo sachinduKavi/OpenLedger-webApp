@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import {Input, Switch} from 'antd'
 const {TextArea} = Input
 import toast, {Toaster} from 'react-hot-toast'
@@ -9,6 +9,7 @@ import ToastCustom from '../../components/ToastCustom'
 import Refresh from '../../assets/icons/Refresh.png'
 import { uploadImageFireStore } from '../../query/firebaseImageUpload'
 import { v4 } from 'uuid'
+import { SessionContext } from '../../Session'
 
 import '../../styles/transaction-form.css'
 import Payment from '../../dataModels/Payment'
@@ -17,6 +18,7 @@ export default function TransactionForm(props) {
     const payment = props.payment.currentPayment.getPaymentID() === 'AUTO' ? props.payment.currentPayment : new Payment({})
     const setCurrentPayment = props.payment.setCurrentPayment
     const activeUser = props.activeUser
+    const changeSessionData = useContext(SessionContext).changeSessionData
 
     // Transaction state that ready from transaction to proceed
     const [transactionReady, setTransactionReady] = useState(false)
@@ -65,6 +67,7 @@ export default function TransactionForm(props) {
 
     // Bank Transaction process
     const proceedBankTransaction = async () => {
+        changeSessionData({processing: true}) // Enable processing
         if(payment.getEvidence() !== null) {
             // Uploading evidence file
             if(typeof payment.getEvidence() === 'object') {
@@ -91,6 +94,7 @@ export default function TransactionForm(props) {
             // Evidence is not set
             toast.custom(<ToastCustom type='warnning' header='No Evidence'>Please provide proper payment proof.</ToastCustom>);
         }
+        changeSessionData({processing: false}) // Disable processing
     }
 
 
