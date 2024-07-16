@@ -224,7 +224,7 @@ export default function TransactionForm(props) {
                     
             }
             
-            <button onClick={testFunction}>TestFunction</button>
+            {/* <button onClick={testFunction}>TestFunction</button> */}
 
             
         </div>

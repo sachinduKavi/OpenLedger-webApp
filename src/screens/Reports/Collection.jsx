@@ -58,7 +58,9 @@ export default function Collection(props) {
             {
               collectionArray.map((element, index) => {
                 if(activeUser.getUserLevel() > 2 || element.getStatus() !== 'DRAFT')
-                return (<CollectionBanner key={index} collection={element} setCollection={setCollection} index={index}/>)
+                return (<CollectionBanner key={index} collection={element} setCollection={setCollection} index={index}
+                  activeUser={activeUser}
+                />)
               })
             }
         

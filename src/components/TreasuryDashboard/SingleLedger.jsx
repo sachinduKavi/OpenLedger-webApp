@@ -19,30 +19,27 @@ export default function SingleLedger(props) {
         <div className="background"></div>
         <div className="content">
             <div className="row">
-                <div className="column" style={{flexBasis: '700px'}}>
-                    <h2>{ledgerRecord.getTitle()}</h2>
-                   
+                <div className="column" style={{flex: '0 0 calc(70%)'}}>
+                    <h2 style={{fontSize: '1.5vw'}}>{ledgerRecord.getTitle()}</h2>
+                    <h4 className="category" style={{color: '#D3D3D3'}}> {ledgerRecord.getCategory()}</h4>
                 </div>
 
-                <div className="column" >
-                  <h4 className="category"> {ledgerRecord.getCategory()}</h4>
-                </div>
-
-                <div className="column" >
-                  <h3 className="amount">LKR {amount.toLocaleString('en-US')}</h3>
+                {/* <div className="column" >
                   
+                </div> */}
+
+                <div className="column" >
+                  <h3 className="amount" style={{color: (amount < 0) ?'#FF0000': '#6CDB9A'}}>LKR {amount.toLocaleString('en-US')}</h3>
+                  <p className="date-time">{dateTime[0]}</p>
                 </div>
             </div>
 
             <div className="row">
-              <div className="column" style={{flexGrow: 9}}>
+              <div className="column" style={{flexBasis: 'calc(100%)'}}>
                 <p className='description' style={{color: '#e0e0e0'}}>{ledgerRecord.getDescription()}</p>
               </div>
             
-              <div className="column" style={{flexGrow: 1, width: 'fit-content'}}>
-                <p className="date-time">{dateTime[0]}</p>
-                <p className="date-time">{dateTime[1]} {(time > 12)? 'PM': 'AM'}</p>
-              </div>
+             
             </div>
         </div>
     </motion.div>

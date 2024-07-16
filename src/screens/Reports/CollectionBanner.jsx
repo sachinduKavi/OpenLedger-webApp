@@ -8,11 +8,15 @@ import CollectionModel from '../../dataModels/CollectionDataModel'
 
 export default function CollectionBanner(props) {
     const collection = props.collection
+    const activeUser = props.activeUser
 
     // Calculate paid amount 
     let totalCollected = collection.getTreasuryAllocation()
+    let thisUser
     collection.participantArray.forEach(element => {
         totalCollected += element.paidAmount
+        if(activeUser.getUserId() === element.userID) 
+            thisUser = element
     })
 
 
@@ -48,8 +52,11 @@ export default function CollectionBanner(props) {
 
 
             <div className="collection-column end-column">
-
-                <h3 style={{color: '#FF3A3A'}}>PENDING PAYMENT</h3>
+                {
+                 thisUser.paidAmount >= thisUser.amount   
+                 ? <h3 style={{color: '#32AF4E'}}>PAID</h3>
+                 : <h3 style={{color: '#FF3A3A'}}>PENDING PAYMENT</h3>
+                }
                 <p className="deadline">
                     Deadline: {collection.getDeadline()}
                 </p>
