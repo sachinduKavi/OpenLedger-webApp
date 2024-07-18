@@ -48,7 +48,10 @@ export default function WelcomeBar(props) {
             </div>
 
             <div onClick={() => {setUserCard(true)}}>
-            <SimpleDP imageLink={props.imageLink} size={45} imageScale={props.imageScale}/>
+                <div className="user-dp">
+                <SimpleDP imageLink={props.imageLink} size={45} imageScale={props.imageScale}/>
+                </div>
+                
             </div>
             
             

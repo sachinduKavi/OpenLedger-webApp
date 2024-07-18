@@ -1,0 +1,21 @@
+.announcement-border {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+}
+
+.announcement-border .ans-column {
+    display: flex;
+    flex-direction: column;
+    margin: 1%;
+    padding: 10px 2vw;
+    border-radius: inherit;
+    flex: 1 1 0;
+    overflow-y: scroll;
+}
+
+.announcement-border .ans-column::-webkit-scrollbar {
+    display: none;
+}

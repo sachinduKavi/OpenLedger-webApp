@@ -30,6 +30,9 @@
     align-items: center;
 }
 
+.user-image {
+    margin: 8px 2vw;
+}
 
 
 .user-details {

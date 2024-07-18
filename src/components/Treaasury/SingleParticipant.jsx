@@ -11,9 +11,12 @@ export default function SingleParticipant(props) {
 
         <div className="counter">
           <h2>{props.indexNumber + 1}</h2>
+          <div className='user-image'>
           <SimpleDP imageLink={user.getDisplayPictureId()}
               imageScale={user.getPictureScale()} size={50}
           />
+          </div>
+          
         </div>
 
         

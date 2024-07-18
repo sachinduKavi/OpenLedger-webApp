@@ -14,8 +14,7 @@ export default function SimpleDP(props) {
 
 
     <div>
-        <div className="display-picture" style={{width:props.size}}
-        >
+        <div className="display-picture" style={{width:props.size, height:props.size}}>
           {(props.imageLink != null) && <motion.img src={props.imageLink} width='100%' animate={picScale}/>}
         </div>
     </div>
