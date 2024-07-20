@@ -1,0 +1,30 @@
+
+.complaint-list {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+  
+  .complaint {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+  }
+  
+  .complaint-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: gray;
+  }
+  
+  .complaint p {
+    margin: 10px 0;
+    color: black;
+  }
+  
+  .complaint-footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: gray;
+  }
