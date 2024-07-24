@@ -141,7 +141,7 @@ class CollectionModel {
             if(element.userID ===  userID) return element
         }
 
-        return null
+        return []
     }
 
 

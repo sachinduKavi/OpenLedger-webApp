@@ -46,6 +46,10 @@ export default function TreasuryDashboard(){
 
   const navigate = useNavigate()
 
+  useEffect(() => {
+    console.warn(userDetails, activeUser)
+  }, [activeUser])
+
   // validate whether user belongs to the treasury group
   // If validate success back end create new treasury token
   const validateTreasury = async (treasury) => {
@@ -67,6 +71,7 @@ export default function TreasuryDashboard(){
       } else if (treasuryRole === 'Chair') {
         // User role is Chair
         setUser(new Chair(userDetails))
+        
       } else if (treasuryRole === 'Member') {
         // User role is Member
         setUser(new Member(userDetails))
@@ -75,6 +80,8 @@ export default function TreasuryDashboard(){
         // Invalid treasury entrance attempt directed back to login page
         navigate('/login')
       }
+
+      
 
     } else {
       // Treasury login is unauthorized

@@ -1,5 +1,8 @@
 import React from 'react'
 import {motion} from 'framer-motion'
+import CreateNewAnnouncement from './CreateNewAnnouncement'
+
+
 import '../../styles/announcement.css'
 
 import AnnouncementSingle from './AnnouncementSingle'
@@ -41,6 +44,8 @@ export default function Announcement() {
 
         <div className="ans-column">
 
+            <CreateNewAnnouncement/>
+          
         </div>
 
       </div>

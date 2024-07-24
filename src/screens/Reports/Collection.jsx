@@ -73,11 +73,13 @@ export default function Collection(props) {
 
         <div className="column">
           
-          { (collectionData !== null) &&
+          { 
+          (collectionData !== null) &&
             <CreateCollection treasury={props.treasury} collection={collectionData} setCollection={setCollection} setLoadState={setLoadState}
               activeUser={activeUser}
               newCollectionState={newCollectionState}
-            />}
+            />
+          }
         </div>
       </div>      
 

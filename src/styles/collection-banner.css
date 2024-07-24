@@ -27,7 +27,7 @@
     min-height: 20px;
     width: 100%;
     
-    justify-content: space-between;
+    justify-content: space-between!important;
 }
 
 .end-column {

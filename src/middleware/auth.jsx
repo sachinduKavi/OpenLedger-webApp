@@ -3,6 +3,7 @@ import CoTreasurer from "../dataModels/CoTreasurer"
 import Chair from "../dataModels/Chair"
 import Member from "../dataModels/Member"
 
+
 const isClassObject = (obj) => {
     try{
         return obj.constructor && obj.constructor !== Object
