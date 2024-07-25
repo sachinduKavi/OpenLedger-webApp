@@ -1,15 +1,20 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {motion} from 'framer-motion'
 import CreateNewAnnouncement from './CreateNewAnnouncement'
+import AnnouncementModel from '../../dataModels/AnnouncementModel'
 
 
 import '../../styles/announcement.css'
 
 import AnnouncementSingle from './AnnouncementSingle'
+import PrimaryBorder from '../../components/PrimaryBorder'
 
 
 
 export default function Announcement() {
+
+  const [newFormState, setFormState] = useState(false)
+
   return (
     <motion.div className='panel-outside-border'
       initial={{x: 1500}}
@@ -43,9 +48,14 @@ export default function Announcement() {
 
 
         <div className="ans-column">
+            <PrimaryBorder borderRadius='10px' width='fit-content' margin='5px'>
+              <button onClick={() => setFormState(true)}>New Announcement</button>
+            </PrimaryBorder>
 
-            <CreateNewAnnouncement/>
-          
+          {
+            newFormState &&
+            <CreateNewAnnouncement setFormState={setFormState}/>
+          }
         </div>
 
       </div>
