@@ -12,7 +12,7 @@ export default function CollectionBanner(props) {
 
     // Calculate paid amount 
     let totalCollected = collection.getTreasuryAllocation()
-    let thisUser
+    let thisUser = null
     collection.participantArray.forEach(element => {
         totalCollected += element.paidAmount
         if(activeUser.getUserId() === element.userID) 
@@ -53,6 +53,7 @@ export default function CollectionBanner(props) {
 
             <div className="collection-column end-column">
                 {
+                thisUser === null ? <h3 style={{color: '#FFA43C'}}>NOT INCLUDED</h3> :
                  thisUser.paidAmount >= thisUser.amount   
                  ? <h3 style={{color: '#32AF4E'}}>PAID</h3>
                  : <h3 style={{color: '#FF3A3A'}}>PENDING PAYMENT</h3>

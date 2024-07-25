@@ -1,12 +1,35 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {motion} from 'framer-motion'
+import CreateNewAnnouncement from './CreateNewAnnouncement'
+import AnnouncementModel from '../../dataModels/AnnouncementModel'
+
+
 import '../../styles/announcement.css'
 
 import AnnouncementSingle from './AnnouncementSingle'
+import PrimaryBorder from '../../components/PrimaryBorder'
 
 
 
 export default function Announcement() {
+
+  const [newFormState, setFormState] = useState(false)
+  const [announcementList, setAnnouncementList] = useState([]) // Announcement list display here
+
+  // Loading all announcements published 
+  const loadAnnouncements = async () => {
+    setAnnouncementList(await AnnouncementModel.fetchAllAnnouncements())
+  }
+
+  // Update variable for announcement list
+  const [announcementUpdate, setUpdate] = useState(false)
+
+
+  // Component did mount ?
+  useEffect(() => {
+    loadAnnouncements()
+  }, [announcementUpdate])
+
   return (
     <motion.div className='panel-outside-border'
       initial={{x: 1500}}
@@ -21,18 +44,13 @@ export default function Announcement() {
           <h2 className='ans-title'>ANNOUNCEMENTS</h2>
 
          
-            <AnnouncementSingle/>
-
-            <AnnouncementSingle/>
-            <AnnouncementSingle/>
-            <AnnouncementSingle/>
-            <AnnouncementSingle/>
-            <AnnouncementSingle/>
-            <AnnouncementSingle/>
-            <AnnouncementSingle/>
-            <AnnouncementSingle/>
-            <AnnouncementSingle/>
-            <AnnouncementSingle/>
+            
+            {/* Loading all the announcements */}
+            {
+              announcementList.map((element, index) => {
+                return (<AnnouncementSingle key={index} announcement={element}/>)
+              })
+            }
         
           
 
@@ -40,7 +58,14 @@ export default function Announcement() {
 
 
         <div className="ans-column">
+            <PrimaryBorder borderRadius='10px' width='fit-content' margin='5px'>
+              <button onClick={() => setFormState(true)}>New Announcement</button>
+            </PrimaryBorder>
 
+          {
+            newFormState &&
+            <CreateNewAnnouncement setFormState={setFormState} annUpdate={{announcementUpdate: announcementUpdate, setUpdate: setUpdate}}/>
+          }
         </div>
 
       </div>

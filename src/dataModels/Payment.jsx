@@ -52,9 +52,7 @@ class Payment {
 
 
 
-
-
-    // Payment success through payhere
+    // Payment success through pay here
     async successPaymentPayHere() {
         const response = await createPaymentRecordQuery(this.extractJSON())
         return response.status === 200 && response.data.proceed

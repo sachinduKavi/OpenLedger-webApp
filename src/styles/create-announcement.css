@@ -1,0 +1,32 @@
+.announcement-form {
+    width: 100%;
+    height: fit-content;
+    border-radius: 10px;
+    border: 2px solid #B7B5EB;
+    background-color: #2322387c;
+    backdrop-filter: blur(10px);
+    padding: 30px;
+}
+
+.announcement-form h2 {
+    margin-bottom: 20px;
+}
+
+.announcement-form label {
+    font-size: 12px;
+}
+
+.announcement-form .zipper {
+    margin-bottom: 10px;
+}
+
+:where(.css-dev-only-do-not-override-42nv3w).ant-input-outlined:focus-within {
+    background-color: none;
+}
+
+.announcement-form .row {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+}
+
