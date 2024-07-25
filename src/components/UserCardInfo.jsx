@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import '../styles/user-card.css'
 
 import EditIcon from '../assets/icons/Edit.png'
@@ -10,11 +10,33 @@ import ChangePassword from './changePassword'
 export default function UserCardInfo(props) {
     const userID = props.userID
 
+    const [changePassForm, setChangePassState] = useState(false) // Form state
+
 
     // Loading use data from the backend
     const loadUserDetails = async () => {
         console.log('loading user details')
     }
+
+    
+    const changePassRef = useRef()
+    // Receipt will disappear when user click outside the container
+    const receiptContainer = (e) => {
+        console.log(e, changePassForm && !changePassRef.current?.contains(e.target), changePassForm)
+        if(changePassForm && !changePassRef.current?.contains(e.target)) {
+            setChangePassState(false)
+        }
+    }
+
+
+    useEffect(() => {
+    
+        document.addEventListener("mousedown", receiptContainer)
+    
+        return(()=> {
+          document.removeEventListener("mousedown", receiptContainer)
+        })
+    })
 
 
 
@@ -28,13 +50,13 @@ export default function UserCardInfo(props) {
     const EditorMode = props.editorMode ?? false
 
     return (
-        <div className='user-profile-card'>
+        <div className='user-profile-card' ref={changePassRef}>
             
             <div className="user-content">
             <div className="whole-container">
                 <div className="user-content-header">
                     <div className="user-content-header-name">
-                        <h3>Nipunee Nawanjana</h3>
+                        <h3 className='user-name'>Nipunee Nawanjana</h3>
                         <img src={EditIcon} alt="" />
                     </div>
 
@@ -60,7 +82,7 @@ export default function UserCardInfo(props) {
                         </div>
 
                         <div className="profile-btn">
-                            <button>CHANGE PASSWORD</button>
+                            <button onClick={() => setChangePassState(true)}>CHANGE PASSWORD</button>
                         </div>
                     </div>
 
@@ -88,8 +110,7 @@ export default function UserCardInfo(props) {
                     </div>
                 </div>
 
-
-                <ChangePassword/>
+                {changePassForm && <ChangePassword/>}
 
             </div>
 
