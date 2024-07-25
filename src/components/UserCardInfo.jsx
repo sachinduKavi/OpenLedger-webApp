@@ -1,85 +1,101 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import '../styles/user-card.css'
 
-import EditIcon from  '../assets/icons/Edit.png'
+import EditIcon from '../assets/icons/Edit.png'
 import DisplayPicture from './DisplayPicture'
+
+import ChangePassword from './changePassword'
 
 
 export default function UserCardInfo(props) {
-const userID = props.userID
+    const userID = props.userID
 
 
-// Loading use data from the backend
-const loadUserDetails = async () => {
-    console.log('loading user details')
-}
-
-
-
-useEffect(() => {
-    loadUserDetails()
-}, [])
+    // Loading use data from the backend
+    const loadUserDetails = async () => {
+        console.log('loading user details')
+    }
 
 
 
-// Editor mode variable
-const EditorMode = props.editorMode ?? false
+    useEffect(() => {
+        loadUserDetails()
+    }, [])
 
-  return (
-    <div className='user-profile-card'>
+
+
+    // Editor mode variable
+    const EditorMode = props.editorMode ?? false
+
+    return (
+        <div className='user-profile-card'>
+            
             <div className="user-content">
-                <h1>Nipuni Nawanjana</h1>
-                <div className="content-box">
-                    <div className="user-profile">
-                        
+            <div className="whole-container">
+                <div className="user-content-header">
+                    <div className="user-content-header-name">
+                        <h3>Nipunee Nawanjana</h3>
+                        <img src={EditIcon} alt="" />
+                    </div>
+
+                    <div className='user-content-header-btn'>
+                        <button>SAVE</button>
+                    </div>
+                </div>
+
+
+                <div className="user-content-details">
+                    <div className="user-content-profile">
                         {/* DP image component */}
                         <div className="profile-pic">
-                            <DisplayPicture width={'100px'}/>
+                            <DisplayPicture width={'100px'} />
                         </div>
-                        
+                        <div className="profile-email">
+                            <p>sachindu38@gmail.com</p>
+                        </div>
 
-                        <div className="user-about">
-                            <h4>About Me<img src={EditIcon} style={{visibility: (EditorMode? 'visible': 'hidden')}} /></h4>
-                            <p>Single Room: Designed for one person, typically with one twin or single bed.
-                                usually with three twin beds or one double bed and one twin bed.
+                        <div className="profile-content">
+                            <p className='mobile-num'> Mobile Number</p>
+                            <p className='number'>076837465  <img src={EditIcon} alt="" /></p>
+                        </div>
+
+                        <div className="profile-btn">
+                            <button>CHANGE PASSWORD</button>
+                        </div>
+                    </div>
+
+                    <div className="user-content-description">
+                        <div className="user-content-description-about">
+                            <h3>About Me<img src={EditIcon} alt="" /></h3>
+                            <p>
+                                Computer Science & Technology undergraduate
+                                student at Uva Wellassa University with a passion
+                                for frontend & backend development. Proficient in
+                                React, Node.js, and Flutter. Eager to apply academic
+                                knowledge and practical skills to create impactful
+                                web & mobile experiences.
                             </p>
                         </div>
-                    </div>
 
-                    <div className="input-field">
-                        <span>User Name : <img src={EditIcon} style={{visibility: (EditorMode? 'visible': 'hidden')}} /></span>
-                        <input type="text" />
-
-                        <span>Phone Number : <img src={EditIcon} style={{visibility: (EditorMode? 'visible': 'hidden')}} /></span>
-                        <input type="text" />
-
-                        <span>Email Address : <img src={EditIcon} style={{visibility: (EditorMode? 'visible': 'hidden')}} /></span>
-                        <input type="email" />
-
-                        <button className='change-psw'>Change Password</button>
-                    </div>
-                </div>
-
-
-                <div className="content-box2">
-                    <div className="sign">
-                        <h3>Signature:<img src={EditIcon} style={{visibility: (EditorMode? 'visible': 'hidden')}} /></h3>
-                        <div className="description">
-                            <h5>Nipuni Nawanjana</h5>
-                            <h5>Senior Software Engineer</h5>
-                            <h5>ROOTCODE PVT</h5>
+                        <div className="user-content-description-signature">
+                            <h5>Signature:</h5>
+                            <div className="signature-box">
+                                <h4>SACHINDU KAVISHKA</h4>
+                                <h4>SENIOR SOFTWARE ENGINEER</h4>
+                                <h4>ROOTCODE PVT.</h4>
+                            </div>
                         </div>
                     </div>
-
-
-                    <div className="sign">
-                        
-
-                        <button className='save'>Save</button>
-                    </div>
-
                 </div>
+
+
+                <ChangePassword/>
+
+            </div>
+
             </div>
         </div>
-  )
+
+
+    )
 }
