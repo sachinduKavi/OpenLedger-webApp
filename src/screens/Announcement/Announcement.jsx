@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {motion} from 'framer-motion'
 import CreateNewAnnouncement from './CreateNewAnnouncement'
 import AnnouncementModel from '../../dataModels/AnnouncementModel'
@@ -14,6 +14,21 @@ import PrimaryBorder from '../../components/PrimaryBorder'
 export default function Announcement() {
 
   const [newFormState, setFormState] = useState(false)
+  const [announcementList, setAnnouncementList] = useState([]) // Announcement list display here
+
+  // Loading all announcements published 
+  const loadAnnouncements = async () => {
+    setAnnouncementList(await AnnouncementModel.fetchAllAnnouncements())
+  }
+
+  // Update variable for announcement list
+  const [announcementUpdate, setUpdate] = useState(false)
+
+
+  // Component did mount ?
+  useEffect(() => {
+    loadAnnouncements()
+  }, [announcementUpdate])
 
   return (
     <motion.div className='panel-outside-border'
@@ -29,18 +44,13 @@ export default function Announcement() {
           <h2 className='ans-title'>ANNOUNCEMENTS</h2>
 
          
-            <AnnouncementSingle/>
-
-            <AnnouncementSingle/>
-            <AnnouncementSingle/>
-            <AnnouncementSingle/>
-            <AnnouncementSingle/>
-            <AnnouncementSingle/>
-            <AnnouncementSingle/>
-            <AnnouncementSingle/>
-            <AnnouncementSingle/>
-            <AnnouncementSingle/>
-            <AnnouncementSingle/>
+            
+            {/* Loading all the announcements */}
+            {
+              announcementList.map((element, index) => {
+                return (<AnnouncementSingle key={index} announcement={element}/>)
+              })
+            }
         
           
 
@@ -54,7 +64,7 @@ export default function Announcement() {
 
           {
             newFormState &&
-            <CreateNewAnnouncement setFormState={setFormState}/>
+            <CreateNewAnnouncement setFormState={setFormState} annUpdate={{announcementUpdate: announcementUpdate, setUpdate: setUpdate}}/>
           }
         </div>
 

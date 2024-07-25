@@ -1,5 +1,6 @@
 import {generateCurrentDate} from '../middleware/GenerateCurrentDateTime'
-import { createAnnouncementQuery } from '../query/announcementQuery'
+import { createAnnouncementQuery, fetchALlAnnouncementsQuery } from '../query/announcementQuery'
+
 class AnnouncementModel {
   #announcementID
   #publishDate
@@ -10,6 +11,7 @@ class AnnouncementModel {
   #imageLink
   #commentArray
   #likeCount
+  #publisherDP
 
   constructor({
     announcementID = 'AUTO',
@@ -20,7 +22,8 @@ class AnnouncementModel {
     caption = '',
     imageLink = null,
     commentArray = [],
-    likeCount = null
+    likeCount = null,
+    publisherDP = null
   }) {
     this.#announcementID = announcementID
     this.#publishDate = publishDate
@@ -30,7 +33,8 @@ class AnnouncementModel {
     this.#caption = caption
     this.#imageLink = imageLink
     this.#commentArray = commentArray
-    this.#likeCount = likeCount
+    this.#likeCount = likeCount,
+    this.#publisherDP = publisherDP
   }
 
   extractJSON() {
@@ -43,6 +47,7 @@ class AnnouncementModel {
       imageLink: this.#imageLink,
       commentArray: this.#commentArray,
       likeCount: this.#likeCount,
+      publisherDP: this.#publisherDP
     }
   }
 
@@ -57,7 +62,28 @@ class AnnouncementModel {
       : false
   }
 
+  
+
+  // Loading all the announcements from the backend
+  static async fetchAllAnnouncements() {
+    const response = await fetchALlAnnouncementsQuery()
+
+    let announcementList = []
+    if(response.status === 200 && response.data.proceed) {
+      response.data.content.forEach(element => {
+        announcementList.push(new AnnouncementModel(element))
+      });
+    } 
+
+    return announcementList
+  }
+
   // Getters
+  getPublisherDP() {
+    return this.#publisherDP
+  }
+
+
   getAnnouncementID() {
     return this.#announcementID
   }
@@ -95,6 +121,10 @@ class AnnouncementModel {
   }
 
   // Setters
+  setPublisherDP(publisherDP) {
+    this.#publisherDP = publisherDP
+  }
+
   setAnnouncementID(announcementID) {
     this.#announcementID = announcementID
   }

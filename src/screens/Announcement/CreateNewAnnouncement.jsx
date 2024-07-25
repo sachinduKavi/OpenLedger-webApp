@@ -17,6 +17,8 @@ const {TextArea} = Input
 
 export default function CreateNewAnnouncement(props) {
   const changeSessionData = useContext(SessionContext).changeSessionData
+
+  const annRefresh = props.annUpdate
   
   const [announcement, setAnnouncement] = useState(new AnnouncementModel({}))
   const [postImage, setPostImage] = useState(null)
@@ -51,6 +53,7 @@ export default function CreateNewAnnouncement(props) {
       toast.custom(<ToastCustom type='warnning' header='Missing values'>Please fill all the missing field.</ToastCustom>);
     }
 
+    annRefresh.setUpdate(!annRefresh.announcementUpdate)
     changeSessionData({processing: false})
   }
 

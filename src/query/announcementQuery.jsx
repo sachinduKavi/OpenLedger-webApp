@@ -7,6 +7,12 @@ const createAnnouncementQuery = async (announcementDetails) => {
 }
 
 
+const fetchALlAnnouncementsQuery = async () => {
+    return await cDomain.get('announcement/loadAllAnnouncements', header)
+}
+
+
 export {
-    createAnnouncementQuery
+    createAnnouncementQuery,
+    fetchALlAnnouncementsQuery
 }

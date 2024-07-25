@@ -34,8 +34,7 @@
 }
 
 .single-announcement-border .uploaded-img {
-    height: 400px;
-    background-color: red;
+    height: fit-content;
 }
 
 .single-announcement-border .announcement-footer {
