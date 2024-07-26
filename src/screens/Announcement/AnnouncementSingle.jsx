@@ -1,14 +1,18 @@
-import React from 'react'
+import React, {useState} from 'react'
 import '../../styles/announcement-single.css'
+import {AnimatePresence} from 'framer-motion'
 
 import HeartIcon from '../../assets/icons/heart.png'
 import CommentsIcon from '../../assets/icons/comments.png'
+import Comment from '../../components/Comment'
 
 import SimpleDP from '../../components/SimpleDP'
 
 
 export default function AnnouncementSingle(props) {
   const announcement = props.announcement
+
+  const [commentView, setCommentView] = useState(false) // Comment state of the post 
 
   return (
     <div className='single-announcement-border'>
@@ -37,16 +41,16 @@ export default function AnnouncementSingle(props) {
 
       <div className="announcement-footer">
         <img src={HeartIcon} alt="" className='announcement-icons'/>
-        <p>Likes</p>
+        <p className='controllers'>Likes</p>
 
         <img src={CommentsIcon} alt="" className='announcement-icons'/>
-        <p>Comments</p>
+        <p onClick={() => setCommentView(!commentView)} className='controllers'>Comments</p>
       </div>
 
-      {/* For future development */}
-      <div className="comment-base">
-
-      </div>
+      <AnimatePresence>
+        {commentView && <Comment/>}
+      </AnimatePresence>
+      
 
     </div>
   )

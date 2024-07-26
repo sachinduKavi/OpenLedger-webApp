@@ -1,0 +1,6 @@
+.comment-base {
+    background-color: rgba(0, 0, 0, 0.425);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
