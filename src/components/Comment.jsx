@@ -58,6 +58,7 @@ export default function Comment(props) {
     initial={{height: 0}}
     animate={{height: 'fit-content', transition: {duration: 0.3}}}
     exit={{height: 0, transition: {duration: 0.3}}}
+    ref={props.commentRef}
     >
         <div className="loaded-comments">
             {

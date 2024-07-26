@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, createRef, useEffect} from 'react'
 import '../../styles/announcement-single.css'
 import {AnimatePresence} from 'framer-motion'
 
@@ -12,12 +12,27 @@ import toast from 'react-hot-toast'
 import ToastCustom from '../../components/ToastCustom'
 
 
+
 export default function AnnouncementSingle(props) {
   const announcement = props.announcement
   const update = props.update
   const activeUser = props.activeUser
 
+  const commentRef = createRef()
   const [commentView, setCommentView] = useState(false) // Comment state of the post 
+
+  const checkMouseLocation = (e) => {
+    console.log(e)
+  }
+
+
+  useEffect(() => {
+    document.addEventListener('mousedown', checkMouseLocation)
+
+    return (()=> {
+      document.removeEventListener('mousedown', checkMouseDownLocation)
+    })
+  }, [])
 
   // Delete announcement 
   const deleteAnnouncement = async () => {
@@ -29,6 +44,9 @@ export default function AnnouncementSingle(props) {
     } 
     
   }
+
+
+  
   
 
   return (
@@ -71,7 +89,7 @@ export default function AnnouncementSingle(props) {
       </div>
 
       <AnimatePresence>
-        {commentView && <Comment recordID={announcement.getAnnouncementID()} activeUser={props.activeUser} update={update}/>}
+        {commentView && <Comment recordID={announcement.getAnnouncementID()} activeUser={props.activeUser} update={update} commentRef={commentRef}/>}
       </AnimatePresence>
       
 
