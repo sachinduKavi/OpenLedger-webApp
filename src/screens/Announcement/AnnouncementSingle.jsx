@@ -11,6 +11,8 @@ import SimpleDP from '../../components/SimpleDP'
 
 export default function AnnouncementSingle(props) {
   const announcement = props.announcement
+  const update = props.update
+  const activeUser = props.activeUser
 
   const [commentView, setCommentView] = useState(false) // Comment state of the post 
 
@@ -48,7 +50,7 @@ export default function AnnouncementSingle(props) {
       </div>
 
       <AnimatePresence>
-        {commentView && <Comment recordID={announcement.getAnnouncementID()}/>}
+        {commentView && <Comment recordID={announcement.getAnnouncementID()} activeUser={props.activeUser} update={update}/>}
       </AnimatePresence>
       
 

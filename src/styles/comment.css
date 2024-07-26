@@ -3,6 +3,7 @@
     border-radius: 10px;
     display: flex;
     flex-direction: column;
+    overflow-y: hidden;
 }
 
 .comment-base .new-comment {
@@ -11,4 +12,10 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+}
+
+.comment-base .loaded-comment {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
 }

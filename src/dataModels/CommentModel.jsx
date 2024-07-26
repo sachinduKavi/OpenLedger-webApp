@@ -1,4 +1,4 @@
-import { createCommentQuery } from "../query/commentQuery"
+import { createCommentQuery, deleteCommentQuery, fetchAllCommentsQuery } from "../query/commentQuery"
 
 
 class CommentsModel {
@@ -25,6 +25,29 @@ class CommentsModel {
             content: this.#content,
             userName: this.#userName
         }
+    }
+
+
+    // Load all the comments
+    static async loadCommentList(recordID) {
+        const response = await fetchAllCommentsQuery(recordID)
+        
+        // Creating comment instants 
+        let commentList = []
+        if(response.status === 200 && response.data.proceed) {
+            response.data.content.forEach(element => {
+                commentList.push(new CommentsModel(element))
+            });
+        }
+
+        return commentList
+    }
+
+
+    // Delete comment 
+    async deleteComment() {
+        const response = await deleteCommentQuery(this.#commentID)
+        return response.status === 200 && response.data.proceed
     }
 
 

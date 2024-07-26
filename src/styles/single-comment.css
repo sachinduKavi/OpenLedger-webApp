@@ -1,0 +1,18 @@
+.single-comment {
+    width: 90%;
+    border-radius: 20px;
+    margin: 5px;
+    padding: 10px;
+    background-color: #2E2E2E;
+}
+
+.single-comment p {
+    color: #bdbdc2;
+}
+
+.single-comment .row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}

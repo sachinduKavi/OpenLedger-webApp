@@ -11,7 +11,8 @@ import PrimaryBorder from '../../components/PrimaryBorder'
 
 
 
-export default function Announcement() {
+export default function Announcement(props) {
+  const activeUser = props.activeUser
 
   const [newFormState, setFormState] = useState(false)
   const [announcementList, setAnnouncementList] = useState([]) // Announcement list display here
@@ -48,7 +49,7 @@ export default function Announcement() {
             {/* Loading all the announcements */}
             {
               announcementList.map((element, index) => {
-                return (<AnnouncementSingle key={index} announcement={element}/>)
+                return (<AnnouncementSingle key={index} announcement={element} activeUser={activeUser} update={{announcementUpdate:announcementUpdate, setUpdate:setUpdate}}/>)
               })
             }
         
