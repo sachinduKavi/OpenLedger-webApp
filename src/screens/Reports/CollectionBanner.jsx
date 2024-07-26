@@ -19,6 +19,9 @@ export default function CollectionBanner(props) {
             thisUser = element
     })
 
+    console.log(collection.calOneAmount())
+    const assignedAmount = thisUser.autoAssigned ? collection.calOneAmount() : thisUser.amount
+
 
   return (
     <motion.div className='collection-banner-border'
@@ -54,7 +57,7 @@ export default function CollectionBanner(props) {
             <div className="collection-column end-column">
                 {
                 thisUser === null ? <h3 style={{color: '#FFA43C'}}>NOT INCLUDED</h3> :
-                 thisUser.paidAmount >= thisUser.amount   
+                 thisUser.paidAmount >= assignedAmount   
                  ? <h3 style={{color: '#32AF4E'}}>PAID</h3>
                  : <h3 style={{color: '#FF3A3A'}}>PENDING PAYMENT</h3>
                 }

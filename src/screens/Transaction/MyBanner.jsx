@@ -14,16 +14,17 @@ export default function MyBanner(props) {
             break
         } 
     }
-
+    console.log(collection.calOneAmount())
+    const assignedAmount = !participant.autoAssigned ? participant.amount : collection.calOneAmount()
     // Remove already paid collections
-    if((participant.amount <= participant.paidAmount) || collection.getStatus() === "DRAFT") return null
+    if((assignedAmount <= participant.paidAmount) || collection.getStatus() === "DRAFT") return null
   return (
     <motion.div className='my-banner-border'
         whileTap={{scale: 0.95}}
         onClick={() => {
             props.setCurrentPayment(new Payment({
                 userID: userID,
-                amount: participant.amount - participant.paidAmount,
+                amount: assignedAmount - participant.paidAmount,
                 reference: collection.getCollectionID(),
                 onlinePayment: true,
                 fromCollection: true
@@ -37,7 +38,7 @@ export default function MyBanner(props) {
         </div>
 
         <div className="column" style={{alignItems: 'flex-end'}}>
-            <h5>LKR {participant.amount} {(participant.paidAmount > 0) ?participant.paidAmount/-1: null} = {participant.amount - participant.paidAmount}| {collection.getAmount()}</h5>
+            <h5>LKR {assignedAmount} {(participant.paidAmount > 0) ?participant.paidAmount/-1: null} = {assignedAmount - participant.paidAmount}| {collection.getAmount()}</h5>
         </div>
     </motion.div>
   )

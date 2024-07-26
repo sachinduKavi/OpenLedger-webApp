@@ -1,4 +1,4 @@
-import React, {useState, createRef, useEffect} from 'react'
+import React, {useState, useRef, useEffect} from 'react'
 import '../../styles/announcement-single.css'
 import {AnimatePresence} from 'framer-motion'
 
@@ -18,21 +18,24 @@ export default function AnnouncementSingle(props) {
   const update = props.update
   const activeUser = props.activeUser
 
-  const commentRef = createRef()
+  const commentRef = useRef()
   const [commentView, setCommentView] = useState(false) // Comment state of the post 
 
   const checkMouseLocation = (e) => {
-    console.log(e)
+    if(commentView && !commentRef.current?.contains(e.target)) {
+      setCommentView(false)
+    }
   }
 
 
   useEffect(() => {
+    
     document.addEventListener('mousedown', checkMouseLocation)
 
     return (()=> {
-      document.removeEventListener('mousedown', checkMouseDownLocation)
+      document.removeEventListener('mousedown', checkMouseLocation)
     })
-  }, [])
+  }, [commentView])
 
   // Delete announcement 
   const deleteAnnouncement = async () => {
