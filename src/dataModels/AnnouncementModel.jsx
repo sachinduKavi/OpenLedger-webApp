@@ -1,5 +1,5 @@
 import {generateCurrentDate} from '../middleware/GenerateCurrentDateTime'
-import { createAnnouncementQuery, fetchALlAnnouncementsQuery } from '../query/announcementQuery'
+import { createAnnouncementQuery, deleteAnnouncementQuery, fetchALlAnnouncementsQuery } from '../query/announcementQuery'
 
 class AnnouncementModel {
   #announcementID
@@ -60,6 +60,13 @@ class AnnouncementModel {
         errorMessage: response.data.errorMessage
       }
       : false
+  }
+
+
+  // Delete announcement record 
+  async deleteAnnouncement() {
+    const response = await deleteAnnouncementQuery(this.#announcementID)
+    return response.status === 200 && response.data.proceed
   }
 
   

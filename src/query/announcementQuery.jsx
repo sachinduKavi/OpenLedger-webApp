@@ -11,8 +11,13 @@ const fetchALlAnnouncementsQuery = async () => {
     return await cDomain.get('announcement/loadAllAnnouncements', header)
 }
 
+const deleteAnnouncementQuery = async (announcementID) => {
+    return await cDomain.post('announcement/deleteAnnouncement', {announcementID: announcementID}, header)
+}
+
 
 export {
     createAnnouncementQuery,
-    fetchALlAnnouncementsQuery
+    fetchALlAnnouncementsQuery,
+    deleteAnnouncementQuery
 }

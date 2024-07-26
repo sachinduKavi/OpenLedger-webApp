@@ -54,3 +54,12 @@
     cursor: pointer;
 }
 
+.single-announcement-border .delete-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    justify-self: end;
+    flex: 1 1 0;
+}
+

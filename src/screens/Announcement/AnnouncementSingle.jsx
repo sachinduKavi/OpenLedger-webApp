@@ -5,8 +5,11 @@ import {AnimatePresence} from 'framer-motion'
 import HeartIcon from '../../assets/icons/heart.png'
 import CommentsIcon from '../../assets/icons/comments.png'
 import Comment from '../../components/Comment'
+import DeleteIcon from '../../assets/icons/delete.png'
 
 import SimpleDP from '../../components/SimpleDP'
+import toast from 'react-hot-toast'
+import ToastCustom from '../../components/ToastCustom'
 
 
 export default function AnnouncementSingle(props) {
@@ -15,6 +18,18 @@ export default function AnnouncementSingle(props) {
   const activeUser = props.activeUser
 
   const [commentView, setCommentView] = useState(false) // Comment state of the post 
+
+  // Delete announcement 
+  const deleteAnnouncement = async () => {
+    if(window.confirm("Are you sure you want to delete an announcement ?") && await announcement.deleteAnnouncement()) {
+      toast.custom(<ToastCustom type='success' header='Announcement Deleted'>You have successfully deleted the announcement.</ToastCustom>);
+      props.update.setUpdate(!props.update.announcementUpdate)
+    } else {
+      toast.custom(<ToastCustom type='warnning' header='Deletion canceled'>Deletion was canceled or something went wrong.</ToastCustom>);
+    } 
+    
+  }
+  
 
   return (
     <div className='single-announcement-border'>
@@ -29,6 +44,12 @@ export default function AnnouncementSingle(props) {
             <h2 className="user-name">{announcement.getPublisherName()}</h2>
             <h5 className='date' style={{fontSize: '0.9vw'}}>{announcement.getPublishDate()}</h5>
         </div>
+
+        {
+          (activeUser.getUserId() === announcement.getPublisherID()) &&
+          <div className="delete-btn" >
+          <img src={DeleteIcon} alt="delete-icon" width='20px' onClick={deleteAnnouncement} style={{cursor: 'pointer'}}/>
+        </div>}
       </div>
 
 
