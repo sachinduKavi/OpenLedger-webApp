@@ -1,28 +1,43 @@
 import React, {useEffect, useState} from 'react'
 import {motion} from 'framer-motion'
 import {Input} from 'antd'
+import toast from 'react-hot-toast'
 import CommentsModel from '../dataModels/CommentModel'
+import ToastCustom from './ToastCustom'
 
 import '../styles/comment.css'
 
 import PrimaryBorder from './PrimaryBorder'
-import AnnouncementModel from '../dataModels/AnnouncementModel'
 
 export default function Comment(props) {
     const recordID = props.recordID  // Relevant record ID 
 
-    useEffect(() => {
-
-    }, [])
+    
 
     const [newComment, setNewComment] = useState('')
 
-    // Creating a new comment 
-    const createComment = () => {
-        // creating comment instant 
-        const announcement = new AnnouncementModel({content: newComment})
-        console.log(announcement)
+    const loadComments = async () => {
+
     }
+
+
+    useEffect(() => {
+        loadComments()
+    })
+
+
+    // Creating a new comment 
+    const createComment = async () => {
+        // creating comment instant 
+        const comment = new CommentsModel({content: newComment, recordID: recordID})
+        if(await comment.createNewComment()) {
+            // Comment created successfully 
+            toast.custom(<ToastCustom type='success' header='Comment Shared'>You have successfully shared your comment.</ToastCustom>);
+        } else {
+            // Comment creation error
+            toast.custom(<ToastCustom type='error' header='Comment failed'>There is something wrong, please try again later.</ToastCustom>);
+        }
+     }
     
   return (
 

@@ -1,26 +1,49 @@
+import { createCommentQuery } from "../query/commentQuery"
+
+
 class CommentsModel {
     #commentID
     #recordID
     #userID
     #content
+    #userName
 
-    CommentsModel({commentID = null, recordID = null, userID = null, content = null}) {
+    constructor({commentID = null, recordID = null, userID = null, content = null, userName = null}) {
         this.#commentID = commentID
         this.#recordID = recordID
         this.#userID = userID
         this.#content = content
+        this.#userName = userName
     }
 
     
     extractJSON() {
         return {
             commentID: this.#commentID,
-            recordID: this.#commentID,
+            recordID: this.#recordID,
             userID: this.#userID,
-            content: this.#content
+            content: this.#content,
+            userName: this.#userName
         }
     }
 
+
+    // Creating new comment 
+    async createNewComment() {
+        const response = await createCommentQuery(this.extractJSON())
+        return (response.status === 200 && response.data.proceed)
+    }
+
+
+
+    // Getter and setter
+    getUserName() {
+        return this.#userName
+    }
+
+    setUserName(userName) {
+        this.#userName = userName
+    }
 
     getCommentID() {
         return this.#commentID;
