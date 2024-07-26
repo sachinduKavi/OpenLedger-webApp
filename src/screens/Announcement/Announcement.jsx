@@ -41,7 +41,7 @@ export default function Announcement() {
 
 
         <div className="ans-column">
-          <h2 className='ans-title'>ANNOUNCEMENTS</h2>
+          <h1 className='ans-title'>ANNOUNCEMENTS</h1>
 
          
             

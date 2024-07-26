@@ -48,7 +48,7 @@ export default function AnnouncementSingle(props) {
       </div>
 
       <AnimatePresence>
-        {commentView && <Comment/>}
+        {commentView && <Comment recordID={announcement.getAnnouncementID()}/>}
       </AnimatePresence>
       
 
