@@ -19,10 +19,15 @@ const toggleAnnouncementLikeQuery =  async (announcementID) => {
     return await cDomain.post('announcement/toggleLike', {announcementID: announcementID}, header)
 }
 
+const announcementParameterCounterQuery = async (announcementID) => {
+    return await cDomain.post('announcement/countParameters', {announcementID: announcementID}, header)
+}
+
 
 export {
     createAnnouncementQuery,
     fetchALlAnnouncementsQuery,
     deleteAnnouncementQuery,
-    toggleAnnouncementLikeQuery
+    toggleAnnouncementLikeQuery,
+    announcementParameterCounterQuery
 }

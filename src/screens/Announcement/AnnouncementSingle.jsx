@@ -30,6 +30,11 @@ export default function AnnouncementSingle(props) {
 
   // Announcement user like state
   const [like, setLike] = useState(false)
+  const [commentUpdate, setCommentUpdate] = useState(false)
+  const [parameterCount, setParameterCount] = useState({
+    likeCount: 0,
+    commentCount: 0
+  })
 
   
   const toggleAnnouncementLike = async () => {
@@ -44,6 +49,26 @@ export default function AnnouncementSingle(props) {
       toast.custom(<ToastCustom type='warnning' header='Something went wrong'>Unable to update your like, Please check your connection.</ToastCustom>);
     }
   }
+
+
+  // Load like and comment count 
+  const loadParameters = async () => {
+    const res = await announcement.loadParameterCount()
+    if(res) {
+      setParameterCount({
+        likeCount: res.likeCount,
+        commentCount: res.commentCount,
+      })
+      setLike(res.myLike)
+    } else {
+      // Update error
+      toast.custom(<ToastCustom type='warnning' header='Something went wrong'>Sorry something went wrong.</ToastCustom>);
+    }
+  }
+
+  useEffect(() => {
+    loadParameters()
+  }, [like, commentUpdate])
 
 
   useEffect(() => {
@@ -104,16 +129,18 @@ export default function AnnouncementSingle(props) {
       <div className="announcement-footer">
         <div className="binder" onClick={toggleAnnouncementLike}>
           <img src={like ? LikedHeart: HeartIcon} alt="" className='announcement-icons'/>
-          <p className='controllers'>Likes</p>
+          <p className='controllers'>{parameterCount.likeCount} Likes</p>
         </div>
         
 
         <img src={CommentsIcon} alt="" className='announcement-icons'/>
-        <p onClick={() => setCommentView(!commentView)} className='controllers'>Comments</p>
+        <p onClick={() => setCommentView(!commentView)} className='controllers'>{parameterCount.commentCount} Comments</p>
       </div>
 
       <AnimatePresence>
-        {commentView && <Comment recordID={announcement.getAnnouncementID()} activeUser={props.activeUser} update={update} commentRef={commentRef}/>}
+        {commentView && <Comment recordID={announcement.getAnnouncementID()} activeUser={props.activeUser} update={update} commentRef={commentRef}
+          commentUpdate={commentUpdate} setCommentUpdate={setCommentUpdate}
+        />}
       </AnimatePresence>
       
 

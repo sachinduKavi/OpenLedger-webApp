@@ -14,11 +14,12 @@ import { capitalize } from '../middleware/auth'
 
 export default function Comment(props) {
     const recordID = props.recordID  // Relevant record ID 
+    const commentUpdate = props.commentUpdate
+    const setCommentUpdate = props.setCommentUpdate
 
 
     const [newComment, setNewComment] = useState('')
     const [commentList, setCommentList] = useState([]) // Comment list 
-    const [commentUpdate, setCommentUpdate] = useState(false)
 
 
     // Load current all the comments related to the database 

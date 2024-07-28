@@ -1,5 +1,5 @@
 import {generateCurrentDate} from '../middleware/GenerateCurrentDateTime'
-import { createAnnouncementQuery, deleteAnnouncementQuery, fetchALlAnnouncementsQuery, toggleAnnouncementLikeQuery } from '../query/announcementQuery'
+import { announcementParameterCounterQuery, createAnnouncementQuery, deleteAnnouncementQuery, fetchALlAnnouncementsQuery, toggleAnnouncementLikeQuery } from '../query/announcementQuery'
 
 class AnnouncementModel {
   #announcementID
@@ -75,6 +75,14 @@ class AnnouncementModel {
     const response = await toggleAnnouncementLikeQuery(this.#announcementID)
     return response.status === 200 && response.data.proceed && response.data.content !== 'error'
     ? response.data.content : false
+  }
+
+
+  // Load like and comment count 
+  async loadParameterCount() {
+    const response = await announcementParameterCounterQuery(this.#announcementID)
+    return response.status === 200 & response.data.proceed 
+      ? response.data.content : false
   }
 
   
