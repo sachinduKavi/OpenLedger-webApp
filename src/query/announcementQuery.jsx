@@ -15,9 +15,14 @@ const deleteAnnouncementQuery = async (announcementID) => {
     return await cDomain.post('announcement/deleteAnnouncement', {announcementID: announcementID}, header)
 }
 
+const toggleAnnouncementLikeQuery =  async (announcementID) => {
+    return await cDomain.post('announcement/toggleLike', {announcementID: announcementID}, header)
+}
+
 
 export {
     createAnnouncementQuery,
     fetchALlAnnouncementsQuery,
-    deleteAnnouncementQuery
+    deleteAnnouncementQuery,
+    toggleAnnouncementLikeQuery
 }

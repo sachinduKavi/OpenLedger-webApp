@@ -3,6 +3,7 @@ import '../../styles/announcement-single.css'
 import {AnimatePresence} from 'framer-motion'
 
 import HeartIcon from '../../assets/icons/heart.png'
+import LikedHeart from '../../assets/icons/liked.png'
 import CommentsIcon from '../../assets/icons/comments.png'
 import Comment from '../../components/Comment'
 import DeleteIcon from '../../assets/icons/delete.png'
@@ -24,6 +25,23 @@ export default function AnnouncementSingle(props) {
   const checkMouseLocation = (e) => {
     if(commentView && !commentRef.current?.contains(e.target)) {
       setCommentView(false)
+    }
+  }
+
+  // Announcement user like state
+  const [like, setLike] = useState(false)
+
+  
+  const toggleAnnouncementLike = async () => {
+    const res = await announcement.togglePostLike()
+    if(res) {
+      if(res === 'like') 
+        setLike(true)
+      else 
+        setLike(false)
+    } else {
+      // Something went wrong
+      toast.custom(<ToastCustom type='warnning' header='Something went wrong'>Unable to update your like, Please check your connection.</ToastCustom>);
     }
   }
 
@@ -84,8 +102,11 @@ export default function AnnouncementSingle(props) {
       </div>
 
       <div className="announcement-footer">
-        <img src={HeartIcon} alt="" className='announcement-icons'/>
-        <p className='controllers'>Likes</p>
+        <div className="binder" onClick={toggleAnnouncementLike}>
+          <img src={like ? LikedHeart: HeartIcon} alt="" className='announcement-icons'/>
+          <p className='controllers'>Likes</p>
+        </div>
+        
 
         <img src={CommentsIcon} alt="" className='announcement-icons'/>
         <p onClick={() => setCommentView(!commentView)} className='controllers'>Comments</p>

@@ -63,3 +63,9 @@
     flex: 1 1 0;
 }
 
+.announcement-footer .binder {
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+}
+

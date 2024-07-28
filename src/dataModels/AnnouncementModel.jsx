@@ -1,5 +1,5 @@
 import {generateCurrentDate} from '../middleware/GenerateCurrentDateTime'
-import { createAnnouncementQuery, deleteAnnouncementQuery, fetchALlAnnouncementsQuery } from '../query/announcementQuery'
+import { createAnnouncementQuery, deleteAnnouncementQuery, fetchALlAnnouncementsQuery, toggleAnnouncementLikeQuery } from '../query/announcementQuery'
 
 class AnnouncementModel {
   #announcementID
@@ -67,6 +67,14 @@ class AnnouncementModel {
   async deleteAnnouncement() {
     const response = await deleteAnnouncementQuery(this.#announcementID)
     return response.status === 200 && response.data.proceed
+  }
+
+
+  // Toggle announcement post like
+  async togglePostLike() {
+    const response = await toggleAnnouncementLikeQuery(this.#announcementID)
+    return response.status === 200 && response.data.proceed && response.data.content !== 'error'
+    ? response.data.content : false
   }
 
   
