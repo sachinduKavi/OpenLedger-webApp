@@ -97,6 +97,15 @@ export default function CreateCollection(props) {
         }
         
     }
+
+
+    // Withdraw function 
+    const withdrawAmount = () => {
+        if(window.confirm("Are you sure you want to make a withdraw ?")) {
+            // Confirm withdraw
+            console.log('hello world ')
+        } 
+    }
     
     const {TextArea} = Input
 
@@ -110,8 +119,19 @@ export default function CreateCollection(props) {
 
         <div className="collection-container">
 
-            {activeUser.getUserLevel() <= 2 && <div className="background-blur" style={{opacity: 0}}></div>}
-            <h2>COLLECTION </h2> <h6>{collection.getCollectionID()} {collection.getStatus()}</h6>
+            <div className="front-row">
+                <div className="column">
+                    {activeUser.getUserLevel() <= 2 && <div className="background-blur" style={{opacity: 0}}></div>}
+                    <h2>COLLECTION </h2> <h6>{collection.getCollectionID()} {collection.getStatus()}</h6>
+                </div>
+
+                <PrimaryBorder borderRadius='10px'>
+                    <button onClick={withdrawAmount}>WITHDRAW</button> 
+                </PrimaryBorder>
+
+            </div>
+
+            
             
             <div className="row">
                 <div className="column collection-name">
