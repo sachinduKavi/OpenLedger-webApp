@@ -19,7 +19,7 @@ export default function CollectionBanner(props) {
             thisUser = element
     })
 
-    const assignedAmount = thisUser.autoAssigned ? collection.calOneAmount() : thisUser.amount
+    const assignedAmount = thisUser === null ? 0 : thisUser.autoAssigned ? collection.calOneAmount() : thisUser.amount
 
 
   return (
