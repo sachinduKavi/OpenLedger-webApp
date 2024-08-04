@@ -56,12 +56,12 @@ export default function TreasuryDetails(props) {
 
             <PrimaryBorder width='100%' borderRadius='26px' flex='1'>
               <div className="card" style={{background: `url('${treasury.getCoverImageID()}')`, backgroundSize: 'cover'}}></div>
-            </PrimaryBorder>  
+            </PrimaryBorder>
       
           </div>
 
           <div className="column main-details">
-            <h1>Treasury Details</h1>
+            <h1>Group Details</h1>
 
             <div className="editable-row">
               <h2>{treasury.getTreasuryName()}</h2>
