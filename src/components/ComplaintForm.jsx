@@ -7,8 +7,8 @@ export default function ComplaintForm() {
 
   return (
 
-    <div className='row'>
-      <div className="complaint-form">
+    <div className='cmp-row'>
+      <div className="cmp-complaint-form">
       <h3>Add Your Complaint</h3>
       <form>
         <label>

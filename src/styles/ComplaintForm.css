@@ -1,34 +1,34 @@
-/* .row{
+.cmp-row{
     flex-direction: row;
     display: flex;
     margin-top: 20px;
 }
 
-.complaint-form {
+.cmp-complaint-form {
     background-color: #1C1F31;
     padding: 20px;
     border-radius: 10px;
     
   }
   
-  .complaint-form h3 {
+  .cmp-complaint-form h3 {
     margin-bottom: 20px;
     color: white;
   }
   
-  .complaint-form form {
+  .cmp-complaint-form form {
     display: flex;
     flex-direction: column;
   }
   
-  .complaint-form form label {
+  .cmp-complaint-form form label {
     margin-bottom: 10px;
     color: white;
   }
   
-  .complaint-form form input[type="text"],
-  .complaint-form form textarea,
-  .complaint-form form input[type="file"] {
+  .cmp-complaint-form form input[type="text"],
+  .cmp-complaint-form form textarea,
+  .cmp-complaint-form form input[type="file"] {
     width: 100%;
     padding: 10px;
     margin-top: 5px;
@@ -36,20 +36,20 @@
     border: 1px solid #ccc;
   }
   
-  .complaint-form form textarea {
+  .cmp-complaint-form form textarea {
     height: 100px;
   }
   
-  .complaint-form form .identity {
+  .cmp-complaint-form form .identity {
     display: flex;
     align-items: center;
   }
   
-  .complaint-form form .identity span {
+  .cmp-complaint-form form .identity span {
     margin-left: 10px;
   }
   
-  .complaint-form form button {
+  .cmp-complaint-form form button {
     width: 100px;
     padding: 10px;
     margin-top: 10px;
@@ -57,18 +57,18 @@
     border-radius: 5px;
     cursor: pointer;
   }
-  .complaint-form form btn{
+  .cmp-complaint-form form btn{
     flex-direction: row;
     
   }
-  .complaint-form form button[type="submit"] {
+  .cmp-complaint-form form button[type="submit"] {
     background-color: #4a4a8c;
     color: white;
   }
   
-  .complaint-form form button[type="reset"] {
+  .cmp-complaint-form form button[type="reset"] {
     background-color: #4a4a8c;
     color: white;
     margin-left: 50px;
   }
-   */
+  

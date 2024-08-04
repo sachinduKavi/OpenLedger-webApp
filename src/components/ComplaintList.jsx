@@ -21,14 +21,14 @@ export default function ComplaintList() {
     <div>
        <div className="complaint-list">
       {complaints.map((complaint) => (
-        <div key={complaint.id} className="complaint">
-          <div className="complaint-header">
+        <div key={complaint.id} className="cmp-complaint">
+          <div className="cmp-complaint-header">
             <span>Anonymous</span>
             <span>{complaint.time}</span>
             <span>{complaint.date}</span>
           </div>
           <p>{complaint.text}</p>
-          <div className="complaint-footer">
+          <div className="cmp-complaint-footer">
             <span>{complaint.likes} likes</span>
             <span>{complaint.comments} comments</span>
           </div>

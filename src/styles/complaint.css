@@ -1,27 +1,27 @@
-/* 
 
-.panel-outside-border .row1 {
+
+.cmp-panel-outside-border .cmp-row1 {
     justify-content: space-evenly;
     width: 50%;
 }
-.panel-outside-border .row1 h2{
+.cmp-panel-outside-border .cmp-row1 h2{
     color: aliceblue;
     font-weight: bold;
     font-size: 30px;
     text-align-last: center;
 }
 
-.panel-outside-border .column {
+.cmp-panel-outside-border .cmp-column {
     width: 48%;
     
 }
-.panel-outside-border .column1 {
+.cmp-panel-outside-border .cmp-column1 {
     margin-top: 30px;
 
      
  }
-.panel-outside-border .column2 {
+.cmp-panel-outside-border .cmp-column2 {
     margin-top: 6px;
 
      
- } */
+ }
