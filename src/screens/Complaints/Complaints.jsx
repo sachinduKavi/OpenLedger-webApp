@@ -10,11 +10,13 @@ import '../../styles/complaint.css'
 
 export default function Complaints() {
   return (
-    <motion.div className='cmp-panel-outside-border'
+    <motion.div className='panel-outside-border cmp-panel-outside-border'
       initial={{x: 1500}}
       animate={{x: 0, transition: {duration: 0.3, delay: 0.2}}}
       exit={{y: 1000, transition: {delay: 0.1}}}
     >
+
+
 
       <div className="cmp-row">
         <div className="cmp-column">
