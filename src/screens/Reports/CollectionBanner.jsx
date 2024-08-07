@@ -18,6 +18,7 @@ export default function CollectionBanner(props) {
         if(activeUser.getUserId() === element.userID) 
             thisUser = element
     })
+   
 
     const assignedAmount = thisUser === null ? 0 : thisUser.autoAssigned ? collection.calOneAmount() : thisUser.amount
 

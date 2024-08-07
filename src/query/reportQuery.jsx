@@ -45,6 +45,10 @@ const discardCollectionQuery =  async (collectionID) => {
 const fetchSingleCollectionQuery = async (collectionID) => {
     return await cDomain.post('collection/fetchSingleRecord', {collectionID: collectionID}, header)
 }
+
+const collectionWithdrawQuery = async (collectionID, totalAmount, today) => {
+    return await cDomain.post('collection/withdraw', {collectionID: collectionID, totalAmount: totalAmount, today: today}, header)
+}
  
 
 export {
@@ -58,5 +62,6 @@ export {
     collectionSaveQuery,
     loadALlTreasuryCollections,
     discardCollectionQuery,
-    fetchSingleCollectionQuery
+    fetchSingleCollectionQuery,
+    collectionWithdrawQuery
 }

@@ -7,6 +7,8 @@ import dayjs from 'dayjs'
 import Participants from './Participants'
 import CalculateIcon from '../../assets/icons/Calculator.png'
 import CollectionModel from '../../dataModels/CollectionDataModel'
+import toast from 'react-hot-toast'
+import ToastCustom from '../../components/ToastCustom'
 
 import {SessionContext} from '../../Session'
 
@@ -20,6 +22,12 @@ export default function CreateCollection(props) {
     // Collection instant from the parent 
     const collection = props.collection
     const setCollection = props.setCollection
+    
+    // Calculating total collected amount 
+    let totalCollectedAmount = collection.getTreasuryAllocation()
+    collection.participantArray.forEach(element => {
+        totalCollectedAmount += element.paidAmount
+    });
 
     const [changeForm, setChangeForm] = useState(false)
 
@@ -100,10 +108,18 @@ export default function CreateCollection(props) {
 
 
     // Withdraw function 
-    const withdrawAmount = () => {
-        if(window.confirm("Are you sure you want to make a withdraw ?")) {
+    const withdrawAmount = async () => {
+        if(window.confirm(`Are you sure you want to make a withdraw of ${totalCollectedAmount}?`)) {
             // Confirm withdraw
-            console.log('hello world ')
+            if(await collection.withdraw(totalCollectedAmount)) {
+                // Collection withdraw success
+                setCollection(null)
+                props.setLoadState(true)
+                toast.custom(<ToastCustom type='success' header='Withdraw Success'>You have successfully withdraw LKR {totalCollectedAmount}.</ToastCustom>);
+            } else {
+                // Collection withdraw error
+                toast.custom(<ToastCustom type='error' header='Something went wrong'>You have encountered a error.</ToastCustom>);
+            }
         } 
     }
     

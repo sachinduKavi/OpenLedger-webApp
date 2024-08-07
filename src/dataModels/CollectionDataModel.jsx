@@ -1,5 +1,5 @@
 import { generateCurrentDate } from "../middleware/GenerateCurrentDateTime"
-import { collectionSaveQuery, loadALlTreasuryCollections, discardCollectionQuery, fetchSingleCollectionQuery} from "../query/reportQuery"
+import { collectionSaveQuery, loadALlTreasuryCollections, discardCollectionQuery, fetchSingleCollectionQuery, collectionWithdrawQuery} from "../query/reportQuery"
 
 class CollectionModel {
     #collectionID
@@ -16,6 +16,7 @@ class CollectionModel {
     participantArray
     #manualAssigned
     autoAssignCount
+    totalCollected = null
 
     // static autoAssignCount = 0
 
@@ -144,7 +145,12 @@ class CollectionModel {
         return []
     }
 
-
+    // Collection withdraw
+    async withdraw(totalAmount) {
+        const response = await collectionWithdrawQuery(this.#collectionID, totalAmount, generateCurrentDate())
+        console.log(response)
+        return response.status === 200 && response.data.proceed
+    }
 
     // Save the Collection 
     async saveCollection() {
