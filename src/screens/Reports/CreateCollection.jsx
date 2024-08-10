@@ -141,9 +141,10 @@ export default function CreateCollection(props) {
                     <h2>COLLECTION </h2> <h6>{collection.getCollectionID()} {collection.getStatus()}</h6>
                 </div>
 
-                <PrimaryBorder borderRadius='10px'>
+                {activeUser.getUserLevel() > 3 &&
+                    <PrimaryBorder borderRadius='10px'>
                     <button onClick={withdrawAmount}>WITHDRAW</button> 
-                </PrimaryBorder>
+                </PrimaryBorder>}
 
             </div>
 
