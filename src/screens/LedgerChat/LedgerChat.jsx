@@ -1,10 +1,13 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { motion } from 'framer-motion'
 import '../../styles/ledgerChar.css'
 import {Input} from 'antd'
 import PrimaryBorder from '../../components/PrimaryBorder'
 import SendIcon from '../../assets/icons/send.png'
 import Message from '../../dataModels/Message'
+import MessageBlock from './MessageBlock'
+
+
 
 
 export default function LedgerChat() {
@@ -14,7 +17,21 @@ export default function LedgerChat() {
   // New message is send to the backend
   const sendMessage = async () => {
     const message = new Message({message: messageInput})
+    if(!await message.createNewMessage()) {
+      // Message failed
+
+    }
+
+    setMessage("")
   }
+
+  
+  useEffect(() => {
+    // Scroll to bottom of the page
+    document.getElementById('message-box').scrollTop
+  }, [])
+
+
 
   return (
     <motion.div className='panel-outside-border'
@@ -29,8 +46,15 @@ export default function LedgerChat() {
         <h1>LedgerChat</h1>
       </div>
 
-      <div className="messages">
-
+      <div className="messages" id='message-box'>
+        <MessageBlock blockNo={0}/>
+        <MessageBlock blockNo={1}/>
+        <MessageBlock blockNo={1}/>
+        <MessageBlock blockNo={1}/>
+        <MessageBlock blockNo={1}/>
+        <MessageBlock blockNo={1}/>
+        <MessageBlock blockNo={1}/>
+        
       </div>
 
       <div className="message-input">

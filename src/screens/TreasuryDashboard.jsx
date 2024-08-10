@@ -20,7 +20,7 @@ import Chair from '../dataModels/Chair'
 import { SessionContext } from '../Session'
 import Reports from './Reports/Reports'
 import Transaction from './Transaction/Transaction'
-import LedgerChat from './LedgerChat/LedgerChar'
+import LedgerChat from './LedgerChat/LedgerChat'
 import Complaints from './Complaints/Complaints'
 import Announcement from './Announcement/Announcement'
 
