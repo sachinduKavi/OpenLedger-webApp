@@ -19,16 +19,23 @@ export default function LedgerChat(props) {
 
   // New message is send to the backend
   const sendMessage = async () => {
-    const message = new Message({message: messageInput})
-    if(!await message.createNewMessage()) {
-      // Message failed
-      toast.custom(<ToastCustom type='error' header='Message error'>Your message could not reach to the server.</ToastCustom>);
-    }
+    if(messageInput.length > 0) {
+      const message = new Message({message: messageInput})
+      if(!await message.createNewMessage()) {
+        // Message failed
+        toast.custom(<ToastCustom type='error' header='Message error'>Your message could not reach to the server.</ToastCustom>);
+      }
 
-    setUpdate(!update)
-    setMessage("")
+      setUpdate(!update)
+      setMessage("")
+    }
+    
   }
 
+
+  const pressEnter = (e) =>{
+    if(e.key === "Enter") sendMessage()
+  }
   
   useEffect(() => {
     // Scroll to bottom of the page
@@ -37,9 +44,13 @@ export default function LedgerChat(props) {
       setUpdate(!update)
     }, 500)
 
+    document.addEventListener("keypress", pressEnter)
+
 
     return(() => {
       clearInterval(refresh)
+
+      document.removeEventListener("keypress", pressEnter)
     })
   })
 
