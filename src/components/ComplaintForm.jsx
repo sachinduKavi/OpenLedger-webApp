@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import {motion, AnimatePresence} from 'framer-motion'
 import '../styles/ComplaintForm.css';
+import { capitalize } from '../middleware/auth';
+import Complaint from '../dataModels/Complaint';
 
 import PlusIcon from '../assets/icons/plus.png'
 import EvidenceTitle from './TreasuryDashboard/EvidenceTitle';
@@ -12,6 +14,10 @@ export default function ComplaintForm() {
   const [evidenceState, toggleEvidenceState] = useState(false)
   // Evidence array 
   const [evidenceArray, changeEvidenceArray] = useState([])
+  // Complaint values
+  const [formValues, setFormValues] = useState(new Complaint({}))
+
+
   // Add new evidence to the evidence array and display the evidence prompt function
   const createNewEvidence = (evidenceObj) => {
     // console.log('return object ', evidenceObj)
@@ -33,7 +39,7 @@ export default function ComplaintForm() {
         
         <label>
           Subject:
-          <input type="text" />
+          <input type="text" onChange={(e) => formValues.setSubject(capitalize(e.target.value))} value={formValues.getSubject()}/>
         </label>
         <label>
           Description:
