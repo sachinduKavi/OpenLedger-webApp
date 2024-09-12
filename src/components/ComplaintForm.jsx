@@ -39,11 +39,17 @@ export default function ComplaintForm() {
         
         <label>
           Subject:
-          <input type="text" onChange={(e) => formValues.setSubject(capitalize(e.target.value))} value={formValues.getSubject()}/>
+          <input type="text" onChange={(e) => {
+            formValues.setSubject(capitalize(e.target.value))
+            setFormValues(new Complaint(formValues.extractJSON()))
+          }} value={formValues.getSubject()??""}/>
         </label>
         <label>
           Description:
-          <textarea />
+          <textarea onChange={(e) => {
+            formValues.setCaption(capitalize(e.target.value))
+            setFormValues(new Complaint(formValues.extractJSON()))
+          }} value={formValues.getCaption()??""}/>
         </label>
         <label>Add Evidence:</label>
             
