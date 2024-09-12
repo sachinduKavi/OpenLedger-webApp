@@ -1,27 +1,16 @@
-
-
-.cmp-panel-outside-border .cmp-row1 {
-    justify-content: space-evenly;
-    width: 50%;
-}
-.cmp-panel-outside-border .cmp-row1 h2{
-    color: aliceblue;
-    font-weight: bold;
-    font-size: 30px;
-    text-align-last: center;
+.complaint-row {
+    display: flex;
+    flex-direction: row;
+    flex: 1 1 0;
+    width: 100%;
+    border-radius: inherit;
+    padding: 10px;
 }
 
-.cmp-panel-outside-border .cmp-column {
-    width: 48%;
-    
+
+.cmp-column {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
 }
-.cmp-panel-outside-border .cmp-column1 {
-    margin-top: 30px;
-
-     
- }
-.cmp-panel-outside-border .cmp-column2 {
-    margin-top: 6px;
-
-     
- }

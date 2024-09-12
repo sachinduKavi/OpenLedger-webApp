@@ -16,23 +16,19 @@ export default function Complaints() {
       exit={{y: 1000, transition: {delay: 0.1}}}
     >
 
+    <div className="complaint-row">
+      <div className="cmp-column">  
 
+        <ComplaintForm/>
 
-      <div className="cmp-row">
-        <div className="cmp-column">
-          <ComplaintForm/>
-        </div>
-
-      <div className='cmp-row1'>
-        <h2>Complaints</h2>
-        <div className="cmp-column1">
-        <ComplaintList/>
-        </div>
-        <div className="cmp-column2">
-        <ComplaintList/>
-        </div>
-        </div>
       </div>
+
+      <div className="cmp-column">
+
+      </div>
+    </div>
+
+      
       
       
       

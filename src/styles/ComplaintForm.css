@@ -2,13 +2,17 @@
     flex-direction: row;
     display: flex;
     margin-top: 20px;
+    height: 100%;
 }
 
 .cmp-complaint-form {
     background-color: #1C1F31;
     padding: 20px;
+    width: 100%;
+    height: fit-content;
     border-radius: 10px;
-    
+    display: flex;
+    flex-direction: column;
   }
   
   .cmp-complaint-form h3 {
@@ -35,6 +39,13 @@
     border-radius: 5px;
     border: 1px solid #ccc;
   }
+
+  .cmp-complaint-form form input[type="checkbox"] {
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
   
   .cmp-complaint-form form textarea {
     height: 100px;
@@ -49,26 +60,37 @@
     margin-left: 10px;
   }
   
+  .cmp-complaint-form .btn {
+    display: flex;
+    flex-direction: row;
+  }
+
   .cmp-complaint-form form button {
-    width: 100px;
     padding: 10px;
-    margin-top: 10px;
     border: none;
+    flex: 1 1 0;
+    margin: 5px;
     border-radius: 5px;
     cursor: pointer;
   }
+
   .cmp-complaint-form form btn{
-    flex-direction: row;
-    
+    display: flex;
+    flex-direction: row-reverse;
   }
-  .cmp-complaint-form form button[type="submit"] {
+  .cmp-complaint-form form button[type="button"] {
     background-color: #4a4a8c;
     color: white;
   }
   
   .cmp-complaint-form form button[type="reset"] {
-    background-color: #4a4a8c;
+    background-color: transparent;
     color: white;
-    margin-left: 50px;
+    border: 1px solid #4a4a8c;
+  }
+
+  .add-btn {
+    aspect-ratio: 1;
+    width: 90px;
   }
   
