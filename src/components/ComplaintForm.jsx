@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {motion, AnimatePresence} from 'framer-motion'
 import '../styles/ComplaintForm.css';
 import { capitalize } from '../middleware/auth';
-import Complaint from '../dataModels/Complaint';
+import ComplaintModel from '../dataModels/ComplaintModel';
 
 import PlusIcon from '../assets/icons/plus.png'
 import EvidenceTitle from './TreasuryDashboard/EvidenceTitle';
@@ -15,7 +15,7 @@ export default function ComplaintForm() {
   // Evidence array 
   const [evidenceArray, changeEvidenceArray] = useState([])
   // Complaint values
-  const [formValues, setFormValues] = useState(new Complaint({}))
+  const [formValues, setFormValues] = useState(new ComplaintModel({}))
 
 
   // Add new evidence to the evidence array and display the evidence prompt function
@@ -30,6 +30,18 @@ export default function ComplaintForm() {
 
   }
 
+  // Submission of values 
+  const onSubmission = async () => {
+    // Updating evidence values to the object 
+    formValues.setEvidenceArray(evidenceArray)
+    setFormValues(new ComplaintModel(formValues.extractJSON()))
+
+    // Uploading the evidences
+    await formValues.uploadEvidenceImages()
+    
+
+  }
+
   return (
 
     <div className='cmp-row'>
@@ -41,14 +53,14 @@ export default function ComplaintForm() {
           Subject:
           <input type="text" onChange={(e) => {
             formValues.setSubject(capitalize(e.target.value))
-            setFormValues(new Complaint(formValues.extractJSON()))
+            setFormValues(new ComplaintModel(formValues.extractJSON()))
           }} value={formValues.getSubject()??""}/>
         </label>
         <label>
           Description:
           <textarea onChange={(e) => {
             formValues.setCaption(capitalize(e.target.value))
-            setFormValues(new Complaint(formValues.extractJSON()))
+            setFormValues(new ComplaintModel(formValues.extractJSON()))
           }} value={formValues.getCaption()??""}/>
         </label>
         <label>Add Evidence:</label>
@@ -77,7 +89,7 @@ export default function ComplaintForm() {
         </label>
         <div className='btn'>
         <button type="reset">Reset</button>
-        <button type="button" >Submit</button>
+        <button type="button" onClick={onSubmission}>Submit</button>
         
         </div>
       </form>

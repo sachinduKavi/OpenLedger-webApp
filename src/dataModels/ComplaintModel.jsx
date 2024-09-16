@@ -1,4 +1,6 @@
 import Evidence from "./Evidence"
+import { v4 } from "uuid"
+import {uploadImageFireStore} from '../query/firebaseImageUpload'
 import { isClassObject } from "../middleware/auth"
 
 class Complaint {
@@ -11,8 +13,9 @@ class Complaint {
     #subject
     #status
     #evidenceArray
+    #evidenceLinkArray
 
-    constructor({complaintID = null, publishedDate = null, treasuryID = null, publisherID = null, anonymous = true, caption = null, subject = null, status = null, evidenceArray = []}) {
+    constructor({complaintID = null, publishedDate = null, treasuryID = null, publisherID = null, anonymous = true, caption = null, subject = null, status = null, evidenceArray = [], evidenceLinkArray = []}) {
         this.#complaintID = complaintID
         this.#publishedDate = publishedDate
         this.#treasuryID = treasuryID
@@ -21,6 +24,7 @@ class Complaint {
         this.#caption = caption
         this.#subject = subject
         this.#status = status
+        this.#evidenceLinkArray = evidenceLinkArray
         this.#evidenceArray = evidenceArray
 
         if (this.#evidenceArray.length > 0 && !isClassObject(this.#evidenceArray[0])) this.#convertToEvidenceObject()
@@ -45,6 +49,7 @@ class Complaint {
                 // New image link is generated and assigned it to the Evidence object
                 this.#evidenceArray[i].setImageName(v4()) // set evidence image name for random string 
                 const imageLink = await uploadImageFireStore(this.#evidenceArray[i].getImageFile(), `evidence/${this.#treasuryID}/${this.#evidenceArray[i].getImageName()}`)
+
                 this.#evidenceArray[i].setImageLink(imageLink)
             }
         } else {
@@ -53,17 +58,22 @@ class Complaint {
         }
     }
 
+
+    async createNewComplaint() {
+        
+    }
+
     extractJSON() {
         return {
             complaintID: this.#complaintID,
             publishedDate: this.#publishedDate,
             treasuryID: this.#treasuryID,
-            publishedDate: this.#publishedDate,
             publisherID: this.#publisherID,
             anonymous: this.#anonymous,
             caption: this.#caption,
             subject: this.#subject,
-            status: this.#status
+            status: this.#status,
+            evidenceLinkArray: this.#evidenceLinkArray
         }
     }
 
