@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {motion, AnimatePresence} from 'framer-motion'
 import '../styles/ComplaintForm.css';
 import { capitalize } from '../middleware/auth';
@@ -6,10 +6,12 @@ import ComplaintModel from '../dataModels/ComplaintModel';
 
 import PlusIcon from '../assets/icons/plus.png'
 import EvidenceTitle from './TreasuryDashboard/EvidenceTitle';
+import { SessionContext } from '../Session';
 
 
 
 export default function ComplaintForm() {
+  const changeSessionData = useContext(SessionContext).changeSessionData
 
   const [evidenceState, toggleEvidenceState] = useState(false)
   // Evidence array 
@@ -32,6 +34,7 @@ export default function ComplaintForm() {
 
   // Submission of values 
   const onSubmission = async () => {
+    changeSessionData({processing: true}) // Processing
     // Updating evidence values to the object 
     formValues.setEvidenceArray(evidenceArray)
     setFormValues(new ComplaintModel(formValues.extractJSON()))
@@ -39,7 +42,13 @@ export default function ComplaintForm() {
     // Uploading the evidences
     await formValues.uploadEvidenceImages()
     
+    if(await formValues.createNewComplaint()) {
+      // Success
+    } else {
+      // Failed to create complaint 
+    }
 
+    changeSessionData({processing: false}) // Processing
   }
 
   return (
@@ -84,7 +93,10 @@ export default function ComplaintForm() {
             </div>
   
         <label className="identity">
-          <input type="checkbox" />
+          <input type="checkbox" onChange={(e) => {
+            formValues.setAnonymous(e.target.checked)
+            setFormValues(new ComplaintModel(formValues.extractJSON()))
+          }}/>
           <span>Anonymous</span>
         </label>
         <div className='btn'>
