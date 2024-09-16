@@ -3,10 +3,11 @@ import {motion, AnimatePresence} from 'framer-motion'
 import '../styles/ComplaintForm.css';
 import { capitalize } from '../middleware/auth';
 import ComplaintModel from '../dataModels/ComplaintModel';
-
+import toast from 'react-hot-toast';
 import PlusIcon from '../assets/icons/plus.png'
 import EvidenceTitle from './TreasuryDashboard/EvidenceTitle';
 import { SessionContext } from '../Session';
+import ToastCustom from './ToastCustom';
 
 
 
@@ -34,7 +35,7 @@ export default function ComplaintForm() {
 
   // Submission of values 
   const onSubmission = async () => {
-    changeSessionData({processing: true}) // Processing
+    changeSessionData({processing: true}) // Processing starts ...
     // Updating evidence values to the object 
     formValues.setEvidenceArray(evidenceArray)
     setFormValues(new ComplaintModel(formValues.extractJSON()))
@@ -44,11 +45,20 @@ export default function ComplaintForm() {
     
     if(await formValues.createNewComplaint()) {
       // Success
+      toast.custom(<ToastCustom type='success' header='Complaint Success'>Compliant created successfully. Now you have to wait for a response.</ToastCustom>);
     } else {
       // Failed to create complaint 
+      toast.custom(<ToastCustom type='error' header='Something went wrong'>We could not create complaint, please try again later.</ToastCustom>);
     }
 
-    changeSessionData({processing: false}) // Processing
+    changeSessionData({processing: false}) // Processing ends...
+  }
+
+
+  // Reset the whole form
+  const formRest = () => {
+    setFormValues(new ComplaintModel({}))
+    changeEvidenceArray([])
   }
 
   return (
@@ -100,7 +110,7 @@ export default function ComplaintForm() {
           <span>Anonymous</span>
         </label>
         <div className='btn'>
-        <button type="reset">Reset</button>
+        <button onClick={formRest} type='reset'>Reset</button>
         <button type="button" onClick={onSubmission}>Submit</button>
         
         </div>
