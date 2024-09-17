@@ -8,7 +8,7 @@ import '../../styles/complaint.css'
 
 
 
-export default function Complaints() {
+export default function Complaints(props) {
 
   const [refreshComplaint, setUpdate] = useState(false)
 
@@ -28,7 +28,7 @@ export default function Complaints() {
       </div>
 
       <div className="cmp-column">
-        <ComplaintList/>
+        <ComplaintList activeUser={props.activeUser}/>
       </div>
     </div>
 

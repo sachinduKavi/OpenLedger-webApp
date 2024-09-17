@@ -7,6 +7,11 @@ const createComplaintQuery = async (evidence) => {
 }
 
 
+const loadComplaintsQuery = async () => {
+    return await cDomain.get('complaint/loadComplaints', header)
+}
+
 export {
-    createComplaintQuery
+    createComplaintQuery,
+    loadComplaintsQuery
 }

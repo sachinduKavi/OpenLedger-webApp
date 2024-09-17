@@ -3,7 +3,7 @@ import { v4 } from "uuid"
 import {uploadImageFireStore} from '../query/firebaseImageUpload'
 import { isClassObject } from "../middleware/auth"
 import { generateCurrentDate } from "../middleware/GenerateCurrentDateTime"
-import { createComplaintQuery } from "../query/complaintQuery"
+import { createComplaintQuery, loadComplaintsQuery } from "../query/complaintQuery"
 
 class Complaint {
     #complaintID
@@ -13,11 +13,13 @@ class Complaint {
     #anonymous
     #caption
     #subject
+    #publisher
+    #dpLink
     #status
     #evidenceArray
     #evidenceLinkArray
 
-    constructor({complaintID = null, publishedDate = generateCurrentDate(), treasuryID = null, publisherID = null, anonymous = true, caption = null, subject = null, status = null, evidenceArray = [], evidenceLinkArray = []}) {
+    constructor({complaintID = null, publishedDate = generateCurrentDate(), treasuryID = null, publisherID = null, anonymous = true, caption = null, subject = null, status = null, evidenceArray = [], evidenceLinkArray = [], publisher = null, dpLink = null}) {
         this.#complaintID = complaintID
         this.#publishedDate = publishedDate
         this.#treasuryID = treasuryID
@@ -26,6 +28,8 @@ class Complaint {
         this.#caption = caption
         this.#subject = subject
         this.#status = status
+        this.#publisher = publisher
+        this.#dpLink = dpLink
         this.#evidenceLinkArray = evidenceLinkArray
         this.#evidenceArray = evidenceArray
 
@@ -39,6 +43,15 @@ class Complaint {
             tempObjectArray.push(new Evidence(element))
         });
         this.#evidenceArray = tempObjectArray
+    }
+
+
+    // Get all the complaints
+    static async loadAllComplaint() {
+        const response = await loadComplaintsQuery()
+        return (response.status === 200 && response.data.proceed)
+            ? response.data.content.map(element => {return new Complaint(element)})
+            : false
     }
 
 
@@ -82,6 +95,8 @@ class Complaint {
             caption: this.#caption,
             subject: this.#subject,
             status: this.#status,
+            publisher: this.#publisher,
+            dpLink: this.#dpLink,
             evidenceLinkArray: this.#evidenceLinkArray
         }
     }
@@ -89,6 +104,14 @@ class Complaint {
 
 
     // Getters
+    getPublisher() {
+        return this.#publisher
+    }
+
+    getDpLink() {
+        return this.#dpLink
+    }
+
     getEvidenceArray() {
         return this.#evidenceArray
     }

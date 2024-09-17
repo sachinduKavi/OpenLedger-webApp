@@ -1,0 +1,46 @@
+.single-complaint-border {
+    width: 100%;
+    background-color: #D9D9D9;
+    height: fit-content;
+    border-radius: 10px;
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.096);
+    display: flex;
+    padding: 5px 10px;
+    flex-direction: row;
+    margin-bottom: 8px;
+}
+
+.single-complaint-border .complaint-text {
+    color: black;
+}
+
+.single-complaint-border:hover {
+    box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.473);
+}
+
+.single-complaint-border .content-complaint {
+    margin: 0;
+    padding: 0 10px;
+    display: flex;
+    flex: 1 1 0;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.single-complaint-border .caption {
+    font-size: calc(5px + 0.6vw);
+}
+
+.complaint-date {
+    color: rgba(0, 0, 0, 0.521);
+    align-self: flex-end;
+    font-size: calc(8px + 0.4vw);
+}
+
+/* .single-complaint-border .complaint-row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    background-color: aqua;
+} */
