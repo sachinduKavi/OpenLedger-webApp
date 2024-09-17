@@ -1,7 +1,7 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {motion} from 'framer-motion'
 import ComplaintForm from '../../components/ComplaintForm'
-import ComplaintList from '../../components/ComplaintList'
+import ComplaintList from './ComplaintList'
 
 import '../../styles/complaint.css'
 
@@ -9,6 +9,10 @@ import '../../styles/complaint.css'
 
 
 export default function Complaints() {
+
+  const [refreshComplaint, setUpdate] = useState(false)
+
+
   return (
     <motion.div className='panel-outside-border cmp-panel-outside-border'
       initial={{x: 1500}}
@@ -24,7 +28,7 @@ export default function Complaints() {
       </div>
 
       <div className="cmp-column">
-
+        <ComplaintList/>
       </div>
     </div>
 
