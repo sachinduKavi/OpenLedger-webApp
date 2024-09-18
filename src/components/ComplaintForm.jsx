@@ -11,7 +11,8 @@ import ToastCustom from './ToastCustom';
 
 
 
-export default function ComplaintForm() {
+export default function ComplaintForm(props) {
+  const {value, refresh} = props.refresh
   const changeSessionData = useContext(SessionContext).changeSessionData
 
   const [evidenceState, toggleEvidenceState] = useState(false)
@@ -46,6 +47,8 @@ export default function ComplaintForm() {
     if(await formValues.createNewComplaint()) {
       // Success
       toast.custom(<ToastCustom type='success' header='Complaint Success'>Compliant created successfully. Now you have to wait for a response.</ToastCustom>);
+      refresh(!value)
+      setFormValues(new ComplaintModel({}))
     } else {
       // Failed to create complaint 
       toast.custom(<ToastCustom type='error' header='Something went wrong'>We could not create complaint, please try again later.</ToastCustom>);

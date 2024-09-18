@@ -19,7 +19,7 @@ class Complaint {
     #evidenceArray
     #evidenceLinkArray
 
-    constructor({complaintID = null, publishedDate = generateCurrentDate(), treasuryID = null, publisherID = null, anonymous = true, caption = null, subject = null, status = null, evidenceArray = [], evidenceLinkArray = [], publisher = null, dpLink = null}) {
+    constructor({complaintID = null, publishedDate = generateCurrentDate(), treasuryID = null, publisherID = null, anonymous = false, caption = null, subject = null, status = null, evidenceArray = [], evidenceLinkArray = [], publisher = null, dpLink = null}) {
         this.#complaintID = complaintID
         this.#publishedDate = publishedDate
         this.#treasuryID = treasuryID

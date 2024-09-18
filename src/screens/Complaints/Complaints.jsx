@@ -11,7 +11,7 @@ import '../../styles/complaint.css'
 export default function Complaints(props) {
 
   const [refreshComplaint, setUpdate] = useState(false)
-
+  const refresh = {value: refreshComplaint, refresh: setUpdate}
 
   return (
     <motion.div className='panel-outside-border cmp-panel-outside-border'
@@ -23,12 +23,12 @@ export default function Complaints(props) {
     <div className="complaint-row">
       <div className="cmp-column">  
 
-        <ComplaintForm/>
+        <ComplaintForm refresh={refresh}/>
 
       </div>
 
       <div className="cmp-column">
-        <ComplaintList activeUser={props.activeUser}/>
+        <ComplaintList activeUser={props.activeUser} refresh={refresh}/>
       </div>
     </div>
 
