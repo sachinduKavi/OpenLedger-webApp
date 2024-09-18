@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {AnimatePresence} from 'framer-motion'
 
 import Comment from '../../components/Comment'
@@ -10,6 +10,12 @@ export default function SingleComplaint(props) {
 
     const complaint = props.complaint
     const [commentUpdate, setCommentUpdate] = useState(false)
+
+    
+    useEffect(() => {
+
+    })
+
   return (
     <div className='single-complaint-border'>
         <div className="complaint-col">
@@ -21,6 +27,10 @@ export default function SingleComplaint(props) {
             <h3 className='complaint-text'>{complaint.getSubject()} : {complaint.getAnonymous()? "Anonymous": complaint.getPublisher()}</h3>
 
             <p className='caption complaint-text'>{complaint.getCaption()}</p>
+
+            <div className="image-gallery">
+
+            </div>
 
             <AnimatePresence>
                 <Comment recordID={complaint.getComplaintID()} activeUser={props.activeUser} commentUpdate={commentUpdate} setCommentUpdate={setCommentUpdate}/>
