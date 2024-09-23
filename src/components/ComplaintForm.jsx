@@ -48,7 +48,7 @@ export default function ComplaintForm(props) {
       // Success
       toast.custom(<ToastCustom type='success' header='Complaint Success'>Compliant created successfully. Now you have to wait for a response.</ToastCustom>);
       refresh(!value)
-      setFormValues(new ComplaintModel({}))
+      formRest() // Reset form structure 
     } else {
       // Failed to create complaint 
       toast.custom(<ToastCustom type='error' header='Something went wrong'>We could not create complaint, please try again later.</ToastCustom>);

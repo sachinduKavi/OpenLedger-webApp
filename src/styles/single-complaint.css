@@ -61,7 +61,8 @@
 }
 
 .image-gallery .evidence {
-    aspect-ratio: 1;
+    width: 100%;
+    height: fit-content;
 }
 
 .complaint-footer {
