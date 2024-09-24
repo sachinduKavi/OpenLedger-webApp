@@ -38,9 +38,28 @@
 
 .form-vote-border .place-number {
     margin: 5px 5px 5px 0;
+    padding: 2px 5px;
+    border-radius: 6px;
+    border: 1px solid rgb(255, 255, 255);
 }
 
 .form-vote-border .delete-btn:active {
     border: 0!important;
     box-shadow: 0!important;
+}
+
+.form-vote-border .submission-btn {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.form-vote-border .submission-btn Button {
+    flex: 1 1 0;
+    margin: 5px 2px;
+}
+
+.form-vote-border button[type='reset'] {
+    background-color: transparent;
+    border: 2px solid #4a4a8c;
 }
