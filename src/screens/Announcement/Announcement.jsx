@@ -8,6 +8,7 @@ import '../../styles/announcement.css'
 
 import AnnouncementSingle from './AnnouncementSingle'
 import PrimaryBorder from '../../components/PrimaryBorder'
+import CreatePoll from './CreatePoll'
 
 
 
@@ -53,20 +54,33 @@ export default function Announcement(props) {
               })
             }
         
-          
+            
 
         </div>
 
 
         <div className="ans-column">
-            <PrimaryBorder borderRadius='10px' width='fit-content' margin='5px'>
-              <button onClick={() => setFormState(true)}>New Announcement</button>
-            </PrimaryBorder>
+            <div className="row">
+              <PrimaryBorder borderRadius='10px' width='fit-content' margin='5px'>
+                <button onClick={() => setFormState(true)}>New Announcement</button>
+              </PrimaryBorder>
+
+              <PrimaryBorder borderRadius='10px' width='fit-content' margin='5px'>
+                <button onClick={() => {
+                  setFormState(false)
+
+                }}>New Vote</button>
+              </PrimaryBorder>
+            </div>
+            
 
           {
             newFormState &&
             <CreateNewAnnouncement setFormState={setFormState} annUpdate={{announcementUpdate: announcementUpdate, setUpdate: setUpdate}}/>
           }
+
+          <CreatePoll/>
+
         </div>
 
       </div>

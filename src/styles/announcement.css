@@ -19,3 +19,8 @@
 .announcement-border .ans-column::-webkit-scrollbar {
     display: none;
 }
+
+.announcement-border .ans-column .row {
+    display: flex;
+    flex-direction: row;
+}

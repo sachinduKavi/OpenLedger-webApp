@@ -1,0 +1,46 @@
+.form-vote-border {
+    width: 100%;
+    height: fit-content;
+    border: 2px solid #B7B5EB;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    margin-top: 5px;
+}
+
+.form-vote-border .square-btn {
+    aspect-ratio: 1;
+    width: fit-content;
+}
+
+.form-vote-border .square-btn:active {
+    color: transparent;
+}
+
+.form-vote-border .square-btn:hover {
+    background-color: transparent!important;
+}
+
+.form-vote-border .title::placeholder {
+    color: rgba(230, 230, 230, 0.808);
+    flex: 1 1 0;
+}
+
+.form-vote-border .row {
+    justify-content: start;
+    align-items: center;
+}
+
+.form-vote-border .row > h6 {
+    margin: 0 5px 0 10px;
+}
+
+.form-vote-border .place-number {
+    margin: 5px 5px 5px 0;
+}
+
+.form-vote-border .delete-btn:active {
+    border: 0!important;
+    box-shadow: 0!important;
+}
