@@ -16,12 +16,15 @@ export default function Announcement(props) {
   const activeUser = props.activeUser
 
   const [newFormState, setFormState] = useState(false)
+  const [newVoteState, setNewVoteState] = useState(false)
   const [announcementList, setAnnouncementList] = useState([]) // Announcement list display here
 
   // Loading all announcements published 
   const loadAnnouncements = async () => {
     setAnnouncementList(await AnnouncementModel.fetchAllAnnouncements())
   }
+
+
 
   // Update variable for announcement list
   const [announcementUpdate, setUpdate] = useState(false)
@@ -31,6 +34,10 @@ export default function Announcement(props) {
   useEffect(() => {
     loadAnnouncements()
   }, [announcementUpdate])
+
+  useEffect(() => {
+
+  }, [])
 
   return (
     <motion.div className='panel-outside-border'
@@ -62,13 +69,16 @@ export default function Announcement(props) {
         <div className="ans-column">
             <div className="row">
               <PrimaryBorder borderRadius='10px' width='fit-content' margin='5px'>
-                <button onClick={() => setFormState(true)}>New Announcement</button>
+                <button onClick={() => {
+                  setFormState(true)
+                  setNewVoteState(false)
+                }}>New Announcement</button>
               </PrimaryBorder>
 
               <PrimaryBorder borderRadius='10px' width='fit-content' margin='5px'>
                 <button onClick={() => {
                   setFormState(false)
-
+                  setNewVoteState(true)
                 }}>New Vote</button>
               </PrimaryBorder>
             </div>
@@ -79,7 +89,11 @@ export default function Announcement(props) {
             <CreateNewAnnouncement setFormState={setFormState} annUpdate={{announcementUpdate: announcementUpdate, setUpdate: setUpdate}}/>
           }
 
-          <CreatePoll/>
+          {
+            newVoteState && <CreatePoll/>
+          }
+
+          
 
         </div>
 

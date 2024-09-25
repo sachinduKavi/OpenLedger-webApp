@@ -1,5 +1,5 @@
 import { generateCurrentDate } from "../middleware/GenerateCurrentDateTime"
-
+import { createVoteQuery } from "../query/voteQuery"
 class Vote {
     #voteID
     #publisherID
@@ -29,8 +29,12 @@ class Vote {
     }
 
     // Create new Poll Submission 
-    createPoll() {
-        console.log(JSON.stringify(this.extractJSON()))
+    async createPoll() {
+        console.log('hello world')
+        const response = await createVoteQuery(this.extractJSON())
+        console.log('response', response)
+        console.log('testing')
+        return response.status === 200 && response.data.proceed
     }
 
 
