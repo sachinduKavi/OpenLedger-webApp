@@ -13,12 +13,10 @@ export default function ComplaintList(props) {
     // Load all the complaints
     const loadComplaints = async () => {
         const res = await ComplaintModel.loadAllComplaint()
-        if(res) {
-            
+        if(res) {    
             setComplaintList(res)
         } else {
-            // Error occurred 
-
+            // Error occurred
         }
     }
 

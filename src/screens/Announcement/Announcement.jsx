@@ -19,6 +19,8 @@ export default function Announcement(props) {
 
   const [newFormState, setFormState] = useState(false)
   const [newVoteState, setNewVoteState] = useState(false)
+
+  const [pollRefresh, setPollRefresh] = useState(false)
   const [announcementList, setAnnouncementList] = useState([]) // Announcement list display here
   const [voteList, setVoteList] = useState([]) // Vote list 
 
@@ -29,7 +31,9 @@ export default function Announcement(props) {
 
   // Load all the published votes 
   const loadVotes = async () => {
-
+      console.log('Hello world')
+      const res = (await Vote.loadVotes())
+      setVoteList([...res])
   }
 
 
@@ -44,8 +48,9 @@ export default function Announcement(props) {
   }, [announcementUpdate])
 
   useEffect(() => {
-
-  }, [])
+    console.log('jeust hte ')
+    loadVotes()
+  }, [pollRefresh])
 
   return (
     <motion.div className='panel-outside-border'
@@ -98,12 +103,16 @@ export default function Announcement(props) {
           }
 
           {
-            newVoteState && <CreatePoll/>
+            newVoteState && <CreatePoll setPollRefresh={setPollRefresh}/>
           }
 
 
 
-          <Poll/>
+          {
+            voteList.map((element, index) => {
+              return (<Poll pollElement={element} key={index} activeUser={props.activeUser} pollRefresh={pollRefresh}  setPollRefresh={setPollRefresh}/>)
+            })
+          }
 
           
 

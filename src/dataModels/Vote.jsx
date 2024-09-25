@@ -1,5 +1,5 @@
 import { generateCurrentDate } from "../middleware/GenerateCurrentDateTime"
-import { createVoteQuery } from "../query/voteQuery"
+import { createVoteQuery, deletePollQuery, loadAllVotesQuery, updatePoll } from "../query/voteQuery"
 class Vote {
     #voteID
     #publisherID
@@ -28,20 +28,38 @@ class Vote {
         }
     }
 
+
     // Load all the votes and data
     static async loadVotes() {
-        
+        const response = await loadAllVotesQuery()
+        return response.status === 200 && response.data.proceed
+        ? response.data.content.map(element => {
+            return new Vote(element)
+        })
+        : false
     }
 
     // Create new Poll Submission 
     async createPoll() {
-        console.log('hello world')
         const response = await createVoteQuery(this.extractJSON())
-        console.log('response', response)
-        console.log('testing')
         return response.status === 200 && response.data.proceed
     }
 
+
+    // Update a poll
+    async pollUpdate(optionID, state) {
+        const response = await updatePoll(this.#voteID, optionID, state, this.#multiple)
+        return response.status === 200 && response.data.proceed 
+        ? new Vote(response.data.content)
+        : false
+    }
+
+
+    // Deletion of poll
+    async deletePoll() {
+        const response = await deletePollQuery(this.#voteID)
+        return response.status === 200 && response.data.proceed
+    }
 
     getChoices() {
         return this.#choices

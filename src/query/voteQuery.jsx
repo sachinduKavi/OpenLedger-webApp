@@ -6,11 +6,22 @@ const createVoteQuery = async(vote) => {
 }
 
 
-const loadAllVotes = async () => {
+const loadAllVotesQuery = async () => {
     return await cDomain.get('vote/loadVotes', header)
+}
+
+
+const updatePoll = async (voteID, optionID, state, multiple) => {
+    return await cDomain.put('vote/updatePoll', {voteID: voteID, optionID: optionID, state: state, multiple: multiple}, header)
+}
+
+const deletePollQuery = async (voteID) => {
+    return await cDomain.put('vote/deletePoll', {voteID: voteID}, header)
 }
 
 export {
     createVoteQuery,
-    loadAllVotes
+    loadAllVotesQuery,
+    updatePoll,
+    deletePollQuery
 }

@@ -11,7 +11,7 @@ import { SessionContext } from '../../Session'
 
 import '../../styles/create-poll.css'
 
-export default function CreatePoll() {
+export default function CreatePoll(props) {
   const changeSession = useContext(SessionContext).changeSessionData
   const [choiceList, setChoices] = useState([])
   const [vote, setVote] = useState(new Vote({}))
@@ -21,16 +21,14 @@ export default function CreatePoll() {
   const createPollSubmission = async () => {
       changeSession({processing: true})
 
-      if(choiceList.length > 0 && vote.getTitle().length() > 0) {
+      if(choiceList.length > 0) {
         vote.setChoices(choiceList)
         setVote(new Vote(vote.extractJSON())) // Updating choice object
 
         if(await vote.createPoll()) {
           // Poll created success
           toast.custom(<ToastCustom type='success' header='Poll created'>Your poll created successfully.</ToastCustom>);
-        } else {
-          // Poll creation failed
-            
+          props.setPollRefresh(preState => !preState)
         }
 
 

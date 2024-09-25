@@ -4,6 +4,7 @@
     height: fit-content;
     border-radius: 10px;
     padding: 20px;
+    margin: 5px 0;
 }
 
 .vote-border .row {
@@ -22,4 +23,8 @@
  
 .vote-border .details > h6 {
     margin: -2px 5px 0 5px;
+}
+
+.vote-border .space-between {
+    justify-content: space-between;
 }
