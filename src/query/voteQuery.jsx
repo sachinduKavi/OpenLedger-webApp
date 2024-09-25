@@ -6,6 +6,11 @@ const createVoteQuery = async(vote) => {
 }
 
 
+const loadAllVotes = async () => {
+    return await cDomain.get('vote/loadVotes', header)
+}
+
 export {
-    createVoteQuery
+    createVoteQuery,
+    loadAllVotes
 }

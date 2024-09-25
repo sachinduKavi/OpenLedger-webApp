@@ -28,6 +28,11 @@ class Vote {
         }
     }
 
+    // Load all the votes and data
+    static async loadVotes() {
+        
+    }
+
     // Create new Poll Submission 
     async createPoll() {
         console.log('hello world')

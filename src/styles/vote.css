@@ -1,0 +1,25 @@
+.vote-border {
+    width: 100%;
+    border: 1px solid white;
+    height: fit-content;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.vote-border .row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.vote-border .selection {
+    margin: 0 10px;
+}
+
+.vote-border .details {
+    justify-content: flex-end;
+}
+ 
+.vote-border .details > h6 {
+    margin: -2px 5px 0 5px;
+}

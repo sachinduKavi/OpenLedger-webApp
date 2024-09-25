@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {motion} from 'framer-motion'
 import CreateNewAnnouncement from './CreateNewAnnouncement'
 import AnnouncementModel from '../../dataModels/AnnouncementModel'
+import Poll from './Poll'
 
 
 import '../../styles/announcement.css'
@@ -9,6 +10,7 @@ import '../../styles/announcement.css'
 import AnnouncementSingle from './AnnouncementSingle'
 import PrimaryBorder from '../../components/PrimaryBorder'
 import CreatePoll from './CreatePoll'
+import Vote from '../../dataModels/Vote'
 
 
 
@@ -18,10 +20,16 @@ export default function Announcement(props) {
   const [newFormState, setFormState] = useState(false)
   const [newVoteState, setNewVoteState] = useState(false)
   const [announcementList, setAnnouncementList] = useState([]) // Announcement list display here
+  const [voteList, setVoteList] = useState([]) // Vote list 
 
   // Loading all announcements published 
   const loadAnnouncements = async () => {
     setAnnouncementList(await AnnouncementModel.fetchAllAnnouncements())
+  }
+
+  // Load all the published votes 
+  const loadVotes = async () => {
+
   }
 
 
@@ -92,6 +100,10 @@ export default function Announcement(props) {
           {
             newVoteState && <CreatePoll/>
           }
+
+
+
+          <Poll/>
 
           
 
