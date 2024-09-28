@@ -32,11 +32,15 @@ class Vote {
     // Load all the votes and data
     static async loadVotes() {
         const response = await loadAllVotesQuery()
-        return response.status === 200 && response.data.proceed
-        ? response.data.content.map(element => {
-            return new Vote(element)
-        })
-        : false
+        const voteList = []
+        if(response.status === 200 && response.data.proceed) {
+            response.data.content.forEach(element => {
+                voteList.push(new Vote(element))
+            });
+        }
+
+        return voteList
+        
     }
 
     // Create new Poll Submission 

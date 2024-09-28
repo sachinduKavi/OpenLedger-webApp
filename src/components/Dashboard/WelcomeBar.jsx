@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect} from 'react'
 import {motion} from 'framer-motion'
 
 import SimpleDP from '../SimpleDP'
@@ -10,8 +10,10 @@ import '../../styles/welcomeComp.css'
 import MenuImage from '../../assets/logos/olLogo.png'
 
 export default function WelcomeBar(props) {
-
+    const userDetails = props.userDetails
+    const userID = userDetails.userID
     const setUserCard = useContext(SessionContext).setUserCardState
+
    
   return (
     <motion.div className="welcome-container"
@@ -25,7 +27,7 @@ export default function WelcomeBar(props) {
                     <div>
                     <div className="image-div"><img src={MenuImage} alt="menu button"  width={50}/></div>
                     
-                    <p><a>Welcome,</a><br/>{props.userName}</p>
+                    <p><a>Welcome,</a><br/>{userDetails.userName}</p>
                     </div>
                     
 
@@ -47,7 +49,10 @@ export default function WelcomeBar(props) {
                 
             </div>
 
-            <div onClick={() => {setUserCard(true)}}>
+            <div onClick={() => {setUserCard({
+                userCardState: true,
+                userID: userID
+            })}}>
                 <div className="user-dp">
                 <SimpleDP imageLink={props.imageLink} size={45} imageScale={props.imageScale}/>
                 </div>

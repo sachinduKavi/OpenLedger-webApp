@@ -31,9 +31,7 @@ export default function Announcement(props) {
 
   // Load all the published votes 
   const loadVotes = async () => {
-      console.log('Hello world')
-      const res = (await Vote.loadVotes())
-      setVoteList([...res])
+      setVoteList(await Vote.loadVotes())
   }
 
 

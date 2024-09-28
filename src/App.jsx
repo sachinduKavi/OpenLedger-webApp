@@ -18,8 +18,10 @@ function App() {
   }) // Declare session variables
   // Change Session data
 
-  const [userDetails, setUserDetail] = useState(null)
-  const [userCartState, setUserCardState] = useState(false)
+  const [userCard, setUserCardState] = useState({
+    userCardState: false,
+    userID: "US00000000000000"
+  })
 
   return (
     <SessionContext.Provider value={{sessionData, changeSessionData, setUserCardState}}>
@@ -41,7 +43,7 @@ function App() {
       {sessionData.processing && <Process/>}
 
       {/* Global User card */}
-      {userCartState && <UserCardInfo/>}
+      {userCard.userCardState && <UserCardInfo userID={userCard.userID} setUserCard={setUserCardState} editorMode={true}/>}
 
       {/* </SessionContext.Provider> */}
     </SessionContext.Provider>

@@ -110,7 +110,7 @@ export default function TreasuryDashboard(){
         }}
       />
       
-      <WelcomeBar userName={userDetails?.userName} imageLink={userDetails?.dpLink} imageScale={userDetails?.pictureScale} position={activeUser.getPosition()}/>
+      <WelcomeBar userDetails={userDetails} imageLink={userDetails?.dpLink} imageScale={userDetails?.pictureScale} position={activeUser.getPosition()}/>
 
       <div className="body-content">
         {/* Navigation bar */}

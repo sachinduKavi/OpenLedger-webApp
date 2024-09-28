@@ -6,8 +6,13 @@ const getUserDetail = async (userID) => {
     return cDomain.post('user/loadUserDetails', {userID: userID}, header)
 }
 
+const updateUserQuery = async (userDetails) => {
+    return cDomain.put('user/updateUserDetails', userDetails, header)
+}
+
 
 
 export {
-    getUserDetail
+    getUserDetail,
+    updateUserQuery
 }
