@@ -52,7 +52,7 @@ export default class Dashboard extends Component {
     return (
       <div>
         <div className="dash02">
-          <WelcomeBar userName={this.userDetails.userName} imageLink={this.userDetails.dpLink} imageScale={this.userDetails.pictureScale}/>
+          <WelcomeBar userDetails={this.userDetails} imageLink={this.userDetails.dpLink} imageScale={this.userDetails.pictureScale}/>
         
 
           <p>You'll find recently accessed groups here, and you also have the option to create new treasury groups.</p>

@@ -1,10 +1,12 @@
-import React from 'react'
+import React, {useContext} from 'react'
 
 import SimpleDP from '../SimpleDP'
+import { SessionContext } from '../../Session'
 import CardIcon from '../../assets/icons/card.png'
 
 export default function SingleParticipant(props) {
   const user = props.user
+  const setUserCard = useContext(SessionContext).setUserCardState
 
   return (
     <div className='single-participant-border'>
@@ -40,8 +42,13 @@ export default function SingleParticipant(props) {
         </div>
 
         
-        <div style={{cursor: 'pointer'}}>
-          <img src={CardIcon} alt="card-icon" />
+        <div style={{cursor: 'pointer'}} onClick={() => {
+          setUserCard({
+            userCardState: true,
+            userID: user.getUserId()
+          })
+        }}>
+          <img src={CardIcon} alt="card-icon"/>
         </div>
         
     </div>

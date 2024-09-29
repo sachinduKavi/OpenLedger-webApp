@@ -9,6 +9,7 @@ import SimpleDP from './SimpleDP'
 import ChangePassword from './changePassword'
 import toast from 'react-hot-toast'
 import ToastCustom from './ToastCustom'
+import {motion} from 'framer-motion'
 
 
 export default function UserCardInfo(props) {
@@ -62,8 +63,9 @@ export default function UserCardInfo(props) {
     const changePassRef = useRef()
     // Receipt will disappear when user click outside the container
     const receiptContainer = (e) => {
-        console.log(e)
-        console.log(changePassRef.current)
+        if(!changePassRef.current.contains(e.target)) {
+            props.setUserCard(false)
+        }
     }
 
 
@@ -81,10 +83,13 @@ export default function UserCardInfo(props) {
     const editorMode = localUserDetails.userID === userDetails.userID
 
     return (
-        <div className='user-profile-card' ref={changePassRef}>
+        <motion.div className='user-profile-card' 
+            initial={{scale: 0}}
+            animate={{scale: 1}}
+        >
             
             <div className="user-content">
-            <div className="whole-container">
+            <div className="whole-container" ref={changePassRef}>
                 <div className="user-content-header">
                     <div className="user-content-header-name">
                         <h3 className='user-name'>{userDetails.userName}</h3>
@@ -166,7 +171,7 @@ export default function UserCardInfo(props) {
             </div>
 
             </div>
-        </div>
+        </motion.div>
 
 
     )
