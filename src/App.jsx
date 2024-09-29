@@ -9,6 +9,7 @@ import TreasuryDashboard from './screens/TreasuryDashboard'
 import Process from './components/process'
 import { UserCardSession } from './UserCardSession'
 import UserCardInfo from './components/UserCardInfo'
+import RequestPage from './screens/RequestPage'
 
 export const Context = React.createContext()
 
@@ -34,6 +35,7 @@ function App() {
           <Route path='/register' element={<Registration/>}/>
           <Route path='/dashboard' element={<Dashboard/>}/>
           <Route path='/treasury' element={<TreasuryDashboard/>}/>
+          <Route path='/request' element={<RequestPage/>}/>
         </Routes>
   
       </BrowserRouter>
