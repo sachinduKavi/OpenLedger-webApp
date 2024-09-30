@@ -35,7 +35,7 @@ function App() {
           <Route path='/register' element={<Registration/>}/>
           <Route path='/dashboard' element={<Dashboard/>}/>
           <Route path='/treasury' element={<TreasuryDashboard/>}/>
-          <Route path='/request' element={<RequestPage/>}/>
+          <Route path='/request/:treasuryID' element={<RequestPage/>}/>
         </Routes>
   
       </BrowserRouter>

@@ -45,13 +45,7 @@
 /*===== GOOGLE FONTS =====*/
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
 
-/*===== VARIABLES CSS =====*/
 
-/*=== Colores ===*/
-:root{
-    --first-color: #12192C;
-    --text-color: #8590AD;
-}
 
 /*=== Fuente y tipografia ===*/
 :root{
@@ -71,18 +65,34 @@
 *,::before,::after{
     box-sizing: border-box;
 }
-body{
-    margin: 0;
-    padding: 0;
-    font-family: var(--body-font);
-    color: var(--first-color);
+
+.request-page-border h3, h2, h1, p,  label{
+    color: black;
 }
-h1{
-    margin: 0;
+
+.request-page-border .input {
+    padding: 6px;
+    font-size: 16px;
+    margin: 5px;
+    color: rgb(46, 46, 46);
+    background-color: rgba(133, 132, 132, 0.281);
 }
-a{
-    text-decoration: none;
+
+.request-page-border .real-form {
+    margin: 10px 5px;
 }
+
+.request-page-border .input::placeholder {
+    color: rgba(17, 17, 17, 0.692);
+}
+
+.request-page-border .no-blur {
+    width: 90%;
+    aspect-ratio: 2;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.411);
+}
+
 img{
     max-width: 100%;
     height: auto;
@@ -125,6 +135,7 @@ img{
     background-color: whitesmoke;
     padding: 50px;
     width: 90%;
+    max-width: 500px;
     border-radius: 26px;
 }
 .form__img{
@@ -167,8 +178,7 @@ img{
     position: absolute;
     left: .75rem;
     top: .25rem;
-    font-size: var(--normal-font-size);
-    color: var(--text-color);
+
     transition: .3s;
 }
 /*=== Label focus ===*/
@@ -192,7 +202,7 @@ img{
     background: none;
     padding: .5rem .75rem;
     font-size: 1.2rem;
-    color: var(--first-color);
+    color: white;
     transition: .3s;
 }
 .form__forgot{
@@ -215,8 +225,8 @@ img{
     outline: none;
     border: none;
     margin-bottom: 3rem;
-    background-color: var(--first-color);
-    color: #fff;
+    /* background-color: var(--first-color); */
+    /* color: #fff; */
     border-radius: .5rem;
     cursor: pointer;
     transition: .3s;
