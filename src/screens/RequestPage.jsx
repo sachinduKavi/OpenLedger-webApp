@@ -2,10 +2,13 @@ import React,{useEffect, useState} from 'react'
 import {useParams, useSearchParams} from 'react-router-dom'
 import { getTreasuryDetails } from '../query/treasuryQuery'
 import {Input} from 'antd'
+import toast, {Toaster} from 'react-hot-toast'
+import ToastCustom from '../components/ToastCustom'
 
 
 
 import '../styles/request.css'
+import { joinRequestQuery } from '../query/userQuery'
 
 export default function RequestPage() {
 
@@ -13,6 +16,7 @@ export default function RequestPage() {
 
   const [treasury, setTreasury] = useState(null)
   const [credentials, setCredentials] = useState({})
+  const [error, setError] = useState([])
 
   // Load treasury details from the backend
   const loadTreasuryDetails = async () => {
@@ -26,6 +30,24 @@ export default function RequestPage() {
 
   // Submit request to join the treasury group 
   const requestSubmission = async () => {
+    const response = await joinRequestQuery(credentials, atob(treasuryID))
+    console.log(response)
+    if(response.status === 200) {
+      if(response.data.proceed) {
+        // Credentials match
+        setError([])
+        setCredentials({})
+        toast.custom(<ToastCustom type='success' header='Request sent successfully'>Once treasurer accepts your request your'll join the group.</ToastCustom>);
+      } else {
+        // Invalid username or password
+        if(error.length < 6)
+        setError([...error, response.data.errorMessage])
+        
+      }
+    } else {
+      // Network error
+      toast.custom(<ToastCustom type='warnning' header='Network Error'>Please try again later.</ToastCustom>);
+    }
 
   }
 
@@ -36,18 +58,23 @@ export default function RequestPage() {
 
 
   return (
+    
+
+
     <div className='request-page-border' 
-    style={{background: `url('${treasury?.coverImageID?? ''}')`,
+    style={{backgroundImage: `url('${treasury?.coverImageID?? ''}')`,
       backgroundPosition: 'center',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat'
     }}>
 
+    
+
 
       <div className="content">
         <div className="column">
           <div className="no-blur" 
-           style={{background: `url('${treasury?.coverImageID?? ''}')`,
+           style={{backgroundImage: `url('${treasury?.coverImageID?? ''}')`,
            backgroundPosition: 'center',
            backgroundSize: 'cover',
            backgroundRepeat: 'no-repeat'
@@ -56,7 +83,11 @@ export default function RequestPage() {
           </div>
         </div>
 
-
+        <Toaster position='top-right'
+            toastOptions={{
+              duration: 15000
+            }}
+          />
 
           <div className="column">
           <form className="form__content" >
@@ -70,10 +101,20 @@ export default function RequestPage() {
               <Input placeholder='Email' className='email input' type='text' value={credentials.email} onChange={(e) => {
                 setCredentials({...credentials, email: e.target.value})
               }}/>
-              <Input placeholder='Password' className='password input' type='password' onChange={(e) => {
+              <Input placeholder='Password' className='password input' type='password' 
+              value={credentials.password}
+              onChange={(e) => {
                 setCredentials({...credentials, password: e.target.value})
               }}/>
             </div>
+            
+            
+            {
+              error.map((element, index) => {
+                return (<p className="error" key={index}>**{element}</p>)
+              })
+            }
+            
             
 
       

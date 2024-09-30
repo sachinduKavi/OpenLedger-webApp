@@ -66,8 +66,13 @@
     box-sizing: border-box;
 }
 
-.request-page-border h3, h2, h1, p,  label{
+.request-page-border .content h3, .request-page-border h2, .request-page-border h1, .request-page-border p,  .request-page-border label{
     color: black;
+}
+
+.request-page-border .error {
+    background-color: transparent;
+    color: red;
 }
 
 .request-page-border .input {
@@ -93,7 +98,7 @@
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.411);
 }
 
-img{
+.request-page-border img{
     max-width: 100%;
     height: auto;
 }

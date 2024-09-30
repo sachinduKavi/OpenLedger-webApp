@@ -10,9 +10,13 @@ const updateUserQuery = async (userDetails) => {
     return cDomain.put('user/updateUserDetails', userDetails, header)
 }
 
+const joinRequestQuery = async (credentials, treasuryID) => {
+    return cDomain.post('user/joinRequest', {...credentials, treasuryID: treasuryID}, header)
+}
 
 
 export {
     getUserDetail,
-    updateUserQuery
+    updateUserQuery,
+    joinRequestQuery
 }

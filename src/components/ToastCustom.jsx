@@ -38,7 +38,7 @@ export default function ToastCustom(props) {
   return (
     
     <motion.div className='message-box' 
-    style={{position: 'relative'}}
+    style={{position: 'relative', flexDirection: 'column'}}
       // animate={{x: 0}}
       // initial={{x:500}}
       // transition={{duration: 0.3, type: 'spring', stiffness: 200}}

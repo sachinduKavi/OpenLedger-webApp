@@ -21,7 +21,7 @@ export default function Participants(props) {
 
   return (
     <div className='inner-screen-border'>
-        <div className="participant-free-space">
+        <div className="participant-free-space" >
 
             {
               participantArray.map((element, index) => {
@@ -29,6 +29,9 @@ export default function Participants(props) {
                 return (<SingleParticipant user={element} key={index} indexNumber={index}/>)
               })
             }
+
+
+            <h5 className='requests'>Requests</h5>
         </div>
 
 
