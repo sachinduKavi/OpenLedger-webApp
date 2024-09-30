@@ -12,7 +12,7 @@ export default function SingleParticipant(props) {
     <div className='single-participant-border'>
 
         <div className="counter">
-          <h2>{props.indexNumber + 1}</h2>
+          <h2>{(props.indexNumber + 1).toString().padStart(2, '0')}</h2>
           <div className='user-image'>
           <SimpleDP imageLink={user.getDisplayPictureId()}
               imageScale={user.getPictureScale()} size={50}
