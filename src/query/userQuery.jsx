@@ -22,11 +22,16 @@ const deleteRequestQuery = async (requestID) => {
     return await cDomain.put('treasury/deleteRequest', {requestID: requestID}, header)
 }
 
+const acceptRequestQuery = async (requestID) => {
+    return await cDomain.put('treasury/acceptRequest', {requestID: requestID}, header)
+}
+
 
 export {
     getUserDetail,
     updateUserQuery,
     joinRequestQuery,
     loadTreasuryRequestsQuery,
-    deleteRequestQuery
+    deleteRequestQuery,
+    acceptRequestQuery
 }

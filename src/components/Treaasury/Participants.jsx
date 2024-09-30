@@ -6,7 +6,7 @@ import RequestParticipant from './RequestParticipant'
 import {CheckCircleOutlined, CloseOutlined} from '@ant-design/icons'
 
 import '../../styles/participants.css'
-import { deleteRequestQuery, loadTreasuryRequestsQuery } from '../../query/userQuery'
+import { acceptRequestQuery, deleteRequestQuery, loadTreasuryRequestsQuery } from '../../query/userQuery'
 
 export default function Participants(props) {
   const treasury = props.treasury.treasury
@@ -43,6 +43,17 @@ export default function Participants(props) {
     }
   }
 
+
+  const acceptRequest = async (requestID) => {
+    const response = await acceptRequestQuery(requestID)
+    console.log(response)
+    if(response.status === 200 && response.data.proceed) {
+      setListRefresh(pre => !pre)
+    }
+  }
+
+
+
   return (
     <div className='inner-screen-border'>
         <div className="participant-free-space" >
@@ -65,7 +76,7 @@ export default function Participants(props) {
                 <div className="request-column">
                   <RequestParticipant user={element} indexNumber={index} key={index}/>
                   <div className="accept-reject">
-                    <Button icon={<CheckCircleOutlined />} className='accepts'>Accepts</Button>
+                    <Button icon={<CheckCircleOutlined />} className='accepts' onClick={() => acceptRequest(element.request_ID)}>Accepts</Button>
                     <Button icon={<CloseOutlined/>} className='rejects' onClick={() => deleteRequest(element.request_ID)}>Reject</Button>
                   </div>
                 </div>)
