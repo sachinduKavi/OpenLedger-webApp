@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import '../styles/user-card.css'
 
 import { getUserDetail, updateUserQuery } from '../query/userQuery'
-import {Input} from 'antd'
+import {Input, Button} from 'antd'
 import EditIcon from '../assets/icons/Edit.png'
 import DisplayPicture from './DisplayPicture'
 import SimpleDP from './SimpleDP'
@@ -14,9 +14,11 @@ import {motion} from 'framer-motion'
 
 export default function UserCardInfo(props) {
     const userID = props.userID || 'US00000000000000'
-    const activeUser = props.activeUser
+    const activeUser = props?.activeUser
 
     const localUserDetails = JSON.parse(localStorage.getItem('userDetails'))
+    const position = localStorage.getItem('position') === 'Treasurer'
+    console.log(position, localStorage.getItem('position'))
     
 
     const [changePassForm, setChangePassState] = useState(false) // Form state
@@ -98,7 +100,11 @@ export default function UserCardInfo(props) {
 
                     <div className='user-content-header-btn'>
                         {
-                            editorMode && <button onClick={updateSubmission}>SAVE</button>
+                            editorMode ? <button onClick={updateSubmission}>SAVE</button>
+                            : position && <div className='promote-demote'>
+                                <Button>Promote</Button>
+                                <Button>Demote</Button>
+                            </div>
                         }
                         
                     </div>

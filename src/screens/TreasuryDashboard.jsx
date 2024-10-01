@@ -81,6 +81,8 @@ export default function TreasuryDashboard(){
         navigate('/login')
       }
 
+      localStorage.setItem('position', treasuryRole)
+
       
 
     } else {

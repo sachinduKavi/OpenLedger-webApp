@@ -86,6 +86,24 @@
     text-align: center;
 }
 
+.user-content .promote-demote {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.user-content .promote-demote button {
+    color: white;
+    margin: 3px;
+    border: 1;
+}
+
+.user-content .promote-demote button:hover {
+    color: black!important;
+    border-color: rgb(1, 29, 36)!important;
+    background-color: rgb(255, 255, 255)!important;
+}
+
 
 
 .profile-content .mobile-num{
