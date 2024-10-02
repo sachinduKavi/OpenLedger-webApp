@@ -45,7 +45,8 @@ export default function SingleParticipant(props) {
         <div style={{cursor: 'pointer'}} onClick={() => {
           setUserCard({
             userCardState: true,
-            userID: user.getUserId()
+            userID: user.getUserId(),
+            refreshFunction: props.refresh
           })
         }}>
           <img src={CardIcon} alt="card-icon"/>

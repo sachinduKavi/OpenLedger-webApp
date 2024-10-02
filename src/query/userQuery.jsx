@@ -26,6 +26,14 @@ const acceptRequestQuery = async (requestID) => {
     return await cDomain.put('treasury/acceptRequest', {requestID: requestID}, header)
 }
 
+const promoteQuery = async (data) => {
+    return await cDomain.put('treasury/promoteDemoteMember', data, header)
+}
+
+const loadSuggestionQuery = async(keywords) => {
+    return await cDomain.post('treasury/searchKeywords', {keywords: keywords}, header)
+}
+
 
 export {
     getUserDetail,
@@ -33,5 +41,7 @@ export {
     joinRequestQuery,
     loadTreasuryRequestsQuery,
     deleteRequestQuery,
-    acceptRequestQuery
+    acceptRequestQuery,
+    promoteQuery,
+    loadSuggestionQuery
 }

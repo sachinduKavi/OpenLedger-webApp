@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import '../styles/user-card.css'
 
-import { getUserDetail, updateUserQuery } from '../query/userQuery'
+import { getUserDetail, promoteQuery, updateUserQuery } from '../query/userQuery'
 import {Input, Button} from 'antd'
 import EditIcon from '../assets/icons/Edit.png'
 import DisplayPicture from './DisplayPicture'
@@ -15,6 +15,7 @@ import {motion} from 'framer-motion'
 export default function UserCardInfo(props) {
     const userID = props.userID || 'US00000000000000'
     const activeUser = props?.activeUser
+    const refresh = props.refresh
 
     const localUserDetails = JSON.parse(localStorage.getItem('userDetails'))
     const position = localStorage.getItem('position') === 'Treasurer'
@@ -55,6 +56,25 @@ export default function UserCardInfo(props) {
             toast.custom(<ToastCustom type='error' header='Something went wrong'>Update was unsuccessful, please try again later.</ToastCustom>);
         }
     }
+
+
+    // Promotion || Demotion 
+    const promoteDemoteUser = async (promoteState) => {
+        const response = await promoteQuery({promoteState: promoteState, memberID: userDetails.userID})
+        if(response.status === 200) {
+            if(response.data.proceed) {
+                toast.custom(<ToastCustom type='success' header='Action performed'>You have successfully {promoteState? 'promoted ': 'demoted ' + userDetails.userName} to {response.data.content}.</ToastCustom>);
+                refresh(prev => !prev)
+            } else {
+                // Error 
+                toast.custom(<ToastCustom type='error' header={response.data.errorMessage}>Action can not be perform. Current position of {userDetails.userName} is {response.data.content}</ToastCustom>);
+            }
+        } else {
+            // Network Error
+            toast.custom(<ToastCustom type='error' header="Network Error">Something went wrong. Current position of {userDetails.userName} is {response.data.content}</ToastCustom>);
+        }
+    }
+
 
     // Component did mount ?
     useEffect(() => {
@@ -102,8 +122,8 @@ export default function UserCardInfo(props) {
                         {
                             editorMode ? <button onClick={updateSubmission}>SAVE</button>
                             : position && <div className='promote-demote'>
-                                <Button>Promote</Button>
-                                <Button>Demote</Button>
+                                <Button onClick={() => promoteDemoteUser(true)}>Promote</Button>
+                                <Button onClick={() => promoteDemoteUser(false)}>Demote</Button>
                             </div>
                         }
                         

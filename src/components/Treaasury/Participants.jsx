@@ -60,7 +60,7 @@ export default function Participants(props) {
 
             {
               participantArray.map((element, index) => {
-                return (<SingleParticipant user={element} key={index} indexNumber={index}/>)
+                return (<SingleParticipant user={element} key={index} indexNumber={index} refresh={setListRefresh}/>)
               })
             }
 
