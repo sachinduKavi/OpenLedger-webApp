@@ -16,8 +16,8 @@ export default function SearchBar() {
   // Close the suggestions when user click outside
   const containerRef = useRef()
   const checkMousePosition = (e) => {
-    console.log(dropdown && !containerRef?.current?.contains(e.target))
-    if(dropdown && !containerRef?.current?.contains(e.target)) {
+    // console.log(!containerRef?.current?.contains(e.target))
+    if(!containerRef?.current?.contains(e.target)) {
       setDropdown(false)
     }
   }
@@ -55,7 +55,7 @@ export default function SearchBar() {
                 onFocus={() => setDropdown(true)}
                 value={searchValue} onChange={(e) => {
                   setSearch(e.target.value)
-                }} autoComplete={false}/>
+                }} autoComplete='off'/>
 
                 <img src={SearchImg} alt='search icon' />
             </div>
@@ -68,7 +68,7 @@ export default function SearchBar() {
 
           {
             searchResults.map((element, index) => {
-              console.log(btoa(element.treasury_Id))
+              // console.log(btoa(element.treasury_Id))
               return (
                 <div className="row" key={index}>
                   <a href={`http://localhost:5173/request/${btoa(element.treasury_Id)}`} target='_blank'>{element.treasury_name}</a>

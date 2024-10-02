@@ -1,7 +1,7 @@
 .request-page-border {
     width: 100vw;
     height: 100vh;
-    background-color: red;
+    background-color: rgb(212, 242, 255);
     position: relative;
     display: flex;
     flex-direction: row;
