@@ -33,6 +33,7 @@ class Vote {
     static async loadVotes() {
         const response = await loadAllVotesQuery()
         const voteList = []
+        console.log(response.data)
         if(response.status === 200 && response.data.proceed) {
             response.data.content.forEach(element => {
                 voteList.push(new Vote(element))

@@ -11,6 +11,7 @@ import AnnouncementSingle from './AnnouncementSingle'
 import PrimaryBorder from '../../components/PrimaryBorder'
 import CreatePoll from './CreatePoll'
 import Vote from '../../dataModels/Vote'
+import { delay } from '../../middleware/auth'
 
 
 
@@ -31,7 +32,10 @@ export default function Announcement(props) {
 
   // Load all the published votes 
   const loadVotes = async () => {
-      setVoteList(await Vote.loadVotes())
+      const response = await Vote.loadVotes()
+      setVoteList([])
+      await delay(50)
+      setVoteList(response)
   }
 
 
@@ -46,7 +50,7 @@ export default function Announcement(props) {
   }, [announcementUpdate])
 
   useEffect(() => {
-    console.log('jeust hte ')
+    console.log('poll refresh console ')
     loadVotes()
   }, [pollRefresh])
 

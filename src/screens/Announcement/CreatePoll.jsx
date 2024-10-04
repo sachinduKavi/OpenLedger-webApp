@@ -10,6 +10,7 @@ import ToastCustom from '../../components/ToastCustom'
 import { SessionContext } from '../../Session'
 
 import '../../styles/create-poll.css'
+import { delay } from '../../middleware/auth'
 
 export default function CreatePoll(props) {
   const changeSession = useContext(SessionContext).changeSessionData

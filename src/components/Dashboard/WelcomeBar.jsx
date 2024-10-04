@@ -1,5 +1,6 @@
 import React, {useContext, useEffect} from 'react'
 import {motion} from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 
 import SimpleDP from '../SimpleDP'
 import { SessionContext } from '../../Session'
@@ -13,6 +14,13 @@ export default function WelcomeBar(props) {
     const userDetails = props.userDetails
     const userID = userDetails.userID
     const setUserCard = useContext(SessionContext).setUserCardState
+    const navigate = useNavigate()
+
+    // Logout proceed
+    const logoutUser = () => {
+        console.log('hello user')
+        navigate('/login')
+    }
 
    
   return (
@@ -51,7 +59,8 @@ export default function WelcomeBar(props) {
 
             <div onClick={() => {setUserCard({
                 userCardState: true,
-                userID: userID
+                userID: userID,
+                logoutFunction: logoutUser
             })}}>
                 <div className="user-dp">
                 <SimpleDP imageLink={props.imageLink} size={45} imageScale={props.imageScale}/>

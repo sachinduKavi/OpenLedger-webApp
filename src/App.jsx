@@ -22,7 +22,8 @@ function App() {
   const [userCard, setUserCardState] = useState({
     userCardState: false,
     userID: "US00000000000000",
-    refreshFunction: null
+    refreshFunction: null,
+    logoutFunction: null
   })
 
   return (
@@ -46,7 +47,7 @@ function App() {
       {sessionData.processing && <Process/>}
 
       {/* Global User card */}
-      {userCard.userCardState && <UserCardInfo userID={userCard.userID} setUserCard={setUserCardState} editorMode={true} refresh={userCard.refresh}/>}
+      {userCard.userCardState && <UserCardInfo userID={userCard.userID} setUserCard={setUserCardState} editorMode={true} refresh={userCard.refreshFunction} logout={userCard.logoutFunction}/>}
 
       {/* </SessionContext.Provider> */}
     </SessionContext.Provider>

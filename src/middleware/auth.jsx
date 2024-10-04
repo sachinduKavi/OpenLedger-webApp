@@ -27,8 +27,15 @@ const userCategorize = (userRole, userDetails) => {
     }
 }
 
+
+const delay = (time) => {
+    return new Promise(res => {
+        setTimeout(res, time)
+    })
+}
+
 const capitalize = (value) => {
     return value !== null? value.charAt(0).toUpperCase() + value.slice(1): ''
 }
 
-export {isClassObject, userCategorize, capitalize}
+export {isClassObject, userCategorize, capitalize, delay}

@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react'
 import '../styles/user-card.css'
 
+
+import { useNavigate } from 'react-router-dom'
 import { getUserDetail, promoteQuery, updateUserQuery } from '../query/userQuery'
 import {Input, Button} from 'antd'
 import EditIcon from '../assets/icons/Edit.png'
@@ -16,6 +18,9 @@ export default function UserCardInfo(props) {
     const userID = props.userID || 'US00000000000000'
     const activeUser = props?.activeUser
     const refresh = props.refresh
+    const logout = props.logout
+
+
 
     const localUserDetails = JSON.parse(localStorage.getItem('userDetails'))
     const position = localStorage.getItem('position') === 'Treasurer'
@@ -120,7 +125,14 @@ export default function UserCardInfo(props) {
 
                     <div className='user-content-header-btn'>
                         {
-                            editorMode ? <button onClick={updateSubmission}>SAVE</button>
+                            editorMode ? 
+                            <div className='promote-demote'>
+                                <Button onClick={updateSubmission}>SAVE</Button>
+                                <Button className='logout' onClick={() => {
+                                    logout()
+                                     props.setUserCard(false)
+                                }}>Logout</Button>
+                            </div>
                             : position && <div className='promote-demote'>
                                 <Button onClick={() => promoteDemoteUser(true)}>Promote</Button>
                                 <Button onClick={() => promoteDemoteUser(false)}>Demote</Button>

@@ -10,11 +10,11 @@ import Vote from '../../dataModels/Vote'
 import '../../styles/vote.css'
 
 export default function Poll(props) {
-    const [vote, setVote] = useState(new Vote({}))
+    const [vote, setVote] = useState(props.pollElement)
 
     useEffect(() => {
         setVote(props.pollElement)
-    }, [])
+    }, [props.pollRefresh])
     
     const user = props.activeUser
     // Update poll
