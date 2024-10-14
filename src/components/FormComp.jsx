@@ -10,6 +10,7 @@ import OtherOptions from './OtherOptions'
 import {motion} from 'framer-motion'
 
 import OpenledgerLogo from '../assets/OpenLedger.png'
+import Password from 'antd/es/input/Password'
 
 export default class FormComp extends Component {
 
@@ -38,11 +39,25 @@ export default class FormComp extends Component {
     
   }
 
+  // Gust user setup
+  guestUserForward = () => {
+    this.setState({
+      user: {
+        userEmail: "demo@openledger.com",
+        userPassword: "skk"
+      }
+    }, () => {
+      this.onDataSubmission()
+    })
+    
+  }
+
   // User name and password submission 
   onDataSubmission = async () => {
     // Trigger processing circle
     this.props.parentContext.processTrigger(true)
 
+    console.log(this.state.user.userEmail)
     // Check for email format 
     if(emailRegex(this.state.user.userEmail)) {
       // Extract user email and password 
@@ -114,6 +129,8 @@ export default class FormComp extends Component {
                 {/* or continue with google or apple */}
                 <Orcomp>OR CONTINUE WITH</Orcomp>
                 
+                <p className="guest" style={{color: 'red', cursor: 'pointer'}} onClick={this.guestUserForward}>Continue as Guest User</p>
+
                 <OtherOptions/>
 
                 

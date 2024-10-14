@@ -23,6 +23,7 @@ export default function UserCardInfo(props) {
 
 
     const localUserDetails = JSON.parse(localStorage.getItem('userDetails'))
+    const isGuestUser = localUserDetails.userID === 'US0000000000000000'
     const position = localStorage.getItem('position') === 'Treasurer'
     console.log(position, localStorage.getItem('position'))
     
@@ -127,7 +128,7 @@ export default function UserCardInfo(props) {
                         {
                             editorMode ? 
                             <div className='promote-demote'>
-                                <Button onClick={updateSubmission}>SAVE</Button>
+                                {!isGuestUser && <Button onClick={updateSubmission}>SAVE</Button>}
                                 <Button className='logout' onClick={() => {
                                     logout()
                                      props.setUserCard(false)
@@ -157,7 +158,7 @@ export default function UserCardInfo(props) {
                         <div className="profile-content">
                             <p className='mobile-num'> Mobile Number</p>
                             <Input type="number" value={userDetails.mobileNumber} 
-                            disabled={!editorMode}
+                            disabled={!editorMode || isGuestUser}
                             onChange={(e) => {
                                 setUserDetails({...userDetails, mobileNumber: e.target.value})
                         
@@ -177,7 +178,7 @@ export default function UserCardInfo(props) {
                             <h3>About Me</h3>
                            
                                 <textarea name="" id="" rows={10} style={{width: '100%', padding: '5px'}}
-                                disabled={!editorMode}
+                                disabled={!editorMode || isGuestUser}
                                 value={userDetails.aboutMe} onChange={(e) => {
                                     setUserDetails({...userDetails, aboutMe: e.target.value})
                                 }}>
@@ -190,7 +191,7 @@ export default function UserCardInfo(props) {
                             <h5>Signature:</h5>
                             <div className="signature-box"  style={{width: '100%'}}>
                                 <textarea 
-                                disabled={!editorMode}
+                                disabled={!editorMode || isGuestUser}
                                 onChange={(e) => {
                                     setUserDetails({...userDetails, userSignature: e.target.value})
                                 }}
