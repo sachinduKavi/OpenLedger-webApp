@@ -203,6 +203,7 @@ export default function NewLegerForm(props) {
             <div className="category-search-box" style={{width: '250px'}}>
               <PrimaryBorder borderRadius='6px'>
                 <Input id='category-input' value={newRecord.category}
+                autoComplete='off'
                 onChange={(e) => {
                   setNewRecord({...newRecord, category: capitalize(e.target.value)})
                   filterLedgerCategories(e.target.value.trim())
@@ -212,9 +213,8 @@ export default function NewLegerForm(props) {
                 }}
                   onBlur={async () => {
                     setTimeout(() => {
-                      console.log('blur')
                       setSearchResultState(false)
-                    }, 200)
+                    }, 500)
                   }}
                 />
               </PrimaryBorder>
