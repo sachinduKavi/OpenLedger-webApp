@@ -4,6 +4,7 @@ import { getTreasuryDetails } from '../query/treasuryQuery'
 import {Input} from 'antd'
 import toast, {Toaster} from 'react-hot-toast'
 import ToastCustom from '../components/ToastCustom'
+import TreasuryDetailsCard from './TreasuryDetailsCard'
 
 
 
@@ -15,6 +16,7 @@ export default function RequestPage() {
   const {treasuryID} = useParams()
 
   const [treasury, setTreasury] = useState(null)
+  const [cardStatus, setCard] = useState(false)
   const [credentials, setCredentials] = useState({})
   const [error, setError] = useState([])
 
@@ -26,7 +28,6 @@ export default function RequestPage() {
       setTreasury(response.data.content)
     }
   }
-
 
   // Submit request to join the treasury group 
   const requestSubmission = async () => {
@@ -51,10 +52,10 @@ export default function RequestPage() {
 
   }
 
+
   useEffect(() => {
     loadTreasuryDetails()
   }, [])
-
 
 
   return (
@@ -80,7 +81,10 @@ export default function RequestPage() {
            backgroundRepeat: 'no-repeat'
          }}>
 
+          
+
           </div>
+          {(Boolean(treasury?.publicTreasury??false)) && <button style={{margin: '20px'}} onClick={() => setCard(true)}>View Details</button>}
         </div>
 
         <Toaster position='top-right'
@@ -124,6 +128,11 @@ export default function RequestPage() {
             
           </form>
           </div>
+
+            {
+              cardStatus && Boolean(treasury?.publicTreasury??false) && <TreasuryDetailsCard treasury={treasury} visibility={setCard}/>
+            }
+
       </div>
     </div>
 

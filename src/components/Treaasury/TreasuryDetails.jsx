@@ -100,7 +100,7 @@ export default function TreasuryDetails(props) {
 
 
             <div className="editable-row">
-              <h3>Public Availability</h3>
+              <h3>Details Publicity</h3>
               <Switch value={treasury.getPublic()} onChange={async () => {
                 updateTreasury('public_group', !treasury.getPublic())
               }}  disabled={activeUser.getUserLevel() > 3? false: true}/>

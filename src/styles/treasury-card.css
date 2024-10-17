@@ -1,0 +1,23 @@
+.treasury-card-details {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.treasury-card-details .card {
+    width: fit-content;
+    max-width: 70%;
+    padding: 20px;
+    height: fit-content;
+    z-index: 100;
+    position: relative;
+    background-color: aliceblue;
+    display: flex;
+    flex-direction: column;
+}
+
+.treasury-card-details .card h3 {
+    margin-top: 10px;
+}
