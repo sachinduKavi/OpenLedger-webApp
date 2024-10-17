@@ -10,7 +10,7 @@ export default function TreasuryDetailsCard(props) {
 
 
     const checkClose = (e) => {
-        if(!(cardRef?.current.contains(e.target)?? true)) {
+        if(!(cardRef?.current?.contains(e.target)?? true)) {
             props.visibility(false)
         }
     }
