@@ -48,6 +48,7 @@ const PayHerePayment = (props) => {
     await generateHash();
 
     const payment = {
+      platform: "OpenLedger",
       sandbox: true,
       merchant_id: "1226760",
       return_url: undefined,

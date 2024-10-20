@@ -29,6 +29,17 @@ export default function TreasuryDashboard(){
   // Extracting the object from the local storage
   const [treasury, treasuryUpdate] = useState(new Treasury(JSON.parse(localStorage.getItem('treasury_obj')))) // Creating new class object using local storage data
 
+
+  const [balanceUpdate, updateBalance] = useState(false)
+
+  const refreshTreasury = async () => {
+    await treasury.refreshTreasuryDetails()
+    treasuryUpdate(new Treasury(treasury.extractJSON()))
+  }
+  useEffect(() => {
+    refreshTreasury()
+  }, [balanceUpdate])
+
   // Get user details from the local storage
   const userDetails = JSON.parse(localStorage.getItem('userDetails')) // User details
   const [activeUser, setUser] = useState(new User(userDetails)) // For user object with their user level
@@ -124,7 +135,7 @@ export default function TreasuryDashboard(){
             {/* Dashboard */}
             {panelSwitch.dashboard 
             && !isProcessing 
-            && <Dashboard treasuryObj={treasury} userObj={activeUser} treasuryUpdate={treasuryUpdate}/>}
+            && <Dashboard treasuryObj={treasury} userObj={activeUser} treasuryUpdate={treasuryUpdate} updateBalance={updateBalance}/>}
 
             {/* Treasury */}
             {panelSwitch.treasury && <TreasuryOverview activeUser={activeUser} treasury={{treasury: treasury, treasuryUpdate: treasuryUpdate}}/>}
@@ -134,7 +145,7 @@ export default function TreasuryDashboard(){
             {panelSwitch.reports && <Reports activeUser={activeUser} treasury={treasury}/>}
 
             {/* Transaction */}
-            {panelSwitch.transaction && <Transaction activeUser={activeUser} treasury={{treasury: treasury, treasuryUpdate: treasuryUpdate}}/>}
+            {panelSwitch.transaction && <Transaction activeUser={activeUser} treasury={{treasury: treasury, treasuryUpdate: treasuryUpdate}} updateBalance={updateBalance}/>}
 
             {/* Announcement */}
             {panelSwitch.announcement && <Announcement activeUser={activeUser} treasury={{treasury: treasury, treasuryUpdate: treasuryUpdate}}/>}

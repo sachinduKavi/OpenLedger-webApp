@@ -14,6 +14,7 @@ export default function Dashboard(props) {
 
     useEffect(() => {
         console.log('dashboard is mounting step 02', props.treasuryObj)
+        props.updateBalance(pre => !pre)
     }, [])
 
   return (

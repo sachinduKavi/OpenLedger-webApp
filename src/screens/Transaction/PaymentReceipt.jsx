@@ -32,6 +32,7 @@ export default function PaymentReceipt(props) {
       props.setPayment(new Payment(payment.extractJSON()))
       props.setUpdate(!props.update)
       changeSessionData({processing: false}) // Processing 
+      props.updateBalance(pre => !pre)
   }
 
 

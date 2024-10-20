@@ -18,6 +18,8 @@ export default function TransactionForm(props) {
     const payment = props.payment.currentPayment.getPaymentID() === 'AUTO' ? props.payment.currentPayment : new Payment({})
     const setCurrentPayment = props.payment.setCurrentPayment
     const activeUser = props.activeUser
+    const updateBalance = props.updateBalance
+    const {treasury, treasuryUpdate} = props.treasury
     const changeSessionData = useContext(SessionContext).changeSessionData
 
     // Transaction state that ready from transaction to proceed
@@ -52,6 +54,7 @@ export default function TransactionForm(props) {
         }
 
         props.setUpdate(!props.update)
+        updateBalance(pre => !pre)
      }
 
 
@@ -95,6 +98,7 @@ export default function TransactionForm(props) {
             toast.custom(<ToastCustom type='warnning' header='No Evidence'>Please provide proper payment proof.</ToastCustom>);
         }
         changeSessionData({processing: false}) // Disable processing
+        updateBalance(pre => !pre)
     }
 
 

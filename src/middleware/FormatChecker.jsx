@@ -3,6 +3,11 @@ const emailRegex = (email) => {
     return regex.test(email)
 }  
 
+const mobileNumberRegex = (number) => {
+    const regex = /^\d{10}$/;
+    return regex.test(number);
+}
+
 const localStorageToUserClass = (userDetails) => {
     return {
         userID: userDetails.user_ID,
@@ -18,5 +23,6 @@ function numberFormat(number) {
 
 export {
     emailRegex,
-    numberFormat
+    numberFormat,
+    mobileNumberRegex
 }

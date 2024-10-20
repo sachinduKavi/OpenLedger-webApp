@@ -273,22 +273,24 @@ export default function EstimateEditor(props) {
 
                     <PrimaryBorder width='fit-content' borderRadius='8px' margin='0 0 0 10px'>
                         {/* Only Chair & Treasurer is able to add signature */}
-                        {(activeUser.getPosition === 'Chair' || activeUser.getPosition() === 'Treasurer') && 
+                        {(activeUser.getPosition() === 'Chair' || activeUser.getPosition() === 'Treasurer') && 
                         <button onClick={() => {
-                            setChange(true) // Enable save button
-                            //Check whether the signature already exists
-                            if(!estimateValues.getSignatureArray().includes(activeUser.getUserSignature())) {
+                            setChange(true); // Enable save button
+
+                            const signatureArray = estimateValues.getSignatureArray();
+                            const userSignature = activeUser.getUserSignature();
+
+                            // Check whether the signature already exists
+                            if (!signatureArray.includes(userSignature)) {
                                 // Add user signature to the estimate document
-                            estimateValues.setSignatureArray([...estimateValues.getSignatureArray(), activeUser.getUserSignature()])
-                            setEstimate(new EstimateReport(estimateValues.extractJSON()))
+                                estimateValues.setSignatureArray([...signatureArray, userSignature]);
                             } else {
                                 // Remove the signature from the document
-                                let tempSignatureArray = estimateValues.getSignatureArray()
-                                const index = tempSignatureArray.indexOf(activeUser.getUserSignature())
-                                tempSignatureArray.splice(index, 1) // Removing signature from the temp array
-                                estimateValues.setSignatureArray(tempSignatureArray)
-                                setEstimate(new EstimateReport(estimateValues.extractJSON())) 
+                                const updatedSignatureArray = signatureArray.filter(signature => signature !== userSignature);
+                                estimateValues.setSignatureArray(updatedSignatureArray);
                             }
+
+                            setEstimate(new EstimateReport(estimateValues.extractJSON()));
                         }}>SIGNATURE</button>}
                     </PrimaryBorder>
                 </div>

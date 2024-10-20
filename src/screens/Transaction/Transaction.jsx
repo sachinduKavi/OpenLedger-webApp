@@ -54,7 +54,7 @@ export default function Transaction(props) {
 
             <div className="mini-column-pay">
               <TransactionForm activeUser={props.activeUser} payment={{currentPayment:currentPayment , setCurrentPayment: setCurrentPayment}}
-                setUpdate={setUpdate} update={update}
+                setUpdate={setUpdate} update={update} treasury={props.treasury} updateBalance={props.updateBalance}
               />
             </div>
 
@@ -75,7 +75,7 @@ export default function Transaction(props) {
 
       {
         receiptState && <PaymentReceipt receiptRef={receiptRef} payment={currentPayment} setPayment={setCurrentPayment}
-        setUpdate={setUpdate} update={update} activeUser={props.activeUser}
+        setUpdate={setUpdate} update={update} activeUser={props.activeUser} updateBalance={props.updateBalance}
         />
       }
       
