@@ -130,8 +130,8 @@ const ReportPaper = forwardRef((props, ref) => {
                     <td>{element.getQuantity()}</td>
                     <td>{element.getUnit()}</td>
                     <td>{element.getItemOfWork()}</td>
-                    <td className='rupee-format'>{numberFormat(element.getRate())}</td>
-                    <td className='rupee-format'>{numberFormat(element.calculateExpense())}</td>
+                    <td className='rupee-format'>{numberFormat(element.getRate() ?? 0)}</td>
+                    <td className='rupee-format'>{numberFormat(element.calculateExpense() ?? 0)}</td>
                   </tr>)
             })
               

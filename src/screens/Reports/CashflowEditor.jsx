@@ -68,12 +68,14 @@ export default function CashflowEditor(props) {
 
 
   // Delete the cashflow report from the database 
-  const cashflowReportDiscard = () => {
-    if(cashflow.reportDiscard()) {
+  const cashflowReportDiscard = async () => {
+    if(window.confirm('Are you sure you want to delete the document ?')) {
       // Report deleted successfully
-      setCashflow(null) // directing back to report preview
+      if(await cashflow.reportDiscard())
+        setCashflow(null) // directing back to report preview
     } else {
       // Record deletion error
+      console.log('Not deleted')
     }
   }
 

@@ -61,7 +61,7 @@ class CashflowReportModel {
 
     async reportDiscard() {
         const response = await discardCashflowQuery(this.#reportID)
-        return response.status === 200 
+        return response.status === 200 && response.data.proceed
             ? response.data.proceed
             : false
     }
