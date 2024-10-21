@@ -108,7 +108,7 @@ export default function UserCardInfo(props) {
 
 
     // Editor mode variable
-    const editorMode = localUserDetails.userID === userDetails.userID
+    const editorMode = localUserDetails.userID === userDetails.userID && userDetails.userID !== 'US0000000000000000'
 
     return (
         <motion.div className='user-profile-card' 
